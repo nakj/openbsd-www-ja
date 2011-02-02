@@ -7,7 +7,7 @@
 <meta name= "description"   content= "the OpenBSD FAQ page">
 <meta name= "keywords"      content= "openbsd,faq">
 <meta name= "distribution"  content= "global">
-<meta name= "copyright"     content= "This document copyright 1998-2007 by OpenBSD.">
+<meta name= "copyright"     content= "This document copyright 1998-2010 by OpenBSD.">
 <meta http-equiv="Content-Type" content="text/html; charset=iso-2022-jp">
 </head>
 
@@ -98,16 +98,16 @@ OpenBSD には3つの "フレーバー"があります。
 
 <blockquote>
 <pre>
-       ,------o-----------o----X                    4.3 Stable
+       ,------o-----------o----X                    4.5 Stable
        |      .           .
-       |      .    ,------o---------o----X          4.4 Stable
+       |      .    ,------o---------o----X          4.6 Stable
        |      .    |      .         .
-       |      .    |      .    ,----o----------o--&gt; 4.5 Stable
+       |      .    |      .    ,----o----------o--&gt; 4.7 Stable
        |      .    |      .    |    .          .
-       |      .    |      .    |    .    ,-----o--&gt; 4.6 Stable
+       |      .    |      .    |    .    ,-----o--&gt; 4.8 Stable
        |      .    |      .    |    .    |     .
        |      .    |      .    |    .    |     .
- --&gt;4.3Rel-----&gt;4.4Rel-----&gt;4.5Rel-----&gt;4.6Rel----&gt; Current 
+ --&gt;4.5Rel-----&gt;4.6Rel-----&gt;4.7Rel-----&gt;4.8Rel----&gt; Current 
 
           Time ---&gt;
 </pre>
@@ -132,15 +132,15 @@ OpenBSD には3つの "フレーバー"があります。
 "<i>patch branch</i>" として知られているからです。
 上のイラストでは、垂直の点線がバグ
 フィックスが<i>-stable</i>ブランチに盛り込まれたことを示しています。そして
-上の例では、<i>4.3-stable</i> ブランチが<i>4.5-release</i>とともに終わりを迎えた
-こと、そして <i>4.4-stable</i>ブランチは<i>4.6-release</i>とともに終わりをむかえた
+上の例では、<i>4.5-stable</i> ブランチが<i>4.7-release</i>とともに終わりを迎えた
+こと、そして <i>4.6-stable</i>ブランチは<i>4.8-release</i>とともに終わりをむかえた
 ことに気付くでしょう -- 古いリリースは、通常
 ２つ
 前のリリースまでサポートされます。古いバージョンをサポートする事は資源と時間を使います、
 古いリリースのサポートを継続して提供してもよいでしょうけれども、我々は
 新しい機能に焦点を当てたいのです。<i>-stable</i> ブランチは、とても簡単に
 同じバージョンの<i>-release</i>ブランチから構築することができるようにデザインされています
-(たとえば、<i>4.6-release</i>から<i>4.6-stable</i>へ移行するなどです)。
+(たとえば、<i>4.8-release</i>から<i>4.8-stable</i>へ移行するなどです)。
 
 <p>
 <i>-stable</i>ブランチは<i>-release</i>と
@@ -152,11 +152,12 @@ OpenBSD には3つの "フレーバー"があります。
 <i>-stable</i>に追加されることはありません。
 
 <p>
-"<i>-stable</i>" という名前が指し示すものは <i>-current</i> が信頼性のないものであることを
-意味するものではありません。
-<i>-current</i>は変更され進化しているのにたいして、
-<i>-stable</i> の操作や API は変更されません。ですので、システムを
-学びなおしたり設定ファイルを変更したり、システムに追加アプリケーションを追加する際の
+"<i>-stable</i>" という名前が指し示すものは <i>-current</i> が信頼性のないもの
+あるいは、これがより堅牢な製品であることを意味するものではありません。
+<i>-current</i>のAPI(プログラムがどうやってOSと対話するか ) や機能
+は変更され進化しているのにたいして、
+<i>-stable</i> の操作や API はそれがベースにしているリリースと同じですので
+システムを学びなおしたり設定ファイルを変更したり、システムに追加アプリケーションを追加する際の
 問題が増えたりはしません。
 
 <p>
@@ -225,11 +226,11 @@ OpenBSD 公式リリースの間、<i>スナップショット</i> が作られ
 <p>
 <b>Upgrading</b> は新機能を含む OpenBSD の新しいバージョンを
 インストールするプロセスになります。
-たとえば、v4.5 から v4.6 にしたり、 6月12日版の
+たとえば、v4.7 から v4.8 にしたり、 6月12日版の
 スナップショットを 6月20日版にすることです。
 アップグレードするときには、例によって
 <a href="../current.html">Following -current</a> あるいは
-<a href="../upgrade46.html">Upgrade guide</a> (リリースが変わったとき)
+<a href="../upgrade48.html">Upgrade guide</a> (リリースが変わったとき)
 の両方をアップグレードされたバージョンの OpenBSD に必要な変更の参考にするでしょう。
 
 <br>
@@ -241,7 +242,7 @@ OpenBSD 公式リリースの間、<i>スナップショット</i> が作られ
 the <a href="../../stable.html">stable process</a>にならうことで完了します。
 システムを "update" するときは、<i>-release</i>から
 同じリリースバージョンの<i>-stable</i> (あるいはパッチ適用済み<i>-release</i>)にします。
-たとえば、4.6-release を 4.6-stable にするようにです。
+たとえば、4.8-release を 4.8-stable にするようにです。
 You may then later update it to a newer <i>-stable</i> of the same
 release version.
 それで、 同じリリースバージョンのより新しい <i>-stable</i> 
@@ -250,9 +251,9 @@ release version.
 ファイルやその他のシステム設定には変更を加える必要はありません。
 
 <p>
-それで、CDからシステムをインストールした(たとえば、 4.4-release) としたら、
-4.4-stable にアップデートするのは少しの時間ですみます。 それから CD で 4.5-release に
-アップグレードし、そして 4.6-releaseに再びアップグレードするのは少しの時間で
+それで、CDからシステムをインストールした(たとえば、 4.6-release) としたら、
+4.6-stable にアップデートするのは少しの時間ですみます。 それから CD で 4.7-release に
+アップグレードし、そして 4.8-releaseに再びアップグレードするのは少しの時間で
 済みます。
 
 <h3>Keeping Things in Sync</h3>
@@ -272,8 +273,8 @@ but again, OpenBSD has limited resources available.
 One should also understand that the upgrade
 process is supported in <b>only one direction: from older to newer</b>,
 and from <i>-stable</i> to <i>-current</i>.  You can not run
-<i>4.6-current</i> (or a snapshot), then decide you are living too
-dangerously, and step back to <i>4.6-stable</i>.  You are on your own if
+<i>4.8-current</i> (or a snapshot), then decide you are living too
+dangerously, and step back to <i>4.8-stable</i>.  You are on your own if
 you choose any path other than the supported option of reloading your
 system from scratch, do not expect assistance from the OpenBSD
 development team.
@@ -315,6 +316,15 @@ It is likely this will be all you need for running <i>-current</i>.
 The most common reason to build from source is to follow the
 <i>-stable</i> branch, where building from source is the only supported
 option.
+
+<p>
+If you are compiling <i>-current</i> from source, it is HIGHLY
+recommended that you only do so from a machine which you have full
+console access to.
+There will be times in the development process where the mismatch
+between your new kernel and your old userland may render the system
+inaccessible via network.
+This is not an issue when properly building <i>-stable</i>.
 
 <a name="Bld"></a>
 <h2>5.3 - Building OpenBSD from source</h2>
@@ -379,7 +389,7 @@ you should start with:
 It is recommended that you install the binary by using the "Upgrade" 
 option of the install media.
 If that is not possible, you can also unpack the binaries as described
-<a href="upgrade46.html">here</a>.
+<a href="upgrade48.html">here</a>.
 Regardless, you must do the entire upgrade process, including creating 
 any users or other <tt>/etc</tt> directory changes needed.
 
@@ -456,20 +466,20 @@ your checkout:
 <pre>
     # <b>cd /usr</b>
     # <b>export CVSROOT=anoncvs@anoncvs.example.org:/cvs</b>
-    # <b>cvs -d$CVSROOT checkout -rOPENBSD_4_6 -P src</b>
+    # <b>cvs -d$CVSROOT checkout -rOPENBSD_4_8 -P src</b>
 </pre>
 
-This will pull the src files from the OPENBSD_4_6 branch, which is also
+This will pull the src files from the OPENBSD_4_8 branch, which is also
 known as the "Patch branch" or "<a href="../stable.html">-stable</a>".
 You would update the code similarly:
 <pre>
     # <b>cd /usr/src</b>
     # <b>export CVSROOT=anoncvs@anoncvs.example.org:/cvs</b>
-    # <b>cvs -d$CVSROOT up -rOPENBSD_4_6 -Pd</b>
+    # <b>cvs -d$CVSROOT up -rOPENBSD_4_8 -Pd</b>
 </pre>
 
 Actually, CVS is nice enough to stick a "Tag" in the checked out file
-system, so you don't have to remember the "<tt>-rOPENBSD_4_6</tt>" part
+system, so you don't have to remember the "<tt>-rOPENBSD_4_8</tt>" part
 of the command line, it will remember this until you explicitly clear
 them or set a new tag by using the "<tt>-A</tt>" option to
 "<tt>update</tt>".
@@ -486,7 +496,7 @@ You can combine the checkouts into one line (<i>-stable</i> shown):
 <pre>
     # <b>export CVSROOT=anoncvs@anoncvs.example.org:/cvs</b>
     # <b>cd /usr</b>
-    # <b>cvs -d$CVSROOT checkout -rOPENBSD_4_6 -P src ports xenocara</b>
+    # <b>cvs -d$CVSROOT checkout -rOPENBSD_4_8 -P src ports xenocara</b>
 </pre>
 
 However, updates must be done directory-by-directory.
@@ -600,7 +610,6 @@ performance.
 
 
 <a name="BldKernel"></a>
-<a name="Building"></a>  <!-- Old tag -->
 <h3>5.3.4 - Building the kernel</h3>
 We will assume you wish to build a standard (GENERIC or GENERIC.MP)
 kernel here.
@@ -724,7 +733,7 @@ on your system.
 <li><b>If building <i>-current</i>:</b> Update <tt>/dev</tt> and
 <tt>/etc</tt>, with the changes listed in
 <a href="current.html">current.html</a>.
-If following -stable after a proper <a href="upgrade46.html">upgrade
+If following -stable after a proper <a href="upgrade48.html">upgrade
 process</a> or a install of the <a href="#BldBinary">proper starting
 binary</a>, this step is not needed or desired.
 
@@ -837,7 +846,7 @@ release.
 
 Once you have the complete release made, you can use those files for
 a standard <a href="faq4.html">install</a> or
-<a href="upgrade46.html">upgrade</a> on another machine, or if updating
+<a href="upgrade48.html">upgrade</a> on another machine, or if updating
 a machine to a new <i>-stable</i>, simply
 <a href="faq4.html#AddFileSet">unpack</a> the tar files in the root
 directory of the target machine.
@@ -995,7 +1004,7 @@ enjoy pain.
 It is also assumed that you have a goal that can not be achieved by
 either a <a href="#BootConfig">Boot time configuration (UKC>)</a> or
 by <a href="#config">config(8)ing a GENERIC kernel</a>.
-If both of these are not true, you should stick to using GENERIC.
+If all of this is not true, you should stick to using GENERIC.
 Really.
 
 <p>
@@ -1122,9 +1131,6 @@ In this case, we will build a kernel that supports the
 ISA multi-port serial card.
 This card is not in the GENERIC kernel, due to conflicts with other
 drivers.
-
-Another common reason to make a custom kernel would be to use RAIDframe,
-which is too large to have in the stock kernel.
 There are two common ways to make a custom kernel: copy the GENERIC
 config file to another name and edit it, or create a "wrapper" file that
 "includes" the standard GENERIC kernel and any options you need that
@@ -1145,7 +1151,7 @@ The disadvantage is one can not remove devices (though in general, that's
 a bad idea, anyway).
 
 <p>
-Another way to generate a custom kernel is to make a copy of the
+The other way to generate a custom kernel is to make a copy of the
 standard <tt>GENERIC</tt>, giving it another name, then editing it as
 needed.
 The disadvantage to this is later updates to the GENERIC configuration
@@ -1244,7 +1250,7 @@ man page.
 <!--XXXver -->
 <blockquote><pre>
 $ <strong>sudo config -e /bsd</strong>
-OpenBSD 4.6 (GENERIC) #58: Thu Jul  9 21:24:42 MDT 2009
+OpenBSD 4.7 (GENERIC) #558: Thu Mar 17 20:46:15 MDT 2010
     deraadt@i386.openbsd.org:/usr/src/sys/arch/i386/compile/GENERIC
 warning: no output file specified
 Enter 'help' for information
@@ -1314,7 +1320,7 @@ changes made from boot -c into a new kernel binary bsd.new.
 
 <blockquote><pre>
 $ <strong>sudo config -e -u -o bsd.new /bsd</strong>
-OpenBSD 4.6 (GENERIC) #58: Thu Jul  9 21:24:42 MDT 2009
+OpenBSD 4.7 (GENERIC) #558: Thu Mar 17 20:46:15 MDT 2010
     deraadt@i386.openbsd.org:/usr/src/sys/arch/i386/compile/GENERIC
 Processing history...
 162 wi* disabled
@@ -1496,50 +1502,6 @@ near the time of a new <i>-release</i>.
 You should really just <a href="#BldBinary">install the latest
 snapshot</a>.
 
-<p>
-OpenBSD now supports two compilers in-tree, gcc v3.3.5 used by most
-platforms, but also gcc v2.95.3 used by a few platforms which haven't
-been converted yet, or may never be converted due to lack of gcc3
-support or poor gcc3 performance.
-
-<p>
-The two compilers are in different parts of the tree:
-<ul>
-<li>gcc3: <tt>/usr/src/gnu/usr.bin/gcc</tt>
-<li>gcc2: <tt>/usr/src/gnu/egcs/gcc</tt>
-</ul>
-
-<p>
-Because upgrading a compiler is a bit of a chicken-and-egg problem,
-changes to the in-tree compiler require a little extra attention.
-You have to build the compiler twice -- the first build produces a
-compiler that generates new code but runs with code generated by the old
-compiler, the second build makes it a completely new compiler.
-In general, you'll want to perform the following procedure:
-
-<pre>
-    <b>If your platform uses gcc 2.95.3:</b>
-       # rm -r /usr/obj/gnu/egcs/gcc/*
-       # cd /usr/src/gnu/egcs/gcc
-        <i>- or -</i>
-    <b>If your platform uses gcc 3.3.5:</b>
-       # rm -r /usr/obj/gnu/usr.bin/gcc/*
-       # cd /usr/src/gnu/usr.bin/gcc
-
-    <b>Common build procedure for v3.3.5 or v2.95.3</b>
-    # make -f Makefile.bsd-wrapper clean
-    # make -f Makefile.bsd-wrapper obj
-    # make -f Makefile.bsd-wrapper depend
-    # make -f Makefile.bsd-wrapper
-    # make -f Makefile.bsd-wrapper install
-    # make -f Makefile.bsd-wrapper clean
-    # make -f Makefile.bsd-wrapper depend
-    # make -f Makefile.bsd-wrapper
-    # make -f Makefile.bsd-wrapper install
-</pre>
-
-<p>
-And then run a normal <a href="#BldUserland">make build</a>.
 
 <a name="UpdateEtc"></a>
 <h3>5.11.10 - What is the best way to update <tt>/etc</tt>, <tt>/var</tt>,
@@ -1566,17 +1528,17 @@ recently, do a:
 <!-- XXXversion -->
 <p>To see all the changes in <tt>/etc</tt> between arbitrary versions of
 OpenBSD, you can use <a href="../anoncvs.html">CVS</a>.
-For example, to see the changes between 4.5 and 4.6 do a:
+For example, to see the changes between 4.7 and 4.8 do a:
 
 <pre>
     # cd /usr/src/etc
-    # cvs diff -u -rOPENBSD_4_5 -rOPENBSD_4_6
+    # cvs diff -u -rOPENBSD_4_7 -rOPENBSD_4_8
 </pre>
 
-To see the changes between 4.6 and <i>-current</i> ("HEAD"), use:
+To see the changes between 4.8 and <i>-current</i> ("HEAD"), use:
 <pre>
     # cd /usr/src/etc
-    # cvs diff -u -rOPENBSD_4_6 -rHEAD
+    # cvs diff -u -rOPENBSD_4_8 -rHEAD
 </pre>
 
 The 
@@ -1614,7 +1576,7 @@ Typical <tt>/etc</tt> changes to watch out for between releases include:
 
 <!-- XXXversion -->
 These changes are summarized in
-<a href="upgrade46.html">upgrade46.html</a> (for going to 4.6-release)
+<a href="upgrade48.html">upgrade48.html</a> (for going to 4.8-release)
 or <a href="current.html">current.html</a> (for going
 to <i>-current</i>).
 
@@ -1675,6 +1637,6 @@ booting.
 <a href= "index.html"><img height= "24" width= "24" src= "../images/back.gif" border= "0" alt= "[back]"></a>
 <a href= "mailto:www@openbsd.org">www@openbsd.org</a>
 <br>
-<small>$OpenBSD: faq5.html,v 1.177 2009/11/30 03:06:52 nick Exp $</small>
+<small>$OpenBSD: faq5.html,v 1.181 2011/01/29 03:33:30 nick Exp $</small>
 </body>
 </html>
