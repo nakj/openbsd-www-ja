@@ -1,0 +1,336 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>OpenBSD Upgrade Guide</title>
+<link rev="made" href="mailto:www@openbsd.org">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="resource-type" content="document">
+<meta name="description"   content="the OpenBSD FAQ page">
+<meta name="keywords"      content="openbsd,faq">
+<meta name="distribution"  content="global">
+<meta name="copyright"     content="This document copyright 2005, 2006 by OpenBSD">
+</head>
+
+<body bgcolor="#ffffff" text="#000000">
+<a href="../index.html">
+<img alt="[OpenBSD]" height=30 width=141 src="../images/smalltitle.gif" border="0">    
+</a>
+<p>
+<font color="#0000e0">
+<a href="upgrade35.html">[3.4 -> 3.5]</a> |
+<a href="upgrade36.html">[3.5 -> 3.6]</a> |
+<a href="upgrade37.html">[3.6 -> 3.7]</a> |
+<a href="upgrade39.html">[3.8 -> 3.9]</a> |
+<a href="index.html">[FAQ Index]</a>
+</font>
+
+<h1><font color="#e00000">Upgrade Guide: 3.7 to 3.8</font></h1>
+<hr>
+
+<i>Note: Upgrades are only supported from one release to the release
+immediately following it.
+Do not skip releases.</i>
+
+<p><i>
+It is highly recommended that you read through and fully understand
+this process before attempting it.
+If you are doing it on a critical or physically remote machine, it is
+recommended that you test this process on an identical, local system to
+verify its success before attempting on a critical or remote computer.
+</i>
+
+<p>
+Upgrading is a convenient way to bring your OpenBSD system up to the most
+recent version.
+However, the results are not intended to precisely match the results of
+a wipe-and-reload installation.
+Old library files in particular are not removed in the upgrade process,
+as they may be required by older applications that may or may not be
+upgraded at this time.
+If you REALLY wish to get rid of all these old files, you would probably
+be better off reinstalling from scratch.
+
+<h2>Before upgrading...</h2>
+Before upgrading, some users choose to remove all
+<a href="faq15.html#PkgMgmt">packages</a>, and installing new versions
+after upgrade.
+<p>
+To quickly remove all packages from your system:
+<blockquote><pre>
+pkg_delete -q /var/db/pkg/*
+</pre></blockquote>
+After the upgrade, install the new versions of these applications.
+
+<p>
+
+Note that, with OpenBSD 3.8, the pkg tools now support in-place updating
+using <code>pkg_add -r</code>.  This has been checked to work with most 
+packages, in particular with the CD packages available in 3.6 or 3.7.
+Some important points apply:
+<ul>
+<li><code>pkg_add -r</code>   does not do global updates, but needs to 
+be told which packages to update.  A new option <code>pkg_add -u</code>
+can be used to find out the exact list of packages to pass to
+<code>pkg_add -r</code>.
+<li><code>pkg_add -r -F update -F updatedepends -q list_of_new_pkgs</code> 
+should work in most cases.
+<li>mozilla packages in 3.7 can now safely be updated to a 3.8 version.
+</ul>
+
+<p>
+<b>tx(4) driver is now
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=epic&amp;sektion=4">epic(4)</a></b>.
+If your system has a tx(4) based card (such as SMC EtherPower II 10/100
+cards), it will be supported by a different driver on OpenBSD 3.8 than
+it was on 3.7.
+BEFORE doing the upgrade, copy your <tt>/etc/hostname.tx*</tt> file(s)
+to corresponding <tt>/etc/hostname.epic*</tt> files, otherwise you will
+not have functioning network during and after the upgrade process.
+
+<h2>Upgrading by install media</h2>
+The easiest and safest way to upgrade from binary files is to boot from
+install media and follow the upgrade steps, which are very similar to
+the <a href="faq4.html">install process</a>.
+Afterwards, do the <a href="#etcUpdates"><tt>/etc</tt> updates</a> below.
+
+<h2>Upgrading without install media</h2>
+<i>This is not the recommended process.  Use the install media method
+if at all possible!</i>
+
+<p>
+Sometimes, one needs to do an upgrade of a machine when one can't easily
+use the normal upgrade process.
+One can usually do this by carefully following a process similar to a 
+source-based upgrade:
+
+<ul>
+<li><b>Place install files in a "good" location</b>.
+Make sure you have sufficient room!
+
+<li><b>Stop any "insecure" applications from starting at boot:</b>
+There will be a time when PF will be unlikely to be running during this
+upgrade process, but your applications may still start and run properly.
+Any application dependant upon PF for security should be disabled 
+before this happens, and should not be re-enabled until proper PF
+operation is verified after upgrade.
+There may be other applications which you wish to keep from running
+during the upgrade, stop and disable them as well.
+
+<li><b>Install new kernel(s)</b>
+<blockquote><pre>
+cd /<i>path</i>
+rm /obsd ; ln /bsd /obsd && cp bsd /nbsd && mv /nbsd /bsd
+cp bsd.rd bsd.mp /
+</pre></blockquote>
+
+Note the extra steps for copying over the primary kernel: those are done
+to ensure that there is always a valid copy of the kernel on the disk
+that the system can boot from should there be a really badly timed power
+outage or system crash.
+
+<li><b>Install new <tt>/etc/firmware</tt> files:</b>
+Due to the fact that some uploaded "firmware" blobs were relocated from
+the kernel to files in the <tt>/etc/firmware</tt> directory, there are
+a few drivers which will break if there is no uploadable firmware file
+available when the new kernel boots.
+This will impact users of only a few devices, though all
+users can use this step without harm.
+To extract the firmware files from <tt>base38.tgz</tt>, use the
+following as root:
+
+<blockquote><pre>
+cd /
+tar xzpf /<i>path</i>/base38.tgz "*etc/firmware/*"
+</pre></blockquote>
+
+before the next step.
+
+<li><b>Reboot on the new kernel:</b>
+This might be a tempting step to skip, but it should be done now, as
+usually, the new kernel will run old userland apps (such as the soon to
+be important <tt>reboot</tt>!), but often a new userland will NOT
+work on the old kernel.
+
+<li><b>Install new userland applications.</b>
+<i>Do NOT install <tt>etc38.tgz</tt> and <tt>xetc38.tgz</tt> now!</i>
+
+<blockquote><pre>
+cd /
+tar xzpf /<i>path</i>/base38.tgz
+tar xzpf /<i>path</i>/comp38.tgz
+tar xzpf /<i>path</i>/game38.tgz
+tar xzpf /<i>path</i>/man38.tgz
+tar xzpf /<i>path</i>/misc38.tgz
+tar xzpf /<i>path</i>/xbase38.tgz
+tar xzpf /<i>path</i>/xfont38.tgz
+tar xzpf /<i>path</i>/xserv38.tgz
+tar xzpf /<i>path</i>/xshare38.tgz
+</pre></blockquote>
+Note: not all file sets will need to be installed for all applications,
+however if you installed a file set originally, you should certainly
+upgrade it with the new file set now.
+
+<p>
+Note: the files in <tt>/etc</tt> are handled separately below, so
+<tt>etc38.tgz</tt> and <tt>xetc38.tgz</tt> are NOT unpacked here.
+
+<li><b>Update <tt>/dev</tt>.</b>
+The new 
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=MAKEDEV&amp;sektion=8&amp;arch=i386">MAKEDEV</a>
+file will be copied to /dev by the installation of
+<tt>base38.tgz</tt>, so you simply need to do the following:
+<blockquote><pre>
+cd /dev
+./MAKEDEV all
+</pre></blockquote>
+
+<li><b>Upgrade <tt>/etc</tt> as below</b>.
+
+<li><b>Reboot</b>
+</ul>
+
+During this process,
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=sendmail&amp;sektion=8">sendmail(8)</a>
+may produce some error messages like the following:
+<pre>
+    Nov 1 12:47:05 puffy sm-mta[16733]: filesys_update failed: No such file or dire
+    ctory, fs=., avail=-1, blocksize=380204
+</pre>
+These messages can be safely ignored, or you may wish to halt
+sendmail(8) during the upgrade process.
+
+<hr>
+<p>
+<a name="etcUpdates"></a>
+<h2>Updates to <tt>/etc</tt></h2>
+
+Whether you upgrade by using an install media and doing a formal
+"upgrade" process, or do a "in-place" binary upgrade, there are certain
+manual steps that have to be performed.
+
+<a name="users"></a>
+<h4>New users and groups</h4>
+An HostAP daemon has been added, so new users and groups are required.
+
+As <i>root</i>, add the following users and groups, using 
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=useradd&amp;sektion=8">useradd(8)</a>:
+
+<blockquote><pre>
+useradd -u86 -g=uid -c"HostAP Daemon" -d/var/empty -s/sbin/nologin _hostapd
+</pre></blockquote>
+
+This step will add both the new user and its corresponding group.
+Your environment may allow you to copy/paste those commands.
+
+
+<a name="apps"></a>
+<h4>Userland Applications</h4>
+
+<a name="etcfiles"></a>
+<h4><tt>/etc</tt> file changes</h4>
+You will want to extract the <tt>etc38.tgz</tt> files to a temporary
+location:
+<blockquote><pre>
+cd /tmp
+tar xzpf /<i>path</i>/etc38.tgz
+</pre></blockquote>
+
+
+Files that can probably be copied from <tt>etc38.tgz</tt> "as is":
+
+<blockquote><pre>
+hostapd.conf
+netstart
+pf.os
+rc
+services
+mtree/*
+</pre></blockquote>
+
+Note that it IS possible to locally modify these files, if this has been
+done, manual merging will be needed.
+Here are copy/paste lines for copying these files, assuming you unpacked 
+<tt>etc38.tgz</tt> in the above recommended place:
+
+<blockquote><pre>
+cd /tmp/etc
+cp hostapd.conf netstart pf.os rc services /etc
+cp mtree/* /etc/mtree/
+</pre></blockquote>
+
+<p>
+Files that must be manually merged, respecting any local 
+changes made to them, if they were modified from the default, 
+otherwise, just copy them over, too:
+
+<blockquote><pre>
+ftpusers
+inetd.conf
+login.conf
+rc.conf
+sysctl.conf
+syslog.conf
+mail/aliases
+</pre></blockquote>
+
+The changes to these files are in <a href="upgrade38.patch">this
+patch file</a>.
+You can attempt to use this by executing the following as root:
+<blockquote><pre>
+cd /
+patch -C -p0 &lt;upgrade38.patch
+</pre></blockquote>
+
+This will test the patch to see how well it will apply to YOUR system,
+to actually apply it, leave off the "<tt>-C</tt>" option.
+Note that it is likely that if you have customized files or not kept
+them closely updated, or are upgrading from an snapshot of 3.7, they may
+not accept the patch cleanly.
+In those cases, you will need to manually apply the changes.
+Please test this process before relying on it for a machine you can not
+easily get to.
+
+<p>
+Note that since the <tt>/etc/mail/aliases</tt> file has been changed,
+you need to run
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=newaliases&amp;sektion=8">newaliases(8)</a>
+to have them take effect.
+
+<p>
+The following files have had changes which should be looked at, but it
+is unlikely they should be directly copied or merged (i.e., if you are
+using pf.conf, look at the suggested change of strategy, and decide if
+it is appropriate for your use).
+
+<blockquote><pre>
+pf.conf
+spamd.conf
+/root/.profile
+</pre></blockquote>
+
+
+Finally, use
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=mtree&amp;sektion=8">mtree(8)</a>
+to create any new directories:
+<blockquote><pre>
+mtree -qdef /etc/mtree/4.4BSD.dist -p / -u
+</pre></blockquote>
+
+<p>
+<font color="#0000e0">
+<a href="upgrade35.html">[3.4 -> 3.5]</a> |
+<a href="upgrade36.html">[3.5 -> 3.6]</a> |
+<a href="upgrade37.html">[3.6 -> 3.7]</a> |
+<a href="upgrade39.html">[3.8 -> 3.9]</a> |
+<a href="index.html">[FAQ Index]</a>
+</font>
+
+<p>
+<hr>
+<a href="index.html"><img height="24" width="24" src="../images/back.gif" border="0" alt="[back]"></a>
+<a href="mailto:www@openbsd.org">www@openbsd.org</a>
+<br>
+<small>$OpenBSD: upgrade38.html,v 1.18 2006/05/01 00:57:59 nick Exp $</small>
+
+</body>
+</html>

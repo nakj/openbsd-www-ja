@@ -1,0 +1,178 @@
+<!DOCTYPE HTML PUBLIC  "-//W3C//DTD HTML 4.01 Transitional//EN"
+	"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>OpenBSD/sgi</title>
+<link rev="made" href="mailto:www@openbsd.org">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="resource-type" content="document">
+<meta name="description" content="the OpenBSD/sgi page">
+<meta name="keywords" content="openbsd,sgi">
+<meta name="distribution" content="global">
+<meta name="copyright" content="This document copyright 1996-2009 by OpenBSD.">
+</head>
+
+<body bgcolor="#ffffff" text="#000000" link="#23238e">
+<a href="index.html"><img alt="[OpenBSD]" height="30" width="141" src="../images/smalltitle.gif" border="0"></a>
+<h2><font color="#e00000">OpenBSD/sgi</font></h2>
+
+<hr>
+<a href="../images/sgi_o2.jpg">
+<img src="../images/sgi_o2.jpg"align="right"></a>
+
+<p>
+OpenBSD/sgi funktioniert zurzeit auf den 64-Bit-MIPS-basierten
+SGI-O2-Workstations. Andere 64-Bit-SGI-Systeme werden in der Zukunft
+ebenso unterstützt.
+</p>
+<p>
+OpenBSD/sgi ist eine voll unterstützte 64-Bit-Portierung und
+funktioniert daher nur auf 64-Bit-Prozessoren, z.&nbsp;B. R4000 und
+aufwärts.
+</p>
+
+<p>
+Eine Mailingliste für die OpenBSD/sgi-Portierung ist unter
+<u><font color="#23238e">sgi@openbsd.org</font></u> erreichbar.
+Um die Mailingliste zu abonnieren, sende eine E-Mail mit dem Inhalt <b>"subscribe
+sgi"</b> an <a href="mailto:majordomo@openbsd.org">majordomo@openbsd.org</a>.
+Bitte lies vorher unsere <a href="mail.html">Mailinglistenrichtlinie</a> before
+</p>
+
+<p>
+Die momentan Verantwortlichen für die Portierung sind Miod Vallat
+(<a href="mailto:miod@openbsd.org">miod@openbsd.org</a>)
+und
+Joel Sing
+(<a href="mailto:jsing@openbsd.org">jsing@openbsd.org</a>).
+</p>
+
+
+<a name="toc"></a>
+<h3><font color="#0000e0"><i>Inhaltsverzeichnis</i></font></h3>
+<table><tr>
+<td width=1%></td>
+<td valign="top" width="20%">
+  <li><a href="#history">Geschichte der Portierung</a><br>
+  <li><a href="#status">Momentaner Status</a><br>
+  <li><a href="#hardware">Unterstützte Hardware</a><br>
+</td><td valign="top" width="20%">
+  <li><a href="#install">Beziehen und installieren</a><br>
+  <li><a href="#projects">Projekte und zu reparierende Fehler</a><br>
+</td></tr></table>
+<br clear=all>
+<hr>
+
+<a name="history"></a>
+<h3><font color="#0000e0"><strong>Geschichte</strong></font></h3>
+
+<p>
+Die OpenBSD/sgi-Portierung hat ihre Wurzeln in der
+<a href="arc.html">OpenBSD/arc</a>-Portierung aus den frühen Tagen von
+OpenBSD. Die Arc-Unterstützung wurde jedoch bald wegen mangelndem
+Interesse und mangelnder Hardware wieder eingestellt. Die Unterstützung
+von OpenBSD-Mips wurde dann außerhalb des OpenBSD-Projekts gepflegt. Als
+SGI-Hardware bezahlbar wurde und leicht zu erwerben war, stieg das
+Interesse an einer SGI-Portierung. Das letzte fehlende Stück - eine
+funktionierende 64-Bit-Toolchain - ist nun da und die
+64-Bit-SGI-OpenBSD-Portierung ist somit verfügbar und wird im
+OpenBSD-Source-Tree verwaltet.
+</p>
+
+<a name="status"></a>
+<h3><font color="#0000e0"><strong>Momentaner Status</strong>
+</font></h3>
+
+<p>
+Aktuell läuft OpenBSD/sgi im 64-Bit-Modus und bootet auf verfügbaren
+Systemen in den Multiuser-Modus. Snapshots werden von Zeit zu Zeit
+zur Verfügung gestellt, während sich die Portierung entwickelt und
+vergrößert.<br>
+Gegen Ende des Jahres 2007 wurde die Portierung so erweitert, dass sie das
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=wscons&amp;sektion=4">wscons(4)</a>
+unterstützt.
+Dadurch ist es nun möglich die Glass Console zu benutzen.
+</p>
+
+<a name="hardware"></a>
+<h3><font color="#0000e0"><strong>Unterstützte
+Hardware</strong></font></h3>
+
+<ul>
+Für eine vollständige Liste von Systemkomponenten und Gerätetreibern
+für diese Architektur lies bitte
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=intro&amp;arch=sgi&amp;sektion=4">intro(4/sgi)</a>.
+<p>
+<li><strong>SGI O2 (aka Moosehead) with R5000, RM5200, RM7000, R10000 and R12000 CPUs.<br>
+Level-2-Caches werden auf allen CPUs unterstützt.
+RM7000-Level-3-Cache wird unterstützt.</strong>
+<li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ahc&amp;sektion=4">ahc(4)</a> Adaptec-AIC-7880-SCSI.
+<li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=mec&amp;arch=sgi&amp;sektion=4">mec(4)</a> MAC-110-100MBit-Ethernet.
+<li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=com&amp;sektion=4">com(4)</a> eingebauter serieller Port.
+<li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=fxp&amp;sektion=4">fxp(4)</a> Intel-i8255x-basiertes PCI-Ethernet (außer i82556), auf dem <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=pci&amp;sektion=4">pci(4)</a>-Bus.
+<li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=mavb&amp;arch=sgi&amp;sektion=4">mavb(4)</a>
+Moosehead-A/V-Board-Audiogerät.
+<li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=gbe&amp;arch=sgi&amp;sektion=4">gbe(4)</a> SGI-Graphics-Back-End-Frame-Buffer,
+unterstützt die <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=wscons&amp;sektion=4">wscons(4)</a>-Konsole,
+die X-Windows unterstützt.
+<li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=mkbc&amp;sektion=4&amp;arch=sgi">mkbc(4)</a>
+eingebauter PS/2-Controller.
+<li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=pckbd&amp;sektion=4">pckbd(4)</a> PS/2-Tastaturen.
+<li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=pms&amp;sektion=4">pms(4)</a>
+PS/2-Mäuse.
+<li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=power&amp;sektion=4&amp;arch=sgi">power(4)</a>-Knopf.
+<li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=usb&amp;sektion=4&amp;arch=sgi">usb(4)</a> auf dem <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=pci&amp;sektion=4">pci(4)</a>-Bus, unterstützt einige USB-Geräte.
+<li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=rum&amp;sektion=4">rum(4)</a> Ralink Technology IEEE 802.11a/b/g USB-Adapter.
+<li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=run&amp;sektion=4">run(4)</a>) Ralink Technology IEEE 802.11a/b/g/Draft-N USB-Adapter.
+<li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=uvideo&sektion=4">uvideo(4)</a> UVC-kompatible Video-Geräte.
+</ul>
+
+<a name="install"></a>
+<h3><font color="#0000e0">
+<strong>Beziehen und installieren</strong>
+</font></h3>
+
+<p>
+Das aktuellste unterstützte OpenBSD/sgi-Release ist
+<a href="../45.html">OpenBSD 4.5</a>.
+Hier sind die
+<a href="ftp://ftp.OpenBSD.org/pub/OpenBSD/4.5/sgi/INSTALL.sgi">
+OpenBSD-sgi-4.5-Installationsanleitungen</a>.
+
+<p>
+Snapshots werden ab und an
+<a href="ftp://ftp.OpenBSD.org/pub/OpenBSD/snapshots/sgi">hier</a>
+zur Verfügung gestellt, genauso wie auf den
+,<a href="ftp.html">mirrors</a>'.
+Hier sind die
+<a href="ftp://ftp.OpenBSD.org/pub/OpenBSD/snapshots/sgi/INSTALL.sgi">
+OpenBSD/sgi Snapshot Installationsanweisungen.</a>
+
+<a name="projects"></a>
+<h3><font color="#0000e0">
+<strong>Projekte und zu reparierende Fehler</strong>
+</font></h3>
+
+<ul>
+  <li>Workaround für das ,coherency' Verhalten von R10000-CPUs
+  <li>Größerer User-VM-Space (aktuell sind 2 GB die Höchstgrenze)
+  <li>Unterstützung für mehr SGI-Hardware wie Origin 200, Octane etc.
+  <li>Unterstützung für Multiprozessor-Systeme (<b>nicht</b> NUMA)
+</ul>
+
+<hr>
+<a href="plat.html">
+<img height="24" width="24" src="../back.gif" border="0" alt="Unterstützte Plattformen">
+</a>
+<br>
+<small><a href="mailto:www@openbsd.org">www@openbsd.org</a></small>
+<br>
+<small>
+<!--
+Originally [OpenBSD: sgi.html,v 1.53 ]<br>
+$Translation: sgi.html,v 1.47 2009/05/03 12:44:31 tobias Exp $<br>
+-->
+$OpenBSD: sgi.html,v 1.44 2009/05/04 19:07:52 tobias Exp $
+</small>
+</body>
+</html>

@@ -1,0 +1,875 @@
+q<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>2 - Getting to know OpenBSD</title>
+<link rev="made" href="mailto:www@openbsd.org">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-2022-JP">
+<meta name="resource-type" content="document">
+<meta name="description"   content="the OpenBSD FAQ page">
+<meta name="keywords"      content="openbsd,faq">
+<meta name="distribution"  content="global">
+<meta name="copyright"     content="This document copyright 1998-2010 by OpenBSD.">
+</head>
+
+<body bgcolor="#ffffff" text="#000000">
+<!-- Passes validator.w3.org, please keep it this way;
+please, use a max of 72 chars per line -->
+
+<a href="../index.html">
+<img alt="[OpenBSD]" height=30 width=141 src="../images/smalltitle.gif" border="0">    
+</a>
+<p>
+<font color="#0000e0">
+<a href="index.html">[FAQ の目次]</a>
+<a href="faq1.html">[To Section 1 - OpenBSD 入門]</a>
+<a href="faq3.html">[To Section 3 - OpenBSD のはじめかた]</a>
+</font>
+
+<h1><font color="#e00000">2 - OpenBSD を知る</font></h1>
+<hr>
+
+<p>
+<h3>目次</h3>
+<ul>
+<li><a href="#WebSites">2.1 - Web ページ</a>
+<li><a href="#MailLists">2.2 - メーリングリスト</a>
+<li><a href="#ManPages">2.3 - マニュアルページ</a>
+<li><a href="#Bugs">2.4 - バグ報告</a>
+</ul>
+
+<hr>
+
+
+<p>
+<a name="WebSites"></a>
+<h2>2.1 - 興味を引くウェブページ</h2>
+
+<p>
+OpenBSD プロジェクトの公式 web サイトは
+<a href="http://www.openbsd.org">http://www.OpenBSD.org</a> です。
+
+<p>
+ここには、OpenBSD プロジェクトすべてに関する、
+有用な情報が数多く書かれています。
+
+<p>
+The <a href="http://www.undeadly.org">OpenBSD Journal</a> は
+OpenBSD にフォーカスしたニュースと意見のサイトです。
+
+<p>
+<a href="http://www.openbsdsupport.org/">OpenBSDsupport.org</a> は
+様々な質の「ユーザーによりメンテナンスされているドキュメントを蒐集しているサイトですが、
+しばしばこのFAQや他の公式ドキュメントにない話題を取り扱っています。
+
+<p>
+たくさんのユーザーが OpenBSD 固有の情報をのせたウェブページを
+作っています。
+すべてのものがインターネット上にあるように、よい検索エンジンは
+あなたの人生を簡単にし、 as will a healthy dose of skepticism.
+常に、目をつむってコマンドを入力しないでください。あなたのコンピュータについて
+理解してください。
+
+
+<p>
+<a name="MailLists"></a>
+<h2>2.2 - メーリングリスト</h2>
+
+<p>
+OpenBSD プロジェクトではいくつかのメーリングリストを用意しており、
+ユーザに参加を推奨しています。メーリングリストに参加するには、
+<a href="mailto:majordomo@openbsd.org">majordomo@openbsd.org</a>
+宛に電子メールをお送りください。このアドレスは参加を自動処理する
+プログラムのためのものです。メール本文には、参加したいメーリング
+リスト用の参加コマンドを一行で記述します。たとえば、次のような
+感じです。
+
+<blockquote>
+<pre>
+<strong>subscribe announce</strong>
+</pre>
+</blockquote>
+
+<p>
+そうすると自動参加処理プログラムから、そのメーリングリストに参加する意志を
+確認するメールが返送されてきます。これは、他人があなたを勝手に参加させて、
+不要なメールで溢れさせたりすることがないようにするためなのです。
+このメッセージには、確認メッセージに反応するか、<tt>majordomo@openbsd.org</tt>
+に応答を返すための、<a href="http://lists.openbsd.org">メーリングリストサーバ</a>の
+web ページへのリンクを含む、参加の意思確認のためのいくつかの異なる方法について
+操作手順が書かれていますので、お好きな方法を選択してください。
+これらの全部で 3 つの確認方法は、<tt>A56D-70D4-52C3</tt> のような、
+ユニークで時間限定の識別番号を必要とすることに注意してください。
+これは、あなたが本当にメーリングリストへの参加を希望した本人かどうかを
+確認するためなのです (これが<i>本当の</i> "選択" なのです)。
+
+<p>
+参加の意志確認が終わるとすぐにメーリングリストへの
+参加処理が行われ、自動参加処理プログラムから正常に参加処理が
+行われた旨がメールで通知されます。
+
+<p>
+メーリングリストから退会する場合にも、
+<a href="mailto:majordomo@openbsd.org">majordomo@openbsd.org</a>
+へメールを送ります。
+その場合、本文は次のようになります。
+
+<blockquote>
+<pre>
+<strong>unsubscribe announce</strong>
+</pre>
+</blockquote>
+
+<p>
+メーリングリストシステムに関して何か困ったことがありましたら、まずは
+本文に "help" と書いたメールを
+<a href= "mailto:majordomo@openbsd.org">majordomo@openbsd.org</a>
+に送ると送られてくるヘルプファイルに目をとおしてください。
+
+<p>
+あなたの OpenBSD のメーリングリストへの参加状況は、
+    <a href="http://lists.openbsd.org">http://lists.openbsd.org</a>
+の web インターフェイスでメンテナンスすることもできます。
+
+<p>
+次にあげるのは、一般向けの OpenBSD メーリングリストの
+いくつかです。
+
+<p>
+<ul>
+    <li><b>announce</b> - 重要なアナウンス。
+    配送頻度は低めです。
+    <li><b>security-announce</b> - セキュリティ関連の
+    アナウンス。配送頻度は低めです。
+    <li><b>misc</b> - ユーザの一般的な質問とその答え。
+    最も活発なメーリングリストであり、
+    大部分の質問は普通ここで行われます。
+    <li><b>bugs</b> - sendbug(1) 経由で送られるバグ情報と
+    それに関する議論。
+    <li><b>source-changes</b> - CVS ソースツリーの変更点が
+    自動的に送られるメーリングリスト。開発者がソースツリーの変更点を
+    commit するごとに、<a href="../../ja/why-cvs.html">CVS</a> は
+    (通常は短かい) commit 時のメッセージの写しを
+    このメーリングリストに送信します。
+    <li><b>ports</b> - OpenBSD Ports ツリーに関する議論。
+    <li><b>ports-changes</b> - CVS ソースツリーの Ports
+    関連の変更点が自動的に送られるメーリングリスト。
+    <li><b>advocacy</b> - OpenBSD の普及活動に関する議論、
+    および <i>misc</i> からずれ過ぎてしまった話題。
+</ul> 
+
+<p>
+多くの質問は何度も繰り返し行われていますので、
+<b>misc</b> やその他のメーリングリストに質問を送る前に、
+メールアーカイブを調べましょう。
+その質問や問題があなたにとって初めてのものであったとしても、
+メーリングリストに参加している他の人たちは先週も同じ質問を何度も受けていて、
+もう見たくないと思っているかも知れません。
+もし、ハードウェアに関する質問を聞くときは、 <i>常に 
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=dmesg&amp;sektion=8"
+>dmesg(8)</a>を含めてください !</i>
+
+<p>
+メーリングリストのアーカイブやメーリングリストに関するガイドライン、さらに詳しい情報は、
+<a href="../../ja/mail.html">メーリングリストのページ</a>に書かれています。
+
+<p>
+<a href="http://mailman.theapt.org/listinfo/openbsd-newbies">OpenBSD Newbies</a>
+メーリングリストは、OpenBSDとUnixの初心者が
+興味をもつかもしれない非公式なメーリングリストです。
+
+
+
+<p> 
+<a name="ManPages"></a>
+<h2>2.3 - Manual Pages</h2>
+
+<p>
+OpenBSD は特定のアプリケーションに関する長い文書の他、さまざまな文書を
+マニュアルページという形で提供しています。
+マニュアルページが最新のものに維持され、間違いがないことを確実にするために、
+考え得るだけの努力が行われています。
+すべての場合において、マニュアルページは OpenBSD についての
+信頼すべき情報源であると考えられています。
+
+<p>
+<!-- XXXrelease -->
+マニュアルページや他の文書を読むには、<tt>man47.tgz</tt> と <tt>misc47.tgz</tt>
+の<a href="faq4.html#FilesNeeded">配布セット</a>を
+インストールしていなければなりませんのでご注意ください。
+
+<p>
+次のリストは、初心者向けに有用なマニュアルページをまとめたものです。
+
+<p>
+
+<b>はじめに</b>
+<ul>
+<li><b><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=afterboot&amp;sektion=8"
+  >afterboot(8)</a></b> - 最初に起動させた後にチェックしなければならないこと
+
+<li><b><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=help&amp;sektion=1"
+  >help(1)</a></b> - 初心者ユーザ、管理者向けのヘルプ
+
+<li><b><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=hier&amp;sektion=7"
+  >hier(7)</a></b> - ファイルシステムのレイアウト
+
+<li><b><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=man&amp;sektion=1"
+  >man(1)</a></b> - オンラインマニュアルページの表示
+
+<li><b><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=intro&amp;sektion=1"
+>intro(1)</a></b> - 一般的なコマンドの紹介、
+マニュアルの他の章:
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=intro&amp;sektion=2">intro(2)</a>,
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=intro&amp;sektion=3">intro(3)</a>,
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=intro&amp;sektion=4&amp;arch=i386">intro(4)</a>
+(注: intro(4) は<a href="../../ja/plat.html">プラットフォーム</a>固有のものです)、
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=intro&amp;sektion=5">intro(5)</a>,
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=intro&amp;sektion=6">intro(6)</a>,
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=intro&amp;sektion=7">intro(7)</a>,
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=intro&amp;sektion=8">intro(8)</a>,
+および
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=intro&amp;sektion=9">intro(9)</a>も参照のこと
+
+<li><b><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=adduser&amp;sektion=8"
+  >adduser(8)</a></b> - 新しいユーザを追加するコマンド
+
+<li><b><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=vipw&amp;sektion=8"
+  >vipw(8)</a></b> - マスターパスワードファイルの編集
+
+<li><b><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=disklabel&amp;sektion=8"
+  >disklabel(8)</a></b> - ディスクパックラベルの読み書き
+
+<li><b><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=reboot&amp;sektion=8"
+  >reboot, halt(8)</a></b> - システムの停止と再起動
+
+<li><b><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=shutdown&amp;sektion=8"
+  >shutdown(8)</a></b> - 指定時間にシステムを停止させる
+
+<li><b><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=dmesg&amp;sektion=8"
+  >dmesg(8)</a></b> - ブート時のカーネルメッセージの再表示
+
+<li><b><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=sudo&amp;sektion=8"
+  >sudo(8)</a></b> - root としてログインせずに、root 権限でコマンドを実行
+
+<li><b><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=mg&amp;sektion=1"
+		>mg(1)</a></b> - emacs風テキストエディタ
+
+</ul>
+
+<b>上級ユーザ向け</b>
+<ul>
+<li><b><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=boot&amp;sektion=8&amp;arch=i386"
+  >boot(8)</a></b> - システムの起動過程
+
+<li><b><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=boot_config&amp;sektion=8"
+  >boot_config(8)</a></b> - カーネルの設定を起動時に変更する方法
+  
+<li><b><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=gcc-local&amp;sektion=1"
+  >gcc-local(1)</a></b> - <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=gcc&amp;sektion=1">gcc(1)</a> に対するOpenBSD固有の変更
+
+<li><b><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ifconfig&amp;sektion=8"
+  >ifconfig(8)</a></b> - ネットワークインターフェイスのパラメータ設定
+
+<li><b><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=login.conf&amp;sektion=5"
+  >login.conf(5)</a></b> - ログインクラス設定ファイルの書式
+
+<li><b><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=netstat&amp;sektion1"
+  >netstat(1)</a></b> - ネットワーク利用状況の表示
+
+<li><b><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=release&amp;sektion=8"
+  >release(8)</a></b> - OpenBSD のリリースのビルド
+
+<li><b><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=sendbug&amp;sektion=1"
+  >sendbug(1)</a></b> - OpenBSD の障害報告 (PR; problem report) を担当サイトに送るコマンド
+
+<li><b><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=style&amp;sektion=9"
+  >style(9)</a></b> - OpenBSD のカーネルソースのコーディングスタイルのガイド
+
+<li><b><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=sysctl&amp;sektion=8"
+  >sysctl(8)</a></b> - カーネルの状態の取得/設定。
+
+</ul>
+
+<p>
+<!-- XXXrelease -->
+<tt>man47.tgz </tt>のファイル一式をインストールしていない場合でも、
+<a href="http://www.openbsd.org/cgi-bin/man.cgi">http://www.openbsd.org/cgi-bin/man.cgi</a>
+を使用して、web 上ですべての OpenBSD
+のマニュアルページを読むことができます。
+
+<p>
+一般的に、コマンドやマニュアルページの名前が分かっていれば <kbd>"man コマンド名"</kbd>
+とすることでマニュアルページを読むことができます。たとえば <kbd>"man vi"</kbd>
+とすれば、vi エディタのマニュアルページが読めます。コマンド名がわからなかったり、
+<kbd>"man コマンド名"</kbd> としたのにマニュアルページが見つからないという場合は、
+<kbd>"apropos なんとか"</kbd> もしくは <kbd>"man -k なんとか"</kbd> とすることで、
+マニュアルページデータベースから検索を行うことができます。
+「なんとか」の部分には、あなたが探しているマニュアルページの
+タイトルに出てきそうな言葉を入れてください。たとえば、次のような感じです。
+
+<blockquote>
+<pre>
+# <strong>apropos "time zone"</strong>
+tzfile (5) - time zone information
+zdump (8) - time zone dumper
+zic (8) - time zone compiler
+</pre>
+</blockquote>
+
+<p>
+カッコ内の数字は、マニュアルページが置かれているセクションを
+示しています。お気づきかと思いますが、いくつかのマニュアルページは
+同じ名前で複数のセクションに置かれています。たとえば cron
+デーモンの設定ファイルの書式を知りたいとしましょう。
+求めるマニュアルページのセクション番号が分かったら、
+<kbd>"man n command"</kbd>
+(n はセクション番号) とします。
+
+<blockquote>
+<pre>
+# <strong>man -k cron</strong>
+cron (8) - clock daemon
+crontab (1) - maintain crontab files for individual users
+crontab (5) - tables for driving cron
+# <strong>man 5 crontab</strong>
+</pre>
+</blockquote>
+
+<p>
+<!-- XXXrelease -->
+UNIX マニュアルページの他に、(<tt>misc47.tgz</tt> に含まれる)
+組版可能な文書群があります。それらは <tt>/usr/share/doc</tt>
+ディレクトリに置かれており、
+それぞれのサブディレクトリで
+"make" を実行することで組版することが可能です。
+<tt>psd</tt> サブディレクトリは Programmer's Supplementary Documents,
+<tt>smm</tt> サブディレクトリは System Manager's Manual,
+<tt>usd</tt> サブディレクトリは UNIX User's Supplementary Documents です。
+この 3 つのサブディレクトリで "<tt>make</tt>" を実行するか、
+あるいはそのディレクトリの下にあるセクションをひとつ選んで `make'
+を実行することができます。
+
+<p>
+サブディレクトリには、空のものもあります。
+文書は標準で、印刷に適した PostScript 形式に組版されます。
+この PostScript 形式は非常に大きなもの -- 250-300% のサイズ -- になります。
+PostScript プリンタや PostScript ディスプレイが使用できない環境にいる場合は、
+端末のディスプレイで表示できる形式に組版することも可能です。
+各文書サブディレクトリには
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=make&amp;sektion=1">make(1)</a>
+で生成する事のできる
+テキスト形式のコピー(`paper.txt'と呼ばれています) を生成するターゲットがあります。
+たとえば、次のような感じです。
+
+<blockquote>
+<pre>
+# <strong>cd /usr/share/doc/usd/04.csh</strong>
+# <strong>make paper.txt</strong>
+# <strong>more paper.txt</strong>
+</pre>
+</blockquote>
+
+<p>
+これらのディレクトリで文書を生成するにはスーパーユーザー権限が必要になることに注意してください。
+<strong>make clean</strong> で以前に生成した全ての文書を
+削除することができます。/usr/share/doc 以下のドキュメントに関する詳細は、
+ /usr/share/doc/README にあります。
+
+<p>
+通常、これらの組版可能な文書よりも UNIX マニュアルページの方が新しく、
+信頼できるものになっています。一方で組版可能な文書は、マニュアルページよりも
+複雑な応用例について解説してあることがあります。
+
+<p>
+ほとんどの場合、マニュアルページを印刷すると便利でしょう。
+マニュアルページの印刷手順を以下に説明します。
+
+<h3>マニュアルページのソースファイル (tcpdump.8 のように数字で終わっているファイル)
+を表示する方法は ?</h3>
+
+<p>
+このファイルはソースツリーにあります。
+ソースツリーにあるマニュアルページは組版されておらず、
+<a href="../../anoncvs.html">CVS</a> を使用して何度も更新されています。
+これらのマニュアルページを表示するには、次のようにします。
+
+<blockquote>
+<pre>
+# <b>nroff -Tascii -mandoc &lt;file&gt; | more</b>
+</pre>
+</blockquote>
+
+
+<h3>組版や制御文字を含まない、
+素のままのマニュアルページを作成するには ?</h3>
+
+<p>
+制御文字を含まないマニュアルページを
+作成するには、たとえば次のようにすると
+良いでしょう。
+
+<blockquote>
+<pre>
+# <b>man &lt;command&gt; | col -b</b>
+</pre>
+</blockquote>
+
+<h3>印刷用に、マニュアルページの
+PostScript 版を作成するには ?</h3>
+
+<p>
+Note that <tt>&lt;ファイル名&gt;</tt> の部分には、マニュアルページのソースフ
+ァイル名 (おそらく<tt>tcpdump.8</tt> のように数字で終わっています ) を入れてくだ
+さい。PostScript 版のマニュアルページは非常にきれいな仕上がりになります。これは
+、gv (GhostView) のようなプログラムで印刷やディスプレイ上での表示を行うことが可
+能です。GhostView は<a href="faq15.html">packages コレクション</a>にあります。
+OpenBSD システムのマニュアルページの PostScript 版を作成するには、次のような 
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=nroff&amp;sektion=1">nroff(1)</a> 
+コマンドオプションを使用してください。
+
+<blockquote>
+<pre>
+# <b>nroff -Tps -mandoc &lt;file&gt; &gt; outfile.ps</b>
+</pre>
+</blockquote>
+
+<h3>圧縮したマニュアルページを生成するには ?</h3>
+
+<p>
+ソースからシステムを構築した場合、 
+マニュアルページを構築するオプションはいくつかあります。オプションは 
+/etc/mk.conf に置き、(必要であれば作成してください) 、
+システムの構築時にインクルードされます。マニュアルページを圧縮して生成するオプションは、
+ディスクスペースを節約するのにとても有用です。圧縮したマニュアルページは man コマンドを
+使用して普通に見ることができます。これをセットするために、
+以下のオプションを<tt>/etc/mk.conf</tt> に追加してください。
+
+<blockquote>
+<pre>
+MANZ=yes
+</pre>
+</blockquote>
+
+テキストだけでなくPostScript に組版したマニュアルページを生成する便利なオプションもあります。
+/etc/mk.conf に<tt>MANPS=yes</tt> とオプションを設定することで出来ます。 
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=mk.conf&amp;sektion=5">mk.conf(5)</a>に、もっとすすんだオプションがあります。
+
+<h3>info 
+ファイルとはなんですか ?</h3>
+
+<p>
+OpenBSD に関するいくつかの情報は、 info ファイル形式で提供されており、
+通常は <tt>/usr/share/info</tt> に置かれています。これは、GNUによる文書化の代替形式で
+す。これらのファイルは、GNUによるマニュアルページよりも頻繁に更新されており、
+ <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=info&amp;sektion=1">info(1)</a> 
+コマンドで参照することができます。たとえば、GNU コンパイラ 
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=gcc&amp;sektion=1">gcc(1)</a> 
+の情報をみるには以下のようにします。
+
+<blockquote>
+<pre>
+# <b>info gcc</b>
+</pre>
+</blockquote>
+
+info を使えば、我々のマニュアルページを本当に評価することになるでしょう。
+
+<h3>XTerm 上で色付きのマニュアルページを表示するにはどうしたらいいですか ?</h3>
+
+<p>
+標準の
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=xterm&amp;sektion=1">xterm(1)</a> 
+の設定ファイルは色付きのマニュアルページを表示しません。
+色付きの出力をさせるには、
+ <tt>/etc/X11/app-defaults/XTerm-color</tt> ファイルを
+ホームディレクトリにコピーし、"<tt>.Xdefaults</tt>" という名前に変更します。
+現在の "<tt>.Xdefaults</tt>" 設定ファイルを上書きしないように注意してください。
+このファイルは XTerm で色を有効にするのに必要な設定がすべて含まれています。
+しかしながら、 動かす前に以下の３行をアンコメントする必要があります。
+
+<blockquote>
+<pre>
+!*VT100*colorULMode: on
+!*VT100*underLine: off
+!*VT100*colorBDMode: on
+</pre>
+</blockquote>
+
+このファイルの残りの部分で、色を選ぶ様々な設定をする事が出来ます。マ
+ニュアルページに関連するものには以下のようなものがあります。
+
+<blockquote>
+<pre>
+*VT100*colorUL: yellow
+*VT100*colorBD: white
+</pre>
+</blockquote>
+
+これはむしろ地獄のような外観のマニュアルページを作り出します。必要ならばそのようにカスタマイズする事が出来ますが、
+"colorUL"を赤に、"colorBD"をマゼンダにする事をお勧めします。
+
+
+もちろんX11の マニュアルページビューワーもあります。
+マニュアルページの(グラフィカル) インターフェイス
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=xman&amp;sektion=1">xman(1)</a>です。
+xtermとxmanのマニュアルページに詳細があります。
+
+<h3>自分のマニュアルページを書くにはどうしたらいいですか？</h3>
+
+<p>
+自分の作ったアプリケーション向けのマニュアルページを書きたいとお望みなら、
+ <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=mdoc.samples&amp;sektion=7">mdoc.samples(7)</a> 
+にチュートリアルがあります。
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=mdoc&amp;sektion=7">mdoc(7)</a> 
+に便利なリファレンスガイドもあります。
+
+<p>
+<a name="Bugs"></a>
+<h2>2.4 - バグ報告</h2>
+
+バグだ！と泣く前に、本当に何を扱っているか
+確認してください。
+もし、あなたがOpenBSDで何が行われたか、あるいは
+どのように動いているのかを理解してなければ、
+<a href="#ManPages">マニュアルページ</a> やOpenBSDのウェブサイトを見るか、
+メーリングリスト(ほとんどはmisc@openbsd.orgでしょう)に助けを求めても
+解決方法が見つかりません。
+もしこれが初めてのOpenBSD体験であれば、実際あなたは多分
+未知のバグを見つける事はできないでしょう。
+故障したハードウェアもソフトウェアのバグのようにふるまうことに注意が必要です。どうか
+"バグ" を見つけたと結論づける前にハードウェアの最新の状態を確かめてください。
+
+<p>
+最後に、バグ報告を提出する前に、 
+<a href="../report.html">http://www.openbsd.org/report.html</a> 
+に目を通してください。
+
+<p>
+バグ報告を適切に行うことは、エンドユーザの最も重要な
+役割のひとつです。深刻なバグの診断には、非常に詳細な
+情報が必要になります。開発者の元には、よく次のような
+バグ報告の電子メールが届きます。
+<p>
+<table border=0 width="90%"><tr><td nowrap bgcolor="#EEEEEE"><pre>
+From: joeuser@example.com
+To: bugs@openbsd.org
+Subject: 助けて!!!
+
+私の PC が起動しないのです !!!!!  486 マシンなのですが !!!!!
+</pre></td></tr></table>
+
+<p>
+大部分のみなさんには、このような報告がすぐに削除される理由を
+理解していただけると思います。バグ報告には、詳細な情報が含まれていなければなりません。
+もし本当にこの人が誰かにこのバグを見つけて欲しいと思っていたなら、きっと次のように、
+より多くの情報を提供していたはずです (訳注: 実際のメールは英語で提出してください)。
+
+<p>
+<table border=0 width="90%"><tr><td nowrap bgcolor="#EEEEEE"><pre>
+From: smartuser@example.com
+To: bugs@openbsd.org
+Subject: 3.3-beta panics on a SPARCStation2 
+
+このマシンに、公式 CD-ROM から OpenBSD 3.2 をインストールし、
+快適に動いていました。
+
+FTP ミラーから 3.3-beta のクリーンインストールを実行後、
+一定時間使用するとシステムがランダムに、そして、予想どおり、X
+を起動すると、その直後にパニックすることに気付きました。
+
+dmesg の出力は次のようになっています。
+ 
+OpenBSD 3.3-beta (GENERIC) #9: Mon Mar 17 12:37:18 MST 2003
+    deraadt@sparc.openbsd.org:/usr/src/sys/arch/sparc/compile/GENERIC
+real mem = 67002368
+avail mem = 59125760
+using 200 buffers containing 3346432 bytes of memory
+bootpath: /sbus@1,f8000000/esp@0,800000/sd@1,0
+mainbus0 (root): SUNW,Sun 4/75
+cpu0 at mainbus0: CY7C601 @ 40 MHz, TMS390C602A FPU; cache chip bug
+- trap page uncached
+cpu0: 64K byte write-through, 32 bytes/line, hw flush cache enabled
+memreg0 at mainbus0 ioaddr 0xf4000000
+clock0 at mainbus0 ioaddr 0xf2000000: mk48t02 (eeprom)
+timer0 at mainbus0 ioaddr 0xf3000000 delay constant 17
+auxreg0 at mainbus0 ioaddr 0xf7400003
+zs0 at mainbus0 ioaddr 0xf1000000 pri 12, softpri 6
+zstty0 at zs0 channel 0 (console i/o)
+zstty1 at zs0 channel 1
+zs1 at mainbus0 ioaddr 0xf0000000 pri 12, softpri 6
+zskbd0 at zs1 channel 0: reset timeout
+zskbd0: no keyboard
+zstty2 at zs1 channel 1: mouse
+audioamd0 at mainbus0 ioaddr 0xf7201000 pri 13, softpri 4
+audio0 at audioamd0
+sbus0 at mainbus0 ioaddr 0xf8000000: clock = 20 MHz
+dma0 at sbus0 slot 0 offset 0x400000: rev 1+
+esp0 at sbus0 slot 0 offset 0x800000 pri 3: ESP100A, 25MHz, SCSI ID 7
+scsibus0 at esp0: 8 targets
+sd0 at scsibus0 targ 1 lun 0: &lt;SEAGATE, ST1480 SUN0424, 8628&gt; SCSI2 0/direct fixed
+sd0: 411MB, 1476 cyl, 9 head, 63 sec, 512 bytes/sec, 843284 sec total
+sd1 at scsibus0 targ 3 lun 0: &lt;COMPAQPC, DCAS-32160, S65A&gt; SCSI2 0/direct fixed
+sd1: 2006MB, 8188 cyl, 3 head, 167 sec, 512 bytes/sec, 4110000 sec total
+le0 at sbus0 slot 0 offset 0xc00000 pri 5: address 08:00:20:13:10:b9
+le0: 16 receive buffers, 4 transmit buffers
+cgsix0 at sbus0 slot 1 offset 0x0: SUNW,501-2325, 1152x900, rev 11
+wsdisplay0 at cgsix0
+wsdisplay0: screen 0 added (std, sun emulation)
+fdc0 at mainbus0 ioaddr 0xf7200000 pri 11, softpri 4: chip 82072
+fd0 at fdc0 drive 0: 1.44MB 80 cyl, 2 head, 18 sec
+root on sd0a
+rootdev=0x700 rrootdev=0x1100 rawdev=0x1102
+
+
+以下は、X を起動しようとした場合に発生するパニックです。
+
+panic: pool_get(mclpl): free list modified: magic=78746572; page 0xfaa93000;
+ item addr 0xfaa93000
+Stopped at      Debugger+0x4:   jmpl            [%o7 + 0x8], %g0
+RUN AT LEAST 'trace' AND 'ps' AND INCLUDE OUTPUT WHEN REPORTING THIS PANIC!
+DO NOT EVEN BOTHER REPORTING THIS WITHOUT INCLUDING THAT INFORMATION!
+ddb> trace
+pool_get(0xfaa93000, 0x22, 0x0, 0x1000, 0x102, 0x0) at pool_get+0x2c0
+sosend(0x16, 0xf828d800, 0x0, 0xf83b0900, 0x0, 0x0) at sosend+0x608
+soo_write(0xfac0bf50, 0xfac0bf70, 0xfac9be28, 0xfab93190, 0xf8078f24, 0x0)
+at soo_write+0x18
+dofilewritev(0x0, 0xc, 0xfac0bf50, 0xf7fff198, 0x1, 0xfac0bf70) at
+dofilewritev+0x12c
+sys_writev(0xfac87508, 0xfac9bf28, 0xfac9bf20, 0xf80765c8, 0x1000, 0xfac0bf70)
+at sys_writev+0x50
+syscall(0x79, 0xfac9bfb0, 0x0, 0x154, 0xfcffffff, 0xf829dea0) at syscall+0x220
+slowtrap(0xc, 0xf7fff198, 0x1, 0x154, 0x1, 0xfac87508) at slowtrap+0x1d8
+ddb> ps
+   PID   PPID   PGRP    UID  S       FLAGS  WAIT       COMMAND
+ 27765   8819  29550      0  3        0x86  netio      xconsole
+  1668  29550  29550      0  3      0x4086  poll       fvwm
+ 15447  29550  29550      0  3     0x44186  poll       xterm
+  8819  29550  29550     35  3      0x4186  poll       xconsole
+  1238  29550  29550      0  3      0x4086  poll       xclock
+ 29550  25616  29550      0  3      0x4086  pause      sh
+  1024  25523  25523      0  3     0x40184  netio      XFree86
+*25523  25616  25523     35  2     0x44104             XFree86
+ 25616  30876  30876      0  3      0x4086  wait       xinit
+ 30876  16977  30876      0  3      0x4086  pause      sh
+ 16977      1  16977      0  3      0x4086  ttyin      csh
+  5360      1   5360      0  3        0x84  select     cron
+ 14701      1  14701      0  3     0x40184  select     sendmail
+ 12617      1  12617      0  3        0x84  select     sshd
+ 27515      1  27515      0  3       0x184  select     inetd
+  1904      1   1904      0  2        0x84             syslogd
+  9125      1   9125      0  3        0x84  poll       dhclient
+     7      0      0      0  3    0x100204  crypto_wa  crypto
+     6      0      0      0  3    0x100204  aiodoned   aiodoned
+     5      0      0      0  3    0x100204  syncer     update
+     4      0      0      0  3    0x100204  cleaner    cleaner
+     3      0      0      0  3    0x100204  reaper     reaper
+     2      0      0      0  3    0x100204  pgdaemon   pagedaemon
+     1      0      1      0  3      0x4084  wait       init
+     0     -1      0      0  3     0x80204  scheduler  swapper
+
+よろしくお願いします。
+</pre></td></tr></table>
+
+<p>
+<a href="../../report.html">report.html</a> を参照してください。もし、
+バグがハードウェアかハードウェアの構成と何らかの関係があると考えられる場合は、
+ハードウェアについての詳細な情報が必要です。
+通常、ここで期待されるているものは
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=dmesg&amp;sektion=8">dmesg(8)</a>
+の出力で十分でしょう。もちろん、あなたが遭遇した問題についての
+詳細な記述は必須です。あなたは、ハードウェアを記述した dmesg や、賢明なユーザが
+どうしてシステムが壊れているわけではない (3.2 が正しく動いていた) と考えるのか、
+ということについて記述された文章、(X の起動時に) どうしてこのようなクラッシュが
+発生してしまうのかということ、そして、デバッガの "<tt>ps</tt>" および "<tt>trace</tt>"
+コマンドの出力に注意を払うことでしょう。このような場合、賢明なユーザは
+<a href="../faq7.html#SerCon">シリアルコンソール</a>で記録された出力を用意しますが、もし、
+あなたにはこれができない場合、クラッシュの記録を取るために、紙と鉛筆を使用することも
+できるのです (実は、これが本当の問題であり、このような報告に記載された情報が、Sun4c
+システムに影響を与えているこの問題の解決につながるのです)。
+
+<p>
+もし、バグ報告を動作中の OpenBSD システムから行いたければ、
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=sendbug&sektion=1&format=html">sendbug(1)</a>
+ユーティリティを使用して GNATS 障害報告追跡システムに
+バグ報告を送ることができます。
+もちろん、システムが起動していなければ
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=sendbug&sektion=1&format=html">sendbug(1)</a>
+を使用することができませんが、使用できる場合には、できるだけこれを使用すべきです。
+その際にも、問題の詳細、システムの設定、
+再現方法に関する情報を含めることを忘れないでください。
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=sendbug&sektion=1&format=html">sendbug(1)</a>
+コマンドを動作させるには、
+インターネットに向けて電子メールを送信できるように
+システムが設定されている必要があります。
+メールサーバが 
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=spamd&amp;sektion=8">spamd(8)</a>
+ベースの迷惑メールフィルタを使っていることに注意が必要です。メールサーバが
+バグ報告を受け付けるまで30分くらいかかりますので、待ってください。
+
+<p>
+sendbug(1) を使用してバグの報告を提出すると、報告の処理状況は電子メールで通知を
+受けることになるでしょう。
+付加情報やテストの必要なパッチを開発者に送付することもできます。また、
+<a href="../../mail.html">メーリングリストのページ</a>にその詳細が
+記述されていますが、<tt>bugs@openbsd.org</tt> メーリングリストのアーカイブを
+監視することもできます。あるいは、オンラインで
+<a href="../../query-pr.html">バグ追跡システム</a>
+
+<h3>開発者向け便利情報</h3>
+ここにあるのはいくつかの追加の情報です。
+
+<p>
+<b>"パニックメッセージ"をなくした？</b><br>
+いくつかの状況下では、一番最初の、パニックが発生した理由のパニックメッセージを
+なくしてしまうかもしれません。
+ これは非常に有用なメッセージで、報告したいと望むものです。
+ddb&gt;の "show panic" コマンドを用いれば、
+以下のように取り戻すことができます。
+
+<p>
+<table border=0 width="90%"><tr><td nowrap bgcolor="#EEEEEE"><pre>
+ddb> <b>show panic</b>
+0:      kernel: page fault trap, code=0
+ddb> 
+</pre></td></tr></table>
+<p>
+この場合、パニック文字列は、 "Kernel: page fault trap, code=0" です。
+
+<p>
+<b>SMP システム向けの特記事項</b><br>
+すべてのプロセッサで "trace" を取得して
+報告に含めるべきです。
+
+<p>
+<table border=0 width="90%"><tr><td nowrap bgcolor="#EEEEEE"><pre>
+ddb{0}> <b>trace</b>   
+pool_get(d05e7c20,0,dab19ef8,d0169414,80) at pool_get+0x226
+fxp_add_rfabuf(d0a62000,d3c12b00,dab19f10,dab19f10) at fxp_add_rfabuf+0xa5
+fxp_intr(d0a62000) at fxp_intr+0x1e7
+Xintr_ioapic0() at Xintr_ioapic0+0x6d
+--- interrupt ---
+idle_loop+0x21:
+ddb{0}> <b>machine ddb 1</b>
+Stopped at      Debugger+0x4:   leave
+ddb{1}> <b>trace</b>
+Debugger(d0319e28,d05ff5a0,dab1bee8,d031cc6e,d0a61800) at Debugger+0x4
+i386_ipi_db(d0a61800,d05ff5a0,dab1bef8,d01eb997) at i386_ipi_db+0xb
+i386_ipi_handler(b0,d05f0058,dab10010,d01d0010,dab10010) at i386_ipi_handler+0x
+4a
+Xintripi() at Xintripi+0x47
+--- interrupt ---
+i386_softintlock(0,58,dab10010,dab10010,d01e0010) at i386_softintlock+0x37
+Xintrltimer() at Xintrltimer+0x47
+--- interrupt ---
+idle_loop+0x21:
+ddb{1}> 
+</pre></td></tr></table>
+
+<p>
+"<tt>machine ddb x</tt>"と "<tt>trace</tt>" を
+マシンの全てのプロセッサについて繰り返してください。
+
+<p>
+
+<h3>カーネルクラッシュからより詳細な情報を集めさせるための方法</h3><p>
+OpenBSD の典型的なカーネルクラッシュは以下のようなものです 
+( 注視するべき個所は太字にしてあります )。<p>
+
+<table border=0 width="90%"><tr><td nowrap bgcolor="#EEEEEE"><pre>
+kernel: page fault trap, code=0
+Stopped at    <b>_pf_route+0x263</b>:        mov     0x40(%edi),%edx
+ddb&gt;
+</pre></td></tr></table><p>
+
+ ddb&gt; プロンプトから最初に実行するコマンドは "trace" です 
+( 詳細は<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ddb">ddb(4)</a> 
+を参照)。
+<table border=0 width="90%"><tr><td nowrap bgcolor="#EEEEEE"><pre>
+ddb&gt; trace
+<b>_pf_route</b>(e28cb7e4,e28bc978,2,1fad,d0b8b120) at <b>_pf_route+0x263</b>
+_pf_test(2,1f4ad,e28cb7e4,b4c1) at _pf_test+0x706
+_pf_route(e28cbb00,e28bc978,2,d0a65440,d0b8b120) at _pf_route+0x207
+_pf_test(2,d0a65440,e28cbb00,d023c282) at _pf_test+0x706
+_ip_output(d0b6a200,0,0,0,0) at _ip_output+0xb67
+_icmp_send(d0b6a200,0,1,a012) at _icmp_send+0x57
+_icmp_reflect(d0b6a200,0,1,0,3) at _icmp_reflect+0x26b
+_icmp_input(d0b6a200,14,0,0,d0b6a200) at _icmp_input+0x42c
+_ipv4_input(d0b6a200,e289f140,d0a489e0,e289f140) at _ipv4_input+0x6eb
+_ipintr(10,10,e289f140,e289f140,e28cbd38) at _ipintr+0x8d
+Bad frame pointer: 0xe28cbcac
+ddb&gt; 
+</pre></td></tr></table><p>
+
+関数呼び出しがクラッシュを引き起こしていることが分かります。<p>
+
+クラッシュを引き起こした C コードの特定の行を見つけるためには、以下のようにします。<br>
+ソースファイル内でクラッシュした関数が定義されているところを探します。
+この例では、sys/net/pf.c 内の pf_route() 関数がそれです。
+以下のようにデバッグ情報つきでソースファイルを再コンパイルします。<p>
+
+<table border=0 width="90%"><tr><td nowrap bgcolor="#EEEEEE"><pre>
+# cd /usr/src/sys/arch/$(uname -m)/compile/GENERIC/
+# rm pf.o
+# DEBUG=-g make pf.o
+</pre></td></tr></table><p>
+そして、<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=objdump">
+objdump(1)</a> を使って逆アセンブルを行います。
+<table border=0 width="90%"><tr><td nowrap bgcolor="#EEEEEE"><pre>
+# objdump --line --disassemble --reloc pf.o &gt;pf.dis
+</pre></td></tr></table><p>
+
+出力を関数名でgrepします(今回の例ではpf_routeです)。<p>
+<table border=0 width="90%"><tr><td nowrap bgcolor="#EEEEEE"><pre>
+# grep "&lt;_pf_route&gt;:" pf.dis
+0000<b>7d88</b> &lt;_pf_route&gt;:
+</pre></td></tr></table><p>
+
+最初の16進数の数字と、 'Stopped at' 行のオフセットを足します。 
+<b>0x7d88</b> + <b>0x263</b> == <b>0x7feb</b>.<br>
+その行へスクロールし
+(アセンブラ命令は 'Stopped at' 行で引用されていた行にマッチします)、
+直前のCの行を見ます.<p>
+<table border=0 width="90%"><tr><td nowrap bgcolor="#EEEEEE"><pre>
+# more pf.dis
+/usr/src/sys/arch/i386/compile/GENERIC/../../../../net/pf.c:<b>3872</b>
+    7fe7:       0f b7 43 02             movzwl 0x2(%ebx),%eax
+    <b>7feb</b>:       8b 57 40                mov    0x40(%edi),%edx
+    7fee:       39 d0                   cmp    %edx,%eax
+    7ff0:       0f 87 92 00 00 00       ja     8088 &lt;_pf_route+0x300&gt;
+</pre></td></tr></table><p>
+
+それで、pf.cの <b>3872</b> 行目が、クラッシュした正確な行になります。<p>
+<table border=0 width="90%"><tr><td nowrap bgcolor="#EEEEEE"><pre>
+# cat -n pf.c | head -n 3872 | tail -n 1
+3872          if ((u_int16_t)ip-&gt;ip_len &lt;= ifp-&gt;if_mtu) {
+</pre></td></tr></table><p>
+
+クラッシュを引き起こしたカーネルと、objdumpに渡すオブジェクトファイルは、
+正確に同じソースファイルからコンパイルされなければならないことに注意が必要です。
+そうでなければ、オフセットが合わなくなります。
+
+ddb&gt;プロンプトの trace 出力と関連するobjdumpのセクションの両方を提供してもらえると
+大変助かります。
+
+<p>
+<font color="#0000e0">
+<a href="index.html">[FAQ Index]</a>
+<a href="faq1.html">[1 章 - OpenBSD 入門]</a>
+<a href="faq3.html">[3章 - OpenBSD のはじめかた]</a>
+</font>
+
+<p>
+<hr>
+<a href="index.html"><img height="24" width="24" src="../images/back.gif" border="0" alt="[back]"></a> 
+<a href="mailto:www@openbsd.org">www@openbsd.org</a>
+<br>
+<small>
+<!--
+Originally [OpenBSD: faq2.html,v 1.105 ]<br>
+$Translation$ <br>
+-->
+$OpenBSD: faq2.html,v 1.105 2010/05/19 12:41:01 nick Exp $</small>
+
+
+</body>
+</html>

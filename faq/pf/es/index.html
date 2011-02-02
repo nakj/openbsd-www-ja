@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>PF: El Filtro de Paquetes de OpenBSD</title>
+<link rev="made" href="mailto:www@openbsd.org">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Language" content="es">
+<meta name="resource-type" content="documento">
+<meta name="description"   content="Preguntas Frecuentes de OpenBSD">
+<meta name="keywords"      content="openbsd,preguntas frecuentes,faq,pf">
+<meta name="distribution"  content="global">
+</head>
+
+<!--
+Copyright (c) 2003, Nick Holland <nick@openbsd.org>
+Copyright (c) 2003, 2004, Joel Knight <enabled@myrealbox.com>
+
+Permission to use, copy, modify, and distribute this documentation for
+any purpose with or without fee is hereby granted, provided that the
+above copyright notice and this permission notice appear in all copies.
+
+THE DOCUMENTATION IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL
+WARRANTIES WITH REGARD TO THIS DOCUMENTATION INCLUDING ALL IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE
+AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL
+DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR
+PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
+TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS DOCUMENTATION
+-->
+
+<body bgcolor="#ffffff" text="#000000">
+<!-- Passes validator.w3.org, please keep it this way;
+please, use a max of 72 chars per line -->
+
+<img alt="[OpenBSD]" height="30" width="141" src="../../../images/smalltitle.gif">
+<p>
+<b>Lenguas:</b> [es] 
+  &nbsp;<a href="../de/index.html">[de]</a>
+  &nbsp;<a href="../index.html">[en]</a>
+  &nbsp;<a href="../fr/index.html">[fr]</a>
+  &nbsp;<a href="../id/index.html">[id]</a>
+  &nbsp;<a href="../ja/index.html">[ja]</a>
+  &nbsp;<a href="../pl/index.html">[pl]</a>
+<p>
+<a href="../../es/index.html">[&Iacute;ndice de las Preguntas
+Frecuentes de OpenBSD]</a>
+<a href="config.html">[Siguiente: Primeros Pasos]</a>
+<h1><font color="#e00000">PF: El Filtro de Paquetes de
+OpenBSD</font></h1>
+<hr>
+
+<p>
+<h3>&Iacute;ndice de Contenidos</h3>
+<ul>
+<li>Configuraci&oacute;n B&aacute;sica
+	<ul>
+	<li><a href="config.html">Primeros Pasos</a>
+	<li><a href="macros.html">Listas y Macros</a>
+	<li><a href="tables.html">Tablas</a>
+	<li><a href="filter.html">Filtrado de Paquetes</a>
+	<li><a href="nat.html"><i>NAT:</i> Traducci&oacute;n de Direcciones
+	de Red</a>
+	<li><a href="rdr.html">Redireccionamiento de Tr&aacute;fico
+	(Reenv&iacute;o de Puertos)</a>
+	<li><a href="shortcuts.html">Atajos para Crear Conjuntos de
+	Reglas</a>
+	</ul>
+<li>Configuraci&oacute;n Avanzada
+	<ul>
+	<li><a href="options.html">Opciones en Tiempo de
+	Ejecuci&oacute;n</a>
+	<li><a href="scrub.html"><i>Scrubbing:</i> Normalizaci&oacute;n de
+	Paquetes</a>
+	<li><a href="anchors.html">Anclajes y (Sub-) Conjuntos de Reglas con
+	Nombre</a>
+	<li><a href="queueing.html">Formaci&oacute;n de Colas y Prioridades
+	de Paquetes</a>
+	<li><a href="pools.html"><i>Pools</i> de Direcci&oacute;n y Balanceo
+	de Carga</a>
+	<li><a href="tagging.html"><i>Tagging:</i> Marcado de Paquetes</a>
+	</ul>
+<li>Temas Adicionales
+	<ul>
+	<li><a href="logging.html"><i>Logging:</i> Registros de
+	Bit&aacute;cora</a>
+	<li><a href="perf.html">Rendimiento</a>
+	<li><a href="ftp.html">Cuestiones Relacionadas con FTP</a>
+	<li><a href="authpf.html">Authpf: <i>Shell</i> de Usuario para la
+	Autenticaci&oacute;n de Pasarelas</a>
+	</ul>
+<li>Ejemplos de Conjuntos de Reglas:
+	<ul>
+	<li><a href="example1.html">Ejemplo: Cortafuegos para Red en Casa
+	u Oficina</a>
+	</ul>
+</ul>
+
+<hr>
+
+<p>
+<i>Packet Filter</i> (al que en estos documentos nos referiremos como
+PF) es el sistema de OpenBSD para filtrar el tr&aacute;fico TCP/IP y
+llevar a cabo la Traducci&oacute;n de Direcciones de Red (a la que nos
+referiremos como NAT, <i>Network Address Translation</i>).
+Adem&aacute;s de estas funciones, PF tambi&eacute;n es capaz de
+normalizar y acondicionar el tr&aacute;fico TCP/IP y de proveer control
+del ancho de banda y la priorizaci&oacute;n de paquetes TCP/IP.  PF ha
+formado parte del n&uacute;cleo GENERIC del sistema OpenBSD desde la
+versi&oacute;n 3.0 del sistema.  En versiones anteriores de OpenBSD se
+usaba un paquete de cortafuegos/NAT diferente, para el que ya no
+ofrecemos soporte ni documentaci&oacute;n.
+
+<p>
+El creador original de PF es Daniel Hartmeier, y en el momento actual lo
+mantiene y desarrolla Daniel junto con el resto del equipo de
+desarrolladores de OpenBSD.
+
+<p>
+Esta gu&iacute;a tiene como objetivo ofrecer a los usuarios una
+introducci&oacute;n general al sistema de filtros PF como parte del
+sistema operativo OpenBSD.  La gu&iacute;a debe usarse como suplemento
+de las <a href="http://www.openbsd.org/cgi-bin/man.cgi">p&aacute;ginas
+del manual</a>, y no como sustituto de &eacute;stas.  Esta gu&iacute;a
+cubre todos los aspectos y funcionalidades m&aacute;s importantes de PF.
+Para obtener una visi&oacute;n en profundidad sobre PF, hay que leer la
+p&aacute;gina del manual de
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=pf&amp;sektion=4&amp;manpath=OpenBSD+3.5">pf(4)</a>.
+
+<p>
+Del mismo modo que sucede con el resto resto de las Preguntas Frecuentes
+de OpenBSD, esta gu&iacute;a est&aacute; orientada a los usuarios de
+<a href="../../../35.html">OpenBSD 3.5</a>.  Debido al continuo
+crecimiento y al desarrollo activo de PF, existen cambios y mejoras
+entre la versi&oacute;n final 3.5-<i>release</i> y la versi&oacute;n de
+desarrollo en OpenBSD-<i>current</i>.  Por ello se recomienda al usuario
+que lea las p&aacute;ginas del manual correspondientes a la
+versi&oacute;n de OpenBSD que tenga instalada.
+
+<p>
+<a href="../../es/index.html">[&Iacute;ndice de las Preguntas
+Frecuentes de OpenBSD]</a>
+<a href="config.html">[Siguiente: Primeros Pasos]</a>
+
+<hr>
+<a href="../../es/index.html"><img height="24" width="24" src="../../../images/back.gif" border="0" alt="[&Iacute;ndice]"></a> 
+<a href="mailto:www@openbsd.org">www@openbsd.org</a>
+<br>
+<small>
+Originally [OpenBSD: index.html,v 1.16 ]<br>
+$OpenBSD: index.html,v 1.12 2004/09/02 12:46:38 jufi Exp $<br>
+$Translation: index.html,v 1.17 2004/08/31 16:39:27 santana Exp $
+</small>
+</body>
+</html> 

@@ -1,0 +1,2084 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>10 - System Management</title>
+<link rev= "made" href= "mailto:www@openbsd.org">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name= "resource-type" content= "document">
+<meta name= "description"   content= "the OpenBSD FAQ page">
+<meta name= "keywords"      content= "openbsd,faq">
+<meta name= "distribution"  content= "global">
+<meta name= "copyright"     content= "This document copyright 1998-2010 by OpenBSD.">
+</head>
+
+<body bgcolor= "#ffffff" text= "#000000">
+
+<a href="../index.html">
+<img alt="[OpenBSD]" height=30 width=141 src="../images/smalltitle.gif" border="0">    
+</a>
+<p>
+<font color= "#0000e0">
+<a href= "index.html">[FAQ Index]</a>
+<a href= "faq9.html">[To Section 9 - Migrating to OpenBSD]</a>
+<a href="faq11.html">[To Section 11 - The X Window System]</a>
+</font>
+
+<h1><font color="#e00000">10 - System Management</font></h1>
+<hr>
+
+<p>
+<h3>Table of Contents</h3>
+<ul>
+<li><a href="#wheel"         >10.1 - When I try to su to root it says that I'm in the wrong group.</a>
+<li><a href="#DupFS"         >10.2 - How do I duplicate a filesystem?</a>
+<li><a href="#rc"            >10.3 - How do I start daemons with the system? (Overview of rc(8))</a>
+<li><a href="#RelayingDenied">10.4 - Why do users get relaying access denied when they are remotely sending mail through my OpenBSD system?</a>
+<li><a href="#POP"           >10.5 - I've set up POP, but I get errors when accessing my mail through POP. What can I do?</a>
+<li><a href="#SendmailDNS"   >10.6 - Why does Sendmail ignore /etc/hosts?</a>
+<li><a href="#HTTPS"         >10.7 - Setting up a Secure HTTP Server using ssl(8)</a>
+<li><a href="#vipw"          >10.8 - I made changes to /etc/passwd with an editor, but the changes didn't seem to take place. Why?</a>
+<li><a href="#AddDelUser"    >10.9 - How do I add a user? Or delete a user?</a>
+<li><a href="#FTPOnly"       >10.10 - How do I create a ftp-only account?</a>
+<li><a href="#Quotas"        >10.11 - Setting up user disk quotas</a>
+<li><a href="#Kerberos"      >10.12 - Setting up KerberosV Clients and Servers</a>
+<li><a href="#AnonFTP"       >10.13 - Setting up an Anonymous FTP Server</a>
+<li><a href="#ftpchroot"     >10.14 - Confining users to their home directories in ftpd(8)</a>
+<li><a href="#Patches"       >10.15 - Applying patches in OpenBSD</a>
+<li><a href="#httpdchroot"   >10.16 - Tell me about chroot(2) Apache?</a>
+<li><a href="#rootshell"     >10.17 -  Can I change the root shell?</a>
+<li><a href="#ksh"           >10.18 - What else can I do with ksh?</a>
+<li><a href="#Dir"           >10.19 - Directory services</a>
+<ul>
+  <li><a href="#Dir.available" >10.19.1 - Which directory services are available?</a>
+  <li><a href="#YP_secure"     >10.19.2 - YP security considerations</a>
+  <li><a href="#YP_server"     >10.19.3 - Setting up a YP server</a>
+  <li><a href="#YP_client"     >10.19.4 - Setting up a YP client</a>
+</ul>
+</ul>
+
+<hr>
+
+<p>
+<a name= "wheel"></a>
+<h2>10.1 - Why does it say that I'm in the wrong group when I try to su root?</h2>
+
+<p>
+Existing users must be added to the <kbd>&quot;wheel&quot;</kbd> group
+by hand.
+This is done for security reasons, and you should be cautious with whom
+you give access to. On OpenBSD, users who are in the <kbd>wheel</kbd>
+group are allowed to use the
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=su&amp;sektion=1">su(1)</a>
+userland program to become root. Users who are not in
+<kbd>&quot;wheel&quot;</kbd> cannot use su(1).
+Here is an example of a <kbd>/etc/group</kbd> entry to place the user
+<b>ericj</b> into the <kbd>&quot;wheel&quot;</kbd> group.
+
+<p>
+If you are adding a new user with
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=adduser&amp;sektion=8">adduser(8)</a>,
+you can put them in the wheel group by answering wheel at "<tt>Invite
+<i>user</i> into other groups:</tt>". This will add them to /etc/group,
+which will look something like this:
+
+<blockquote><pre>
+wheel:*:0:root,ericj
+</pre></blockquote>
+
+<p>
+If you are looking for a way to allow users limited access to superuser
+privileges without putting them in the <kbd>&quot;wheel&quot;</kbd>
+group, use
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=sudo&amp;sektion=8">sudo(8)</a>.
+
+<p>
+<a name= "DupFS"></a>
+<h2>10.2 - How do I duplicate a filesystem?</h2>
+
+<p>
+To duplicate your filesystem use
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=dump&amp;sektion=8">dump(8)</a> and
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=restore&amp;sektion=8">restore(8)</a>.
+For example, to duplicate everything under directory <kbd>SRC</kbd> to
+directory <kbd>DST</kbd>, do a:
+
+<blockquote><pre>
+# <b>cd /SRC; dump 0f - . | (cd /DST; restore -rf - )</b>
+</pre></blockquote>
+
+<p>
+dump is designed to give you plenty of backup capabilities, and it may
+be an overkill if you just want to duplicate a part of a (or an entire)
+filesystem. The command
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=tar&amp;sektion=1">tar(1)</a>
+may be faster for this operation.  The format looks very similar:
+
+<blockquote><pre>
+# <b>cd /SRC; tar cf -  . | (cd /DST; tar xpf - )</b>
+</pre></blockquote>
+
+<p>
+<a name= "rc"></a>
+<h2>10.3 - How do I start daemons with the system? (Overview of
+rc(8))</h2>
+
+OpenBSD uses an
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=rc&amp;sektion=8">rc(8)</a>
+style startup. This uses a few key files for startup.
+
+<ul>
+  <li>/etc/rc - Main script. Should not be edited.
+  <li>/etc/rc.conf - Configuration file used by <i>/etc/rc</i> to set
+  startup parameters for the system.
+  Should not be edited.
+  <li>/etc/rc.conf.local - Configuration file that overrides
+  settings in /etc/rc.conf so you don't have to touch /etc/rc.conf
+  itself, which is important when upgrading your system.
+  <li>/etc/netstart - Script used to initialize the network. Shouldn't
+  be edited.
+  <li>/etc/rc.local - Script used for local administration. This is
+  where new daemons or host specific information should be stored.
+  <li>/etc/rc.securelevel - Script which runs commands that must be run
+  before the security level changes. See
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=init&amp;sektion=8">init(8)</a>
+  <li>/etc/rc.shutdown - Script run on shutdown. Put anything you want
+  done before shutdown in this file. See
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=rc.shutdown&amp;sektion=8">rc.shutdown(8)</a>
+</ul>
+
+<h3>How does rc(8) work?</h3>
+
+<p>
+The main files a system administrator should concentrate on are
+<i>/etc/rc.conf</i> (for guidance), <i>/etc/rc.conf.local</i> (for
+changes), <i>/etc/rc.local</i> and <i>/etc/rc.shutdown</i>.
+To get a look of how the rc(8) procedure works, here is the flow:
+
+<p>
+After the kernel is booted, <i>/etc/rc</i> is started:
+<ul>
+  <li>Filesystems are checked.
+  <li>Default configuration variables are read in from
+      <i>/etc/rc.conf</i>, then local changes to those variables are
+      read from <i>/etc/rc.conf.local</i>.
+      Settings in rc.conf.local will override those in rc.conf.
+  <li>Filesystems are mounted
+  <li>Clears out <i>/tmp</i> and preserves any editor files
+  <li>Configures the network via <i>/etc/netstart</i>
+  <ul>
+    <li>Configures your interfaces up.
+    <li>Sets your hostname, domainname, etc.
+  </ul>
+  <li>Starts system daemons
+  <li>Performs various other checks (quotas, savecore, etc)
+  <li>Local daemons are run, via <i>/etc/rc.local</i>
+</ul>
+
+<h3>Starting Daemons and Services that come with OpenBSD</h3>
+
+<p>
+Most daemons and services that come with OpenBSD are controlled on boot
+by variables defined in the <i>/etc/rc.conf</i> configuration file.
+Take a look at the
+<a href="http://www.openbsd.org/cgi-bin/cvsweb/~checkout~/src/etc/rc.conf?content-type=text/plain">/etc/rc.conf</a>
+file. You'll see lines similar to this:
+
+<blockquote><pre>
+ftpd_flags=NO           # for non-inetd use: ftpd_flags="-D"
+</pre></blockquote>
+
+<p>
+A line like this shows that
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ftpd&amp;sektion=8">ftpd(8)</a>
+is not to start up with the system (at least not as a daemon via rc(8);
+ftpd is often run out of
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=inetd&amp;sektion=8">inetd(8)</a>,
+see <a href="faq10.html#AnonFTP">Anonymous FTP FAQ</a> to read more
+about this).
+Each line has a comment showing you the flags for common usage of that
+daemon or service.
+This doesn't mean that you must run that daemon or service with those
+flags.
+Read the relevant manual page to see how you can have that daemon or
+service start up in any way you like.
+
+<p>
+We strongly suggest you never touch <i>/etc/rc.conf</i> itself.
+Instead, create the file <i>/etc/rc.conf.local</i>, copy just the lines
+you need to change from <i>/etc/rc.conf</i> and adjust them as you like.
+This makes future upgrades easier -- all the changes are in the one
+file.
+In fact, the standard <a href="upgrade48.html">upgrade process</a>
+assumes you have not modified <i>/etc/rc.conf</i>, and will overwrite it
+with the new version.
+
+<p>
+For example, here is the default line pertaining to httpd(8).
+
+<blockquote><pre>
+httpd_flags=NO          # for normal use: "" (or "-DSSL" after reading ssl(8))
+</pre></blockquote>
+
+<p>
+Here you can see that starting up httpd normally requires no flags, so a
+line like <tt>httpd_flags=""</tt> added to <i>/etc/rc.conf.local</i>
+will do the job.
+But to start httpd with ssl enabled (refer to the
+<a href="#HTTPS">SSL FAQ</a> or
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ssl&amp;sektion=8">ssl(8)</a>),
+you would start with a line like <tt>httpd_flags="-DSSL"</tt>, though
+you may need to add other parameters for other reasons.
+
+<h3>Starting up local daemons and configuration</h3>
+
+<p>
+For other daemons which you might install on the system via packages or
+other ways, you should use the <i>/etc/rc.local</i> file.
+For example, I've installed a daemon which lies at
+/usr/local/sbin/daemonx. I want it to start at boot time. I would put
+an entry into <i>/etc/rc.local</i> like this:
+
+<blockquote><pre>
+if [ -x /usr/local/sbin/daemonx ]; then
+             echo -n ' daemonx';       /usr/local/sbin/daemonx
+fi
+</pre></blockquote>
+
+<p>
+(If the daemon does not automatically detach on startup, remember to add
+a "&amp;" at the end of the command line.)
+
+<p>
+From now on, this daemon will be started at boot. You will be able to see
+any errors on boot, a normal boot with no errors would show a line like
+this:
+
+<blockquote><pre>
+Starting local daemons: daemonx.
+</pre></blockquote>
+
+<h3>rc.shutdown</h3>
+
+<p>
+<i>/etc/rc.shutdown</i> is a script that is run at shutdown. Anything
+you want done before the system shuts down should be added to this file.
+If you have apm, you can also set &quot;powerdown=YES&quot;, which will
+give you the equivalent of &quot;shutdown -p&quot;.
+
+<p>
+<a name= "RelayingDenied"></a>
+<h2>10.4 - Why do users get "relaying denied" when they are remotely
+sending mail through my OpenBSD system?</h2>
+
+<p>
+Try this:
+
+<blockquote><pre>
+# <b>grep relay-domains /etc/mail/sendmail.cf</b>
+</pre></blockquote>
+
+<p>
+The output may look something like this:
+
+<blockquote><pre>
+FR-o /etc/mail/relay-domains
+</pre></blockquote>
+
+<p>
+If this file doesn't exist, create it. You will need to enter the hosts
+who are sending mail remotely with the following syntax:
+
+<blockquote><pre>
+.domain.com    #Allow relaying for/to any host in domain.com
+sub.domain.com #Allow relaying for/to sub.domain.com and any host in that domain
+10.2           #Allow relaying from all hosts in the IP net 10.2.*.*
+</pre></blockquote>
+
+<p>
+Don't forget send a 'HangUP' signal to sendmail (a signal which causes
+most daemons to re-read their configuration file):
+
+<blockquote><pre>
+# <b>kill -HUP `head -1 /var/run/sendmail.pid`</b>
+</pre></blockquote>
+
+<p>
+
+<h3>Further Reading</h3>
+
+<p>
+<ul>
+<li><a href="http://www.sendmail.org/~ca/email/relayingdenied.html">http://www.sendmail.org/~ca/email/relayingdenied.html</a>
+<li><a href="http://www.sendmail.org/tips/relaying.php">http://www.sendmail.org/tips/relaying.php</a>
+<li><a href="http://www.sendmail.org/antispam/">http://www.sendmail.org/antispam/</a>
+</ul>
+
+<p>
+<a name= "POP"></a>
+<h2>10.5 - I've set up POP, but users have trouble accessing mail
+through POP. What can I do?</h2>
+
+<p>
+Most issues dealing with POP are problems with temporary files and lock
+files. If your pop server sends an error message such as:
+
+<blockquote><pre>
+-ERR Couldn't open temporary file, do you own it?
+</pre></blockquote>
+
+<p>
+Try setting up your permissions as such:
+
+<blockquote><pre>
+permission in  /var
+drwxrwxr-x   2 bin     mail     512 May 26 20:08 mail
+
+
+permissions in  /var/mail
+-rw-------   1 username   username        0 May 26 20:08 username
+</pre></blockquote>
+
+<p>
+Another thing to check is that the user actually owns their own
+/var/mail file. Of course this should be the case (as in, /var/mail/joe
+should be owned by joe) but if it isn't set correctly it could be the
+problem!
+
+<p>
+Of course, making /var/mail writable by group mail opens up some vague
+and obscure security problems. It is likely that you will never have
+problems with it. But it could (especially if you are a high profile
+site, ISP, ...)! There are several POP servers you can install right
+away from the ports collection. If possible, use
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=popa3d&amp;sektion=8">popa3d</a>
+which is available in the OpenBSD base install.
+Or, you could just have the wrong options selected for your pop daemon
+(like dot locking).  Or, you may just need to change the directory
+that it locks in (although then the locking would only be valuable for the
+POP daemon.)
+
+<p>
+<b>Note:</b> OpenBSD does not have a group name of
+&quot;mail&quot;. You need to create this in your <i>/etc/group</i> file
+if you need it. An entry like:
+
+<blockquote><pre>
+mail:*:6:
+</pre></blockquote>
+
+<p>
+would be sufficient.
+
+<a name="SendmailDNS"></a>
+<h2>10.6 - Why does Sendmail ignore the <tt>/etc/hosts</tt> file?</h2>
+
+<p>
+By default, Sendmail uses DNS for name resolution, not the
+<tt>/etc/hosts</tt> file. The behavior can be changed through the use of
+the <tt>/etc/mail/service.switch</tt> file.
+
+<p>
+If you wish to query the hosts file before DNS servers, create a
+<tt>/etc/mail/service.switch</tt> file which contains the following
+line:
+
+<blockquote><pre>
+hosts       files dns
+</pre></blockquote>
+
+<p>
+If you wish to query ONLY the hosts file, use the following:
+
+<blockquote><pre>
+hosts       files
+</pre></blockquote>
+
+<p>
+Send Sendmail a HUP signal:
+
+<blockquote><pre>
+# <b>kill -HUP `head -1 /var/run/sendmail.pid`</b>
+</pre></blockquote>
+
+<p>
+and the changes will take effect.
+
+
+<p>
+<a name= "HTTPS"></a>
+<h2>10.7 - Setting up a Secure HTTP server with SSL(8)</h2>
+
+<p>
+OpenBSD ships with an SSL-ready httpd and RSA libraries. For use with
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=httpd&amp;sektion=8">httpd(8)</a>, 
+you must first have a certificate created. This will be kept in
+<i>/etc/ssl/</i> with the corresponding key in <i>/etc/ssl/private/</i>.
+The steps shown here are taken in part from the
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ssl&amp;sektion=8">ssl(8)</a> 
+man page. Refer to it for further information.
+This FAQ entry only outlines how to create an RSA certificate for web
+servers, not a DSA server certificate. To find out how to do so, please
+refer to the
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ssl&amp;sektion=8">ssl(8)</a> 
+man page. 
+
+<p>
+To start off, you need to create your server key and certificate using
+OpenSSL:
+
+<blockquote><pre>
+# <b>openssl genrsa -out /etc/ssl/private/server.key 1024</b>
+</pre></blockquote>
+
+<p>
+Or, if you wish the key to be encrypted with a passphrase that you will
+have to type in when starting servers
+
+<blockquote><pre>
+# <b>openssl genrsa -des3 -out /etc/ssl/private/server.key 1024</b>
+</pre></blockquote>
+
+<p>
+The next step is to generate a Certificate Signing Request which is used
+to get a Certifying Authority (CA) to sign your certificate. To do this
+use the command:
+
+<blockquote><pre>
+# <b>openssl req -new -key /etc/ssl/private/server.key -out /etc/ssl/private/server.csr</b>
+</pre></blockquote>
+
+<p>
+This <i>server.csr</i> file can then be given to Certifying Authority
+who will sign the key. One such CA is <b>Thawte Certification</b> which
+you can reach at
+<a href="http://www.thawte.com/">http://www.thawte.com/</a>.
+
+<p>
+If you cannot afford this, or just want to sign the certificate
+yourself, you can use the following.
+
+<blockquote><pre>
+# <b>openssl x509 -req -days 365 -in /etc/ssl/private/server.csr \
+       -signkey /etc/ssl/private/server.key -out /etc/ssl/server.crt</b>
+</pre></blockquote>
+
+<p>
+With <i>/etc/ssl/server.crt</i> and <i>/etc/ssl/private/server.key</i>
+in place, you should be able to start
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=httpd&amp;sektion=8">httpd(8)</a>
+with the <b>-DSSL</b> flag (see the <a href="#rc">section about
+rc(8)</a> in this faq), enabling https transactions with your machine on
+port 443.
+
+<p>
+<a name= "vipw"></a>
+<h2>10.8 - I edited /etc/passwd, but the changes didn't seem to take
+place. Why?</h2>
+
+<p>
+If you edit <i>/etc/passwd</i> directly, your changes will be lost.
+OpenBSD generates <i>/etc/passwd</i> dynamically with
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=pwd_mkdb&amp;sektion=8">pwd_mkdb(8)</a>.
+The main password file in OpenBSD is <i>/etc/master.passwd</i>.
+According to pwd_mkdb(8),
+
+<blockquote><pre>
+FILES
+     /etc/master.passwd  current password file
+     /etc/passwd         a 6th Edition-style password file
+     /etc/pwd.db         insecure password database file
+     /etc/pwd.db.tmp     temporary file
+     /etc/spwd.db        secure password database file
+     /etc/spwd.db.tmp    temporary file
+</pre></blockquote>
+
+<p>
+In a traditional Unix password file, such as /etc/passwd, everything
+including the user's encrypted password is available to anyone on the
+system (and is a prime target for programs such as Crack).
+4.4BSD introduced the master.passwd file, which has an extended format
+(with additional options beyond those provided by /etc/passwd) and is
+only readable by root. For faster access to data, the library calls
+which access this data normally read /etc/pwd.db and /etc/spwd.db.
+
+<p>
+OpenBSD does come with a tool with which you should edit your password
+file. It is called
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=vipw&amp;sektion=8">vipw(8)</a>.
+Vipw will use vi (or your favourite editor defined per $EDITOR) to edit
+/etc/master.passwd. After you are done editing, it will re-create
+/etc/passwd, /etc/pwd.db, and /etc/spwd.db as per your changes.
+Vipw also takes care of locking these files, so that if anyone else
+attempts to change them at the same time, they will be denied access.
+
+<p>
+<a name= "AddDelUser"></a>
+<h2>10.9 - What is the best way to add and delete users?</h2>
+
+<p>
+OpenBSD provides two commands for easily adding users to the system: 
+
+<ul>
+<li><a href="#adduser">adduser(8)</a>
+<li><a href="#user">user(8)</a>
+</ul>
+
+You can also add users by hand, using 
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=vipw&amp;sektion=8">vipw(8)</a>,
+but this is more difficult for most operations.
+
+<a name="adduser"></a>
+<p>
+The easiest way to add a user in OpenBSD is to use the 
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=adduser&amp;sektion=8">adduser(8)</a>
+script. You can configure adduser(8) by editing
+<i>/etc/adduser.conf</i>.
+adduser(8) allows for consistency checks on <i>/etc/passwd</i>,
+<i>/etc/group</i>, and shell databases. It will create the entries and
+$HOME directories for you. It can even send a message to the user
+welcoming them. Here is an example user, <b>testuser</b>, being added to
+a system.
+He/she will be given the $HOME directory <i>/home/testuser</i>, made a
+member of the group <b>guest</b>, and given the shell <i>/bin/ksh</i>.
+
+<blockquote><pre>
+# <b>adduser</b>
+Use option ``-silent'' if you don't want to see all warnings and questions.
+
+Reading /etc/shells
+Reading /etc/login.conf
+Check /etc/master.passwd
+Check /etc/group
+
+Ok, let's go.
+Don't worry about mistakes. I will give you the chance later to correct any input.
+Enter username []: <b>testuser</b>
+Enter full name []: <b>Test FAQ User</b>
+Enter shell csh ksh nologin sh [sh]: <b>ksh</b>
+Uid [1002]: <b><i>Enter</i></b>
+Login group testuser [testuser]: <b>guest</b>
+Login group is ``guest''. Invite testuser into other groups: guest no 
+[no]: <b>no</b>
+Login class auth-defaults auth-ftp-defaults daemon default staff 
+[default]: <b><i>Enter</i></b>
+Enter password []: <b><i>Type password, then Enter</i></b>
+Enter password again []: <b><i>Type password, then Enter</i></b>
+
+Name:        testuser
+Password:    ****
+Fullname:    Test FAQ User
+Uid:         1002
+Gid:         31 (guest)
+Groups:      guest
+Login Class: default
+HOME:        /home/testuser
+Shell:       /bin/ksh
+OK? (y/n) [y]: <b>y</b>
+Added user ``testuser''
+Copy files from /etc/skel to /home/testuser
+Add another user? (y/n) [y]: <b>n</b>
+Goodbye!
+</pre></blockquote>
+
+<p>
+To delete users you should use the
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=rmuser&amp;sektion=8">rmuser(8)</a>
+utility. This will remove all existence of a user. It will remove any
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=crontab&amp;sektion=1">crontab(1)</a>
+entries, their $HOME dir (if it is owned by the user), and their mail.
+Of course it will also remove their <i>/etc/passwd</i> and
+<i>/etc/group</i> entries. Next is an example of removing the user that
+was added above. Notice you are prompted for the name, and whether or
+not to remove the user's home directory.
+
+<blockquote><pre>
+# <b>rmuser</b>
+Enter login name for user to remove: <b>testuser</b>
+Matching password entry:
+
+testuser:$2a$07$ZWnBOsbqMJ.ducQBfsTKUe3PL97Ve1AHWJ0A4uLamniLNXLeYrEie:1002
+:31::0:0:Test FAQ User:/home/testuser:/bin/ksh
+
+Is this the entry you wish to remove? <b>y</b>
+Remove user's home directory (/home/testuser)? <b>y</b>
+Updating password file, updating databases, done.
+Updating group file: done.
+Removing user's home directory (/home/testuser): done.
+</pre></blockquote>
+
+<a name="user"></a>
+<h3>Adding users via user(8)</h3>
+
+<p>
+These tools are less interactive than the 
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=adduser&amp;sektion=8">adduser(8)</a> 
+command, which makes them easier to use in scripts.
+
+<p>
+The full set of tools is:
+<ul>
+<li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=group&amp;sektion=8">group(8)</a>
+<li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=groupadd&amp;sektion=8">groupadd(8)</a>
+<li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=groupdel&amp;sektion=8">groupdel(8)</a>
+<li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=groupinfo&amp;sektion=8">groupinfo(8)</a>
+<li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=groupmod&amp;sektion=8">groupmod(8)</a>
+<li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=user&amp;sektion=8">user(8)</a>
+<li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=useradd&amp;sektion=8">useradd(8)</a>
+<li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=userdel&amp;sektion=8">userdel(8)</a>
+<li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=userinfo&amp;sektion=8">userinfo(8)</a>
+<li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=usermod&amp;sektion=8">usermod(8)</a>
+</ul>
+
+<h4>Actually adding users</h4>
+
+<p>
+Being that user(8) is not interactive, the easiest way to add users
+efficiently is to use the adduser(8) command. The actual command
+<i>/usr/sbin/user</i> is just a frontend to the rest of the
+<i>/usr/sbin/user*</i> commands. Therefore, the following commands can
+be added by using <b>user add</b> or <b>useradd</b>, its your choice as
+to what you want, and doesn't change the use of the commands at all.
+
+<p>
+In this example, we are adding the same user with the same
+specifications as the user that was added <a href="#adduser">above</a>.
+useradd(8) is much easier to use if you know the default setting before
+adding a user. These settings are located in <i>/etc/usermgmt.conf</i>
+and can be viewed by doing so:
+
+<blockquote><pre>
+$ <b>user add -D</b>
+group           users
+base_dir        /home
+skel_dir        /etc/skel
+shell           /bin/csh
+inactive        0
+expire          Null (unset)
+range           1000..60000
+</pre></blockquote>
+
+<p>
+The above settings are what will be set unless you specify different
+with command line options. For example, in our case, we want the user to
+go to the group <b>guest</b>, not <b>users</b>.
+One more little hurdle with adding users, is that passwords must be
+specified on the command line. This is, the encrypted passwords, so you
+must first use the
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=encrypt&amp;sektion=1">encrypt(1)</a>
+utility to create the password. For example: OpenBSD's passwords by
+default use the Blowfish algorithm for 6 rounds.
+Here is an example line to create an encrypted password to specify to
+useradd(8).
+
+<blockquote><pre>
+$ <b>encrypt -p -b 6</b>
+Enter string:
+$2a$06$YOdOZM3.4m6MObBXjeZtBOWArqC2.uRJZXUkOghbieIvSWXVJRzlq
+</pre></blockquote>
+
+<p>
+Now that we have our encrypted password, we are ready to add the user.
+
+<blockquote><pre>
+# <b>user add -p '$2a$06$YOdOZM3.4m6MObBXjeZtBOWArqC2.uRJZXUkOghbieIvSWXVJRzlq' -u 1002 \
+-s /bin/ksh -c "Test FAQ User" -m -g guest testuser</b>
+</pre></blockquote>
+
+<p>
+<b>Note:</b> Make sure to use '&nbsp;' (single quotes)
+around the password string, not
+&quot;&nbsp;&quot; (double quotes)
+as the shell will interpret these before sending it to user(8). In
+addition to that, make sure you specify the <b>-m</b> option if you want
+the user's home directory created and the files from
+<i>/etc/skel</i> copied over.
+
+<p>
+To see that the user was created correctly, we can use many different
+utilities. Below are a few commands you can use to quickly check that
+everything was created correctly.
+
+<blockquote><pre>
+$ <b>ls -la /home</b>
+total 14
+drwxr-xr-x   5 root      wheel   512 May 12 14:29 .
+drwxr-xr-x  15 root      wheel   512 Apr 25 20:52 ..
+drwxr-xr-x  24 ericj     wheel  2560 May 12 13:38 ericj
+drwxr-xr-x   2 testuser  guest   512 May 12 14:28 testuser
+$ <b>id testuser</b>
+uid=1002(testuser) gid=31(guest) groups=31(guest)
+$ <b>finger testuser</b>
+Login: testuser                         Name: Test FAQ User
+Directory: /home/testuser               Shell: /bin/ksh
+Last login Sat Apr 22 16:05 (EDT) on ttyC2
+No Mail.
+No Plan.
+</pre></blockquote>
+
+<p>
+In addition to these commands, user(8) provides its own utility to show
+user characteristics, called userinfo(8).
+
+<blockquote><pre>
+$ <b>userinfo testuser</b>
+login   testuser
+passwd  *
+uid     1002
+groups  guest
+change  Wed Dec 31 19:00:00 1969
+class
+gecos   Test FAQ User
+dir     /home/testuser
+shell   /bin/ksh
+expire  Wed Dec 31 19:00:00 1969
+</pre></blockquote>
+
+<h4>Removing users</h4>
+
+<p>
+To remove users with the user(8) hierarchy of commands, you will use
+userdel(8). This is a very simple, yet usable command. To remove the
+user created in the last example, simply:
+
+<blockquote><pre>
+# <b>userdel -r testuser</b>
+</pre></blockquote>
+
+<p>
+Notice the <b>-r</b> option, which must be specified if you want the
+users home directory to be deleted as well. Alternatively, you can
+specify <b>-p</b> and not <b>-r</b> and this will lock the user's
+account, but not remove any information.
+
+<p>
+<a name= "FTPOnly"></a>
+<h2>10.10 - How do I create an ftp-only account (not anonymous FTP!)?</h2>
+
+<p>
+There are a few ways to do this, but a very common way to do such is to
+add "<tt>/usr/bin/false</tt>" into "<tt>/etc/shells</tt>".
+Then when you set a users shell to "<tt>/usr/bin/false</tt>", they will
+not be able log in interactively, but will be able to use ftp
+capabilities.  You may also want to restrict access by
+<a href="#ftpchroot">Confining users to their home directory in
+ftpd</a>.
+
+
+<p>
+<a name= "Quotas"></a>
+<h2>10.11 - Setting up Quotas</h2>
+
+<p>
+Quotas are used to limit user's space that they have available to them
+on your disk drives. It can be very helpful in situations where you have
+limited resources. Quotas can be set by user and/or by group.
+
+<p>
+The first step to setting up quotas is to make sure that "<tt>option
+QUOTA</tt>" is in your <a href="faq5.html#Options">Kernel
+Configuration</a>. This option is in the GENERIC kernel. After this, you
+need to mark in
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=fstab&amp;sektion=5"><tt>/etc/fstab</tt></a>
+the filesystems which will have quotas enabled.
+The keywords <tt>userquota</tt> and <tt>groupquota</tt> should be used
+to mark each filesystem that you will be using quotas on. By default,
+the files <tt>quota.user</tt> and <tt>quota.group</tt> will be created
+at the root of that filesystem to hold the quota information. This
+default can be overridden by specifying the file name with the quota
+option in <tt>/etc/fstab</tt>, such as
+"<tt>userquota=/var/quotas/quota.user</tt>".
+Here is an example <tt>/etc/fstab</tt> that has one filesystem with
+userquotas enabled, and the quota file in a non-standard location:
+
+<blockquote><pre>
+/dev/wd0a / ffs rw,userquota=/var/quotas/quota.user 1 1
+</pre></blockquote>
+
+<p>
+Now it's time to set the user's quotas. To do so you use the utility
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=edquota&amp;sektion=8">edquota(8)</a>.
+A simple use is just "<tt>edquota&nbsp;&lt;user&gt;</tt>". edquota(8)
+will use vi(1) to edit the quotas unless the environmental variable
+EDITOR is set to a different editor. For example:
+
+<blockquote><pre>
+# <b>edquota ericj</b>
+</pre></blockquote>
+
+<p>
+This will give you output similar to this:
+
+<blockquote><pre>
+Quotas for user ericj:
+/: KBytes in use: 62, limits (soft = 0, hard = 0)
+        inodes in use: 25, limits (soft = 0, hard = 0)
+</pre></blockquote>
+
+<p>
+To add limits, edit it to give results like this:
+
+<blockquote><pre>
+Quotas for user ericj:
+/: KBytes in use: 62, limits (soft = 1000, hard = 1050)
+        inodes in use: 25, limits (soft = 0, hard = 0)
+</pre></blockquote>
+
+<p>
+Note that the quota allocation is in 1k blocks.
+In this case, the softlimit is set to 1000k, and the hardlimit is set to
+1050k. A softlimit is a limit where the user is just warned when
+they cross it and have until their grace period is up to get their disk
+usage below their limit. Grace periods can be set by using the
+<b>-t</b> option on edquota(8). After the grace period is over
+the softlimit is handled as a hardlimit. This usually results in an
+allocation failure.
+
+<p>
+Now that the quotas are set, you need to turn the quotas on. To do this
+use
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=quotaon&amp;sektion=8">quotaon(8)</a>.
+For example:
+
+<blockquote><pre>
+# <b>quotaon -a</b>
+</pre></blockquote>
+
+<p>
+This will go through <tt>/etc/fstab</tt> to turn on the filesystems with
+quota options. Now that quotas are up and running, you can view them
+using
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=quota&amp;sektion=1">quota(1)</a>.
+Using a command of "<tt>quota &lt;user&gt;</tt>" will give that user's
+information. When called with no arguments, the quota(1) command will
+give your quota statistics. For example:
+
+<blockquote><pre>
+# <b>quota ericj</b>
+</pre></blockquote>
+
+<p>
+Will result in output similar to this:
+
+<blockquote><pre>
+Disk quotas for user ericj (uid 1001): 
+     Filesystem  blocks   quota   limit   grace   files   quota   limit   grace
+              /      62    1000    1050              27       0       0        
+</pre></blockquote>
+
+<p>
+By default quotas set in <tt>/etc/fstab</tt> will be started on boot. To
+turn them off use
+
+<blockquote><pre>
+# <b>quotaoff -a</b>
+</pre></blockquote>
+
+<p>
+<a name= "Kerberos"></a>
+<h2>10.12 - Setting up KerberosV Clients and Servers</h2>
+
+<p>
+OpenBSD includes KerberosV as a pre-installed component of the default
+system.
+
+<p>
+For more information on KerberosV, from your OpenBSD system, use the
+command:
+<blockquote><pre>
+# <b>info heimdal</b>
+</pre></blockquote>
+
+
+<p>
+<a name= "AnonFTP"></a>
+<h2>10.13 - Setting up Anonymous FTP Services</h2>
+
+<p>
+Anonymous FTP allows users without accounts to access files on your
+computer via the File Transfer Protocol. This will give an overview of
+setting up the anonymous FTP server, and its logging, etc.
+
+<h3>Adding the FTP account</h3>
+
+<p>
+To start off, you need to have an <i>ftp</i> account on your system.
+This account should not have a usable password. Here we will set the login
+directory to /home/ftp, but you can put it wherever you want.
+When using anonymous ftp, the ftp daemon will chroot itself to the home
+directory of the <i>ftp</i> user. To read up more on that, read the
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ftpd&amp;sektion=8">ftpd(8)</a> and 
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=chroot&amp;sektion=2">chroot(2)</a>
+man pages. Here is an example of adding the <i>ftp</i> user. I will do
+this using
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=adduser&amp;sektion=8">adduser(8)</a>.
+We also need to add /usr/bin/false to our <i>/etc/shells</i>, this is
+the &quot;shell&quot; that we will be giving to the <i>ftp</i> user.
+This won't allow them to login, even though we will give them an empty
+password. To do this you can simply do
+
+<blockquote><pre>
+echo /usr/bin/false &gt;&gt; /etc/shells
+</pre></blockquote>
+
+After this, you are ready to add the <i>ftp</i> user:
+
+<blockquote><pre>
+# <b>adduser</b>
+Use option ``-silent'' if you don't want to see all warnings and questions.
+
+Reading /etc/shells
+Reading /etc/login.conf
+Check /etc/master.passwd
+Check /etc/group
+
+Ok, let's go.
+Don't worry about mistakes. I will give you the chance later to correct any input.
+Enter username []: <b>ftp</b>
+Enter full name []: <b>anonymous ftp</b>
+Enter shell csh false ksh nologin sh tcsh zsh [sh]: <b>false</b>
+Uid [1002]: <b><i>Enter</i></b>
+Login group ftp [ftp]: <b><i>Enter</i></b>
+Login group is ``ftp''. Invite ftp into other groups: guest no 
+[no]: <b>no</b>
+Login class auth-defaults auth-ftp-defaults daemon default staff 
+[default]: <b><i>Enter</i></b>
+Enter password []: <b><i>Enter</i></b>
+Set the password so that user cannot logon? (y/n) [n]: <b>y</b>
+
+Name:        ftp
+Password:    ****
+Fullname:    anonymous ftp
+Uid:         1002
+Gid:         1002 (ftp)
+Groups:      ftp
+Login Class: default
+HOME:        /home/ftp
+Shell:       /usr/bin/false
+OK? (y/n) [y]: <b>y</b>
+Added user ``ftp''
+Copy files from /etc/skel to /home/ftp
+Add another user? (y/n) [y]: <b>n</b>
+Goodbye!
+</pre></blockquote>
+
+<h3>Directory Setup</h3>
+
+<p>
+Along with the user, this created the directory <i>/home/ftp</i>. This
+is what we want, but there are some changes that we will have to make to
+get it ready for anonymous ftp. Again these changes are explained in the
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ftpd&amp;sektion=8">ftpd(8)</a> man page.
+
+<p>
+You <b>do not</b> need to make a /home/ftp/usr or /home/ftp/bin
+directory.
+<ul>
+<li><i>/home/ftp</i> - This is the main directory. It should be owned by
+root and have permissions of 555.
+<li><i>/home/ftp/etc</i> - This is entirely optional and not
+recommended, as it only serves to give out information on users which
+exist on your box. If you want your anonymous ftp directory to appear to
+have real users attached to your files, you should copy /etc/pwd.db and
+/etc/group to this directory. This directory should be mode 511, and the
+two files should be mode 444. These are used to give owner names as
+opposed to numbers. There are no passwords stored in pwd.db, they are
+all in spwd.db, so don't copy that over.
+<li><i>/home/ftp/pub</i> - This is a standard directory to place files
+in which you wish to share. This directory should also be mode 555.
+</ul>
+
+<p> 
+Note that all these directories should be owned by ''root''. Here is a
+listing of what the directories should look like after their creation.
+
+<blockquote><pre>
+# pwd
+/home
+# ls -laR ftp
+total 5
+dr-xr-xr-x  5 root  ftp    512 Jul  6 11:33 .
+drwxr-xr-x  7 root  wheel  512 Jul  6 10:58 ..
+dr-x--x--x  2 root  ftp    512 Jul  6 11:34 etc
+dr-xr-xr-x  2 root  ftp    512 Jul  6 11:33 pub
+
+ftp/etc:
+total 43
+dr-x--x--x  2 root  ftp    512 Jul  6 11:34 .
+dr-xr-xr-x  5 root  ftp    512 Jul  6 11:33 ..
+-r--r--r--  1 root  ftp    316 Jul  6 11:34 group
+-r--r--r--  1 root  ftp  40960 Jul  6 11:34 pwd.db
+
+ftp/pub:
+total 2
+dr-xr-xr-x  2 root  ftp  512 Jul  6 11:33 .
+dr-xr-xr-x  5 root  ftp  512 Jul  6 11:33 ..
+</pre></blockquote>
+
+<h3>Starting up the server and logging</h3>
+
+<p>
+You can choose to start ftpd either by
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=inetd&amp;sektion=8">inetd(8)</a>
+or from the
+<a href="#rc">rc</a> scripts.
+These examples will show our daemon being started from inetd.conf.
+First we must become familiar with some of the options to ftpd.
+The default line from <i>/etc/inetd.conf</i> is:
+
+<blockquote><pre>
+<b>ftp             stream  tcp     nowait  root    /usr/libexec/ftpd       ftpd -US</b>
+</pre></blockquote>
+
+<p>
+Here ftpd is invoked with <i>-US</i>. This will log anonymous
+connections to <i>/var/log/ftpd</i> and concurrent sessions to
+<i>/var/run/utmp</i>. That will allow for these sessions to be seen via
+who(1). For some, you might want to run only an anonymous server, and
+disallow ftp for users. To do so you should invoke ftpd with the
+<i>-A</i> option. Here is a line that starts ftpd up for anonymous
+connections only. It also uses <i>-ll</i> which logs each connection to
+syslog, along with the get, retrieve, etc., ftp commands.
+
+<blockquote><pre>
+<b>ftp             stream  tcp     nowait  root    /usr/libexec/ftpd       ftpd -llUSA</b>
+</pre></blockquote>
+
+<p>
+<b>Note:</b> For people using HIGH traffic ftp servers, you might not want to
+invoke ftpd from inetd.conf. The best option is to comment the ftpd line
+from inetd.conf and start ftpd from rc.conf.local along with the <i>-D</i>
+option. This will start ftpd as a daemon, and has much less overhead as
+starting it from inetd.
+Here is an example line to start it from rc.conf.local.
+
+<blockquote><pre>
+ftpd_flags="-DllUSA"           # for non-inetd use: ftpd_flags="-D"
+</pre></blockquote>
+
+<p>
+This of course only works if you have ftpd taken out of 
+<i>/etc/inetd.conf</i> and made inetd re-read its configuration file.
+
+<h3>Other relevant files</h3>
+
+<ul>
+<li><i>/etc/ftpwelcome</i> - This holds the Welcome message for people
+once they have connected to your ftp server.
+<li><i>/etc/motd</i> - This holds the message for people once they have
+successfully logged into your ftp server.
+<li><i>.message</i> - This file can be placed in any directory. It will
+be shown once a user enters that directory.
+</ul>
+
+
+<p>
+<a name= "ftpchroot"></a>
+<h2>10.14 - Confining users to their home directories in ftpd(8)</h2>
+
+<p>
+By default, when logging in by ftp, users can change to any directory on
+the filesystem that they have access to.
+This may not be desirable in some cases.
+It is possible to restrict what users may see through ftp sessions by
+chrooting them to their home directory.
+
+<p>
+If you only wish to allow chrooted ftp logins, use the <b>-A</b> option to
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ftpd&amp;sektion=8">ftpd(8)</a>.
+
+<p>
+If you wish to apply them more finely, OpenBSD's
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=login.conf&amp;sektion=5">login
+capability infrastructure</a> and
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ftpd&amp;sektion=8">ftpd(8)</a>
+together make this easy.
+<p>
+
+Users in a login class with the <tt>ftp-chroot</tt> variable set are
+automatically chrooted.
+Additionally, you can add a username to the file <b>/etc/ftpchroot</b>
+to chroot those usernames.
+A user only needs to be listed in one of these locations.
+
+
+<p>
+<a name= "Patches"></a>
+<h2>10.15 - Applying patches in OpenBSD</h2>
+
+<p>
+Even with OpenBSD, bugs happen.
+Some bugs may lead to reliability issues (i.e., something may cause
+the system to stop functioning as desired). Other bugs may lead to security
+vulnerabilities (which may allow others to "use" your computer in unintended
+ways).
+When a critical bug is found, the fix will be committed to
+the <i>-current</i> source tree, and patches will be released for the
+<a href="faq5.html#Flavors">supported releases</a> of OpenBSD.
+These patches appear on the <a href="../errata.html">errata web
+page</a>, and are separated into "common" errata that impact
+all <a href="../plat.html">platforms</a>, and errata that impact only
+one or more, but not all, platforms.
+
+<p>
+Note, however, that patches aren't made for new additions to OpenBSD,
+and are only done for important reliability fixes or security problems
+that should be addressed right away on impacted systems (which is often
+NOT all systems, depending on their purpose).
+
+<p>
+There are three ways to update your system with patched code:
+
+<ul>
+<li><b>Upgrade your system to
+<a href="current.html"><i>-current</i></a>.</b>
+As all fixes are applied to the <i>-current</i> code base, updating your
+system to the latest snapshot is a very good way to apply fixed code.
+However, running <i>-current</i> is not for everyone.
+<li><b>Update your system to <a href="../stable.html"><i>-stable</i></a>.</b>
+This is done by fetching or updating your source tree using the appropriate
+<i>-stable</i> branch, and recompiling the kernel and userland files.
+Overall, this is probably the easiest way, though it takes longer (as the 
+entire system gets recompiled) and a complete source checkout can take a 
+long time if you have limited bandwidth available.
+<li><b>Patch, compile and install individual impacted files.</b>
+This is what we will use for our example below.
+While this requires less bandwidth and typically less time than an entire 
+cvs(1) checkout/update and source code compilation, this is sometimes
+the most difficult option, as there is no one universal set of
+instructions to follow.
+Sometimes you must patch, recompile and install one application, other 
+times, you might have to recompile entire sections of the tree if the 
+problem is in a library file.
+</ul>
+
+Again, patching individual files is not always simple, so give serious
+thought to following the <a href="../stable.html"><i>-stable</i></a> (or
+"patch") branch of OpenBSD.
+Mixing and matching of patching solutions can be done if you understand
+how everything works, but new users should pick one method and stick with 
+it.
+
+<h3>How are "errata" patches different from what is in the CVS tree?</h3>
+
+<p>
+All patches posted to the
+<a href="../errata.html">errata web page</a> are patches
+directly against the indicated release's source tree. Patches against the
+latest CVS tree might also include other changes that wouldn't be wanted
+on a release system.
+This is important: If you have installed a snapshot, checked out the source
+trees at the time you obtained that snapshot and attempt to patch it using a 
+published patch, you may well find the patch doesn't apply, as that code 
+may have changed.
+
+
+
+<h3>Applying patches.</h3>
+
+<p>
+Patches for the OpenBSD Operating System are distributed as "Unified
+diffs", which
+are text files that hold differences to the original source code. They
+are <b>NOT</b> distributed in binary form. This means that to patch your
+system you must have the source code from the <b>RELEASE</b> version of
+OpenBSD readily available.
+In general, you should have the entire source tree available.
+If you are running a release from official CDROM, the source trees are 
+available on disk 3, they are also available as files from the
+<a href="../ftp.html">FTP servers</a>.
+We will assume you have the entire tree checked out.
+
+<p>
+For our example here, we will look at patch 001 for OpenBSD 3.6 dealing
+with the
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=st&amp;sektion=4">st(4)</a>
+driver, which handles tape drives.
+Without this patch, recovering data from backups is quite difficult.
+People using a tape drive <i>need</i> this patch, however those without
+a tape drive may have no particular need to install it.
+Let's look at the patch:
+
+<blockquote><pre>
+# <b>more 001_st.patch</b>
+Apply by doing:
+        cd /usr/src
+        patch -p0 < 001_st.patch
+
+Rebuild your kernel.
+
+Index: sys/scsi/st.c
+===================================================================
+RCS file: /cvs/src/sys/scsi/st.c,v
+retrieving revision 1.41
+retrieving revision 1.41.2.1
+diff -u -p -r1.41 -r1.41.2.1
+--- sys/scsi/st.c       1 Aug 2004 23:01:06 -0000       1.41
++++ sys/scsi/st.c       2 Nov 2004 01:05:50 -0000       1.41.2.1
+@@ -1815,7 +1815,7 @@ st_interpret_sense(xs)
+        u_int8_t skey = sense->flags & SSD_KEY;
+        int32_t info;
+ 
+-       if (((sense->flags & SDEV_OPEN) == 0) ||
++       if (((sc_link->flags & SDEV_OPEN) == 0) ||
+            (serr != 0x70 && serr != 0x71))
+                return (EJUSTRETURN); /* let the generic code handle it */
+</pre></blockquote>
+
+As you will note, the top of the patch includes brief instructions on
+applying it.
+We will assume you have put this patch into the <tt>/usr/src</tt>
+directory, in which case, the following steps are used:
+
+<blockquote><pre>
+# <b>cd /usr/src</b>
+# <b>patch -p0 < 001_st.patch</b>
+Hmm...  Looks like a unified diff to me...
+The text leading up to this was:
+--------------------------
+|Apply by doing:
+|        cd /usr/src
+|        patch -p0 < 001_st.patch
+|
+|Rebuild your kernel.
+|
+|Index: sys/scsi/st.c
+|===================================================================
+|RCS file: /cvs/src/sys/scsi/st.c,v
+|retrieving revision 1.41
+|retrieving revision 1.41.2.1
+|diff -u -p -r1.41 -r1.41.2.1
+|--- sys/scsi/st.c      1 Aug 2004 23:01:06 -0000       1.41
+|+++ sys/scsi/st.c      2 Nov 2004 01:05:50 -0000       1.41.2.1
+--------------------------
+Patching file sys/scsi/st.c using Plan A...
+Hunk #1 succeeded at 1815.              <i>&lt;-- Look for this message!</i>
+done
+</pre></blockquote>
+
+Note the "<tt>Hunk #1 succeeded</tt>" message above.
+This indicates the patch was applied successfully.
+Many patches are more complex than this one, and will involve multiple
+hunks and multiple files, in which case, you should verify that all
+hunks succeeded on all files.
+If they did not, it normally means your source tree is not right, you
+didn't follow instructions carefully, or your patch was mangled.
+Patches are very sensitive to "white space" -- copying and pasting from 
+your browser will often change tab characters into spaces or otherwise
+alter the white space of a file, making it not apply.
+
+<p>
+At this point, you can <a href="faq5.html#BldKernel">build the kernel</a>
+as normal, install it and reboot the system.
+
+<p>
+Not all patches are for the kernel.
+In some cases, you will have to rebuild individual utilities. At other
+times, will require recompiling all utilities statically linked to a
+patched library.
+Follow the guidance in the header of the patch, and if uncertain,
+rebuild the entire system.
+
+<p>
+Patches that are irrelevant to your particular system need not be
+applied -- usually.
+For example, if you did not have a tape drive on your system, you would
+not benefit from the above patch.
+However, patches are assumed to be applied "in order" -- it is possible
+that a later patch is dependent upon an earlier one.
+Be aware of this if you elect to "pick and choose" which patches you
+apply, and if in doubt, apply them all, in order.
+
+
+<a name="httpdchroot"></a>
+<h2>10.16 - Tell me about this chroot(2) Apache?</h2>
+
+<p>
+In OpenBSD, the Apache 
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=httpd&amp;sektion=8">httpd(8)</a>
+server has been
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=chroot&amp;sektion=2">chroot(2)</a>ed
+by default. While this is a tremendous boost to security, it can create
+issues, if you are not prepared.
+
+<h3>What is a chroot?</h3>
+
+A
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=chroot&amp;sektion=2">chroot(2)</a>ed
+application is locked into a particular directory and unable to wander
+around the rest of the directory tree, and sees that directory as its
+"<tt>/</tt>" (root) directory.
+In the case of httpd(8), the program starts, opens its log files, binds
+to its TCP ports (though, it doesn't accept data yet), and reads its
+configuration. Next, it locks itself into <i>/var/www</i> and drops
+privileges, then starts to accept requests.
+This means all files served and used by Apache must be in the
+<i>/var/www</i> directory.
+In the default configuration of OpenBSD, all the files in the
+<i>/var/www</i> directory are read-only by the user Apache runs as,
+<i>www</i>.
+This helps security tremendously -- should
+there be a security issue with Apache, the damage will be confined to a
+single directory with only "read only" permissions and no resources to
+cause mischief with.
+
+<h3>What does this mean to the administrator?</h3>
+
+<p>
+Put bluntly, chroot(2)ing Apache is something not done by
+default in most other operating systems.
+Many applications and system configurations will not work in a chroot(2)
+without some customization.
+Further, it must be remembered that security and convenience are often
+not compatible goals.
+OpenBSD's implementation of Apache does not compromise security 
+for features or "ease".  
+
+<ul>
+<li><b>Historic file system layouts:</b> Servers upgraded from older
+versions of OpenBSD may have web files located in user's directories,
+which clearly won't work in a chroot(2)ed environment, as httpd(8) can't
+reach the <i>/home</i> directory. Administrators may also discover their
+existing /var/www partition is too small to hold all web files. Your
+options are to restructure or do not use the chroot(2) feature. You can,
+of course, use symbolic links in the user's home directories pointing to
+subdirectories in <i>/var/www</i>, but you can NOT use links in
+<i>/var/www</i> pointing to other parts of the file system -- that is
+prevented from working by the chroot(2)ing. Note that if you want your
+users to have <a href="faq10.html#ftpchroot">chroot(2)ed FTP access</a>,
+this will not work, as the FTP chroot will (again) prevent you from
+accessing the targets of the symbolic links. A solution to this is to
+not use <i>/home</i> as your home directories for these users, rather
+use something similar to <i>/var/www/users</i>.
+Symbolic links can be used completely within the chroot(2), but they
+have to be relative, not absolute.
+
+<li><b>Log Rotation:</b> Normally, logs are rotated by renaming the old
+files, then sending httpd(8) a SIGUSR1 signal to cause Apache to close
+its old log files and open new ones. This is no longer possible, as
+httpd(8) has no ability to open log files for writing once privileges are
+dropped. httpd(8) must be stopped and restarted.
+It sometimes takes a few seconds for all the child
+processes to terminate, which must happen before httpd(8) can be
+restarted, so one possible way to rotate the logs would be as follows:
+
+<blockquote><pre>
+# <b>apachectl stop</b>
+    <i>rename your log files</i>
+# <b>apachectl start ; sleep 10 ; apachectl start</b>
+</pre></blockquote>
+
+Yes, the last line attempts to restart Apache immediately, and in case
+that fails it waits a few seconds and tries again.
+And yes, that does mean that for a few seconds every time you do your
+log rotation, your web server will be unavailable.
+While this could be annoying, any attempt to permit httpd(8) to 
+reopen files after chroot(2)ing would defeat the very purpose of
+the chroot!
+There are also other strategies available, including logging to a 
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=pipe&amp;sektion=2">pipe(2)</a>,
+and using an external log rotator at the other end of the pipe(2).
+
+<li><b>Existing Apache modules:</b> Virtually all will load, however
+some may not work properly in chroot(2), and many have issues on
+"<tt><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=apachectl&amp;sektion=8">apachectl</a>
+restart</tt>", generating an error, which causes httpd(8) to exit.
+
+<li><b>Existing CGIs:</b> Most will NOT work as is. They may need
+programs or libraries outside <i>/var/www</i>. Some can be fixed by
+compiling so they are statically linked (not needing libraries in other
+directories), most may be fixed by populating the <i>/var/www</i>
+directory with the files required by the application, though this is
+non-trivial and requires some knowledge of the program.
+
+<li><b>File system mount options:</b>
+By default in OpenBSD, your <i>/var</i> partition will be mounted 
+with the <tt>nosuid</tt> and <tt>nodev</tt> options.
+If you attempt to use an application within the chroot, you may need
+to change those options.
+You may need to do that even if you don't use the chroot option, of
+course.
+
+<li><b>Name Resolution:</b>
+httpd(8) inside the chroot(2) will NOT be able to use the system
+<i>/etc/hosts</i> or <i>/etc/resolv.conf</i>.  Therefore, if you have
+applications which require name resolution, you will need to populate
+<i>/var/www/etc/hosts</i> and/or <i>/var/www/etc/resolv.conf</i> in the
+chroot(2) environment.  Note that some applications expect the
+resolution of "localhost" to work.
+
+<li><b>Timezone:</b>
+httpd(8) inside the chroot(2) will NOT be able to use the system
+<i>/etc/localtime</i>.  If you require localtime logging of events,
+you will need to copy (not link) the corresponding timezone from
+<i>/usr/share/zoneinfo/</i> under <i>/var/www/etc/localtime</i>.
+
+</ul>
+
+In some cases, the application or configuration can be altered to run
+within the chroot(2).
+In other cases, you will simply have to disable this
+feature using the <tt>-u</tt> option for httpd(8) in
+<i><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=rc.conf.local&amp;sektion=8">/etc/rc.conf.local</a></i>.
+
+<h3>Example of chroot(2)ing an app: wwwcount</h3>
+As an example of a process that can be used to chroot an application, we
+will look at wwwcount, a simple web page counter available through
+<a href="faq15.html#PkgMgmt">packages</a>.
+While a very effective program, it knows nothing about chroot(2)ed 
+Apache, and will not work chroot(2)ed in its default configuration.
+
+<p>
+First, we install the
+<a href="http://www.muquit.com/muquit/software/Count/Count.html">wwwcount</a>
+package.
+We configure it and test it, and we find it doesn't seem to work, 
+we get an Apache message saying "Internal Server Error".
+
+First step is to stop and restart Apache with the <tt>-u</tt> switch
+to verify that the problem is the chroot(2)ing, and not the system
+configuration.
+
+<blockquote><pre>
+# <b>apachectl stop</b>
+/usr/sbin/apachectl stop: httpd stopped
+# <b>httpd -u</b>
+</pre></blockquote>
+
+After doing this, we see the counter works properly, at least after we
+change the ownership on a directory so that Apache (and the CGIs it
+runs) can write to the files it keeps.
+So, we definitely have a chroot problem, so we stop and restart 
+Apache again, using the default chrooting:
+
+<blockquote><pre>
+# <b>apachectl stop</b>
+/usr/sbin/apachectl stop: httpd stopped
+# <b>httpd</b>
+</pre></blockquote>
+
+<p>
+A good starting point would be to assume wwwcount uses some libraries
+and other files it can't get to in the chroot.
+We can use the 
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ldd&amp;sektion=1">ldd(1)</a>
+command to find out the dynamic object dependencies that the CGI needs:
+
+<blockquote><pre>
+# <b>cd /var/www/cgi-bin/</b>
+# <b>ldd Count.cgi</b>
+Count.cgi:
+        Start    End      Type Open Ref GrpRef Name
+        1c000000 3c007000 exe  1    0   0      /var/www/cgi-bin/Count.cgi
+        0c085000 2c0be000 rlib 0    1   0      /usr/lib/libc.so.57.0
+        08713000 08713000 rtld 0    1   0      /usr/libexec/ld.so
+</pre></blockquote>
+
+Ok, here is a problem, two files that are not available in the
+chroot(2) environment.
+So, we copy them over:
+
+<blockquote><pre>
+# <b>mkdir -p /var/www/usr/lib /var/www/usr/libexec</b>
+# <b>cp /usr/lib/libc.so.57.0 /var/www/usr/lib</b>
+# <b>cp /usr/libexec/ld.so /var/www/usr/libexec</b>
+</pre></blockquote>
+
+and try the counter again.
+
+<p>
+Well, now the program is running at least, and giving us error messages
+directly: "Unable to open config file for reading".
+Progress, but not done yet.
+The configuration file is normally in <tt>/var/www/wwwcount/conf</tt>, 
+but within the chroot environment, that would seem to be
+<tt>/wwwcount/conf</tt>.
+Our options are to either recompile the program to make it work where 
+the files are now, or move the data files.
+As we installed from a package, we'll just move the data file.
+In order to use the same config either chroot(2)ed or not, we'll use a
+symbolic link:
+
+<blockquote><pre>
+# <b>mkdir -p /var/www/var/www</b>
+# <b>cd /var/www/var/www</b>
+# <b>ln -s ../../wwwcount wwwcount</b>
+</pre></blockquote>
+
+Note that the symbolic link is crafted to work within the chroot.
+Again, we test... and we find we have yet another issue.  
+Now wwwcount is complaining that it can't find the "strip image" files
+it uses to display messages.
+After a bit of searching, we find those are stored in 
+<tt>/usr/local/lib/wwwcount</tt>, so we have to copy those into the
+chroot, as well.
+
+<blockquote><pre>
+# <b>tar cf - /usr/local/lib/wwwcount | (cd /var/www; tar xpf - )</b>
+</pre></blockquote>
+
+we test again...  and it works!
+
+<p>
+Note that we have copied over only files that are absolutely required
+for operation.
+In general, only the minimum files needed to run an application should
+be copied into the chroot.
+
+<h3>Should I use the chroot feature?</h3>
+In the above example, the program is fairly simple, and yet we have seen
+several different kinds of problems.
+
+<p>
+<i>Not every application can or should be chroot(2)ed.</i>
+
+<p>
+The goal is a secure web server, chroot(2)ing is just a tool to accomplish
+this, it is not the goal itself.
+Remember, the starting configuration of the OpenBSD chroot(2)ed Apache
+is where the user the httpd(8) program is running as can not run any
+programs, can not alter any files, and can not assume another user's
+identity.
+Loosen these restrictions, you have lessened your security, chroot or no
+chroot.
+ 
+<p>
+Some applications are pretty simple, and chroot(2)ing them makes sense.
+Others are very complex, and are either not worth the effort of forcing
+them into a chroot(2), or by the time you copy enough of the system into
+the chroot, you have lost the benefit of the chroot(2) environment.
+For example, the OpenWebMail program requires the ability to read and
+write to the mail directory, the user's home directory, and must be able
+to work as any user on the system.
+Attempting to push it into a chroot would be completely pointless, as
+you would end up disabling all the benefits of chroot(2)ing.
+Even with an application as simple as the above counter, it must write
+to disk (to keep track of its counters), so <i>some</i> benefit of the
+chroot(2) is lost.
+
+<p>
+Any application which has to assume root privileges to operate is 
+pointless to attempt to chroot(2), as root can generally escape a
+chroot(2).
+
+<p>
+Do not forget, if the chrooting process for your application is too
+difficult, you may not upgrade or update the system as often as you
+should.
+This could end up making your system LESS secure than a more
+maintainable system with the chroot feature deactivated.
+
+<a name="rootshell"></a>
+<h2>10.17 - Can I change the root shell?</h2>
+It is sometimes said that one should never change the root shell, though
+there is no reason not to in OpenBSD.
+
+<p>
+The default shell for <i>root</i> on OpenBSD is 
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ksh&amp;sektion=1">ksh</a>.
+
+<p>
+A traditional Unix guideline is to only use statically compiled shells
+for root, because if your system comes up in single user mode, non-root
+partitions won't be mounted and dynamically linked shells won't be able
+to access libraries located in the <tt>/usr</tt> partition. This isn't
+actually a significant issue for OpenBSD, as the system will prompt you
+for a shell when it comes up in single user mode, and the default is
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=sh&amp;sektion=1">sh</a>.
+
+The three standard shells in OpenBSD
+(<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=csh&amp;sektion=1">csh</a>,
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=sh&amp;sektion=1">sh</a>
+and
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ksh&amp;sektion=1">ksh</a>)
+are all statically linked, and thus usable in single user mode.
+
+
+<a name="ksh"></a>
+<h2>10.18 - What else can I do with <i>ksh</i>?</h2>
+In OpenBSD, 
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ksh&amp;sektion=1">ksh</a>
+is <a href="http://web.cs.mun.ca/~michael/pdksh/">pdksh</a>, the Public
+Domain Korn Shell, and is the same binary as
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=sh&amp;sektion=1">sh</a>.
+
+<p>
+Users comfortable with <i>bash</i>, often used on Linux systems, will
+probably find
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ksh&amp;sektion=1">ksh</a>
+very familiar. Ksh(1) provides most of the commonly used features in
+<i>bash</i>, including tab completion, command line editing and history
+via the arrow keys, and CTRL-A/CTRL-E to jump to beginning/end of the
+command line. If other features of <i>bash</i> are desired, <i>bash</i>
+itself can be loaded via either <a href="faq15.html#PkgMgmt">packages</a>
+or <a href="faq15.html#Ports">ports</a>.
+
+<p>
+The command prompt of <i>ksh</i> can easily be changed to something
+providing more information than the default "$ " by setting the
+<tt>PS1</tt> variable. For example, inserting the following line:
+
+<blockquote><pre>
+export PS1='$PWD $ '
+</pre></blockquote>
+
+in your <tt>/etc/profile</tt> produces the following command prompt:
+
+<blockquote><pre>
+/home/nick $
+</pre></blockquote>
+
+See the file
+<a href="http://www.openbsd.org/cgi-bin/cvsweb/~checkout~/src/etc/ksh.kshrc?content-type=text/plain"><tt>/etc/ksh.kshrc</tt></a>,
+which includes many useful features and examples, and may be invoked in
+your user's <tt>.profile</tt>.
+
+<p>
+OpenBSD's ksh(1) has been enhanced with a number of 
+"special characters" for the primary prompt string, PS1, similar to 
+those used in bash.
+For example:
+<blockquote>
+<tt>\e - </tt>Insert an ASCII escape character.<br>
+<tt>\h - </tt>The hostname, minus domain name.<br>
+<tt>\H - </tt>The full hostname, including domain name.<br>
+<tt>\n - </tt>Insert a newline character.<br>
+<tt>\t - </tt>The current time, in 24-hour HH:MM:SS format.<br>
+<tt>\u - </tt>The current user's username.<br>
+<tt>\w - </tt>The current working directory.  $HOME is abbreviated as `~'.<br>
+<tt>\W - </tt>The basename of the current working directory.<br>
+<tt>\$ - </tt>Displays "#" for root users, "$" for non-root users.
+</blockquote>
+
+(see the
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ksh&amp;sektion=1">ksh(1)</a>
+man page for more details, and many, many more special characters!
+Also note the "$" character has special meaning inside double quotes, so
+handle it carefully)
+
+<p>
+One could use the following command:
+<blockquote><pre>
+export PS1="\n\u@\H\n\w \\$ "
+</pre></blockquote>
+to give an overly verbose but somewhat useful prompt.
+
+
+<p>
+<a name="Dir"></a>
+<h2>10.19 - Directory services</h2>
+
+<p>
+OpenBSD can be used for both servers and clients of databases containing
+user credentials, group information and other network-related data.
+
+<p>
+<a name="Dir.available"></a>
+<h3>10.19.1 - Which directory services are available?</h3>
+
+<p>
+Of course, you could use various directory services on OpenBSD.
+But YP is the only one that can be accessed directly using standard
+C-library functions like
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=getpwent&amp;sektion=3"
+>getpwent(3)</a>,
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=getgrent&amp;sektion=3"
+>getgrent(3)</a>,
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=gethostbyname&amp;sektion=3"
+>gethostbyname(3)</a> and so on.
+Thus, if you keep your data in a YP database, you do not need
+to copy it to local configuration files like
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=master.passwd&amp;sektion=5"
+>master.passwd(5)</a> before you can use it,
+for example to authenticate system users.
+
+<p>
+YP is a directory service compatible with
+Sun Microsystems NIS (Network Information System).
+See
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=yp&amp;sektion=8">yp(8)</a>
+for an overview of the available manual pages.
+Be careful, some operating systems contain directory services bearing
+similar names but all the same being incompatible, for example NIS+.
+
+<p>
+To use other directory services except YP, you either need to populate local
+configuration files from the directory, or you need a YP frontend to
+the directory.
+For example, you can use the <tt>sysutils/login_ldap</tt> port
+when you choose the former, while the
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ypldap&amp;sektion=8"
+>ypldap(8)</a> daemon provides the latter.
+
+<p>
+For some applications, simply synchronizing a small number of configuration
+files among a group of machines using tools like
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=cron&amp;sektion=8"
+>cron(8)</a>,
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=scp&amp;sektion=1"
+>scp(1)</a> or <tt>rsync</tt> (available from ports) constitutes an easy
+and robust alternative to a full-blown directory service.
+
+<a name="YP_secure"></a> 
+<h3>10.19.2 - YP security considerations</h3>
+
+<p>
+For compatibility reasons, all security features built into the OpenBSD
+implementation of YP are switched <em>off</em> by default.
+Even when they are all switched on, the NIS protocol is still
+inherently insecure for two reasons:
+All data, including sensitive data like password hashes,
+is transmitted unencrypted across the network, and neither the client
+nor the server can reliably verify each other's identity.
+
+<p>
+Thus, before setting up any YP server, you should consider whether
+these inherent security flaws are acceptable in your context.
+In particular, YP is inadequate if potential attackers have physical
+access to your network.
+Anybody gaining root access to any computer connected to your network
+segments carrying YP traffic can bind your YP domain and retrieve its data.
+In some cases, passing YP traffic through SSL or IPSec tunnels
+might be an option, or you might consider combining YP with
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=kerberos&amp;sektion=8"
+>kerberos(8)</a> authentication.
+
+<a name="YP_server"></a> 
+<h3>10.19.3 - Setting up a YP server</h3>
+
+<ol>
+<li><p>
+A YP server serves a group of clients called a "domain".
+You should first select a domain name; it can be an arbitrary string
+and need not be related in any way to DNS domain names.
+Choosing a random name like "Eepoo5vi" can marginally improve security,
+though the effect is mostly in security by obscurity.
+In case you need to maintain several distinct YP domains,
+it's probably better to choose descriptive names like "sales",
+"marketing" and "research" in order to forestall system administration
+errors caused by obscurity.
+Also note that some versions of SunOS require using the host's DNS
+domain name, so your choice might be restricted in a network including
+such hosts.
+
+<p>
+Use the
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=domainname&amp;sektion=1"
+>domainname(1)</a> utility to set the domain name, and put it into the file
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=defaultdomain&amp;sektion=5"
+>defaultdomain(5)</a> to have it automatically set at system startup time. 
+
+<blockquote><pre>
+echo "puffynet" > /etc/defaultdomain
+domainname `cat /etc/defaultdomain`
+</pre></blockquote>
+
+<li><p>
+Initialise the YP server using the interactive command
+
+<blockquote><pre>
+ypinit -m
+</pre></blockquote>
+
+At this point, it is not necessary to specify slave servers yet.
+To add slave servers, you can rerun
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ypinit&amp;sektion=8"
+>ypinit(8)</a> later, using the <tt>-u</tt> option.
+
+Setting up at least one slave server for each domain is useful
+to avoid service interruptions, should the master server ever go down
+or lose network connectivity, in particular since client processes
+trying to access YP maps block indefinitely until they receive the
+requested information.  Thus, YP service interruptions typically render
+the client hosts completely unusable until YP is back to service.
+
+<li><p>
+Decide where to store the source files to generate your YP maps from.
+Keeping the server configuration separate from the served configuration
+helps to control which information will be served and which won't,
+so the default <tt>/etc</tt> often isn't the best choice.
+
+<p>
+The only inconvenience caused by changing the source directory
+is that you will not be able to add, remove and modify users and groups
+in the YP domain using utilities like
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=user&amp;sektion=8"
+>user(8)</a> and
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=group&amp;sektion=8"
+>group(8)</a>.
+Instead, you will have to edit the configuration files with a text editor.
+
+<p>
+To define the source directory, edit the file
+<tt>/var/yp/`domainname`/Makefile</tt>
+and change the <tt>DIR</tt> variable, e.g.
+
+<blockquote><pre>
+DIR=/etc/yp/src/puffynet
+</pre></blockquote>
+
+<li><p>
+Consider customizing other variables in
+<tt>/var/yp/`domainname`/Makefile</tt>.  See
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=Makefile.yp&amp;sektion=8"
+>Makefile.yp(8)</a> for details.
+
+<p>
+For example, even in case you use the default source directory <tt>/etc</tt>,
+you do not usually need all accounts and groups existing on the server on all
+your client hosts.  In particular, not serving the root account and thus
+keeping root's password hash confidential is often beneficial to security.
+Review the values of <tt>MINUID</tt>, <tt>MAXUID</tt>, <tt>MINGID</tt>
+and <tt>MAXGID</tt> and adjust them to you needs.
+
+<p>
+If all your YP clients run OpenBSD or FreeBSD, exclude the encrypted
+passwords from the <tt>passwd</tt> maps by setting <tt>UNSECURE=""</tt> in
+<tt>/var/yp/`domainname`/Makefile</tt>.
+
+<p>
+The former practice of editing the template file <tt>/var/yp/Makefile.yp</tt>
+is no longer recommended.  Changes to that file affect all domains initialized
+after the change, but do not affect domains initialized before the change,
+so this is error-prone either way: You both risk that the intended changes
+do not take effect, and you risk to forget about them and have them affect
+other domains later which they were never intended for.
+
+<li><p>
+Create the source directory and populate it with the configuration files
+you need.  See
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=Makefile.yp&amp;sektion=8"
+>Makefile.yp(8)</a> to learn which YP maps require which source files.
+For the format of the individual configuration files, refer to
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=passwd&amp;sektion=5"
+>passwd(5)</a>,
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=group&amp;sektion=5"
+>group(5)</a>,
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=hosts&amp;sektion=5"
+>hosts(5)</a> and so on, and look at the examples in <tt>/etc</tt>.
+
+<li><p>
+Create the initial version of your YP maps using the commands
+
+<blockquote><pre>
+cd /var/yp
+make
+</pre></blockquote>
+
+Do not worry about error messages from
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=yppush&amp;sektion=8"
+>yppush(8)</a> right now.
+The YP server is not yet running.
+
+<li><p>
+YP uses
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=rpc&amp;sektion=3"
+>rpc(3)</a> (remote procedure calls) to communicate with clients,
+so it is necessary to enable
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=portmap&amp;sektion=8"
+>portmap(8)</a>.
+To do so, edit
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=rc.conf.local&amp;sektion=8"
+>rc.conf.local(8)</a> and set <tt>portmap=YES</tt>.
+This will start the portmapper on next boot.
+You can avoid rebooting by also starting it manually:
+
+<blockquote><pre>
+echo "portmap=YES" >> /etc/rc.conf.local
+portmap
+</pre></blockquote>
+
+<li><p>
+Consider using either the
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=securenet&amp;sektion=5"
+>securenet(5)</a> or the
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ypserv.acl&amp;sektion=5"
+>ypserv.acl(5)</a> security feature of the YP server daemon.
+But be aware that both of these only provide IP based access control.
+Thus, they only help as long as potential attackers have neither physical
+access to the hardware of the network segments carrying your YP traffic
+nor root access to any host connected to those network segments.
+
+<li><p>
+Finally, start the YP server daemon:
+
+<blockquote><pre>
+ypserv
+</pre></blockquote>
+
+It will automatically be restarted at boot time as long as the directory
+<tt>/var/yp/`domainname`</tt> continues to exist.
+
+<li><p>
+To test the new server, consider making it its own client,
+following the instructions in the first part of the next section.
+In case you don't want the server to use its own maps, you can
+disable the client part after the test with the following commands:
+
+<blockquote><pre>
+pkill ypbind
+rm -rf /var/yp/binding
+</pre></blockquote>
+
+<li><p>
+If you wish to allow users to change their passwords from client machines,
+then you must enable
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=yppasswdd&amp;sektion=8"
+>yppasswdd(8)</a>:
+
+<blockquote><pre>
+echo 'yppasswdd_flags="-d /etc/yp/src/puffynet"' >> /etc/rc.conf.local
+rpc.yppasswdd
+</pre></blockquote>
+
+In case you left the source directory at the default <tt>/etc</tt>,
+just use <tt>yppasswdd_flags=""</tt>.
+
+<li><p>
+Remember that each time you change a file sourced by a YP map,
+you must regenerate your YP maps.
+
+<blockquote><pre>
+cd /var/yp
+make
+</pre></blockquote>
+
+This updates all database files in <tt>/var/yp/`domainname`</tt>, with
+one exception:  The file <tt>ypservers.db</tt>, listing all YP master
+and slave servers associated with the domain, is created directly
+from <tt>ypinit -m</tt> and modified exclusively by <tt>ypinit -u</tt>.
+In case you accidentally delete it, run <tt>ypinit -u</tt> to recreate
+it from scratch.
+</ol>
+
+<a name="YP_client"></a> 
+<h3>10.19.4 - Setting up a YP client</h3>
+
+Setting up a YP client involves two distinct parts.
+First, you must get the YP client daemon running,
+binding your client host to a YP server.
+Completing the following steps will allow you to retrieve data
+from the YP server, but that data will not yet be used by the system:
+
+<ol>
+<li><p>
+Like on the server, you must set the domain name and enable the portmapper:
+
+<blockquote><pre>
+echo "puffynet" > /etc/defaultdomain
+domainname `cat /etc/defaultdomain`
+echo "portmap=YES" >> /etc/rc.conf.local
+portmap
+</pre></blockquote>
+
+<li><p>
+It is recommended to provide a list of YP servers in the configuration
+file <tt>/etc/yp/`domainname`</tt>.
+Otherwise, the YP client daemon will use network broadcasts to find
+YP servers for its domain.
+Explicitly specifying the servers is both more robust and marginally
+less open to attack.
+If you have not set up any slave servers, just put the host name
+of the master server into <tt>/etc/yp/`domainname`</tt>.
+
+<li><p>
+The YP client daemon is called
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ypbind&amp;sektion=8"
+>ypbind(8)</a>.
+Starting it manually will create the directory <tt>/var/yp/binding</tt>,
+such that it will be automatically restarted at boot time.
+
+<blockquote><pre>
+ypbind
+</pre></blockquote>
+
+<li><p>
+If all went well you should be able to query the YP server using
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ypcat&amp;sektion=1"
+>ypcat(1)</a> and see your passwd map returned.
+
+<blockquote><pre>
+ypcat passwd
+bob:*:5001:5000:Bob Nuggets:/home/bob:/usr/local/bin/zsh
+...
+</pre></blockquote>
+
+Other useful tools for debugging your YP setup include
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ypmatch&amp;sektion=1"
+>ypmatch(1)</a> and
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=yptest&amp;sektion=8"
+>yptest(8)</a>.
+</ol>
+
+The second part of configuring a YP client
+involves editing local configuration files
+such that certain YP maps get used by various system facilities.
+Not all servers serve all standard maps supported by the operating system,
+some servers serve additional non-standard maps,
+and you are by no means compelled to use all those maps.
+Which of the available maps shall or shall not be used,
+and for which purposes they shall be used, is fully at the discretion
+of the client host's system administrator.
+
+<p>
+For a list of standard YP maps and their standard usage, see
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=Makefile.yp&amp;sektion=8"
+>Makefile.yp(8)</a>.
+The most common use cases include:
+
+<ul>
+<li><p>
+If you want to include all user accounts from the YP domain,
+append the default YP marker to the master password file and rebuild
+the password database:
+
+<blockquote><pre>
+echo '+:*::::::::' >> /etc/master.passwd
+pwd_mkdb -p /etc/master.passwd
+</pre></blockquote>
+
+For details on selective inclusion and exclusion of user accounts, see
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=passwd&amp;sektion=5"
+>passwd(5)</a>.
+To test whether inclusion actually works, use the
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=id&amp;sektion=1"
+>id(1)</a> utility.
+
+<li><p>
+If you want to include all groups from the YP domain,
+append the default YP marker to the group file:
+
+<blockquote><pre>
+echo '+:*::' >> /etc/group
+</pre></blockquote>
+
+For details on selective group inclusion, see
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=group&amp;sektion=5"
+>group(5)</a>.
+
+<li><p>
+If you are distributing hostnames via YP, you should now review
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=resolv.conf&amp;sektion=5"
+>resolv.conf(5)</a> and check that the name service lookup order is correct.
+Most users will require a line like this:
+
+<blockquote><pre>
+lookup file yp bind
+</pre></blockquote>
+</ul>
+
+
+<p>
+<font color= "#0000e0">
+<a href= "index.html">[FAQ Index]</a>
+<a href= "faq9.html">[To Section 9 - Migrating to OpenBSD]</a>
+<a href="faq11.html">[To Section 11 - The X Window System]</a>
+</font>
+
+<p>
+<hr>
+<a href= "index.html"><img height= "24" width= "24" src= "../images/back.gif" border= "0" alt="[back]"></a>
+<a href="mailto:www@openbsd.org">www@openbsd.org</a>
+<br>
+<small>$OpenBSD: faq10.html,v 1.152 2010/11/21 15:52:43 nick Exp $</small>
+</body>
+</html>

@@ -1,0 +1,613 @@
+<!DOCTYPE HTML PUBLIC  "-//W3C//DTD HTML 4.01 Transitional//EN"
+	"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>OpenBSD/macppc</title>
+<link rev="made" href="mailto:www@openbsd.org">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="resource-type" content="document">
+<meta name="description" content="the OpenBSD/macppc page">
+<meta name="keywords" content="openbsd,macppc,ppc,powerpc,mac,macintosh,apple">
+<meta name="distribution" content="global">
+<meta name="copyright" content="This document copyright 1996-2008 by OpenBSD.">
+</head>
+
+<body bgcolor="#ffffff" text="#000000" link="#23238e">
+<a href="index.html"><img alt="[OpenBSD]" height="30" width="141" src="images/smalltitle.gif" border="0"></a>
+<h2><font color="#e00000">OpenBSD/macppc</font></h2>
+
+<hr>
+
+<p>
+OpenBSD/macppc runs on the PowerPC-based Macintosh systems from the
+<i>``New World''</i> family, i.e. all Apple computers from the iMac to current
+models. It does not run on any <a href="#unsup">unsupported models</a>.
+
+<p>
+A mailing list dedicated to the OpenBSD/macppc port is available at
+<u><font color="#23238e">ppc@openbsd.org</font></u>.
+To join the OpenBSD/macppc mailing list, send a message body of <b>"subscribe
+ppc"</b> to
+<a href="mailto:majordomo@openbsd.org">majordomo@openbsd.org</a>.
+Please be sure to check our <a href="mail.html">mailing list policy</a> before
+subscribing.
+
+<p>
+The current port maintainer is Dale Rahn
+(<a href="mailto:drahn@openbsd.org">drahn@openbsd.org</a>).
+Others are definitely welcome to contribute!
+
+<a name="toc"></a>
+<h3><font color="#0000e0"><i>Table of contents</i></font></h3>
+<ul>
+  <li><a href="#history">History of the port</a>
+  <li><a href="#status">Current status</a>
+  <li><a href="#projects">Project list</a>
+  <li><a href="#hardware">Supported hardware</a>
+  <li><a href="#install">Getting and installing OpenBSD/macppc</a>
+  <li><a href="#multiboot">Multiboot/Shared HFS disks</a>
+  <li><a href="#root">Boot device considerations</a>
+  <li><a href="#problems">Known problems</a>
+  <li><a href="#other">Other features</a>
+</ul>
+
+<hr>
+<a name="history"></a>
+<h3><font color="#0000e0"><strong>History:</strong></font></h3>
+
+<p>
+The OpenBSD/macppc port started as OpenBSD/powerpc, and was initially
+focused on Motorola computers with Open Firmware, and VI Power4e boards.
+This port was eventually thrown away after OpenBSD 2.5 was released.
+As a result there was no OpenBSD/powerpc port for the 2.6 and 2.7 releases.
+In the meantime, a new port was started, focusing on Apple hardware, and
+based on code from NetBSD/macppc, and after a lot of work from Dale Rahn,
+OpenBSD 2.8 was released with a powerpc port.
+As work on the port continued, it was renamed to OpenBSD/macppc for 3.0.
+Support for the 64-bit G5 (running in 32-bit mode) was added in OpenBSD 3.9.
+
+<hr>
+<a name="status"></a>
+<h3><font color="#0000e0"><strong>Current status:</strong></font></h3>
+
+<p>
+Currently, all the hardware listed in the
+<a href="#hardware">supported hardware</a> section below boots
+multi-user, supports most, if not all, of the on-board devices, and is
+generally usable.
+<p>
+After the 4.0 release basic support for <i>"Old World"</i> machines was
+committed.  Most machines are able to netboot and completing bootloader
+support is in progress.  SMP support is under active development.
+<a name="X11"></a>
+<p>
+The X Window System is supported on all MacPPC systems.
+Most ATI graphics adapters and some NVIDIA graphics adapters are
+supported by <i>accelerated</i> X servers.
+The graphics adapters not supported by an accelerated driver can be
+used by X in frame buffer (unaccelerated) mode, at the boot resolution
+and color depth using the wsfb driver (installed by default).
+
+<p>
+Directions on enabling the accelerated X server can be found
+in the <tt>/usr/X11R6/README</tt> file on the installed system.
+
+<hr>
+<a name="projects"></a>
+<h3><font color="#0000e0"><strong>Projects (in no particular order):
+</strong></font></h3>
+
+<ul>
+  <li>SMP
+  <li>Work on unsupported on-board devices
+  <li>Fix known problems
+  <li>Improve port-specific documentation
+  <li>Test more platforms and peripherals, especially PCI drivers
+  <li>Better <i>"Old World"</i> Macintosh support.
+</ul>
+
+<hr>
+<a name="hardware"></a>
+<h3><font color="#0000e0"><strong>Supported hardware:</strong></font></h3>
+
+<p>
+
+<h4>Supported models</h4>
+
+<p>
+PowerPC-based Macintosh systems are divided into <i>"Old World"</i> and
+<i>"New World"</i> systems, the difference being
+<a href="http://developer.apple.com/technotes/tn/tn1167.html">the design
+of the system ROM</a>.
+Only <i>"New World"</i> machines are currently supported. 
+Known compatible systems include the following:
+
+<ul>
+<li>iMac (Revision A, B, C, D (iMac,1))
+<li>iMac (Late 1999 (PowerMac2,1))
+<li>iMac (Summer 2000 (PowerMac2,2))
+<li>iMac (Early 2001, Summer 2001) (PowerMac4,1))
+<li>iMac (Flat-Panel (PowerMac4,2))
+<li>iMac (17" Flat-Panel, 17" 1GHz (PowerMac4,5))
+<li>iMac (USB 2.0 (PowerMac6,1))
+<li>iMac (20" Flat-Panel (PowerMac6,3))
+<li>iMac G5 (PowerMac8,1) <b>WARNING:</b> This model may overheat with OpenBSD 4.0.  This is fixed in OpenBSD 4.1.
+<li>iMac G5 (Ambient Light Sensor (PowerMac8,2))
+</ul>
+<ul>
+<li>eMac (ATI Graphics, 1GHz G4 (PowerMac4,4))
+<li>eMac (USB 2.0 (PowerMac6,4))
+</ul>
+<ul>
+<li>Mac mini (PowerMac10,1)
+<li>Mac mini (Late 2005 (PowerMac10,2))
+</ul>
+<ul>
+<li>Power Macintosh G3 (Blue &amp; White (PowerMac1,1))
+<li>Power Macintosh G4 (PCI Graphics (PowerMac1,2))
+<li>Power Macintosh G4 (AGP Graphics (PowerMac3,1, PowerMac3,2 and PowerMac3,3))
+<li>Power Macintosh G4 (Gigabit Ethernet (PowerMac3,3))
+<li>Power Macintosh G4 (Digital Audio (PowerMac3,4))
+<li>Power Macintosh G4 (QuickSilver, QuickSilver 2002 (PowerMac3,5))
+<li>Power Macintosh G4 (Mirrored Drive Doors, FW 800, Mirrored Drive Doors 2003 (PowerMac3,6))
+<li>Power Macintosh G4 (Cube (PowerMac5,1))
+<li>Power Macintosh G5 (Early 2005, dual 2.0 + 2.3 GHz (PowerMac7,2))
+<li>Power Macintosh G5 (June 2004, Early 2005, dual 2.7 GHz (PowerMac7,3))
+<li>Power Macintosh G5 (Late 2004 (PowerMac9,1))
+</ul>
+<ul>
+<li>iBook (PowerBook2,1)
+<li>iBook (FireWire (PowerBook2,2))
+<li>iBook (Dual USB, Late 2001 (PowerBook4,1))
+<li>iBook (16 VRAM (PowerBook4,2))
+<li>iBook (Opaque 16 VRAM, 32 VRAM, Early 2003 (PowerBook4,3))
+<li>iBook G4 (PowerBook6,3)
+<li>iBook G4 (Early 2004, Late 2004 (PowerBook6,5))
+<li>iBook G4 (Mid 2005 (PowerBook6,7))
+</ul>
+<ul>
+<li>PowerBook G3 (12", 13", 14" Rev. A and Rev. B, Bronze Keyboard (PowerBook1,1))
+<li>PowerBook G3 (FireWire (PowerBook3,1))
+<li>PowerBook G4 (PowerBook3,2)
+<li>PowerBook G4 (Gigabit Ethernet (PowerBook3,3))
+<li>PowerBook G4 (DVI (PowerBook3,4))
+<li>PowerBook G4 (867 MHz, 1 GHz (PowerBook3,5))
+<li>PowerBook G4 (17" (PowerBook5,1))
+<li>PowerBook G4 (15" FW 800 (PowerBook5,2))
+<li>PowerBook G4 (17" 1.33 GHz (PowerBook5,3))
+<li>PowerBook G4 (15" 1.33/1.5 GHz (PowerBook5,4))
+<li>PowerBook G4 (17" 1.5 GHz (PowerBook5,5))
+<li>PowerBook G4 (15" 1.5/1.67 GHz (PowerBook5,6))
+<li>PowerBook G4 (17" 1.67 GHz (PowerBook5,7))
+<li>PowerBook G4 (15" Double-Layer SD (PowerBook5,8))
+<li>PowerBook G4 (17" Double-Layer SD (PowerBook5,9))
+<li>PowerBook G4 (12" (PowerBook6,1))
+<li>PowerBook G4 (12" DVI (PowerBook6,2))
+<li>PowerBook G4 (12" 1.33 GHz (PowerBook6,4))
+<li>PowerBook G4 (12" 1.5 GHz (PowerBook6,8))
+</ul>
+<ul>
+<li>Xserve G4 (Dual (RackMac1,1)) <i>(currently only running on serial console with video card removed)</i>
+<li>Xserve G5 (Dual (RackMac3,1))
+</ul>
+
+<p>
+To help us improve the accuracy of this list, <b>PLEASE</b> 
+<a href="faq/faq4.html#SendDmesg">send your dmesg</a> after installation
+to <a href="mailto:dmesg@openbsd.org">dmesg@openbsd.org</a>.
+
+<h4>Supported peripherals</h4>
+
+<ul>
+<li><strong>Onboard I/O modules</strong>
+(<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=macobio&amp;arch=macppc&amp;sektion=4">macobio</a>)
+<ul>
+<li>Apple GC
+<li>Apple Heathrow
+<li>Apple Intrepid
+<li>Apple K2
+<li>Apple Keylargo
+<li>Apple OHare
+<li>Apple Paddington
+<li>Apple Pangea
+<li>Apple Shasta
+</ul>
+
+<li><strong>PCI-Bridges</strong> 
+(<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=pchb&amp;arch=macppc&amp;sektion=4">pchb</a>)
+<ul>
+<li>Apple Bandit
+<li>Apple Intrepid 2 AGP
+<li>Apple Intrepid 2 PCI
+<li>Apple K2
+<li>Apple K2 AGP
+<li>Apple Pangea
+<li>Apple Pangea AGP
+<li>Apple Pangea PCI
+<li>Apple Shasta HyperTransport
+<li>Apple Uni-North
+<li>Apple Uni-North AGP
+<li>Apple Uni-North Eth
+<li>Apple Uni-North 2 AGP
+<li>Apple Uni-North 2 Eth
+<li>Motorola MPC106 Host-PCI
+</ul>
+
+<li><strong>Video Cards</strong>
+<ul>
+<li>ATI Mach64 GP
+<li>ATI Mach64 GV
+<li>ATI Mach64 128 PK
+<li>ATI Mach64 128 VR AGP
+<li>ATI Rage 128 Mobility M3
+<li>ATI Rage Fury AGP4x
+<li>ATI Radeon Mobility M7
+<li>ATI Radeon Mobility 9200 (M9+)
+<li>NVIDIA GeForce4 440 Go 64M
+</ul>
+
+<li><strong>Ethernet Adapters</strong>
+<ul>
+<li>ADMtek AN986-based USB adapters (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=aue&amp;arch=macppc&amp;sektion=4">aue</a>)
+
+<li>Alteon Tigon I/II-based adapters (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ti&amp;arch=macppc&amp;sektion=4">ti</a>)
+
+<li>Apple iMac Rev. A-C Ethernet (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=bm&amp;arch=macppc&amp;sektion=4">bm</a>)
+
+<li>Apple MACE Ethernet (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=mc&amp;arch=macppc&amp;sektion=4">mc</a>)
+
+<li>Apple GMAC (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=gem&amp;arch=macppc&amp;sektion=4">gem</a>)
+
+<li>ASIX Electronics AX88172 based USB adapters (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=axe&amp;arch=macppc&amp;sektion=4">axe</a>)
+
+<li>Broadcom BCM57xx/BCM590x (a.k.a. Tigon3) based PCI adapters (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=bge&amp;arch=macppc&amp;sektion=4">bge</a>)
+
+<li>Sundance/Tamarack TC9021 based PCI adapters (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=stge&amp;arch=macppc&amp;sektion=4">stge</a>)
+
+<li>CATC USB-EL1210A-based USB adapters (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=cue&amp;arch=macppc&amp;sektion=4">cue</a>)
+
+<li>Davicom DM9601 USB Ethernet adapters (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=udav&amp;arch=macppc&amp;sektion=4">udav</a>)
+
+<li>DEC DECchip 21040 (Tulip) (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=de&amp;arch=macppc&amp;sektion=4">de</a>)
+<li>DEC DECchip 21143 (Tulip clones) (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=dc&amp;arch=macppc&amp;sektion=4">dc</a>)
+<li>Intel i8255x-based (except the i82556) PCI adapters (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=fxp&amp;arch=macppc&amp;sektion=4">fxp</a>)
+<li>Intel 21145-based PCI adapters (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=dc&amp;arch=macppc&amp;sektion=4">dc</a>)
+
+<li>Intel i82540, i82541, i82542, i82543, i82544, i82545, is82546, i82547, i82571, i82572 and i82573
+based adapters
+(<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=em&amp;arch=macppc&amp;sektion=4">em</a>)
+
+<li>Kawasaki LSI KL5KUSB101B-based USB adapters (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=kue&amp;arch=macppc&amp;sektion=4">kue</a>)
+
+<li>RealTek 8129/8139-based adapters (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=rl&amp;arch=macppc&amp;sektion=4">rl</a>)
+
+<li>Realtek RTL8150L based USB adapters (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=url&amp;arch=macppc&amp;sektion=4">url</a>)
+
+<li>Realtek 8169/8169S/8110S based PCI adapters (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=re&amp;arch=macppc&amp;sektion=4">re</a>)
+
+<li>SMC 83C170 ("EtherPower II") (EPIC/100) (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=epic&amp;arch=macppc&amp;sektion=4">epic</a>)
+
+<li>VIA Networking VT6122 based PCI adapters (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=vge&amp;arch=macppc&amp;sektion=4">vge</a>)
+
+<li>VIA Rhine/RhineII/RhineIII Ethernet adapters (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=vr&amp;arch=macppc&amp;sektion=4">vr</a>)
+
+<li>3Com 3c9xx EtherLink XL adapters (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=xl&amp;arch=macppc&amp;sektion=4">xl</a>)
+
+<li>AMD PCnet-based PCI adapters (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=pcn&amp;arch=macppc&amp;sektion=4">pcn</a>)
+</ul>
+ 
+<li><strong>Wireless Ethernet Adapters</strong>
+<ul>
+<li>ADMtek ADM8211 IEEE 802.11b PCI/CardBus adapters (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=atw&amp;arch=macppc&amp;sektion=4">atw</a>)
+<li>Aironet Communications 4500/4800 IEEE 802.11FH/b PCI and PCMCIA adapters (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=an&amp;arch=macppc&amp;sektion=4">an</a>)
+<li>Atmel AT76C50x IEEE 802.11b USB adapters (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=atu&amp;arch=macppc&amp;sektion=4">atu</a>)
+<li> Broadcom AirForce IEEE 802.11b/g PCI/CardBus adapters (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=bwi&amp;arch=macppc&amp;sektion=4">bwi</a>), including:
+    <ul>
+    <li>Apple Airport Extreme BCM4306
+    <li>Apple Airport Extreme BCM4318
+    </ul>
+<li>Marvell Libertas IEEE 802.11b/g PCMCIA/PCI/CardBus adapters (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=malo&amp;arch=macppc&amp;sektion=4">malo</a>)
+<li>Ralink Technology IEEE 802.11a/g/n PCI/CardBus adapters (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ral&amp;arch=macppc&amp;sektion=4">ral</a>)
+<li>Ralink Technology IEEE 802.11b/g USB adapters (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ural&amp;arch=macppc&amp;sektion=4">ural</a>)
+<li>Ralink Technology IEEE 802.11a/b/g USB adapters (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=rum&amp;arch=macppc&amp;sektion=4">rum</a>)
+<li>Ralink Technology IEEE 802.11a/g/n USB adapters (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=run&amp;arch=macppc&amp;sektion=4">run</a>) <sup>(A)</sup>
+<li>Realtek RTL8180L IEEE 802.11b PCI/CardBus adapters (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=rtw&amp;arch=macppc&amp;sektion=4">rtw</a>)
+<li>TI ACX100/ACX111 IEEE 802.11a/b/g PCI/CardBus adapters (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=acx&amp;arch=macppc&amp;sektion=4">acx</a>)
+<li>WaveLAN/IEEE, PRISM 2-3, and Spectrum24 IEEE 802.11b PCMCIA/PCI/USB adapters (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=wi&amp;arch=macppc&amp;sektion=4">wi</a>), including:
+    <ul>
+    <li>Apple Airport (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=macobio&amp;arch=macppc&amp;sektion=4">macobio</a>)
+    </ul>
+</ul>
+
+<li><strong>WAN Adapters</strong>
+<ul>
+<li>Accoom Networks Artery T1/E1 WAN interfaces (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=art&amp;arch=macppc&amp;sektion=4">art</a>)
+<li>SBE (formerly Lan Media Corporation) SSI (T1)/HSSI/DS1/DS3 WAN interfaces (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=lmc&amp;arch=macppc&amp;sektion=4">lmc</a>)
+</ul>
+
+<li><strong>SCSI and IDE Host Adapters</strong>
+<ul>
+  <li><i>"Old World"</i> Macintosh on-board SCSI(<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=mesh&amp;arch=macppc&amp;sektion=4">mesh</a>)
+  <li> Adaptec AIC-7770, AIC-7850, AIC-7860, AIC-7870, AIC-7880, AIC-7890,
+    AIC-7891, AIC-7892, AIC-7895, AIC-7896, AIC-7897 and AIC-7899 based host
+    adapters
+    (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ahc&amp;sektion=4"
+    >ahc</a>)
+<li>Symbios Logic 53c810, 53c825 (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=siop&amp;arch=macppc&amp;sektion=4">siop</a>)
+<li>AMD Am53c974 PCscsi-PCI host adapters including the Tekram DC-390
+(<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=pcscp&amp;arch=macppc&amp;sektion=4">pcscp</a>)
+<li>QLogic PCI SCSI controllers (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=isp&amp;arch=macppc&amp;sektion=4">isp</a>)
+<li>LSI Logic Fusion-MPT (Symbios Logic/NCR)
+  (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=mpi&amp;arch=macppc&amp;sektion=4"
+  >mpi</a>)
+  <ul>
+    <li>LSI53C1020, LSI53C1020A, LSI53C1030, LSI53C1030T, LSI53C1035,
+    <li>LSIFC909, LSIFC919, LSIFC919X, LSIFC929, LSIFC929X, LSIFC949, LSIFC949X,
+    <li>LSISAS1064, LSISAS1064E, LSISAS1068, LSISAS1068E
+  </ul>
+<li>All PCI IDE 
+(<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=pciide&amp;arch=macppc&amp;sektion=4">pciide</a>) 
+adapters supported by the <a href="i386.html">i386</a> platform
+</ul>
+
+<li><strong>RAID Controllers</strong>
+<ul>
+<li>Adaptec SCSI RAID (<a href="http://www.intelligent-io.com/">I2O</a>) controllers (ASR-2100S, ASR-3200S, etc.) (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=iop&amp;arch=macppc&amp;sektion=4">iop</a>)
+<li>Areca Technology Corporation PCI-X and PCI Express Sata RAID controllers
+  (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=arc&amp;arch=macppc&amp;sektion=4">arc</a>)
+</ul>
+
+<li><strong>Drives</strong>
+<ul>
+<li>All IDE devices supported on the <a href="i386.html">i386</a>.
+<li>All ATAPI drives supported on the <a href="i386.html">i386</a>.
+<li>All SCSI drives supported on the <a href="i386.html">i386</a>.
+</ul>
+
+<li><strong>USB Controllers/Hubs</strong>
+<ul>
+<li>Apple USB (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ohci&amp;arch=macppc&amp;sektion=4">ohci</a>)
+<li>Apple Intrepid USB (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ohci&amp;arch=macppc&amp;sektion=4">ohci</a>)
+<li>Apple Pangea USB (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ohci&amp;arch=macppc&amp;sektion=4">ohci</a>)
+<li>NEC USB (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ohci&amp;arch=macppc&amp;sektion=4">ohci</a>)
+<li>OHCI root hub (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ohci&amp;arch=macppc&amp;sektion=4">ohci</a>)
+<li>Opti RM861HA (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ohci&amp;arch=macppc&amp;sektion=4">ohci</a>)
+<li>Alps Electric Hub in Apple USB Keyboard
+</ul>
+ 
+<li><strong>USB Devices</strong>
+<ul>
+<li>Alps Electric Apple USB Keyboard (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ukbd&amp;arch=macppc&amp;sektion=4">ukbd</a>)
+<li>Apple touchpad mouse (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=tpms&amp;arch=macppc&amp;sektion=4">tpms</a>)
+<li>Gude ADS Expert mouseCLOCK USB and Expert mouseCLOCK USB II DCF77 and HBG radio clocks (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=udcf&amp;arch=macppc&amp;sektion=4">udcf</a>)
+<li>Solid Year Keyboard and Mouse (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ukbd&amp;arch=macppc&amp;sektion=4">ukbd</a>) (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ums&amp;arch=macppc&amp;sektion=4">ums</a>)
+<li>Logitech M4848 (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ums&amp;arch=macppc&amp;sektion=4">ums</a>)
+<li>Kensington USB/PS2 Wheel Mouse (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ums&amp;arch=macppc&amp;sektion=4">ums</a>)
+<li>USB Zip Drives (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=umass&amp;arch=macppc&amp;sektion=4">umass</a>)
+</ul> 
+
+<li><strong>CardBus/PCMCIA bridges</strong>
+<ul>
+<li>PBG4 onboard CardBus bridge is now supported, as are PCI CardBus bridges. 
+(<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=cbb&amp;sektion=4">cbb</a>)
+</ul>
+
+<li><strong>PC Cards (PCMCIA / Cardbus)</strong>
+<ul>
+<li>Serial ports (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=com&amp;sektion=4">com</a>)
+<li>Wireless Ethernet adapters:
+    <ul>
+    <li>See above.
+    </ul>
+</ul>
+
+<li><strong>Cryptography Accelerators</strong>
+<ul>
+<li>Broadcom uBsec BCM5801, BCM5802, BCM5805, BCM5820, BCM5821, BCM5822, BCM5823 (and the legacy Bluesteelnet 5501 and 5601 parts) (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ubsec&amp;arch=macppc&amp;sektion=4">ubsec</a>)
+<li>Hifn 6500-based boards (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=lofn&amp;arch=macppc&amp;sektion=4">lofn</a>)
+<li>Hifn 7751/7811/7951/7955/7956-based boards (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=hifn&amp;arch=macppc&amp;sektion=4">hifn</a>)
+<li>SafeNet SafeXcel 1141/1741 (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=safe&amp;arch=macppc&amp;sektion=4">safe</a>)
+</ul>
+
+<li><strong>Audio Devices</strong>
+<ul>
+<li>Apple Aoa audio (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=aoa&amp;arch=macppc&amp;sektion=4&">aoa</a>)
+<li>Apple Awacs audio (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=awacs&amp;arch=macppc&amp;sektion=4&">awacs</a>)
+<li>Apple Daca audio (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=daca&amp;arch=macppc&amp;sektion=4&">daca</a>)
+<li>Apple Onyx audio (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=onyx&amp;arch=macppc&amp;sektion=4&">onyx</a>)
+<li>Apple Snapper audio (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=snapper&amp;arch=macppc&amp;sektion=4&">snapper</a>)
+<li>Apple Tumbler audio (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=tumbler&amp;arch=macppc&amp;sektion=4&">tumbler</a>)
+<li>Ensoniq AudioPCI (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=eap&amp;arch=macppc&amp;sektion=4">eap</a>)
+<li>SoundBlaster PCI128 (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=eap&amp;arch=macppc&amp;sektion=4">eap</a>)
+<li>SoundBlaster Live! and PCI512 (EMU10k1) (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=emu&amp;arch=macppc&amp;sektion=4">emu</a>)
+<li>USB audio (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=uaudio&amp;arch=macppc&amp;sektion=4">uaudio</a>)
+</ul>
+
+<li><strong>Radio Receiver Devices</strong> (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=radio&amp;arch=macppc&amp;sektion=9">radio</a>)
+<ul>
+<li>Brooktree 848/849/878/879-based TV tuner cards (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=bktr&amp;arch=macppc&amp;sektion=4">bktr</a>)
+</ul>
+
+<li><strong>Other Devices</strong>
+<ul>
+<li>Serial Ports: While the modern PowerMacintosh series has no external 
+  standard serial ports, many have an on-board modem which can be 
+  removed and replaced with an adapter (several manufacturers of these exist)
+  which will produce a standard (and supported) serial port.
+<li>Backlight on lcd devices can be controlled through the brightness control
+keys on ADB (laptop) keyboards, or through'wsconsctl -w display.brightness=xx'
+(0 - 100) and 'wsconsctl -w display.backlight=xx' (0 or 100)
+<li>Hardware watchdog timer support:
+    <ul>
+    <li>Quancom PWDOG1 watchdog timer (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=pwdog&amp;arch=macppc&amp;sektion=4">pwdog</a>)
+    </ul>
+<li>Hardware monitoring sensors, including:
+    <ul>
+    <li>Analog Devices AD7416, AD7417 and AD7418 (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=adc&amp;arch=macppc&amp;sektion=4">adc</a>)
+    <li>Analog Devices ADM1030 (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=admtmp&amp;arch=macppc&amp;sektion=4">admtmp</a>)
+    <li>Analog Devices ADT7460 (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=adt&amp;arch=macppc&amp;sektion=4">adt</a>)
+    <li>Apple Fan Control Unit (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=fcu&amp;arch=macppc&amp;sektion=4">fcu</a>)
+    <li>Apple Sudden Motion Sensor (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=asms&amp;arch=macppc&amp;sektion=4">asms</a>)
+    <li>National Semiconductor LM75, LM77 (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=lmtemp&amp;arch=macppc&amp;sektion=4">lmtemp</a>)
+    <li>National Semiconductor LM87 (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=lmenv&amp;arch=macppc&amp;sektion=4">lmenv</a>)
+    <li>Maxim DS1624/DS1631/DS1721 (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=maxds&amp;arch=macppc&amp;sektion=4">maxds</a>)
+    <li>Maxim MAX6642/MAX6690 (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=maxtmp&amp;arch=macppc&amp;sektion=4">maxtmp</a>)
+    <li>TAOS TSL2560/61 light sensor (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=tsl&amp;arch=macppc&amp;sektion=4">tsl</a>)
+    </ul>
+<li>Meinberg Funkuhren radio clocks, including:
+    <ul>
+    <li>GPS170PCI 3.3V/5V 6-channel GPS receiver card (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=mbg&amp;arch=macppc&amp;sektion=4">mbg</a>)
+    <li>PCI32 5V DCF77 time signal station receiver card (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=mbg&amp;arch=macppc&amp;sektion=4">mbg</a>)
+    <li>PCI509 5V DCF77 time signal station receiver card (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=mbg&amp;arch=macppc&amp;sektion=4">mbg</a>)
+    <li>PCI511 3.3V/5V DCF77 time signal station receiver card (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=mbg&amp;arch=macppc&amp;sektion=4">mbg</a>)
+    <li>USB5131 USB attached DCF77 time signal station receiver (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=umbg&amp;arch=macppc&amp;sektion=4">umbg</a>)
+    </ul>
+<li>UVC-compatible Video devices (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=uvideo&amp;arch=macppc&amp;sektion=4">uvideo</a>)
+</ul>
+</ul>
+
+<a name="unsup"></a>
+<h4>Unsupported Hardware</h4>
+
+<ul>
+<li>Any older Mac with a 4-digit part number (6100, 7300, 7500,
+  8500, 9500).
+<li>Older Apple PowerMac systems with a 601 processor or lacking
+  Open Firmware are not supported. 
+<li>Older Open Firmware machines are not currently supported.
+  This is mostly due to lack of developer resources and limited 
+  availability of hardware.
+<li>Built-in modems on most machines are not supported.  In many systems,
+  the serial port the modem is attached to is supported, but the modem 
+  itself is not supported. 
+<li>Newer PowerBooks have an internal modem attached as a USB device, these
+  are not supported.
+<li>Sleep/Suspend on laptops is not supported.
+<li>Bluetooth is not supported.
+<li>Multi-speed laptops are not adjustable.
+<li>Firewire is not supported.
+<li>Power Macintosh G5 (October 2005, dual core (PowerMac 11,2)) is not supported yet.
+<li>iMac G5 (iSight (PowerMac12,1)) is not supported yet.
+<li>SATA does not work on PowerMac G5 and Xserve G5 systems.
+</ul>
+
+<hr>
+<a name="install"></a>
+<h3><font color="#0000e0">
+<strong>Getting and installing OpenBSD/macppc:</strong>
+</font></h3>
+
+<p>
+The latest supported OpenBSD/macppc release is
+<a href="46.html">OpenBSD 4.6</a>.
+Here are the
+<a href="ftp://ftp.OpenBSD.org/pub/OpenBSD/4.6/macppc/INSTALL.macppc">
+OpenBSD/macppc 4.6 installation instructions
+</a>.
+
+<p>
+Snapshots are made available from time to time, in
+<a href="ftp://ftp.OpenBSD.org/pub/OpenBSD/snapshots/macppc">this location</a>
+as well as in a few
+<a href="ftp.html">mirrors</a>.
+Here are the
+<a href="ftp://ftp.OpenBSD.org/pub/OpenBSD/snapshots/macppc/INSTALL.macppc">
+OpenBSD/macppc snapshot installation instructions
+</a> as well.
+
+<p>
+There are several installation media provided:
+
+<ul>
+  <li><strong>CD boot</strong>
+  <p>
+  With the OpenBSD CD inserted in the cdrom drive, powering the machine on
+  while leaving the ``C'' key pressed will bootstrap the installation
+  procedure.
+  Alternatively, the CD can be booted at the Open Firmware prompt, with
+<pre>
+  boot cd:,ofwboot 4.6/macppc/bsd.rd
+</pre>
+  <li><strong>Mac OS based boot</strong>
+  <p>
+  If the system disk is shared with Mac OS, the <tt>ofwboot</tt> boot loader
+  and the <tt>bsd.rd</tt> installation media can be copied to the first HFS
+  or HFS+ partition.
+  Then the installation procedure can be booted at the Open Firmware prompt,
+  with
+<pre>
+  boot hd:,ofwboot bsd.rd
+</pre>
+</ul>
+
+<a name="multiboot"></a>
+<h3><font color="#0000e0">Multiboot/Shared HFS disks:</font></h3>
+<p>
+Having OpenBSD multiboot, or share, a disk with Mac OS X/Mac OS 9 
+is possible as long as the disk is first partitioned with the 
+Mac OS utility, <i>Drive Setup</i> (Mac OS 9) or <i>System Disk 
+Utility</i> (Mac OS X).
+Unallocated space, or a partition not in use, must be left for OpenBSD's use. 
+Since OpenBSD is only able to boot from an HFS (not Mac OS X UFS) filesystem,
+the first partition must be formatted as HFS or HFS+, not UFS, to be able to
+boot OpenBSD.
+
+<p>
+Please refer to the installation instructions for more details on how to
+install a shared disk.
+Standalone (no Mac OS present) installation is also supported.
+
+<a name="root"></a>
+<h3><font color="#0000e0">Boot device considerations:</font></h3>
+<p>
+Modern MacPPC systems have two IDE interfaces (called Ultra and IDE), each of 
+which can have two devices on them (ultra0, ultra1, ide0, ide1).
+When multiple drives are present in the system, there are limitations
+of which drives can be configured as the OpenBSD root drive. 
+Invalid configurations will not be able to properly
+detect which drive is the root drive, so any attempt will either
+prompt for a root drive or fail.
+
+<ul>
+<li><tt>ultra0</tt> is always a valid root drive.
+<li><tt>ultra1</tt> is valid as a root disk, as long as <tt>ultra0</tt> 
+  is a hard drive, not a non-hard disk ATAPI device).
+<li><tt>ide1</tt> (Zip drive bay) is valid as a root disk if no hard drive is 
+  located at <tt>ultra1</tt>, 
+<li><tt>ide0</tt> (cdrom) is valid as a root drive <b>only</b> if no hard
+  drives are connected to the Ultra bus.
+</ul>
+
+<hr>
+<a name="problems"></a>
+<h3><font color="#0000e0">Known Problems</font></h3>
+
+<ul>
+<li>Laptop systems may power off within 2-5 minutes if the lid is closed 
+  while running from battery.
+<li>Older iMacs can have a problem with the USB keyboard driver where 
+  the first key pressed after boot will repeat endlessly.  The workaround 
+  is to press &lt;SHIFT&gt; first or to disconnect and reconnect the USB mouse 
+  after the problem has occurred.
+</ul>
+
+<hr>
+<a name="other"></a>
+<h3><font color="#0000e0">Other Features</font></h3>
+
+<ul>
+<li> &lt;CTRL&gt;&lt;CMD&gt;&lt;POWER&gt; on ADB (not USB) keyboards 
+will reset the computer.
+</ul>
+
+<hr>
+<a href="plat.html">
+<img height="24" width="24" src="back.gif" border="0" alt="Supported platforms">
+</a> 
+<br>
+<small><a href="mailto:www@openbsd.org">www@openbsd.org</a></small>
+<br>
+<small>$OpenBSD: macppc.html,v 1.213 2009/10/27 08:11:24 jmc Exp $</small>
+
+</body>
+</html>

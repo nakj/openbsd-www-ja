@@ -1,0 +1,476 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>PF: Voorbeeld: Firewall voor Thuis of Klein Kantoor</title>
+<link rev="made" href="mailto:www@openbsd.org">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="resource-type" content="document">
+<meta name="description"   content="the OpenBSD FAQ page">
+<meta name="keywords"      content="openbsd,faq,pf">
+<meta name="distribution"  content="global">
+</head>
+
+<!--
+Copyright (c) 2003, 2004 Joel Knight <enabled@myrealbox.com>
+
+Permission to use, copy, modify, and distribute this documentation for
+any purpose with or without fee is hereby granted, provided that the
+above copyright notice and this permission notice appear in all copies.
+
+THE DOCUMENTATION IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL
+WARRANTIES WITH REGARD TO THIS DOCUMENTATION INCLUDING ALL IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE
+AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL
+DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR
+PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
+TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS DOCUMENTATION
+-->
+
+<body bgcolor="#ffffff" text="#000000">
+<!-- Passes validator.w3.org, please keep it this way;
+please, use a max of 72 chars per line -->
+
+<a href="../../../nl/index.html">
+<img alt="[OpenBSD]" height=30 width=141 src="../../../images/smalltitle.gif" border="0">
+</a>
+<p>
+[<a href="carp.html">Vorige: Firewall Redundantie met CARP en pfsync</a>]
+[<a href="index.html">Inhoud</a>]
+
+<p>
+<h1><font color="#e00000">PF: Voorbeeld: Firewall voor Thuis of Klein
+Kantoor</font></h1>
+<hr>
+
+<h3>Inhoudsopgave</h3>
+<ul>
+<li><a href="#scenario">Het Scenario</a>
+	<ul>
+	<li><a href="#network">Het Netwerk</a>
+	<li><a href="#objective">De Doelstelling</a>
+	<li><a href="#prep">Voorbereiding</a>
+	</ul>
+<li><a href="#ruleset">De Regelset</a>
+	<ul>
+	<li><a href="#macros">Macro's</a>
+	<li><a href="#options">Opties</a>
+	<li><a href="#scrub">Scrub</a>
+	<li><a href="#nat">Network Address Translation</a>
+	<li><a href="#rdr">Omleiding ("redirection")</a>
+	<li><a href="#filter">Filterregels</a>
+	</ul>
+<li><a href="#allrules">De Volledige Regelset</a>
+</ul>
+
+<hr>
+
+<a name="scenario"></a>
+<h2>Het Scenario</h2>
+In dit voorbeeld draait PF op een OpenBSD machine die fungeert als
+firewall en NAT gateway voor een klein netwerk in een huis of kantoor. De
+globale doelstelling is om Internettoegang aan te bieden aan het netwerk
+en beperkte toegang tot de firewall machine vanaf het Internet, en een
+interne webserver aan het externe Internet bloot te stellen. Dit
+document zal een volledige regelset overlopen die precies dat doet.
+
+<a name="network"></a>
+<h3>Het Netwerk</h3>
+Het netwerk is als volgt opgebouwd:
+
+<pre>
+    
+  [ COMP1 ]    [ COMP3 ]
+      |            |
+   ---+------+-----+------- xl0 [ OpenBSD ] fxp0 -------- ( Internet )
+             |
+         [ COMP2 ]
+
+</pre>
+
+<p>
+Er zijn een aantal computers in het interne netwerk; het diagramma toont
+er drie maar het werkelijke aantal is irrelevant. Deze computers zijn
+gewone werkstations die gebruikt worden voor web surfen, e-mail,
+chatten, enz., behalve COMP3 die ook een kleine webserver draait.
+Het interne netwerk gebruikt het 192.168.0.0 / 255.255.255.0 netwerkblok.
+
+<p>
+De OpenBSD firewall is een Celeron 300 met twee netwerkkaarten: een 3com
+3c509B (<tt>xl0</tt>) en een Intel EtherExpress Pro/100 (<tt>fxp0</tt>).
+De firewall heeft een kabelverbinding naar het Internet en gebruikt NAT om
+deze verbinding te delen met het interne netwerk. Het IP adres op de externe
+interface wordt dynamisch toegekend door de Internet Service Provider.
+
+<a name="objective"></a>
+<h3>De Doelstelling</h3>
+De doelstellingen zijn:
+<ul>
+<li>Bied onbeperkte Internet toegang aan elke interne computer.
+<li>Gebruik een "standaard weigeren" filterregelset.
+<li>Laat het volgende binnenkomende verkeer toe naar de firewall vanaf het
+Internet:
+	<ul>
+	<li>SSH (TCP poort 22): dit zal gebruikt worden voor extern onderhoud
+	van de firewall machine.
+	<li>Auth/Ident (TCP poort 113): gebruikt door bepaalde diensten zoals
+	SMTP en IRC.
+	<li>ICMP Echo Requests: het ICMP pakket-type gebruikt door
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ping&amp;sektion=8"
+>ping(8)</a>.
+	</ul>
+<li>Leid TCP poort 80 verbindingspogingen (die pogingen zijn om een webserver
+te benaderen) om naar computer COMP3.
+Laat ook TCP poort 80 verkeer dat bestemd is voor COMP3, toe doorheen de
+firewall.
+<li>Log filterstatistieken op de externe interface.
+<li>Antwoord standaard met een TCP RST of ICMP Unreachable voor geblokkeerde
+pakketten.
+<li>Maak de regelset zo eenvoudig en gemakkelijk mogelijk om te onderhouden.
+</ul>
+
+<a name="prep"></a>
+<h3>Voorbereiding</h3>
+Dit document veronderstelt dat de OpenBSD host netjes geconfigureerd is om
+als router te fungeren, inclusief het verifiëren van de IP netwerksetup,
+Internet-connectiviteit, en het instellen van de
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=sysctl&amp;sektion=3"
+>sysctl(3)</a> variabelen <tt>net.inet.ip.forwarding</tt> en/of
+<tt>net.inet6.ip6.forwarding</tt> op "<tt>1</tt>".
+U moet ook PF ingeschakeld hebben met
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=pfctl&amp;sektion=8&amp;manpath=OpenBSD+4.6"
+>pfctl(8)</a> of door de overeenkomstige variabele in te stellen in
+<tt>/etc/rc.conf.local</tt>.
+PF staat standaard aan bij OpenBSD 4.6 en nieuwere versies.
+
+<a name="ruleset"></a>
+<h2>De Regelset</h2>
+Het volgende zal doorheen een regelset stappen die de bovenstaande
+doelstellingen vervult.
+
+<a name="macros"></a>
+<h3>Macro's</h3>
+De volgende macro's worden gedefinieerd om onderhoud en het lezen van
+de regelset gemakkelijker te maken:
+<blockquote>
+<tt>
+ext_if="fxp0"<br>
+int_if="xl0"<br>
+<br>
+tcp_services="{ 22, 113 }"<br>
+icmp_types="echoreq"<br>
+<br>
+comp3="192.168.0.3"
+</tt>
+</blockquote>
+
+<p>
+De eerste twee lijnen definiëren de netwerkinterfaces waarop filtering zal
+gebeuren.
+Door ze hier te definiëren, kunnen we als we dit systeem moeten verplaatsen
+naar een systeem met andere hardware, alleen die twee lijnen veranderen,
+en zal de rest van de regelset nog steeds bruikbaar zijn.
+De derde en vierde lijnen sommen de TCP poortnummers op van de
+diensten die geopend zullen worden voor het Internet (SSH en ident/auth) en
+de ICMP pakket-types die zullen doorgelaten worden op de firewall machine.
+Tenslotte definieert de laatste lijn het IP adres van COMP3.
+
+<p>
+<b>Opmerking</b>: Als de Internetverbinding
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=pppoe&amp;sektion=8"
+>PPPoE</a> vereiste, dan zou filtering en NAT moeten plaatsvinden op de
+<tt>tun0</tt> interface en <i>niet</i> op <tt>fxp0</tt>.
+
+<a name="options"></a>
+<h3>Opties</h3>
+De volgende twee opties zullen het standaard antwoord instellen voor
+<tt>block</tt> filterregels en het loggen van statistieken inschakelen
+voor de externe interface:
+<blockquote>
+<tt>
+set block-policy return<br>
+set loginterface $ext_if
+</tt>
+</blockquote>
+
+<p>
+Elk Unix systeem heeft een "loopback" interface.
+Dit is een virtuele netwerkinterface die door toepassingen gebruikt worden
+om binnen het systeem met elkaar te communiceren.
+Op OpenBSD is de loopback interface
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=lo&amp;sektion=4"
+>lo(4)</a>.
+Het wordt als de beste gewoonte beschouwd om al het filteren op loopback
+interfaces uit te schakelen.
+Met <a href="options.html#skip">set skip</a> zullen we dat tot stand brengen.
+<blockquote>
+<tt>
+set skip on lo
+</tt>
+</blockquote>
+Merk op dat we hier de volledige interface-groep <tt>lo</tt> overslaan,
+hierdoor hoeven we ons later, mochten we bijkomende loopback interfaces
+toevoegen, geen zorgen te maken over het wijzigen van dit gedeelte van ons
+bestaande regelsbestand.
+
+<a name="scrub"></a>
+<h3>Scrub</h3>
+Er is geen reden om het aanbevolen schrobben van alle binnenkomende verkeer
+niet te gebruiken, dus dit is een eenvoudige one-liner:
+<blockquote>
+<tt>
+match in all scrub (no-df)
+</tt>
+</blockquote>
+
+<a name="nat"></a>
+<h3>Network Address Translation</h3>
+Om NAT uit te voeren voor het volledige interne netwerk wordt de volgende
+<tt>nat</tt> regel gebruikt:
+<blockquote>
+<tt>
+nat on $ext_if from !($ext_if) to any -&gt; ($ext_if)
+</tt>
+</blockquote>
+
+<p>
+De "<tt>!($ext_if)</tt>" zou in dit geval gemakkelijk kunnen vervangen worden
+door een "<tt>$int_if</tt>", maar als u meerdere interne interfaces toevoegt,
+zou u bijkomende NAT regels moeten toevoegen, terwijl met deze structuur
+NAT zal geregeld worden op alle beschermde interfaces.
+
+<p>
+Aangezien het IP adres op de externe interface dynamisch toegekend wordt,
+worden er haakjes gezet rond de vertalingsinterface zodat PF zal merken
+wanneer het adres verandert.
+
+<p>
+Aangezien we een werkende FTP proxy zullen willen, zullen we het NAT
+<a href="anchors.html">anker</a> er ook inzetten:
+
+<blockquote>
+<tt>
+nat-anchor "ftp-proxy/*"
+</tt>
+</blockquote>
+
+
+
+<a name="rdr"></a>
+<h3>Omleiding ("redirection")</h3>
+De eerste omleidingsregels die nodig zijn dienen voor
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ftp-proxy&amp;sektion=8&amp;manpath=OpenBSD+4.6"
+>ftp-proxy(8)</a> zodat FTP clients op het lokale netwerk kunnen verbinden
+naar FTP servers op het Internet.
+<blockquote>
+<tt>
+rdr-anchor "ftp-proxy/*"<br>
+rdr on $int_if proto tcp from any to any port 21 -&gt; 127.0.0.1 port 8021
+</tt>
+</blockquote>
+
+<p>
+Merk op dat deze regel alleen FTP verbindingen naar poort 21 zal opvangen.
+Als gebruikers regelmatig verbinden naar FTP servers op andere poorten,
+dan moet er een lijst gebruikt worden om de bestemmingspoort te specificeren,
+bijvoorbeeld: <tt>from any to any port { 21, 2121 }</tt>.
+
+<p>
+De laatste omleidingsregel vangt pogingen op door iemand op het Internet
+om te verbinden naar TCP poort 80 op de firewall.
+Legitieme pogingen om deze poort te benaderen zullen komen van gebruikers
+die proberen de webserver van het netwerk te bereiken.
+Deze verbindingspogingen moeten omgeleid worden naar COMP3:
+
+<blockquote>
+<tt>
+rdr on $ext_if proto tcp from any to any port 80 -&gt; $comp3
+</tt>
+</blockquote>
+
+<a name="filter"></a>
+<h3>Filterregels</h3>
+Nu de filterregels. Begin met het "standaard weigeren":
+<blockquote>
+<tt>
+block in<br>
+</tt>
+</blockquote>
+
+<p>
+Op dit ogenblik zal alle verkeer dat op een interface probeert binnen te
+komen, geblokkeerd worden, zelfs dat van het interne netwerk.
+Volgende regels zullen de firewall openen volgens de
+bovenstaande doelstellingen en ook alle benodigde virtuele interfaces
+openen.
+
+<p>
+Hou in het achterhoofd dat pf verkeer kan blokkeren dat binnenkomt of
+buitengaat op een interface.
+Het kan uw leven vereenvoudigen als u ervoor kiest om verkeer in één
+richting te filteren, veeleer dan te proberen het overeind te houden wanneer
+u bepaalde dingen inwaarts filtert, en andere dingen uitwaarts.
+In ons geval zullen we verkiezen om inwaarts verkeer te filteren, maar
+zodra het verkeer toegelaten wordt in een interface, zullen we niet
+proberen het te blokkeren als het weer naar buiten gaat, dus we zullen
+het volgende doen:
+<blockquote>
+<tt>
+pass out keep state
+</tt>
+</blockquote>
+
+<p>
+We hebben een <a href="anchors.html">anker</a> nodig voor ftp-proxy(8):
+<blockquote>
+<tt>
+anchor "ftp-proxy/*"
+</tt>
+</blockquote>
+
+Het is goed om de <a href="filter.html#antispoof">spoofed address
+protection</a> te gebruiken:
+<blockquote>
+<tt>
+antispoof quick for { lo $int_if }
+</tt>
+</blockquote>
+
+
+<p>
+Open nu de poorten gebruikt door die netwerkdiensten die beschikbaar zullen
+zijn voor het Internet.
+Eerst het verkeer dat bestemd is voor de firewall zelf:
+<blockquote>
+<tt>
+pass in on $ext_if inet proto tcp from any to ($ext_if) \<br>
+&nbsp;&nbsp;&nbsp;port $tcp_services flags S/SA keep state
+</tt>
+</blockquote>
+
+<p>
+Het specificeren van de netwerkpoorten in de macro <tt>$tcp_services</tt>
+maakt het eenvoudig om bijkomende diensten te openen voor het Internet door
+eenvoudigweg de macro te bewerken en de regelset te herladen. UDP diensten
+kunnen ook geopend worden door een <tt>$udp_services</tt> macro aan te maken
+en een filterregel toe te voegen die gelijkaardig is aan de bovenstaande
+en <tt>proto udp</tt> specificeert.
+
+<p>
+Bovenop een <tt>rdr</tt> regel te hebben die webserver-verkeer doorgeeft
+naar COMP3, MOETEN we dit verkeer ook doorheen de firewall laten gaan:
+<blockquote>
+<tt>
+pass in on $ext_if inet proto tcp from any to $comp3 port 80 \<br>
+&nbsp;&nbsp;&nbsp;&nbsp;flags S/SA synproxy state
+</tt>
+</blockquote>
+
+<p>
+Voor een bijkomend beetje veiligheid, zullen we gebruik maken van de
+<a href="filter.html#synproxy">TCP SYN Proxy</a> om de webserver verder
+te beschermen.
+
+<p>
+ICMP verkeer moet doorgelaten worden:
+<blockquote>
+<tt>
+pass in inet proto icmp all icmp-type $icmp_types keep state
+</tt>
+</blockquote>
+
+<p>
+Gelijkaardig aan de <tt>$tcp_services</tt> macro, kan de <tt>$icmp_types</tt>
+macro gemakkelijk bewerkt worden om de types van ICMP pakketten te veranderen
+die zullen toegestaan worden de firewall te bereiken. Merk op dat deze regel
+van toepassing is op alle netwerkinterfaces.
+
+<p>
+Nu moet verkeer naar en vanuit het interne netwerk doorgelaten worden.
+We zullen aannemen dat gebruikers op het interne netwerk weten wat ze
+aan het doen zijn en dat ze geen problemen gaan veroorzaken. Dit is niet
+noodzakelijk een geldige veronderstelling; een veel meer beperkende regelset
+zou voor vele omgevingen gepast zijn.
+<blockquote>
+<tt>
+pass in quick on $int_if
+</tt>
+</blockquote>
+
+<p>
+TCP, UDP en ICMP verkeer wordt toegestaan om de firewall te verlaten naar het
+Internet dankzij de "<tt>pass out keep state</tt>" lijn hierboven.
+Toestandsinformatie wordt bijgehouden zodat de terugkerende pakketten
+binnen gelaten zullen worden doorheen de firewall.
+
+<a name="allrules"></a>
+<h2>De Volledige Regelset</h2>
+<table border=0 width="650">
+<tr><td nowrap bgcolor="#EEEEEE">
+<pre>
+# macro's
+ext_if="fxp0"
+int_if="xl0"
+
+tcp_services="{ 22, 113 }"
+icmp_types="echoreq"
+
+comp3="192.168.0.3"
+
+# opties
+set block-policy return
+set loginterface $ext_if
+
+set skip on lo
+
+# scrub
+match in all scrub (no-df)
+
+# nat/rdr
+nat on $ext_if from !($ext_if) -> ($ext_if:0)
+nat-anchor "ftp-proxy/*"
+rdr-anchor "ftp-proxy/*"
+
+rdr pass on $int_if proto tcp to port ftp -> 127.0.0.1 port 8021
+rdr on $ext_if proto tcp from any to any port 80 -> $comp3
+
+# filterregels
+block in
+
+pass out keep state
+
+anchor "ftp-proxy/*"
+antispoof quick for { lo $int_if }
+
+pass in on $ext_if inet proto tcp from any to ($ext_if) \
+   port $tcp_services flags S/SA keep state
+
+pass in on $ext_if inet proto tcp from any to $comp3 port 80 \
+    flags S/SA synproxy state
+
+pass in inet proto icmp all icmp-type $icmp_types keep state
+
+pass in quick on $int_if
+</pre>
+</td></tr>
+</table>
+
+<p>
+[<a href="carp.html">Vorige: Firewall Redundantie met CARP en pfsync</a>]
+[<a href="index.html">Inhoud</a>]
+
+<p>
+<hr>
+<a href="index.html"><img height="24" width="24" src="../../../images/back.gif" border="0" alt="[terug]"></a> 
+<a href="mailto:www@openbsd.org">www@openbsd.org</a>
+<br>
+<small>
+<!--
+Originally [OpenBSD: example1.html,v 1.40 ]<br>
+$Translation: example1.html,v 1.21 2010/03/19 18:42:43 maurice Exp $<br>
+-->
+$OpenBSD: example1.html,v 1.19 2010/03/29 07:15:38 ajacoutot Exp $
+</small>
+
+</body>
+</html> 

@@ -1,0 +1,7 @@
+#!/bin/sh -e
+
+# generate the list of countries for one or the other file.
+
+echo "<!-- DO NOT EDIT THIS LIST - IT COMES FROM mkcountries -->"
+grep '^C ' $1 | sed 's/^C //' | sort -u |
+	awk '{ print "<a href=\"#" $1 "\">" $0 "</a>" }'

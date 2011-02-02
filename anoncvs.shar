@@ -1,0 +1,661 @@
+# This is a shell archive.  Save it in a file, remove anything before
+# this line, and then unpack it by entering "sh file".  Note, it may
+# create directories; files and directories will be owned by you and
+# have default permissions.
+#
+# This archive contains:
+#
+#	anoncvs.shar
+#	Makefile
+#	README
+#	anoncvssh.c
+#
+echo x - Makefile
+sed 's/^X//' >Makefile << 'END-of-Makefile'
+X#CVSROOT=anoncvs@anoncvs1.usa.openbsd.org:/cvs
+XPROG=   anoncvssh
+XBINOWN= root
+XBINMODE=4111
+XBINDIR=/open
+XNOMAN=
+X
+X.include <bsd.prog.mk>
+X
+END-of-Makefile
+echo x - README
+sed 's/^X//' >README << 'END-of-README'
+X
+X        So, you want to run an anoncvs server.
+X
+X        A summary of the steps you'll need to do is:
+X
+X1) Find enough disk space to hold the anoncvs tree, and mount it in an
+X   appropriate place.
+X
+X2) Compile and install anoncvssh, the shell used for the anoncvs user.
+X   Install the cvsync client using 'pkg_add cvsync' command.
+X   ( If you aren't using OpenBSD you'll probably need to compile a cvsync
+X     client as well. The easier path is to use OpenBSD ;).
+X
+X3) Add the anoncvs user to the password file, with no password, and
+X   anoncvssh as it's shell. Decide on a user that will run cvsync to maintain
+X   the archive (this is a different user, NOT the anoncvs user).
+X
+X4) Make a home directory for the anoncvs user. The anoncvs user's
+X   home directory is a chroot jail in which the anoncvssh processes
+X   run when servicing anoncvs requests. The jail must contain the
+X   cvs binary as well as whatever shared libraries and support files
+X   are needed to run them unless you compile and link everything
+X   statically. This example shows what is needed for OpenBSD. If you
+X   use another platform you'll need to be familiar with what needs
+X   to go in a chroot jail for your platform.
+X
+X5) Get permission to use cvsync to obtain the cvs tree from a server.
+X
+X6) Set up cvsync to retrieve the cvs tree from an appropriate place.
+X
+X7) Run cvsync to retrieve the distribution from the server.
+X
+X8) Once you get the distribution in, set up a cron job to run cvsync
+X   periodically to keep your server up to date.
+X
+X9) Enabling OpenCVS anoncvs.
+X
+X**********************************************************************
+XSTEP 1) find enough disk space.
+X    You need roughly 2GB.
+X    Mount it on /open, make sure it doesn't have nosuid and nodev flags.
+X    If you are not able to mount it as /open, substitute it's location
+X    throughout the rest of this description.
+X
+X**********************************************************************
+XSTEP 2) compile the anoncvssh binary.
+X    In the Makefile, change the variable CVSROOT.
+X    Install the binary setuid-root in /open/anoncvssh.
+X
+X**********************************************************************
+XSTEP 3) Create the anoncvs account and decide who will run "cvsync"
+X    to maintain the archive. The anoncvs account should *NOT* be the one
+X    running cvsync to maintain the archive.
+X
+Xcreate an account similar to:
+X
+X    anoncvs::32766:32766::0:0:Anonymous CVS User:/open/anoncvs:/open/anoncvssh
+X
+XYes, that is right - the account has no password. Be sure that the
+Xuid and gid are unique for your system, if the ones above aren't,
+Xpick different values.
+X
+XDecide who will run cvsync to maintain the archive. Call that user
+X$CVSYNCUSER.  Oh, and in case it hasn't been previously mentioned,
+X$CVSYNCUSER should *NOT* be the anoncvs user :).
+X
+XSet "PermitEmptyPasswords yes" option in /etc/ssh/sshd_config and
+Xrestart your sshd daemon.
+X
+X**********************************************************************
+XSTEP 4) Build the anoncvs user's home directory chroot jail. This
+X    example assumes that you're using OpenBSD. If you're not you
+X    may need different files in the chroot.
+X
+Xmkdir /open/anoncvs
+Xmkdir /open/anoncvs/cvs
+Xchown -R $CVSYNCUSER /open/anoncvs/cvs /open/anoncvs
+X
+XStart filling the account up with nice stuff. You are building a chroot
+Xjail for anoncvs in /open/anoncvs.
+X
+X    cd /open/anoncvs
+X    touch .hushlogin
+X    touch .profile
+X
+XPut a message like the following in .plan:
+X    To use anonymous CVS install the latest version of CVS on your local
+X    machine.
+X    Then set your CVSROOT environment variable to the following value:
+X            anoncvs@anoncvs.openbsd.org:/cvs
+X
+X    mkdir bin dev tmp usr var etc
+X    cp /bin/{cat,pwd,rm,sh} bin/
+X
+XUsing mknod, make a dev/null that has the same major/minor numbers as
+X    your /dev/null, and make it mode 666.
+X
+XSome shared library systems require a dev/zero created in the same way.
+X
+XFill etc space for the account
+X    cp /etc/{group,hosts,passwd,protocols} etc/
+X    cp /etc/{pwd.db,resolv.conf,services,ttys} etc/
+X    modify these files to suit your idea of system security
+X
+Xanoncvssh (by setting the environment variable CVSREADONLYFS) uses
+Xa tiny extension provided in the openbsd cvs server code which
+Xpermits the use of read-only cvs repositories, therefore you MUST
+Xcompile the openbsd version of cvs.  Luckily this is not a problem
+Xon a non-openbsd machine, since the cvs sources are imported verbatim
+Xinto the openbsd tree.  They are in gnu/usr.bin/cvs.  The sources
+Xare integrated in such way that Makefile.bsd-wrapper knows how to build
+Xthe sources on an OpenBSD machine, using obj directories.
+X
+XCreate tmp space for the account
+X    # (cd var && ln -s ../tmp tmp)
+X    # chmod a+rwx tmp
+X
+X    # mkdir usr/{bin,lib}
+X    # cp /usr/bin/cvs usr/bin/
+X
+XIf your system has ld.so in /usr/libexec,
+X    # mkdir usr/libexec
+X    # cp /usr/libexec/ld.so usr/libexec/
+X
+XIf using shared libraries, use ldd to find out which shared libs you need:
+X    # ldd /usr/bin/cvs
+X        /usr/bin/cvs:
+X                Start    End      Type Open Ref GrpRef Name
+X                1c000000 3c01f000 exe  1    0   0      /usr/bin/cvs
+X                0f802000 2f80a000 rlib 0    1   0      /usr/lib/libz.so.4.1
+X                020f3000 220f8000 rlib 0    1   0      /usr/lib/libgssapi.so.5.0
+X                0530c000 2531c000 rlib 0    1   0      /usr/lib/libkrb5.so.17.0
+X                03801000 23841000 rlib 0    1   0      /usr/lib/libcrypto.so.18.0
+X                0a8fb000 2a900000 rlib 0    1   0      /usr/lib/libdes.so.9.0
+X                094d2000 2950b000 rlib 0    1   0      /usr/lib/libc.so.51.0
+X                094ca000 094ca000 rtld 0    1   0      /usr/libexec/ld.so
+X
+X    and then copy the required libraries to usr/lib/
+X
+XAs a final pass, make sure that all the files you have just created are
+Xnot world writable (except dev/null).
+X
+XFor :pserver: support (optional)
+X  - Create an entry in /etc/services
+X     cvspserver 2401/tcp    # CVS client/server operations
+X  - Create an entry in /etc/inetd.conf
+X     cvspserver stream tcp nowait anoncvs /open/anoncvssh anoncvssh pserver
+X  - Create a file /open/anoncvs/cvs/CVSROOT/passwd with the following entry
+X        anoncvs:AHDysQkJIubEc
+X    which would be a password of "anoncvs" (as per anoncvs.html)
+X  - Create a file /open/anoncvs/cvs/CVSROOT/readers with a single entry:
+X        anoncvs
+X    which tells cvs that user "anoncvs" is allowed readonly access.
+X  - Create a zero-length file /open/anoncvs/cvs/CVSROOT/writers since you don't
+X    want anyone to be able to write to the mirror.
+X        % cp /dev/null /open/anoncvs/cvs/CVSROOT/writers
+X
+XSee the example layout below for full details.
+X
+X**********************************************************************
+XSTEP 5): Get cvsync permission.
+Xsend mail to sup@openbsd.org
+X1) to have cvsync permissions granted on an appropriate machine for you
+X   to cvsync from. We will need to know your host's real hostname and
+X   IP address.
+X2) to have an anoncvsN.COUNTRY.openbsd.org alias created.
+X3) to have your site mentioned in the http://www.openbsd.org/anoncvs.html page.
+X
+X**********************************************************************
+XSTEP 6): Configure cvsync.
+X
+XYou have to install cvsync package.
+X
+XThe file /etc/cvsync.conf contains the configuration of cvsync. It will
+Xnormally contain:
+X
+Xconfig {
+X        base-prefix /open/anoncvs/
+X        hostname anoncvs.ca.openbsd.org
+X        collection {
+X                name openbsd-cvsroot release rcs
+X                prefix cvs
+X        }
+X        collection {
+X                name openbsd-src release rcs
+X                prefix cvs
+X        }
+X        collection {
+X                name openbsd-ports release rcs
+X                prefix cvs
+X        }
+X        collection {
+X                name openbsd-www release rcs
+X                prefix cvs
+X        }
+X        collection {
+X                name openbsd-xenocara release rcs
+X                prefix cvs
+X        }
+X}
+X
+X**********************************************************************
+XSTEP 7): Run cvsync to retrieve the tree for the first time.
+X
+XLog in as or become the $CVSYNCUSER, and run
+X
+Xcvsync > /tmp/cvsynclog &; tail -f /tmp/cvsynclog
+X
+XIf you have cvsync permission, and have specified the correct host and
+Xprefix in /etc/cvsync.conf you should see a list of files start
+Xcoming in after a short while. Don't panic if nothing happens
+Ximmediately.  Watch for errors (cvsync can timeout or die). If you can't
+Xaccess files contact the cvsync server maintainer. If you get a timeout
+Xor if cvsync dies you can restart and it should continue where it left off.
+X
+XIt can take a good while (and a couple of restarts) to obtain the
+Xwhole tree for the first time.
+X
+X**********************************************************************
+XSTEP 8): Set up cron to keep the tree up to date.
+X
+XYou run cvsync periodically from the cron by setting up the crontab file
+Xof the $CVSYNCUSER.
+X
+XFor example, to update every two hours:
+X
+X15 */2 * * * /usr/local/bin/cvsync > /dev/null
+X
+X**********************************************************************
+XSTEP 9): Enabling OpenCVS anoncvs.
+X
+XThe next step is to enable OpenCVS, which will run on your system next
+Xto the normal GNU cvs server. This will become the default in the
+Xfuture. 
+X
+XFirst off, create a new user account "opencvs" like you did for your
+Xnormal anoncvs user:
+X
+Xopencvs::32766:32766::0:0:Anonymous OpenCVS User:/open/anoncvs:/open/anoncvssh
+X
+XBe sure that the uid and gid are unique for your system, if the ones
+Xabove aren't, pick different values.
+X
+X#define OPENCVS_USER	"opencvs"
+X
+XRecompile anoncvssh.c and install the binary setuid-root in /open/anoncvssh.
+X
+XCompile and install a current /usr/bin/opencvs. 
+X
+XCopy /usr/bin/opencvs to /open/anoncvs/usr/bin/opencvs
+X
+XYou can now use OpenCVS anoncvs by using the correct CVSROOT:
+X
+X	opencvs@anoncvs.openbsd.org:/cvs
+X
+XIf you encounter bugs, send them to joris@openbsd.org
+X
+X**********************************************************************
+XEXAMPLE LAYOUT
+X
+XExample layout for OpenBSD. In this example "deraadt" is the $CVSYNCUSER.
+X
+X$ cd /open
+X$ ls -alF
+Xtotal 64
+Xdrwxr-xr-x   5 root    wheel     512 Jun 18 22:29 ./
+Xdrwxr-xr-x  13 root    wheel     512 Jun  4 05:14 ../
+Xdrwxr-xr-x   9 deraadt wheel     512 Jun  3 02:15 anoncvs/
+X---s--x--x   1 root    wheel   14302 Jun 18 22:29 anoncvssh*
+Xdrwxr-xr-x   4 root    wheel    5120 Jun 10 14:34 ftp/
+X
+X$ cd anoncvs
+X$ ls -alF
+Xtotal 68
+Xdrwxr-xr-x   9 root    wheel    512 Jun  3 02:15 ./
+Xdrwxr-xr-x   5 root    wheel    512 Jun 10 14:32 ../
+X-rw-r--r--   1 root    wheel      0 Jun  3 01:50 .hushlogin
+X-rw-r--r--   1 root    wheel     84 Jun  3 01:50 .plan
+X-rw-r--r--   1 root    wheel      0 Jun  3 01:50 .profile
+Xdrwxr-xr-x   2 root    wheel    512 Jun  3 01:40 bin/
+Xdrwxr-xr-x   7 deraadt wheel    512 Jun 18 22:19 cvs/
+Xdrwxr-xr-x   2 root    wheel    512 Jun  3 01:51 dev/
+Xdrwxr-xr-x   2 root    wheel    512 Jun  3 01:53 etc/
+Xdrwxrwxrwx  10 root    wheel    512 Jun 18 17:38 tmp/
+Xdrwxr-xr-x   5 root    wheel    512 Jun  3 01:54 usr/
+Xdrwxr-xr-x   2 root    wheel    512 Jun  3 01:54 var/
+X$ ls -alFR bin usr tmp etc dev
+Xbin:
+Xtotal 1984
+Xdrwxr-xr-x  2 root  wheel     512 Jun  3 01:40 ./
+Xdrwxr-xr-x  9 root  wheel     512 Jun  3 02:15 ../
+X-r-xr-xr-x  1 root  wheel  132368 Jun  3 01:40 cat*
+X-r-xr-xr-x  1 root  wheel  124176 Jun  3 01:40 pwd*
+X-r-xr-xr-x  1 root  wheel  238864 Jun  3 01:40 rm*
+X-r-xr-xr-x  1 root  wheel  460048 Jun  3 01:40 sh*
+X  
+Xdev:
+Xtotal 8
+Xdrwxr-xr-x  2 root  wheel       512 Jun  3 01:51 ./
+Xdrwxr-xr-x  9 root  wheel       512 Jun  3 02:15 ../
+Xcrw-rw-rw-  1 root  wheel    3,   2 Jun  3 01:51 null
+Xcrw-rw-rw-  1 root  wheel    3,  12 Jun  3 01:51 zero
+X  
+Xetc:
+Xtotal 188
+Xdrwxr-xr-x  2 root  wheel    512 Jun  3 01:53 ./
+Xdrwxr-xr-x  9 root  wheel    512 Jun  3 02:15 ../
+X-r--r--r--  1 root  wheel     64 Jun  3 01:52 group*
+X-r--r--r--  1 root  wheel    576 Jun  3 01:52 hosts*
+X-r--r--r--  1 root  wheel    291 Jun  3 01:53 passwd*
+X-r--r--r--  1 root  wheel   5625 Jun  3 01:52 protocols*
+X-r--r--r--  1 root  wheel  40960 Jun  3 01:52 pwd.db*
+X-r--r--r--  1 root  wheel     93 Jun  3 01:52 resolv.conf*
+X-r--r--r--  1 root  wheel   9875 Jun  3 01:52 services*
+X-r--r--r--  1 root  wheel  26428 Jun  3 01:52 ttys*
+X
+Xusr:
+Xtotal 20
+Xdrwxr-xr-x  5 root  wheel  512 Jun  3 01:54 ./
+Xdrwxr-xr-x  9 root  wheel  512 Jun  3 02:15 ../
+Xdrwxr-xr-x  2 root  wheel  512 Jun  3 01:57 bin/
+Xdrwxr-xr-x  2 root  wheel  512 Jun  3 01:56 lib/
+Xdrwxr-xr-x  2 root  wheel  512 Jun  3 01:55 libexec/
+X
+Xusr/bin:
+Xtotal 3016
+Xdrwxr-xr-x  2 root  wheel     512 Jun  3 01:57 ./
+Xdrwxr-xr-x  5 root  wheel     512 Jun  3 01:54 ../
+X-r-xr-xr-x  1 root  wheel  643728 Jun  3 01:54 cvs*
+X-r-xr-xr-x  1 root  wheel  841240 Jun  3 01:57 opencvs*
+X
+Xusr/lib:
+Xtotal 42344
+Xdrwxr-xr-x  2 root  wheel      512 Jun  3 01:56 ./
+Xdrwxr-xr-x  5 root  wheel      512 Jun  3 01:54 ../
+X-r--r--r--  1 root  wheel  4605409 Jun  3 01:56 libc.so.50.1
+X-r--r--r--  1 root  wheel  9659802 Jun  3 01:56 libcrypto.so.18.0
+X-r--r--r--  1 root  wheel   190814 Jun  3 01:56 libdes.so.9.0
+X-r--r--r--  1 root  wheel  1593303 Jun  3 01:55 libgssapi.so.5.0
+X-r--r--r--  1 root  wheel  5337583 Jun  3 01:56 libkrb5.so.16.0
+X-r--r--r--  1 root  wheel   182556 Jun  3 01:55 libz.so.4.1
+X
+Xusr/libexec:
+Xtotal 120
+Xdrwxr-xr-x  2 root  wheel    512 Jun  3 01:55 ./
+Xdrwxr-xr-x  5 root  wheel    512 Jun  3 01:54 ../
+X-r-xr-xr-x  1 root  wheel  55683 Jun  3 01:55 ld.so*
+X$ ls cvs
+XCVSROOT  ports    src      www      xenocara
+X
+END-of-README
+echo x - anoncvssh.c
+sed 's/^X//' >anoncvssh.c << 'END-of-anoncvssh.c'
+X/*
+X * Copyright (c) 2002 Todd C. Miller <Todd.Miller@courtesan.com>
+X * Copyright (c) 1997 Bob Beck <beck@obtuse.com>
+X * Copyright (c) 1996 Thorsten Lockert <tholo@sigmasoft.com>
+X *
+X * Permission to use, copy, modify, and distribute this software for any
+X * purpose with or without fee is hereby granted, provided that the above
+X * copyright notice and this permission notice appear in all copies.
+X *
+X * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+X * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+X * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+X * ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+X * WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+X * ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+X * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+X */
+X
+X#include <stdio.h>
+X#include <stdlib.h>
+X#if defined(__OpenBSD__) || defined(__NetBSD__) || defined(__FreeBSD__)
+X#include <paths.h>
+X#endif
+X#include <pwd.h>
+X#include <unistd.h>
+X#include <sys/types.h>
+X
+X#ifndef __P
+X#if defined(__STDC__) || defined(__cplusplus)
+X#define	__P(protos)	protos		/* full-blown ANSI C */
+X#else
+X#define	__P(protos)	()		/* traditional C preprocessor */
+X#endif
+X#endif
+X
+X/*
+X * You may need to change this path to ensure that RCS, CVS and diff
+X * can be found
+X */
+X#ifndef _PATH_DEFPATH
+X#define	_PATH_DEFPATH	"/bin:/usr/bin"
+X#endif
+X
+X/*
+X * This should not normally have to be changed
+X */
+X#ifndef _PATH_BSHELL
+X#define _PATH_BSHELL	"/bin/sh"
+X#endif
+X
+X/*
+X * Location of CVS tree, relative to the anonymous CVS user's
+X * home directory
+X */
+X#ifndef LOCALROOT
+X#define	LOCALROOT	"/cvs"
+X#endif
+X
+X/*
+X * Hostname to be used when accessing the remote repository.
+X */
+X#ifndef HOSTNAME
+X#define	HOSTNAME	"anoncvs1.usa.openbsd.org"
+X#endif
+X
+X/*
+X * Username to be used when accessing the remote repository.
+X */
+X#ifndef USERNAME
+X#define USERNAME	"anoncvs"
+X#endif
+X
+X/*
+X * $CVSROOT is created based on USERNAME HOSTNAME and LOCALROOT above
+X */
+X#ifndef CVSROOT
+X#define	CVSROOT		USERNAME "@" HOSTNAME ":"LOCALROOT
+X#endif
+X
+X/*
+X * We define PSERVER_SUPPORT to allow anoncvssh to spawn a "cvs pserver".
+X * You may undefine this if you aren't going to be running pserver.
+X */
+X#ifndef PSERVER_SUPPORT
+X#define PSERVER_SUPPORT
+X#endif
+X
+X/*
+X * Define USE_SYSLOG if you want anoncvssh to log pserver connections 
+X * using syslog()
+X */
+X#define USE_SYSLOG
+X
+X#ifdef USE_SYSLOG
+X#include <string.h>
+X#include <syslog.h>
+X#include <netinet/in.h>
+X#include <sys/socket.h>
+X#include <arpa/inet.h>
+X#define LOG_FACILITY LOG_DAEMON
+X#define LOG_PRIO LOG_INFO
+X#endif
+X
+X/* Define ANONCVS_USER if you want anoncvssh to complain if invoked by
+X * anyone other than root or ANONCVS_USER.
+X */
+X/* #define ANONCVS_USER USERNAME */
+X
+X/*
+X * If you want to be able to run an alternate OpenCVS binary on your
+X * anoncvs server, define OPENCVS_USER as the user who will invoke it.
+X */
+X#define OPENCVS_USER "opencvs"
+X
+Xint main __P((int, char *[]));
+X
+Xchar * const env[] = {
+X	"PATH="_PATH_DEFPATH,
+X	"SHELL="_PATH_BSHELL,
+X	"CVSROOT="LOCALROOT,
+X	"HOME=/",
+X	"CVSREADONLYFS=1",
+X	NULL
+X};
+X
+Xint
+Xmain(argc, argv)
+Xint argc;
+Xchar *argv[];
+X{
+X	struct passwd *pw;
+X#ifdef DEBUG
+X	int i;
+X#endif /* DEBUG */
+X#if defined(OPENCVS_USER)
+X	int opencvs;
+X#endif
+X
+X	pw = getpwuid(getuid());
+X	if (pw == NULL) {
+X		fprintf(stderr, "no user for uid %d\n", getuid());
+X		exit(1);
+X	}
+X	if (pw->pw_dir == NULL) {
+X		fprintf(stderr, "no directory\n");
+X		exit(1);
+X	}
+X
+X#ifdef USE_SYSLOG
+X	openlog("anoncvssh", LOG_PID | LOG_NDELAY, LOG_FACILITY);
+X#endif /* USE_SYSLOG */
+X	
+X#ifdef ANONCVS_USER
+X	/* 
+X	 * I love lusers who have to test every setuid binary on my machine.
+X	 */
+X	if (getuid() != 0 && (strcmp (pw->pw_name, ANONCVS_USER) != 0)) {
+X		fprintf(stderr, "You're not supposed to be running me!\n"); 
+X#ifdef USE_SYSLOG
+X		syslog(LOG_NOTICE,
+X		       "User %s(%d) invoked anoncvssh - Possible twink?",
+X		       pw->pw_name, pw->pw_uid); 
+X#endif /* USE_SYSLOG */
+X		exit(1);
+X	}
+X#endif /* ANONCVS_USER */
+X
+X
+X	setuid(0);
+X	if (chroot(pw->pw_dir) == -1) {
+X		perror("chroot");
+X		exit (1);
+X	}
+X	chdir("/");
+X	setuid(pw->pw_uid);
+X
+X#if defined(OPENCVS_USER)
+X	if (!strcmp(pw->pw_name, OPENCVS_USER))
+X		opencvs = 1;
+X	else
+X		opencvs = 0;
+X#endif
+X
+X	/*
+X	 * program now "safe"
+X	 */
+X
+X#ifdef PSERVER_SUPPORT
+X	/* If we want pserver functionality */
+X	if ((argc == 2) && (strcmp("pserver", argv[1]) == 0)) {
+X#ifdef USE_SYSLOG
+X 	        int slen;
+X		struct sockaddr_in my_sa, peer_sa;
+X		char *us, *them;
+X
+X#if defined(OPENCVS_USER)
+X		if (opencvs == 1) {
+X			fprintf(stderr, "OpenCVS does not support pserver\n");
+X			sleep(10);
+X			exit(1);
+X		}
+X#endif
+X
+X		slen = sizeof(my_sa);
+X		if (getsockname(0, (struct sockaddr *) &my_sa, &slen)
+X		    != 0) {
+X		  perror("getsockname");
+X		  exit(1);
+X		}
+X		us = strdup(inet_ntoa(my_sa.sin_addr));
+X		if (us == NULL) {
+X		  fprintf(stderr, "malloc failed\n");
+X		  exit(1);
+X		}
+X		slen = sizeof(peer_sa);
+X		if (getpeername(0, (struct sockaddr *) &peer_sa, &slen)
+X		    != 0) {
+X		  perror("getpeername");
+X		  exit(1);
+X		}
+X		them=strdup(inet_ntoa(peer_sa.sin_addr));
+X		if (them == NULL) {
+X		  fprintf(stderr, "malloc failed\n");
+X		  exit(1);
+X		}
+X	        syslog(LOG_PRIO, 
+X		       "pserver connection from %s:%d to %s:%d\n",
+X		       them, ntohs(peer_sa.sin_port),
+X		       us, ntohs(my_sa.sin_port));
+X#endif /* USE_SYSLOG */
+X		execle("/usr/bin/cvs", "cvs",
+X		    "--allow-root="LOCALROOT, "pserver", (char *)NULL, env);
+X		perror("execle: cvs");
+X		fprintf(stderr, "unable to exec CVS pserver!\n");
+X		exit(1);
+X		/* NOTREACHED */
+X	}
+X#endif
+X
+X	if (argc != 3 || 
+X		strcmp("anoncvssh",  argv[0]) != 0 ||
+X		strcmp("-c",         argv[1]) != 0 ||
+X		(strcmp("cvs server", argv[2]) != 0 &&
+X		 strcmp("cvs -d "LOCALROOT" server", argv[2]) != 0)) {
+X		fprintf(stderr, "\nTo use anonymous CVS install the latest ");
+X		fprintf(stderr,"version of CVS on your local machine.\n");
+X		fprintf(stderr,"Then set your CVSROOT environment variable ");
+X		fprintf(stderr,"to the following value:\n");
+X#if defined(OPENCVS_USER)
+X		fprintf(stderr, "\t%s@%s:%s for OpenCVS\n", OPENCVS_USER,
+X		    HOSTNAME, LOCALROOT);
+X#endif
+X		fprintf(stderr,"\t%s\n\n", CVSROOT);
+X#ifdef DEBUG
+X		fprintf(stderr, "argc = %d\n", argc);
+X		for (i = 0 ; i < argc ; i++)
+X			fprintf(stderr, "argv[%d] = \"%s\"\n", i, argv[i]);
+X#endif /* DEBUG */
+X		sleep(10);
+X		exit(0);
+X	}
+X
+X#if defined(OPENCVS_USER)
+X	if (opencvs == 1) {
+X		execle("/usr/bin/opencvs", "opencvs",
+X		    "server", (char *)NULL, env);
+X	} else {
+X#endif
+X		execle("/usr/bin/cvs", "cvs", "server", (char *)NULL, env);
+X#if defined(OPENCVS_USER)
+X	}
+X#endif
+X
+X	perror("execle: cvs");
+X	fprintf(stderr, "unable to exec CVS server!\n");
+X	exit(1);
+X	/* NOTREACHED */
+X}
+X
+END-of-anoncvssh.c
+exit
+

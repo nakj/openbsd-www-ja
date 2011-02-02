@@ -1,0 +1,169 @@
+<!DOCTYPE HTML PUBLIC  "-//W3C//DTD HTML 4.01 Transitional//EN"
+	"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>OpenBSD/landisk</title>
+<link rev="made" href="mailto:www@openbsd.org">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="resource-type" content="document">
+<meta name="description" content="the OpenBSD/landisk page">
+<meta name="keywords" content="openbsd,landisk">
+<meta name="distribution" content="global">
+<meta name="copyright" content="This document copyright 1996-2008 by OpenBSD.">
+</head>
+
+<body bgcolor="#ffffff" text="#000000" link="#23238e">
+<a href="index.html"><img alt="[OpenBSD]" height="30" width="141" src="images/smalltitle.gif" border="0"></a>
+<h2><font color="#e00000">OpenBSD/landisk</font></h2>
+
+<hr>
+<a href="images/usl5p.jpg">
+<img src="images/usl5p.jpg" width="306" height="422" align="right"></a>
+
+OpenBSD/landisk runs on machines related to the
+<a href="http://www.iodata.jp/prod/storage/hdd/2004/usl-5p/index.htm">
+IO-DATA USL-5P</a>, using a
+<a href="http://www.renesas.com">Hitachi/Renesas</a>
+SH-4 CPU.<br>
+This platform comes in a variety of models:
+
+<ul>
+<li>IO-DATA USL-5P, using CF storage (Japan; as shown)
+<li>IO-DATA HDL-U, HDL-AV, HDL-W and HDLM-U series (Japan)
+<li>SuperTank LAN Tank (SOTO-HDLWU) (Japan)
+<li>IO-DATA UHDL-160U and UHDL-300U (May be found in USA)
+<li>Plextor PX-EH16L, PX-EH25L and PX-EH40L
+</ul>
+
+Note: The "Giga-landisk" and HDL-F machines are ARM-based
+(both Intel XScale &amp; Marvell) some of which<br>
+ are supported by the <a href="armish.html">armish</a>
+architecture.
+
+<p>
+The current port maintainers are
+Dale Rahn (<a href="mailto:drahn@openbsd.org">drahn@openbsd.org</a>)
+and
+Miod Vallat (<a href="mailto:miod@openbsd.org">miod@openbsd.org</a>).
+Others are definitely welcome to contribute!
+
+<a name="toc"></a>
+<h3><font color="#0000e0"><i>Table of contents</i></font></h3>
+<table><tr>
+<td width=1%></td>
+<td valign="top" width="20%">
+  <li><a href="#history">History of the port</a><br>
+  <li><a href="#status">Current status</a><br>
+  <li><a href="#hardware">Supported hardware</a><br>
+</td><td valign="top" width="20%">
+  <li><a href="#install">Getting and installing</a><br>
+  <li><a href="#projects">Projects & bugs left to fix</a><br>
+  <li><a href="#serial">Serial cable connection</a><br>
+</td></tr></table>
+<br clear=all>
+<hr>
+
+<a name="history"></a>
+<h3><font color="#0000e0"><strong>History</strong></font></h3>
+<p>
+OpenBSD/landisk is the 1st OpenBSD port to a
+<a href="http://www.renesas.com">Hitachi/Renesas</a> SH-4 based machine.
+It is hoped that other SH-4 based machines will show up which are
+interesting enough for our user and development community, but the SH-4
+processor is normally used only in true embedded products.
+
+This processor architecture is the first 32-bit sucessor of a series
+of extremely bizarre 8 and 16 bit processors by Hitachi.  It has a
+very strange instruction set and MMU, and developers find it quite a
+challenge to map their knowledge of Unix low-level ideas to the
+processor architecture.
+
+<a name="status"></a>
+<h3><font color="#0000e0"><strong>Current status</strong></font></h3>
+
+<p>
+Hardware support is mostly complete and quite stable.
+
+<a name="hardware"></a>
+<h3><font color="#0000e0"><strong>Supported hardware</strong></font></h3>
+
+<ul>
+For a complete system component and device driver listing for this architecture, see <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=intro&amp;arch=landisk&sektion=4">intro(4/landisk)</a>.
+<p>
+<li>HITACHI SH4 SH7751R processor at 266MHz.
+<li>64MB of ram.
+<li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=re&amp;sektion=4">re(4)</a> 100Mbit ethernet.
+<li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=wdc&amp;sektion=4">wdc(4)</a> drive controller connected to either flash or microdrive in a CF socket, on some models.
+<li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=pciide&amp;sektion=4">pciide(4)</a> IDE drive controller supporting <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=wd&amp;sektion=4">wd(4)</a>, on some models.
+<li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=com&amp;sektion=4">com(4)</a> serial port console at 9600 baud (lacking hardware flow control).
+<li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ehci&amp;sektion=4">ehci(4)</a> and <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ohci&amp;sektion=4">ohci(4)</a> USB controllers supporting most <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=usb&amp;sektion=4">usb(4)</a> devices.
+<li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=power&amp;arch=landisk&amp;sektion=4">power(4)</a> button and some LEDs.
+</ul>
+
+<a name="install"></a>
+<h3><font color="#0000e0">
+<strong>Getting and installing</strong>
+</font></h3>
+
+<p>
+The latest supported OpenBSD/landisk release is
+<a href="46.html">OpenBSD 4.6</a>.
+Here are the
+<a href="ftp://ftp.OpenBSD.org/pub/OpenBSD/4.6/landisk/INSTALL.landisk">
+OpenBSD/landisk 4.6 installation instructions
+</a>.
+
+<p>
+Snapshots are made available from time to time, in
+<a href="ftp://ftp.OpenBSD.org/pub/OpenBSD/snapshots/landisk">this location</a>
+as well as in a few
+<a href="ftp.html">mirrors</a>.
+Here are the
+<a href="ftp://ftp.openbsd.org/pub/OpenBSD/snapshots/landisk/INSTALL.landisk">
+OpenBSD/landisk snapshot installation instructions
+</a> as well.
+
+<a name="projects"></a>
+<h3><font color="#0000e0"><strong>Projects & bugs left to fix</strong></font></h3>
+
+<ul>
+  <li>Squelch remaining compiler optimization bugs.
+  <li>Make it feel faster.
+</ul>
+
+<img align="right" height=274 width=410 src="images/usl5p-serial.gif">
+<a name="serial"></a>
+<h3><font color="#0000e0">
+<strong>Serial cable connection</strong>
+</font></h3>
+All of these machines require a special serial cable which does
+voltage conversion, and can hopefully be purchased along with the
+card.  This cable normally contains a little max232 or similar chip
+which converts from the 3.3V signals to +/-12V.  The IO-DATA cable
+has pins which can grip the inside of the holes.  Or you can attempt
+to build your own using
+<a href="http://www.mizore.jp/wiki/index.php?LANDISK%2Fserial-console">
+some Japanese instructions</a>.
+<p>
+The IO-DATA cable converts from a DB9 connector to a 5-pin header
+(3.3V Tx Rx GND NC).  Note that the Rx and Tx pins on the board are
+<b>swapped</b> compared to the ARM-based machines made by IO-DATA.
+All the board models have a 5-pin connector (called CN7) which the cable
+can plug into -- except for the USL-5P which has a 4-pin header (thus
+requiring removal of the spare pin).
+<p>
+A USL-5P is shown with a modified IO-DATA cable.  In this case the cable
+has been shortened significantly and the DB9 connector is glued into a slot
+carefully cut into the plastic between the ethernet and a USB port.
+<br clear=all>
+<hr>
+<a href="plat.html">
+<img height="24" width="24" src="back.gif" border="0" alt="Supported platforms">
+</a>
+<br>
+<small><a href="mailto:www@openbsd.org">www@openbsd.org</a></small>
+<br>
+<small>$OpenBSD: landisk.html,v 1.44 2010/02/12 21:38:04 miod Exp $</small>
+
+</body>
+</html>

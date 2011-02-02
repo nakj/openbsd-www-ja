@@ -1,0 +1,349 @@
+<!DOCTYPE HTML PUBLIC  "-//W3C//DTD HTML 4.01 Transitional//EN"
+	"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>OpenBSD/alpha</title>
+<link rev="made" href="mailto:www@openbsd.org">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="resource-type" content="document">
+<meta name="description" content="the OpenBSD/alpha page">
+<meta name="keywords" content="openbsd,alpha">
+<meta name="distribution" content="global">
+<meta name="copyright" content="This document copyright 1996-2009 by OpenBSD.">
+</head>
+
+<body bgcolor="#ffffff" text="#000000" link="#23238e">
+<a href="index.html"><img alt="[OpenBSD]" height="30" width="141" src="images/smalltitle.gif" border="0"></a>
+
+<h2><font color="#e00000">OpenBSD/alpha</font></h2>
+
+<hr>
+
+<p>
+OpenBSD/alpha runs on a large set of the alpha computers manufactured by
+<a href="http://www.digital.com">Digital</a> (then Compaq, now Hewlett-Packard).
+
+<p>
+A mailing list dedicated to the OpenBSD/alpha port is available at
+<u><font color="#23238e">alpha@openbsd.org</font></u>.
+To join the OpenBSD/alpha mailing list, send a message body of <b>"subscribe
+alpha"</b> to <a href="mailto:majordomo@openbsd.org">majordomo@openbsd.org</a>.
+Please be sure to check our <a href="mail.html">mailing list policy</a> before
+subscribing.
+
+<p>
+There is currently no maintainer for the alpha port.
+Technical discussion about the alpha port should be directed to the
+<u><font color="#23238e">alpha@openbsd.org</font></u> mailing list.
+If you are interested in the job of alpha port maintainer, help out the project
+for a while and step up to the job.
+
+<a name="toc"></a>
+<h3><font color="#0000e0"><i>Table of contents</i></font></h3>
+
+<ul>
+  <li><a href="#history">History of the port</a>
+  <li><a href="#status">Current status</a>
+  <li><a href="#projects">Project list</a>
+  <li><a href="#hardware">Supported hardware</a>
+  <li><a href="#install">Getting and installing OpenBSD/alpha</a>
+</ul>
+
+<hr>
+<a name="history"></a>
+<h3><font color="#0000e0"><strong>History:</strong></font></h3>
+
+<p>
+The OpenBSD/alpha port was started in the summer of 1996 by using code
+from the NetBSD/alpha port which was started by
+<a href="mailto:cgd@netbsd.org">Chris Demetriou</a> in 1994.
+After the original OpenBSD port, some
+copyright issues prevented OpenBSD from tracking the NetBSD code.
+Regardless, work on the alpha port continued and many fixes were made.
+Meanwhile, NetBSD continued to make improvements to the
+alpha port which we were unfortunately unable to use.  Over time,
+because of a lack of programmer resources and the inability to use
+NetBSD code, hardware and software support became very outdated.  This
+caused the 2.5 and 2.6 releases of alpha to have few kernel
+enhancements.  As a result of its becoming so stale, there was no
+OpenBSD/alpha port included in the 2.7 and 2.8 releases.
+
+<p>
+Shortly after OpenBSD 2.8 was released, there has been a great deal of
+interest in bringing the port up to date.  This, coupled with the fact
+that NetBSD changed the license on its alpha code so that there were no
+longer copyright issues has lead to an effort to bring the alpha port
+back up. (For details on why we were not able to keep tracking the
+NetBSD code, check our <a href="policy.html">policy</a> page.)
+
+<p>
+Nathan Binkert, Art Grabowski, Niklas Hallqvist and Eric Jackson, with
+the help of a few others, eventually brought the port into good shape
+again, and starting with the 2.9 release OpenBSD/alpha is a supported
+OpenBSD port again.
+
+<hr>
+<a name="status"></a>
+<h3><font color="#0000e0"><strong>Current status:</strong></font></h3>
+
+<p>
+Currently, all the hardware listed in the
+<a href="#hardware">supported hardware</a> section below boots
+multi-user, and supports enough of the on-board devices to be generally
+usable, unless specified otherwise.
+A large set of PCI cards also work reliably, while ISA devices support has
+limitations.
+
+<p>
+X11 is supported on TGA cards, as well as a few regular PCI
+cards on newer (BWX enabled) machines, of which the following have been tested:
+
+<ul>
+  <li>3DFX Interactive Banshee
+  <li>3DLabs Permedia 2 (8, 15, 16 and 24 bits depth)
+  <li>ATI Rage Pro (works with 'Option "NoAccel"')
+  <li>ATI Rage 128
+  <li>Cirrus Logic CL5430 (works with 'Option "NoAccel"')
+  <li>Cirrus Logic GD5446 (8, 16 and 24 bits depth)
+  <li>Matrox MGA 2064 (8, 16 and 24 bits depth, works with 'Option "NoInt10"')
+</ul>
+<p>
+More cards will be supported as time and resources permits.
+
+<hr>
+<a name="projects"></a>
+<h3><font color="#0000e0"><strong>Projects (in no particular order):
+</strong></font></h3>
+
+<ul>
+  <li>Testing more platforms and peripherals, to find what issues are
+      remaining and improve overall stability
+  <li>Improve port-specific documentation
+  <li>Support recent OSF/1 binaries and shared libraries in compatibility mode
+  <li>Support DMA for ISA devices
+  <li>Floppy support (requires working ISA DMA first)
+  <li>Fix 64-bit issues in the non-working PCI drivers
+  <li>Improve X11 support
+  <li>Make X11 work on PCI VGA cards for machines without BWX
+</ul>
+
+<hr>
+<a name="hardware"></a>
+<h3><font color="#0000e0"><strong>Supported hardware:</strong></font></h3>
+
+<p>
+To the best of our knowledge, the following hardware is supported, but there
+might be occasional breakage on some models.
+Since there are many models and combinations that have not been tested,
+we would appreciate very much if you told us about things that work and
+do not work.
+To help us keep track of what hardware people use, please mail your dmesg to
+<a href="mailto:dmesg@openbsd.org">dmesg@openbsd.org</a>.
+If there are things that do not work, please file a bug report using
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=sendbug&amp;arch=alpha&amp;sektion=1">
+sendbug(1)</a>.
+
+<p>
+
+<h4>Supported Machines:</h4>
+<ul>
+<li>DS15, DS15A, DS25, ES45, TS15 and TS202C
+<sup>(support added after 4.6)</sup>
+<br>
+(Only one processor will be used on multiprocessor models)
+<li>264DP, CS20, DS10, DS20, DS20L, ES40, XP900, XP1000, and other EV6 machines
+using the Tsunami chipset<br>
+(Only one processor will be used on multiprocessor models)
+<li>API UP1000, UP1100, UP2000, and UP2000+ and other EV6 machines using the
+Irongate chipset
+<li>Digital Personal Workstation (Miata)<br>
+<li>EB164 based machines (including PC164, 164SX, 164LX, but <b>NOT</b> the
+164UX)<br>
+<li>AlphaStation 600A, 1200
+<li>AlphaServer 800 (also known as Digital Server 3300 and 3305), 1000, 1000A
+<li>AlphaServer 1200, 4000 and 4100
+<li>AlphaServer 300, 400 and AlphaStation 200, 250, 255 and 400
+<li>AlphaStation 500 and 600
+<li>AXPpci based machines (including ``Noname'', UDB, Multia)
+<li>DEC 3000 models 300{,L,X,LX}
+<li>DEC 3000 models 400,500,500X,600,700,800,900
+</ul>
+
+<h4>Unsupported Machines</h4>
+<ul>
+  <li>DECpc AXP150 (2000/300) ``Jensen'' systems (EISA-bus PC-like systems)
+  <li>AlphaServer 2000, 2100 and 2100A
+  <li>AlphaServer 8200, 8400, GS60 and GS140
+  <li>AlphaServer ES47, ES80 and GS1280
+  <li>AlphaServer GS80, GS160 and GS320
+  <li>Alpha XL systems (no SRM)
+  <li>DEC 4000, 7000, and 10000 systems (FutureBus+ and XMIBus-based)
+  <li>EB64+ based systems
+  <li>Samsung 164BX/UX (no SRM)
+  <li>Multiprocessor Alpha systems (though they will run fine using one
+      processor only, if the model is listed as supported above)
+  <li>VME Alpha systems
+  <li>Tadpole ALPHAbook
+</ul>
+
+<h4>Supported devices</h4>
+<ul>
+  <li>Host Controllers and Bridges, including:
+  <ul>
+    <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=tcasic&amp;arch=alpha&amp;sektion=4">tcasic(4)</a>
+        TURBOchannel host bus,
+    <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=lca&amp;arch=alpha&amp;sektion=4">lca(4)</a>
+        DECchip 21066 Core Logic,
+    <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=apecs&amp;arch=alpha&amp;sektion=4">apecs(4)</a>
+        DECchip 21072/21071 Core Logic,
+    <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=cia&amp;arch=alpha&amp;sektion=4">cia(4)</a>
+        DECchip 2117x Core Logic,
+    <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=tsc&amp;arch=alpha&amp;sektion=4">tsc(4)</a>
+        DECchip 21272 and 21274 Core Logic,
+    <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=irongate&amp;arch=alpha&amp;sektion=4">irongate(4)</a>
+        API UP1000 AMD751 Core Logic and AGP,
+    <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=mcbus&amp;arch=alpha&amp;sektion=4">mcbus(4)</a>
+         MCBUS System Bus.
+  </ul>
+  <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=com&amp;arch=alpha&amp;sektion=4">com(4)</a>
+  built-in serial.
+  <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=lpt&amp;arch=alpha&amp;sektion=4">lpt(4)</a>
+  built-in parallel.
+  <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=de&amp;arch=alpha&amp;sektion=4">de(4)</a>
+  built-in DEC Ethernet.
+  <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=fxp&amp;arch=alpha&amp;sektion=4">fxp(4)</a>
+  built-in i8255x Ethernet.
+  <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=le&amp;arch=alpha&amp;sektion=4">le(4)</a>
+  built-in LANCE Ethernet.
+  <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=isp&amp;arch=alpha&amp;sektion=4">isp(4)</a>
+  built-in ISP SCSI controller.
+  <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ahc&amp;arch=alpha&amp;sektion=4">ahc(4)</a>
+  built-in Adaptec SCSI controller.
+  <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=siop&amp;arch=alpha&amp;sektion=4">siop(4)</a>
+  built-in 53C810 SCSI controller.
+  <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=asc&amp;arch=alpha&amp;sektion=4">asc(4)</a>
+  built-in 53C94/53CF94-2 SCSI controller.
+  <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=pciide&amp;arch=alpha&amp;sektion=4">pciide(4)</a>
+  built-in IDE controller.
+  <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=usb&amp;arch=alpha&amp;sektion=4">usb(4)</a>
+  built-in USB supports most USB devices.
+  <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=uvideo&amp;arch=alpha&amp;sektion=4">uvideo(4)</a>
+  UVC-compatible Video devices.
+  <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=pci&amp;arch=alpha&amp;sektion=4">pci(4)</a>
+  most PCI devices.
+  <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=isa&amp;arch=alpha&amp;sektion=4">isa(4)</a>
+  some ISA devices.
+  <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=eisa&amp;arch=alpha&amp;sektion=4">eisa(4)</a>
+  some EISA devices.
+  <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=pckbd&amp;arch=alpha&amp;sektion=4">pckbd(4)</a>
+  PS/2 and AT keyboards.
+  <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=pms&amp;arch=alpha&amp;sektion=4">pms(4)</a>
+  PS/2 mice.
+  <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=le&amp;arch=alpha&amp;sektion=4">le(4)</a>
+   TURBOchannel LANCE Ethernet cards (PMAD-A) on DEC 3000.
+  <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=asc&amp;arch=alpha&amp;sektion=4">asc(4)</a>
+  TURBOchannel SCSI (53C94) (PMAZ-A) on DEC 3000.
+  <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=fta&amp;arch=alpha&amp;sektion=4">fta(4)</a>
+  TURBOchannel DEFTA FDDI cards (PMAF-FA) on DEC 3000.
+</ul>
+
+<h4>Unsupported devices</h4>
+<ul>
+  <li>Floppy drive.
+  <li>ISA devices that require DMA operation.
+  <li>ISA IDE controller
+(<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=wdc&amp;arch=alpha&amp;sektion=4">wdc</a>)
+on the EB164.
+  <li>Built-in ISDN/audio chip on DEC 3000.
+  <li>Built-in framebuffer on DEC 3000.
+</ul>
+
+<hr>
+<a name="install"></a>
+<h3><font color="#0000e0">
+<strong>Getting and installing OpenBSD/alpha:</strong>
+</font></h3>
+
+<p>
+The latest supported OpenBSD/alpha release is
+<a href="46.html">OpenBSD 4.6</a>.
+Here are the
+<a href="ftp://ftp.OpenBSD.org/pub/OpenBSD/4.6/alpha/INSTALL.alpha">
+OpenBSD/alpha 4.6 installation instructions
+</a>.
+
+<p>
+Snapshots are made available from time to time, in
+<a href="ftp://ftp.OpenBSD.org/pub/OpenBSD/snapshots/alpha">this location</a>
+as well as in a few
+<a href="ftp.html">mirrors</a>.
+Here are the
+<a href="ftp://ftp.OpenBSD.org/pub/OpenBSD/snapshots/alpha/INSTALL.alpha">
+OpenBSD/alpha snapshot installation instructions
+</a> as well.
+
+<p>
+There are several installation media provided:
+
+<ul>
+  <li><strong>CD boot</strong>
+  <p>
+  Booting off the OpenBSD CD provides an <i>El Torito</i> 2.88MB floppy image
+  that contains drivers for the most popular devices found in alpha
+  hardware.
+  This also includes minimal USB support (storage devices, keyboard and
+  some Ethernet adapters).<br>
+  For the latest list of drivers available on this image, please take a
+  look at the
+  <a href="http://www.openbsd.org/cgi-bin/cvsweb/src/sys/arch/alpha/conf/RAMDISKBIG?rev=HEAD">RAMDISKBIG</a>
+  kernel configuration file.
+  <li><strong>Floppy A</strong> (floppy46.fs)
+  <p>
+  This 1.44MB floppy image supports the following alpha hardware:
+  <ul>
+    <li>AlphaStation 200, 250, 255, 400
+    <!-- <li>AlphaStation 500, 600 -->
+    <li>AlphaServer 800, 1000, 1000A, 1200, and 4100
+    <li>AXPpci33 based machines, such as the ``Noname'', UDB, and Multia
+    <li>EB164 based machines, such as the PC164, 164SX and 164LX
+    <li>Personal Workstation (Miata)
+  </ul>
+  <p>
+  It contains support for the on-board devices found on these machines,
+  however due to lack of space there are only a few other drivers.
+  In particular, <i>this floppy lacks cdrom support</i> and will <i>not</i>
+  allow installation from cdrom media.<br>
+  For the latest list of drivers available on this image, please take a
+  look at the
+  <a href="http://www.openbsd.org/cgi-bin/cvsweb/src/sys/arch/alpha/conf/RAMDISK?rev=HEAD">RAMDISK</a>
+  kernel configuration file.
+  <li><strong>Floppy B</strong> (floppyB46.fs)
+  <p>
+  This 1.44MB floppy image supports the following alpha hardware:
+  <ul>
+    <li>Alpha Processor, Inc. UP1000
+    <li>XP1000, 264DP, DS10, and DS20, CS20
+    <li>Alpha Processor, Inc. UP2000, UP2000+
+    <li>DS15, DS15A, DS25, ES45, and TS15, TS202C
+  </ul>
+  <p>
+  It contains support for the on-board devices found on these machines,
+  however due to lack of space there are only a few other drivers.
+  In particular, <i>this floppy lacks cdrom support</i> and will <i>not</i>
+  allow installation from cdrom media.<br>
+  For the latest list of drivers available on this image, please take a
+  look at the
+  <a href="http://www.openbsd.org/cgi-bin/cvsweb/src/sys/arch/alpha/conf/RAMDISKB?rev=HEAD">RAMDISKB</a>
+  kernel configuration file.
+</ul>
+
+<hr>
+<a href="plat.html">
+<img height="24" width="24" src="back.gif" border="0" alt="Supported platforms">
+</a> 
+<br>
+<small><a href="mailto:www@openbsd.org">www@openbsd.org</a></small>
+<br>
+<small>$OpenBSD: alpha.html,v 1.242 2009/10/23 21:41:27 dms Exp $</small>
+</body>
+</html>

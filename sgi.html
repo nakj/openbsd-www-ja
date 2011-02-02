@@ -1,0 +1,262 @@
+<!DOCTYPE HTML PUBLIC  "-//W3C//DTD HTML 4.01 Transitional//EN"
+	"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>OpenBSD/sgi</title>
+<link rev="made" href="mailto:www@openbsd.org">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="resource-type" content="document">
+<meta name="description" content="the OpenBSD/sgi page">
+<meta name="keywords" content="openbsd,sgi">
+<meta name="distribution" content="global">
+<meta name="copyright" content="This document copyright 1996-2009 by OpenBSD.">
+</head>
+
+<body bgcolor="#ffffff" text="#000000" link="#23238e">
+<a href="index.html"><img alt="[OpenBSD]" height="30" width="141" src="images/smalltitle.gif" border="0"></a>
+<h2><font color="#e00000">OpenBSD/sgi</font></h2>
+
+<hr>
+<a href="images/sgi_octane.jpg">
+<img src="images/sgi_octane.jpg"align="right"></a>
+
+<p>
+OpenBSD/sgi runs on several 64 bit MIPS-based SGI servers and workstations.
+</p>
+<p>
+OpenBSD/sgi is a fully featured 64 bit port and will thus only run on systems
+based on 64 bit processors, i.e. R4000 and up.
+</p>
+
+<p>
+A mailing list dedicated to the OpenBSD/sgi port is available at
+<u><font color="#23238e">sgi@openbsd.org</font></u>.
+To join the OpenBSD/sgi mailing list, send a message body of <b>"subscribe
+sgi"</b> to <a href="mailto:majordomo@openbsd.org">majordomo@openbsd.org</a>.
+Please be sure to check our <a href="mail.html">mailing list policy</a> before
+subscribing.
+</p>
+
+<p>
+The current port maintainers are Miod Vallat
+(<a href="mailto:miod@openbsd.org">miod@openbsd.org</a>)
+and
+Joel Sing
+(<a href="mailto:jsing@openbsd.org">jsing@openbsd.org</a>).
+</p>
+
+
+<a name="toc"></a>
+<h3><font color="#0000e0"><i>Table of contents</i></font></h3>
+<table><tr>
+<td width=1%></td>
+<td valign="top" width="20%">
+  <li><a href="#history">History of the port</a><br>
+  <li><a href="#status">Current status</a><br>
+  <li><a href="#hardware">Supported hardware</a><br>
+</td><td valign="top" width="20%">
+  <li><a href="#install">Getting and installing</a><br>
+  <li><a href="#projects">Projects</a><br>
+</td></tr></table>
+<br clear=all>
+<hr>
+
+<a name="history"></a>
+<h3><font color="#0000e0"><strong>History</strong></font></h3>
+<p>
+The OpenBSD/sgi port has its roots in the <a href="arc.html">OpenBSD/arc</a>
+port created early in the OpenBSD history. Arc support was rather soon
+discontinued due to the lack of interest and availability of decent hardware.
+<br>
+Eventually SGI hardware became more affordable and obtainable, and interest
+for an SGI port in the tree increased.
+The final piece, a working 64 bit toolchain, eventually became available and
+allowed the 64 bit SGI OpenBSD port to appear in 2004.
+<br>
+Hardware support was initially limited to the O2 workstations.  Efforts
+to port to more systems did not really start until 2008, where the first
+Octane support parts were introduced. This work was completed in 2009
+with support for Origin family systems as well, allowing OpenBSD to be
+the first free operating system to run on the Fuel workstations, and even
+later, also on Origin 350 servers.
+</p>
+
+<a name="status"></a>
+<h3><font color="#0000e0"><strong>Current status</strong></font></h3>
+
+<p>
+Currently OpenBSD/sgi runs in 64 bit mode and boots multi-user on supported
+systems. Snapshots are made periodically as the port develops and expands.
+<br>
+Not all graphics options are supported on IP27 (Origin) and IP35 (Tezro)
+systems yet; in this case the kernel will be limited to serial console
+operation only.
+<br>
+An X server, currently unaccelerated, is also available for IP32 (O2) systems.
+</p>
+
+<a name="hardware"></a>
+<h3><font color="#0000e0"><strong>Supported hardware</strong></font></h3>
+
+For a complete system component and device driver listing for this architecture, see <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=intro&amp;arch=sgi&amp;sektion=4">intro(4/sgi)</a>.
+<p>
+The following families are supported:
+<ul>
+<li>IP27 (Origin) family:
+  <ul>
+  <li>Origin 200. Dual-Origin 200 systems using the CRAYlink connection should
+      work, but currently limited to the first node. <sup>*</sup>
+  </ul>
+<li>IP30 (Octane a.k.a Speedracer) family:
+  <ul>
+  <li>Octane
+  <li>Octane 2
+  </ul>
+  Multiprocessor operation is supported. <sup>*2</sup>
+<li>IP32 (O2 a.k.a Moosehead) family:
+  <ul>
+  <li>O2
+  <li>O2+
+  </ul>
+  R5000, RM5200, RM7000 as well as R10000 and R12000 processors are supported.
+  RM7000 level 3 cache is supported.
+<li>IP35 (Tezro) family:
+  <ul>
+  <li>Fuel
+<!--
+  <li>Origin 300
+  <li>Onyx 300 and Origin 3000 have not been tested, but ought to work
+      since they are very similar to Origin 300.
+ -->
+  <li>Origin 350 <sup>*2</sup>
+  <li>Tezro <sup>*3</sup>
+  <li>Onyx 4 <sup>*3</sup> (currently limited to serial console)
+  <li>Onyx 350 has not been tested, but ought to work
+      since it is very similar to Origin 350.<sup>*2</sup>
+  </ul>
+  Origin 2000, Onyx 2,
+  Origin 300, Onyx 300 and Origin 3000 are not supported yet.
+</ul>
+<sup>*</sup> support for multiple nodes in <i>M</i> mode
+has been added after the 4.6 release.<br>
+<sup>*2</sup> support added after the 4.6 release.<br>
+<sup>*3</sup> support added after the 4.7 release.<br>
+Note that <i>Octane 3</i> and <i>Origin 400</i> systems are completely different
+architectures based on x86 processors, and as such are not supported
+by OpenBSD/sgi.
+
+<p>
+The following devices are supported:
+<ul>
+<li><strong>Ethernet Adapters</strong>
+<ul>
+<li>O2 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=mec&amp;arch=sgi&amp;sektion=4">mec(4)</a> MAC-110 10/100Mbit ethernet.
+<li>IOC3 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=iec&amp;arch=sgi&amp;sektion=4">iec(4)</a> 10/100Mbit ethernet (this is the on-board interface found on Octane, Origin 200/2000/300/3000 and Fuel). <sup>*</sup>
+<li>Broadcom BCM57xx (a.k.a. Tigon3) <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=bge&amp;arch=sgi&amp;sektion=4">bge(4)</a> 10/100/Gigabit ethernet (this is the on-board interface found on Origin 350 and Tezro).
+<li>Many
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=pci&amp;sektion=4">PCI</a>
+adapters, including wireless adapters.
+</ul>
+<li><strong>SCSI Host Adapters</strong>
+<ul>
+<li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ahc&amp;sektion=4">ahc(4)</a> Adaptec AIC-7880 SCSI.
+<li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=isp&amp;sektion=4">isp(4)</a> QLogic ISP SCSI.
+<li>Some
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=pci&amp;sektion=4">PCI</a>
+SCSI adapters.
+</ul>
+<li><strong>RS-232 Devices</strong>
+<ul>
+<li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=com&amp;sektion=4">com(4)</a> built-in serial ports.
+</ul>
+<li><strong>USB Controllers and Devices</strong>
+<ul>
+<li>Fuel on-board <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ohci&amp;sektion=4">ohci</a>.
+<li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=pci&amp;sektion=4">PCI</a>
+USB controllers.
+<li>Most
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=pci&amp;sektion=4">USB</a>
+devices.
+</ul>
+<li><strong>Audio Devices</strong>
+<ul>
+<li>O2 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=mavb&amp;arch=sgi&amp;sektion=4">mavb(4)</a> Moosehead A/V Board audio device.
+<!--
+<li>Tezro <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=envy&amp;arch=sgi&amp;sektion=4">envy(4)</a> Envy24 audio device.
+-->
+</ul>
+<li><strong>Video Devices</strong>
+<ul>
+<li>O2 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=gbe&amp;arch=sgi&amp;sektion=4">gbe(4)</a>
+Graphics Back End Frame Buffer, supporting <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=wscons&amp;sektion=4">wscons(4)</a> console and X Window.
+<li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=impact&amp;arch=sgi&amp;sektion=4">impact(4)</a>
+Impact (<i>Mardigras</i>) frame buffer commonly encountered on Octane systems.
+<sup>*</sup>
+<li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=odyssey&amp;arch=sgi&amp;sektion=4">odyssey(4)</a>
+Odyssey VPro frame buffer commonly encountered on Fuel, Octane 2, Onyx 350 and
+Tezro, as well as some Octane systems.
+<sup>*</sup>
+</ul>
+<li><strong>Input Devices</strong>
+<ul>
+<li>O2 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=mkbc&amp;sektion=4&amp;arch=sgi">mkbc(4)</a> built in PS/2 Controller.
+<li>Octane and Origin family
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=iockbc&amp;sektion=4&amp;arch=sgi">iockbc(4)</a> PS/2 Controller
+found on
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ioc&amp;sektion=4&amp;arch=sgi">ioc(4)</a> IOC3- or
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=iof&amp;sektion=4&amp;arch=sgi">iof(4)</a> IOC4- based I/O boards (such as IO9).
+<li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=pckbd&amp;sektion=4">pckbd(4)</a> PS/2 keyboards.
+<li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=pms&amp;sektion=4">pms(4)</a> PS/2 mice.
+</ul>
+<li><strong>Miscellaneous Devices</strong>
+<ul>
+<li>O2 and Octane<sup>*</sup> <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=power&amp;sektion=4&amp;arch=sgi">power(4)</a> button.
+</ul>
+</ul>
+<sup>*</sup> support added after the 4.6 release.
+
+<a name="install"></a>
+<h3><font color="#0000e0">
+<strong>Getting and installing</strong>
+</font></h3>
+
+<p>
+The latest supported OpenBSD/sgi release is
+<a href="46.html">OpenBSD 4.6</a>.
+Here are the
+<a href="ftp://ftp.OpenBSD.org/pub/OpenBSD/4.6/sgi/INSTALL.sgi">
+OpenBSD/sgi 4.6 installation instructions
+</a>.
+
+<p>
+Snapshots are made available from time to time, in
+<a href="ftp://ftp.OpenBSD.org/pub/OpenBSD/snapshots/sgi">this location</a>
+as well as in a few
+<a href="ftp.html">mirrors</a>.
+Here are the
+<a href="ftp://ftp.OpenBSD.org/pub/OpenBSD/snapshots/sgi/INSTALL.sgi">
+OpenBSD/sgi snapshot installation instructions
+</a> as well.
+
+<a name="projects"></a>
+<h3><font color="#0000e0"><strong>Projects (in no particular order)</strong></font></h3>
+
+<ul>
+  <li>Larger user VM space (currently limited to 2GB)
+  <li>X11 support for Impact and Odyssey frame buffers.
+  <li>SMP support on IP27 and IP35 (in progress)
+  <li>Fix IOC3 serial driver on Origin 300
+  <li>IOC4 ATAPI controller support
+</ul>
+
+<hr>
+<a href="plat.html">
+<img height="24" width="24" src="back.gif" border="0" alt="Supported platforms">
+</a>
+<br>
+<small><a href="mailto:www@openbsd.org">www@openbsd.org</a></small>
+<br>
+<small>$OpenBSD: sgi.html,v 1.69 2010/04/17 11:13:49 miod Exp $</small>
+
+</body>
+</html>

@@ -1,0 +1,247 @@
+<!DOCTYPE HTML PUBLIC  "-//W3C//DTD HTML 4.01 Transitional//EN"
+	"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>OpenBSD/mac68k</title>
+<link rev="made" href="mailto:www@openbsd.org">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="resource-type" content="document">
+<meta name="description" content="the OpenBSD/mac68k page">
+<meta name="keywords" content="openbsd,mac68k">
+<meta name="distribution" content="global">
+<meta name="copyright" content="This document copyright 1996-2008 by OpenBSD.">
+</head>
+
+<body bgcolor="#ffffff" text="#000000" link="#23238e">
+<a href="index.html"><img alt="[OpenBSD]" height="30" width="141" src="../images/smalltitle.gif" border="0"></a>
+<p>
+<h2><font color="#e00000">OpenBSD/mac68k</font></h2>
+<hr>
+
+<p>
+OpenBSD/mac68k läuft auf vielen Motorola-680x0-basierten
+Apple-Macintosh-Computern. Es benötigt einen Motorola-68020-, -68030-
+oder -68040-Prozessor. Wenn du einen 68020 hast, brauchst du zusätzlich
+eine Motorola-68851-PMMU (beachte das sich diese von der 68881
+unterscheidet, die eine FPU ist).
+</p>
+
+<p>
+Eine Mailingliste für OpenBSD/mac68k-Portierung ist unter
+<u><font color="#23238e">mac68k@openbsd.org</font></u> erreichbar.
+Um die OpenBSD/mac68k-Mailingliste zu abonnieren, sende eine
+E-Mail mit dem Inhalt <b>»subscribe mac68k«</b> an
+<a href="mailto:majordomo@openbsd.org">majordomo@openbsd.org</a>.
+Bitte lies vorher unsere
+<a href="mail.html">Mailinglistenrichtlinie</a>.
+</p>
+
+<p>
+Es gibt zurzeit keinen Verantwortlichen für die mac68k-Portierung,
+obwohl Martin Reindl
+(<a href="mailto:martin@openbsd.org">martin@openbsd.org</a>) von Zeit zu
+Zeit an ihr herumwerkelt. Andere sind selbstverständlich eingeladen,
+ebenfalls etwas beizutragen!
+</p>
+
+<a name="toc"></a>
+<h3><font color="#0000e0"><i>Inhaltsverzeichnis</i></font></h3>
+<p>
+<ul>
+  <li><a href="#history">Geschichte der Portierung</a>
+  <li><a href="#status">Momentaner Status</a>
+  <li><a href="#projects">Projektliste</a>
+  <li><a href="#hardware">Unterstützte Hardware</a>
+  <li><a href="#install">OpenBSD/mac68k beziehen und installieren</a>
+</ul>
+
+<hr>
+<a name="history"></a>
+<h3><font color="#0000e0"><strong>Geschichte:</strong></font></h3>
+
+
+<p>
+Die mac68k-Portierung von OpenBSD stammt von NetBSD/mac68k ab und hat
+fast die gleiche Hardware wie NetBSD unterstützt. Die Entwicklung wird
+weitergeführt und Aktualisierungen von NetBSD werden von Zeit zu Zeit
+eingebunden, abhängig von der freien Zeit der Leute.
+</p>
+
+<hr>
+<a name="status"></a>
+<h3><font color="#0000e0"><strong>Momentaner Status:</strong>
+</font></h3>
+
+<p>
+Momentan sollte die gesamte Hardware, die unter
+<a href="#hardware">Unterstützte Hardware</a>
+aufgeführt ist, in den Multiuser-Modus booten und genügend der
+on-board Geräte unterstützen, um allgemein benutzbar zu sein.
+
+</p>
+
+<p>
+Ein nativer, nicht beschleunigter X11-Server ist für eingebaute und
+NuBus-Grafikadapter verfügbar.
+
+<hr>
+<a name="projects"></a>
+<h3><font color="#0000e0">
+<strong>Projekte (in keiner bestimmten Reihenfolge):</strong>
+</font></h3>
+
+<p>
+<ul>
+  <li>Installationsprozeduren verbessern.
+  <li>Mehr Geräte unterstützen.
+</ul>
+
+<hr>
+<a name="hardware"></a>
+<h3><font color="#0000e0"><strong>Unterstützte Hardware:</strong></font></h3>
+
+<p>
+<h4>Unterstützte Maschinen</h4>
+
+<p>
+OpenBSD/mac68k läuft auf einem großen Teil der 680x0-basierten
+Macintosh-Computern. Der Kernel selbst unterstützt die folgenden
+Prozessor-Kombinationen:
+<ul>
+  <li>68020 mit 68851-PMMU und 68881-FPU
+  <li>68030 mit 68882-FPU
+  <li>68040 (<b>ohne</b> den 68LC040)
+</ul>
+
+<p>
+Die folgenden Macintosh-Modelle werden unterstützt und wurden getestet.
+Das heißt, dass zumindest der SCSI-Controller, die serielle Konsole und
+das eingebaute Ethernet mit diesen Modellen funktionieren.
+Auf einigen dieser Maschinen wird eine vollständige 68040-CPU benötigt,
+um die standardmäßige 68LC040-CPU auszutauschen.
+<ul>
+<li>Classic-Familie: SE30
+<li>LC-Familie: LC, LC II, LC III, LC III+, LC475, Performa 400-430,
+Performa 450, Performa 460, Performa 475, Performa 476
+<li>Centris-Familie: 610, 650
+<li>Quadra-Familie: 605, 610, 630, 650, 660AV, 700, 800, 840AV, 900, 950
+</ul>
+
+<p>
+<h4>Unterstützte Geräte</h4>
+
+<p>
+<ul>
+<li>Interne SCSI-Controller und -Peripherien:
+ <ul>
+ <li>Quadra/Centris series' onboard NCR-53c96-SCSI-Controller
+ (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=esp&amp;sektion=4&amp;arch=mac68k">esp</a>).
+ <li>Macintosh II-series', Performa- und LC-series' onboard NCR-5380-SCSI-Controller
+ (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ncrscsi&amp;sektion=4&amp;arch=mac68k">ncrscsi</a>,
+ <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=sbc&amp;sektion=4&amp;arch=mac68k">sbc</a>).
+ </ul>
+ <ul>
+ <li>SCSI-Plattenlaufwerke
+ (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=sd&amp;sektion=4">sd</a>).
+ <li>SCSI-CD-ROM-Laufwerke
+ (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=cd&amp;sektion=4">cd</a>).
+ <li>Autochangers
+ (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ch&amp;sektion=4">ch</a>).
+ <li>Bandlaufwerke
+ (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=st&amp;sektion=4">st</a>).
+ </ul>
+<li>Interner Sound
+(<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=asc&amp;sektion=4&amp;arch=mac68k">asc</a>).
+<li>NuBus interner Erweiterungsbus
+(<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=nubus&amp;sektion=4&amp;arch=mac68k">nubus</a>).
+<li>Interne Video- und die meisten NuBus-Grafikkarten
+(<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=macfb&amp;sektion=4&amp;arch=mac68k">macfb</a>).
+<li>Beide internen seriellen Schnittstellen
+(<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=zsc&amp;sektion=4&amp;arch=mac68k">zsc</a>).
+<li>ADB-Tastaturen und -Mäuse
+(<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=adb&amp;sektion=4&amp;arch=mac68k">adb</a>) (mit Ausnahme der IIfx, Quadra 900 und 950.)
+<li>Auf dem National Semiconductor 8390 basierte Ethernetkarten (Asante, Apple und ein paar weiter)
+(<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ae&amp;sektion=4&amp;arch=mac68k">ae</a>)
+<li>Quadra/Centris-AV-Serie onboard MACE-Ethernet
+(<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=mc&amp;sektion=4&amp;arch=mac68k">mc</a>)
+<li>Einige auf dem SONIC-Chip basierte Ethernetkarten, einschließlich
+  des internen Ethernet in vielen Apple nicht AV Quadras/Centrises
+(<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=sn&amp;sektion=4&amp;arch=mac68k">sn</a>)
+</ul>
+
+<p>
+<h4>Nicht getestete Systeme</h4>
+Die folgenden Macintosh-Modelle sind ungetestet und/oder haben keine
+Unterstützung für wichtige Subsysteme. Es ist sehr wahrscheinlich, dass
+viele von ihnen überhaupt nicht laufen.
+<ul>
+<li>Classic-Familie: Color Classic, Classic II
+<li>Macintosh-II-Familie: Mac II, IIx, IIcx, IIci, IIsi, IIfx, IIvi,
+  IIvx, Performa 600
+<li>500-Familie: 520, 550, 575, 580, Mac TV
+</ul>
+
+<p>
+<h4>Nicht unterstützte Systeme</h4>
+<ul>
+<li>PowerPC-basierte Macs. Einige davon werden von der
+  <a href="macppc.html">OpenBSD/macppc</a>-Portierung unterstützt.
+<li>Powerbook-Familie. Hardwaremöglichkeiten begrenzen die Nutzbarkeit
+  dieser Systeme.
+<li>Auf dem 68lC040-Prozessor basierte Maschinen.
+  Unglücklicherweise enthält der Chip selbst einen schweren Fehler,
+  für den es unter OpenBSD keine Softwarelösung gibt.
+</ul>
+
+<p>
+<h4>Nicht unterstützte Geräte</h4>
+
+<p>
+<ul>
+<li>,Apple Communication Slot'- (CS) Ethernetkarten.
+<li>Alle oben nicht aufgeführten NuBus-Karten.
+<li>Diskettenlaufwerk.
+<li>IOP-ADB-Subsystem in IIfx, Quadra 900 und 950.
+<li>IDE-Laufwerke.
+</ul>
+
+<hr>
+<a name="install"></a>
+<h3><font color="#0000e0">
+<strong>OpenBSD/mac68k beziehen und installieren:</strong>
+</font></h3>
+
+<p>
+Das aktuellste unterstützte OpenBSD/mac68k-Release ist
+<a href="../45.html">OpenBSD 4.5</a>.
+Hier sind die
+<a href="ftp://ftp.OpenBSD.org/pub/OpenBSD/4.5/mac68k/INSTALL.mac68k">
+OpenBSD/mac68k-4.5-Installationsanweisungen</a>.
+</p>
+
+<p>
+Snapshots werden von Zeit zu Zeit
+<a href="ftp://ftp.OpenBSD.org/pub/OpenBSD/snapshots/mac68k">hier</a>
+genauso wie auf den verschiedenen
+,<a href="ftp.html">mirrors</a>' verfügbar gemacht.
+Hier gibt es auch die
+<a href="ftp://ftp.OpenBSD.org/pub/OpenBSD/snapshots/mac68k/INSTALL.mac68k">
+OpenBSD/mac68k-Snapshot-Installationsanweisungen</a>.
+</p>
+
+<hr>
+<a href="plat.html">
+<img height="24" width="24" src="../back.gif" border="0" alt="Unterstützte Plattformen">
+</a>
+<br>
+<small><a href="mailto:www@openbsd.org">www@openbsd.org</a></small>
+<br>
+<small>
+<!--
+Originally [OpenBSD: mac68k.html,v 1.83 ]<br>
+$Translation: mac68k.html,v 1.68 2009/05/03 12:44:31 tobias Exp $<br>
+-->
+$OpenBSD: mac68k.html,v 1.65 2009/05/04 19:07:51 tobias Exp $
+</small>
+</body>
+</html>

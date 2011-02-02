@@ -1,0 +1,234 @@
+<!DOCTYPE HTML PUBLIC  "-//W3C//DTD HTML 4.01 Transitional//EN"
+	"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>OpenBSD/cats</title>
+<link rev="made" href="mailto:www@openbsd.org">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="resource-type" content="document">
+<meta name="description" content="the OpenBSD/cats page">
+<meta name="keywords" content="openbsd,cats,ARM,StrongARM">
+<meta name="distribution" content="global">
+<meta name="copyright" content="This document copyright 2004-2008 by OpenBSD.">
+</head>
+
+<body bgcolor="#ffffff" text="#000000" link="#23238e">
+<a href="index.html"><img alt="[OpenBSD]" height="30" width="141" src="images/smalltitle.gif" border="0"></a>
+
+<h2><font color="#e00000">OpenBSD/cats</font></h2>
+
+<hr>
+
+<p>
+OpenBSD/cats runs on the
+<a href="http://www.simtec.co.uk/">Simtec Electronics</a>
+<a href="http://www.simtec.co.uk/products/EB110ATX/">StrongARM
+110 Evaluation Board</a>.
+<p>
+<strong><font color="#e00000">The OpenBSD/cats port has been
+discontinued</font></strong> after the 4.0 release.
+<p>
+There is no longer work on supporting this port, however the source code
+is still available in the CVS Attic.
+<p>
+A mailing list for ARM-based ports is available at
+<u><font color="#23238e">arm@openbsd.org</font></u>.
+To join the OpenBSD/arm mailing list, send a message body of
+<b>"subscribe arm"</b> to
+<a href="mailto:majordomo@openbsd.org">majordomo@openbsd.org</a>.
+Please be sure to check our <a href="mail.html">mailing list policy</a> before
+subscribing.
+
+<p>
+The current port maintainer is Dale Rahn
+(<a href="mailto:drahn@openbsd.org">drahn@openbsd.org</a>).
+Others are definitely welcome to contribute!
+We are also evaluating other possible ARM platforms.
+
+<a name="toc"></a>
+<h3><font color="#0000e0"><i>Table of contents</i></font></h3>
+
+<ul>
+  <li><a href="#history">History of the port</a>
+  <li><a href="#status">Current status</a>
+<!--
+  <li><a href="#projects">Project list</a>
+-->
+  <li><a href="#hardware">Supported hardware</a>
+  <li><a href="#install">Getting and installing OpenBSD/cats</a>
+</ul>
+
+<hr>
+<a name="history"></a>
+<h3><font color="#0000e0"><strong>History:</strong></font></h3>
+
+<p>
+OpenBSD/cats was started based on NetBSD -current code of January 2004.
+It was used as a reasonably fast foundation to the
+<a href="zaurus.html">zaurus</a> port.
+
+<p>
+Once the zaurus port was running well, cats was neglected due to the
+(relative) lack of hardware, as well as the deceiving hardware reliability,
+and was eventually dropped shortly after the inception of the
+<a href="armish.html">armish</a> port.
+
+<hr>
+<a name="status"></a>
+<h3><font color="#0000e0"><strong>Current status:</strong></font></h3>
+
+<p>
+The Simtec StrongARM 110 Evaluation Board is the only supported board at
+the current time.
+
+<!--
+<hr>
+<a name="projects"></a>
+<h3><font color="#0000e0"><strong>Projects (in no particular order):
+</strong></font></h3>
+
+<ul>
+  <li>Better booting support from ABLE firmware (in progress).
+  <li>Kernel Symbols (currently unavailable due to boot process limitations).
+</ul>
+-->
+
+<hr>
+<a name="hardware"></a>
+<h3><font color="#0000e0"><strong>Supported peripherals:
+</strong></font></h3>
+
+<p>
+Currently only the following hardware has been tested:
+
+<ul>
+<li><strong>Onboard PCI modules</strong> (pci)
+<ul>
+<li>Acer Labs M5229 UDMA IDE
+</ul>
+
+<li><strong>PCI-Bridges</strong> 
+(<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=pchb&amp;arch=cats&amp;sektion=4">pchb</a>)
+<ul>
+<li>Acer Labs M1533 ISA
+</ul>
+
+<li><strong>Video Cards</strong>
+<ul>
+<li>S3 PCI VGA
+</ul>
+
+<li><strong>Ethernet</strong>
+<ul>
+<li>ASIX 88140A/88141-based PCI adapters (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=dc&amp;arch=cats&amp;sektion=4">dc</a>), including:
+    <ul>
+    <li>CNet Pro110B
+    <li>Alfa Inc. GFC2204
+    </ul>
+<li>Novell NE1000, NE2000 (ISA, and PCI variants thereof) (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ne&amp;arch=cats&amp;sektion=4">ne</a>) <sup>(B)</sup>
+<li>VIA Rhine/RhineII/RhineIII Ethernet adapters (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=vr&amp;arch=cats&amp;sektion=4">vr</a>), including:
+    <ul>
+    <li>Addtron AEF-360TX
+    <li>Hawking PN102TX
+    <li>D-Link DFE530TX
+    </ul>
+<li>DEC DECchip 21143 (Tulip clones) (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=dc&amp;arch=cats&amp;sektion=4">dc</a>)
+<li>Intel i8255x-based (except the i82556) PCI adapters (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=fxp&amp;arch=cats&amp;sektion=4">fxp</a>), including:
+    <ul>
+    <li>Intel EtherExpress PRO/10+
+    <li>Intel EtherExpress PRO/100, PRO/100B, and PRO/100+
+    <li>Intel EtherExpress PRO/100+ "Management Adapter"
+    <li>Intel EtherExpress PRO/100 Dual Port
+    <li>Intel PRO/100 VE, PRO/100 VM, and PRO/100 S
+    </ul>
+<li>Intel 21145-based PCI adapters (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=dc&amp;arch=cats&amp;sektion=4">dc</a>)
+</ul>
+ 
+<li><strong>SCSI and IDE Host Adapters</strong>
+<ul>
+  <li> Adaptec AIC-7770, AIC-7850, AIC-7860, AIC-7870, AIC-7880, AIC-7890,
+    AIC-7891, AIC-7892, AIC-7895, AIC-7896, AIC-7897 and AIC-7899 based host
+    adapters
+    (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ahc&amp;sektion=4"
+    >ahc</a>)
+    including the Adaptec cards
+    <ul>
+      <li>AHA-274X[W,T]
+      <li>AHA-284X
+      <li>AHA-2910, AHA-2915
+      <li>AHA-2920
+      <li>AHA-2930[C,U2]
+      <li>AHA-2940[J,N,U,AU,UW,UW Dual,UW Pro,U2W,U2B]
+      <li>AHA-2950[U2W,U2B]
+      <li>AHA-3940[U,AU,UW,AUW,U2W]
+      <li>AHA-3950U2
+      <li>AHA-3960
+      <li>AHA-3985
+      <li>AHA-4944UW
+      <li>AHA-19160B
+      <li>AHA-29160[B,N]
+      <li>AHA-39160
+    </ul>
+  <li>Symbios Logic (NCR) 53C8xx, 53C1010 and 53C1510D-based PCI host
+    adapters including generic cards, old ASUS cards, the DTC-3130
+    series, and Diamond Fireport series
+    (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=siop&amp;arch=cats&amp;sektion=4"
+    >siop</a>)
+<li>All PCI IDE 
+(<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=pciide&amp;arch=cats&amp;sektion=4">pciide</a>) 
+adapters supported by the <a href="i386.html">i386</a> platform
+</ul>
+
+<li><strong>Drives</strong>
+<ul>
+<li>All IDE devices supported on the <a href="i386.html">i386</a> platform.
+<li>All ATAPI drives supported on the <a href="i386.html">i386</a> platform.
+<li>All SCSI drives supported on the <a href="i386.html">i386</a> platform.
+</ul>
+
+<li><strong>USB Controllers/Hubs</strong>
+<p>
+USB support does not work correctly on all boards at the moment.<br>
+<ul>
+<li>OHCI: Acer Labs M5237 USB (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ohci&amp;arch=cats&amp;sektion=4">ohci</a>)
+</ul>
+ 
+<li><strong>USB Devices</strong>
+<ul>
+<li>Alps Electric Apple USB Keyboard (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ukbd&amp;arch=cats&amp;sektion=4">ukbd</a>)
+<li>Solid Year Keyboard and Mouse (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ukbd&amp;arch=cats&amp;sektion=4">ukbd</a>) (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ums&amp;arch=cats&amp;sektion=4">ums</a>)
+<li>Logitech M4848 (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ums&amp;arch=cats&amp;sektion=4">ums</a>)
+<li>Kensington USB/PS2 Wheel Mouse (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ums&amp;arch=cats&amp;sektion=4">ums</a>)
+<li>USB Zip Drives (<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=umass&amp;arch=cats&amp;sektion=4">umass</a>)
+</ul> 
+
+<li><strong>Other Devices</strong>
+<ul>
+<li>Serial Ports: the onboard serial port should work as
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=fcom&amp;arch=cats&amp;sektion=4">fcom</a>
+serial console or as a standard serial port.
+</ul>
+
+</ul>
+
+<hr>
+<a name="install"></a>
+<h3><font color="#0000e0">
+<strong>Getting and installing OpenBSD/cats:</strong>
+</font></h3>
+
+<p>
+The last supported OpenBSD/cats release was
+<a href="40.html">OpenBSD 4.0</a>.
+
+<hr>
+<a href="plat.html">
+<img height="24" width="24" src="back.gif" border="0" alt="Supported platforms">
+</a> 
+<br>
+<small><a href="mailto:www@openbsd.org">www@openbsd.org</a></small>
+<br>
+<small>$OpenBSD: cats.html,v 1.24 2009/09/18 07:15:03 jasper Exp $</small>
+
+</body>
+</html>

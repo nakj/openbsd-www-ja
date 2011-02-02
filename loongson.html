@@ -1,0 +1,169 @@
+<!DOCTYPE HTML PUBLIC  "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>OpenBSD/loongson</title>
+<link rev="made" href="mailto:www@openbsd.org">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="resource-type" content="document">
+<meta name="description" content="the OpenBSD/loongson page">
+<meta name="keywords" content="openbsd,loongson,godson,lemote,yeeloong,fuloong,emtec,gdium,liberty">
+<meta name="distribution" content="global">
+<meta name="copyright" content="This document copyright 2010 by OpenBSD.">
+</head>
+
+<body bgcolor="#ffffff" text="#000000" link="#23238e">
+<a href="index.html"><img alt="[OpenBSD]" height="30" width="141" src="images/sm
+alltitle.gif" border="0"></a>
+<p>
+<h2><font color="#e00000">OpenBSD/loongson</font></h2>
+
+<hr>
+
+<p>
+<a href="images/lemote.jpg">
+<img src="images/lemote.jpg" width="600" height="400"
+align="right"></a>
+
+OpenBSD/loongson is a port intended to run on systems based upon the
+Loongson (also known as <i>Godson</i>) 2E and 2F MIPS-compatible processors,
+using the
+<a href="http://www.pmon2000.com/">PMON</a> firmware and boot loader.
+
+<p>
+The current port maintainer is Miod Vallat
+(<a href="mailto:miod@openbsd.org">miod@openbsd.org</a>).
+
+
+<a name="toc"></a>
+<h3><font color="#0000e0"><i>Table of contents</i></font></h3>
+<ul>
+  <li><a href="#history">History of the port</a>
+  <li><a href="#hardware">Supported hardware</a>
+  <li><a href="#status">Current status</a>
+  <li><a href="#projects">Project list</a>
+  <li><a href="#install">Getting and installing OpenBSD/loongson</a>
+</ul>
+
+<hr>
+<a name="history"></a>
+<h3><font color="#0000e0"><strong>History:</strong></font></h3>
+<p>
+The idea of an OpenBSD/loongson started when the EMTEC Gdium Liberty netbook
+was announced. Unfortunately, the general availability of these machines kept
+being delayed. Because of this, focus switched to the Lemote Yeeloong netbook
+instead. After procrastinating for months, serious work started in August 2009,
+and the kernel work was completed by the end of November 2009.
+<p>
+Unfortunately, most of the Loongson 2F-based hardware available at that time
+suffers from serious problems in the processor's branch prediction logic,
+causing the system to freeze, for which <b>errata information only exists
+in the chinese documentation</b> (chapter 15, missing from the english
+translation), the only english language information being an
+<a href="http://sourceware.org/ml/binutils/2009-11/msg00387.html">e-mail</a>
+on a toolchain mailing-list.
+<p>
+After a rush of adding silicon problems workarounds, the port to the Lemote
+Yeeloong was completed and self hosting by the end of January 2010.
+<p>
+This solid foundation allowed for support for other designs to be added
+pretty quickly, over the next couple of weeks.
+<p>
+And work continues...
+
+<hr>
+<a name="hardware"></a>
+<h3><font color="#0000e0"><strong>Supported hardware:</strong></font></h3>
+<p>
+The OpenBSD/loongson kernel has generic support for systems built with either
+Loongson 2E processors and Algorithmics Bonito64 PCI and memory controller,
+or Loongson 2F processors with their integrated PCI/PCI-X and memory controller.
+Specific hardware support is then written on a design-by-design basis.
+<p>
+At the moment, the following machines are supported:
+<ul>
+<li><a href="http://www.lemote.com/en/products/mini-computer/2010/0310/111.html">Lemote Fuloong 2F
+mini-PC</a>
+<br>
+All on-board devices are supported, but the framebuffer is currently limited
+to the 640x400x8 video mode set up by the firmware.
+<li><a href="http://www.lemote.com/en/products/all-in-one/2010/0311/122.html">Lemote Lynloong all-in-one-PC</a>
+<br>
+All on-board devices are supported, but the framebuffer is currently limited
+to the 1360x768x16 video mode set up by the firmware.
+<li><a href="http://www.lemote.com/en/products/Notebook/2010/0310/112.html">Lemote Yeeloong
+netbook</a>
+<br>
+Both the 8.9" and 10.1" models are supported.
+All on-board devices are supported.
+<li><a href="http://www.gdium.com/en/product/liberty1000">EMTEC Gdium Liberty 1000 netbook</a>
+<br>
+All on-board devices but the audio controller are supported.
+</ul>
+
+<hr>
+<a name="status"></a>
+<h3><font color="#0000e0"><strong>Current status:</strong></font></h3>
+
+<p>
+Development is currently pretty hectic at the moment, although it will slow
+down in preparation for the first OpenBSD/loongson release.
+<p>
+All supported systems run multiuser, and a currently unaccelerated
+X server is available.
+
+<hr>
+<a name="projects"></a>
+<h3><font color="#0000e0"><strong>Projects (in no particular order):
+</strong></font></h3>
+
+<ul>
+<li>CPU frequency scaling on 2F systems.
+(in progress)
+<li>Write support for the on-board audio controller on Gdium.
+<li>Improve the driver for the Sis 315 Pro framebuffer found on the Fuloong
+and Lynloong.
+<li>Suspend/resume on Yeeloong and Gdium Liberty.
+<li>Support more hardware as our developers get their hands on more
+Loongson 2E- and 2F-based systems.
+</ul>
+
+<hr>
+<a name="install"></a>
+<h3><font color="#0000e0">
+<strong>Getting and installing OpenBSD/loongson</strong>
+</font></h3>
+
+<p>
+There is no OpenBSD/loongson formal release yet.
+<!--
+<p>
+The latest supported OpenBSD/loongson release is
+<a href="47.html">OpenBSD 4.7</a>.
+Here are the
+<a href="ftp://ftp.OpenBSD.org/pub/OpenBSD/4.7/loongson/INSTALL.loongson">
+OpenBSD/loongson 4.7 installation instructions
+</a>.
+-->
+
+<p>
+Snapshots are made available from time to time, in
+<a href="ftp://ftp.OpenBSD.org/pub/OpenBSD/snapshots/loongson">this location</a>
+as well as in a few
+<a href="ftp.html">mirrors</a>.
+Here are the
+<a href="ftp://ftp.openbsd.org/pub/OpenBSD/snapshots/loongson/INSTALL.loongson">
+OpenBSD/loongson snapshot installation instructions
+</a> as well.
+
+<hr>
+<a href="plat.html">
+<img height="24" width="24" src="back.gif" border="0" alt="Supported platforms">
+</a>
+<br>
+<small><a href="mailto:www@openbsd.org">www@openbsd.org</a></small>
+<br>
+<small>$OpenBSD: loongson.html,v 1.25 2010/03/13 08:38:17 jasper Exp $</small>
+
+</body>
+</html>

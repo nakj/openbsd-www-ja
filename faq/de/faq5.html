@@ -1,0 +1,1837 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>5 - Das Systems aus dem Quelltext erzeugen</title>
+<link rev= "made" href= "mailto:www@openbsd.org">
+<meta name= "resource-type" content= "document">
+<meta name= "description"   content= "the OpenBSD FAQ page">
+<meta name= "keywords"      content= "openbsd,faq">
+<meta name= "distribution"  content= "global">
+<meta name= "copyright"     content= "This document copyright 1998-2007 by OpenBSD.">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+</head>
+
+<body bgcolor= "#ffffff" text= "#000000">
+<!-- Passes validator.w3.org.  Please keep it this way -->
+
+<a href="../../de/index.html">
+<img alt="[OpenBSD]" height=30 width=141 src="../../images/smalltitle.gif" border="0">
+</a>
+<p>
+<font color= "#0000e0">
+<a href= "index.html">[FAQ-Index]</a>
+<a href= "faq4.html">[Zum Kapitel 4 - Installationsanleitung]</a>
+<a href= "faq6.html">[Zum Kapitel 6 - Netzwerk]</a>
+</font>
+
+<h1><font color="#e00000">5 - Das System aus dem Quelltext
+erzeugen</font></h1>
+<hr>
+
+<p>
+<h3>Inhaltsverzeichnis</h3>
+<ul>
+<li><a href="#Flavors">5.1 - OpenBSDs Flavors</a>
+<li><a href="#WhySrc">5.2 - Warum sollte ich mein System vom Quelltext
+  aus erzeugen?</a>
+<li><a href="#Bld">5.3 - OpenBSD vom Quelltext aus erzeugen</a>
+<ul>
+  <li><a href="#BldOverview">5.3.1 - Überblick</a>
+  <li><a href="#BldBinary">5.3.2 - Zur nächstliegenden Binary
+    aktualisieren oder dieses installieren</a>
+  <li><a href="#BldGetSrc">5.3.3 - Den passenden Quelltext
+    runterladen</a>
+  <li><a href="#BldKernel">5.3.4 - Den Kernel erzeugen</a>
+  <li><a href="#BldUserland">5.3.5 - Das Userland erzeugen</a>
+</ul>
+<li><a href="#Release">5.4 - Ein Release erstellen</a>
+<li><a href="#Xbld">5.5 - X erzeugen</a>
+<li><a href="#Why">5.6 - Warum brauche ich einen angepassten Kernel?</a>
+<li><a href="#Options">5.7 - Einen angepassten Kernel erzeugen</a>
+<li><a href="#BootConfig">5.8 - Konfiguration zur Bootzeit</a>
+<li><a href="#config">5.9 - Mittels config(8) deinen Kernel verändern</a>
+<li><a href="#VerboseBoot">5.10 - Ausführlichere Nachrichten während
+  des Bootens erhalten</a>
+<li><a href="#buildprobs">5.11 - Häufige Probleme, Tipps und Fragen
+  beim Kompilieren und Erzeugen</a>
+   <ul>
+   <li><a href="#sig11">5.11.1 - Das Erzeugen bricht mit einem
+     Signal-11-Fehler ab</a>
+   <li><a href="#snake">5.11.2 - »make build« schlägt mit »cannot
+     open output file snake: is a directory« fehl</a>
+   <li><a href="#ProbIPv6">5.11.3 - Mein System ohne IPv6 läuft
+     nicht!</a>
+   <li><a href="#ProbObj">5.11.4 - Hoppla! Ich habe vergessen, zuerst
+     das <tt>/usr/obj</tt>-Verzeichnis zu erstellen!</a>
+   <li><a href="#ProbObjPt">5.11.5 - Lege <tt>/usr/obj</tt> auf seine
+     eigene Partition</a>
+   <li><a href="#ProbSKIPDIR">5.11.6 - Wie verhindere ich das Erzeugen
+     von bestimmten Teilen des Trees?</a>
+   <li><a href="#ProbMoreInfo">5.11.7 - Wo kann ich mehr über den
+     Erzeugungsprozess erfahren?</a>
+   <li><a href="#NoSnaps">5.11.8 - Ich sehe keine Snapshots auf den
+     FTP-Seiten. Wo sind sie geblieben?</a>
+   <li><a href="#NewCompiler">5.11.9 - Wie führe ich ein Bootstrap
+     für eine neue Version des Compilers (<i>gcc</i>) aus?</a>
+   <li><a href="#UpdateEtc">5.11.10 - Was ist der beste Weg, um
+     <tt>/etc</tt>, <tt>/var</tt> und <tt>/dev</tt> zu
+     aktualisieren?</a>
+   <li><a href="#Hierarchy">5.11.11 - Gibt es einen einfachen Weg, um
+     alle Dateihierarchien zu ändern?</a>
+   <li><a href="#ProbXComp">5.11.12 - Kann ich cross-compilen? Warum
+     nicht?</a>
+   </ul>
+</ul>
+<hr>
+<br>
+
+
+<a name="Flavors"></a>
+<h2>5.1 - OpenBSDs Flavors</h2>
+<!-- XXXversion - revise doodle -->
+Es gibt drei Flavors von OpenBSD:
+<ul>
+<li><b>-release:</b> Die Version von OpenBSD, die alle 6 Monate auf CD
+    ausgeliefert wird.
+<li><b>-stable:</b> Release und zusätzliche Patches, die für
+    Sicherheit und Zuverlässigkeit als notwendig erachtet werden.
+<li><b>-current:</b> Hier werden die aktuellen Entwicklungsarbeiten
+    durchgeführt; letzten Endes wird das nächste Release aus diesem
+    Flavor erstellt.
+</ul>
+
+Grafisch sieht die Entwicklung dieser Flavors ungefähr so aus:
+
+<blockquote>
+<pre>
+       ,------o-----------o----X                    4.1 Stable
+       |      .           .
+       |      .    ,------o---------o----X          4.2 Stable
+       |      .    |      .         .
+       |      .    |      .    ,----o----------o--&gt; 4.3 Stable
+       |      .    |      .    |    .          .
+       |      .    |      .    |    .    ,-----o--&gt; 4.4 Stable
+       |      .    |      .    |    .    |     .
+       |      .    |      .    |    .    |     .
+ --&gt;4.1Rel-----&gt;4.2Rel-----&gt;4.3Rel-----&gt;4.4Rel----&gt; Current
+
+          Zeit ---&gt;
+</pre>
+</blockquote>
+
+<p>
+<i>-Current</i> ist der Ort, an dem die aktive Arbeit gemacht wird. Aus
+diesem Flavor wird dann das nächste <i>-release</i> von OpenBSD. Alle
+sechs Monate, wenn eine neue Version von OpenBSD veröffentlicht wird,
+wird <i>-current</i> markiert und somit <i>-release</i>: ein fester
+Punkt in der Geschichte des Source-Trees. Kein <i>-release</i> wird
+jemals verändert; es ist das, was auf den
+<a href="../../de/orders.html">CDs</a> und
+<a href="../../de/ftp.html">FTP-Servern</a> vorliegt.
+
+<p>
+<i>-Stable</i> basiert auf <i>-release</i> und ist ein Branch des
+Hauptentwicklungsweges von OpenBSD. Wenn sehr wichtige Korrekturen
+in <i>-current</i> durchgeführt wurden, werden sie zurück in die
+<i>-stable</i>-Branches portiert. Das ist der Grund, warum
+<i>-stable</i> auch als <i>Patchbranch</i> bezeichnet wird. In der
+obigen Illustration sind die vertikalen gepunkteten Linien
+Fehlerkorrekturen, die in die <i>-stable</i>-Branches eingefügt
+wurden. Du wirst auch erkennen, dass der Lebenszyklus
+des <i>4.1-stable</i>-Branchs im obigen Beispiel mit Erscheinen des
+<i>4.3-release</i> und der <i>4.2-stable</i>-Branch
+mit Erscheinen von <i>4.4-release</i> beendet war - alte Versionen
+werden typischerweise noch zwei Releases lang weiter gepflegt. Es braucht
+nun mal Ressourcen und Zeit, ältere Versionen zu pflegen - obwohl wir
+das gerne tun würden, konzentrieren wir uns doch lieber auf neue
+Funktionen. Der <i>-stable</i>-Branch kann vom Design her sehr leicht
+aus dem <i>-release</i>-Branch der selben Version erzeugt werden
+(z.&nbsp;B. von <i>4.4-release</i> zu <i>4.4-stable</i>).
+
+<p>
+Der <i>-stable</i>-Branch besteht aus <i>-release</i> und weiteren
+Patches, die man auf der <a href="../../de/errata.html">Errataseite</a>
+findet. Die Bedienung und der Betrieb von <i>-stable</i> ist genauso
+wie im <i>-release</i>, auf dem er basiert.
+Wenn die <a href="http://www.openbsd.org/cgi-bin/man.cgi">Manualseiten</a>
+geändert werden müssen, wird es wahrscheinlich nicht in
+<i>-stable</i> eingefügt werden. Mit anderen Worten:
+Unterstützung für neue Hardware und neue Funktionen werden NICHT in
+<i>-stable</i> eingefügt.
+
+<p>
+An dieser Stelle sei erwähnt, dass der Name <i>-stable</i> nicht
+ausdrücken soll, dass <i>-current</i> unzuverlässig sei.
+Stattdessen ändert und entwickelt sich <i>current</i>, während
+die Funktionsweise von <i>-stable</i> nicht mehr geändert wird:
+Du musst somit dein System nicht neu erlernen, Konfigurationsdateien
+ändern und wirst auch keine Probleme damit haben, deinem System
+weitere Anwendungen hinzuzufügen.
+
+<p>
+Auf Grund unserer Bemühungen, OpenBSD zu verbessern, ist es unser
+Ziel, dass <i>-current</i> zuverlässiger, sicherer und
+selbstverständlich funktionsreicher als <i>-stable</i> ist.
+Grob gesagt ist die »beste« Version von OpenBSD <i>-current</i>.
+
+<p>
+Warnung: <i>-current</i> ist ein sich bewegendes Ziel.
+Es ändert sich fast minütlich und kann sich genauso gut mehrere Male
+in der Zeit ändern, die man braucht, um den Quelltext zu holen.
+Obwohl die Entwickler hart daran arbeiten, sicherstellen zu können,
+dass das System immer kompiliert und dass es keine großen Fehler
+gibt, ist es durchaus möglich, <i>-current</i>-Quelltext herunterzuladen,
+der nicht kompiliert, während es fünf Minuten später wieder einwandfrei
+funktioniert.
+Es gibt ebenfalls Flagdays und große Systemänderungen, die die
+Entwickler mit Tools navigieren, die nur einmal genutzt werden können.
+Das bedeutet, dass eine quelltextbasierte Aktualisierung nicht möglich
+ist. <b>Wenn du damit nicht umgehen kannst, lass deine Finger von
+<i>-current</i>.</b>
+
+<p>
+Die meisten Benutzer sollten also einfach <i>-stable</i> oder
+<i>-release</i> benutzen. Da das jetzt klar ist, sollte man aber auch
+wissen, dass viele Leute <i>-current</i> auf Produktionssystemen fahren
+- und das ist insofern wichtig, weil es hilft, Bugs zu finden und neue
+Funktionalitäten zu testen. Wenn du aber nicht weißt, wie man sauber
+Probleme beschreibt, diagnostiziert oder damit umgeht, rede dir (oder
+jemand anderem) besser nicht ein, du würdest »dem Projekt helfen«,
+indem du <i>-current</i> benutzt. »Es funktioniert nicht!« ist kein
+<a href="../../de/report.html#bugtypes">nützlicher Fehlerbericht</a>.
+"The recent changes to the pciide driver broke compatibility with my
+Slugchip-based IDE interface, dmesg of working and broken systems
+follow..." könnte dagegen durchaus ein sinnvoller und nützlicher
+Bericht sein.
+
+<p>
+Es mag Zeiten geben, in denen auch ein normaler Benutzer gerne auf
+des Messers Schneide leben will und <i>-current</i> benutzt. Der
+häufigste Grund dafür ist, dass er ein Gerät hat, das nicht von
+<i>-release</i> unterstützt wird (und daher selbstverständlich auch
+nicht von <i>-stable</i>). Es könnte auch sein, dass er eine neue
+Funktion aus <i>-current</i> benutzen möchte. In diesem Fall hat er die
+Wahl zwischen <i>-current</i> oder dem Nichtbenutzen seines Gerätes -
+und dann ist eben das Benutzen von <i>-current</i> oftmals weniger
+schlimm. Man sollte dann aber auf keinen Fall ein Händchen halten der
+Entwickler erwarten, falls es zu Problemen kommt.
+
+<h3>Snapshots</h3>
+Zwischen den formalen Veröffentlichungen neuer Versionen von OpenBSD
+werden <i>Snapshots</i> über die
+<a href="../../de/ftp.html">FTP-Seiten</a> verfügbar gemacht. Wie der
+Name schon sagt, sind das Versionen vom Code, der gerade zu eben diesem
+Zeitpunkt aktuell war, als der Übersetzer des Snapshots sich eine Kopie
+des Source-Codes für eben diese Plattform gemacht hat. Denke bitte
+daran, dass es auf einigen Plattformen auch einige TAGE sein können,
+bis der Snapshot dann auch kompiliert und zur Verfügung gestellt wird.
+Es gibt auch keinerlei Garantien, dass die Snapshots funktionsfähig
+oder auch nur installationsfähig sind. Oftmals werden Snapshots dann
+erzeugt, wenn es eine Änderung gibt, die getestet werden muss. Bei
+einigen Plattformen werden Snapshots auf fast täglicher Basis erstellt,
+andere sind weniger regelmäßig. Wenn du unbedingt <i>-current</i>
+benutzen willst, ist ein aktueller Snapshot oft das Einzige, was du
+dazu brauchst, und das Upgraden auf den aktuellen Snapshot ist auch eine
+Voraussetzung, um <i>-current</i> zu erzeugen.
+
+<p>
+Manchmal wird gefragt, ob es einen Weg gibt, genau den Source-Code zu
+bekommen, der zur Erzeugung eines Snapshot eingesetzt wurde. Die Antwort
+ist ,Nein'. Erstens ergibt sich daraus kein besonderer Vorteil. Zweitens
+werden Snapshots nach Bedarf erzeugt, wenn die Zeit es erlaubt oder
+es genügend Ressourcen gibt. Auf schnellen Plattformen könnten
+z.&nbsp;B. mehrere Snapshots an einem Tag freigegeben werden. Auf den
+langsameren kann das schon mal eine ganze Woche dauern. Und das
+Platzieren einer Markierung (Tag) für jeden Snapshot im Quelltext
+ist nun wirklich extrem unpraktisch. Der dritte Grund ist, dass
+Snapshots oft experimentellen Code beinhalten, der noch nicht in den
+Tree eingebunden wurde.
+
+<h3>Upgrade oder Update</h3>
+Du wirst oft sehen, dass über das »Upgraden« und »Updaten« von
+OpenBSD-Installationen geschrieben wird. Obwohl beide Wörter ungefähr
+die gleiche Bedeutung haben, werden sie in Verbindung mit OpenBSD
+unterschiedlich eingesetzt.
+
+<p>
+<b>Upgraden</b> ist die Installation einer neueren OpenBSD-Version,
+die über neue Funktionen verfügt: zum Beispiel ein Wechsel von v4.3
+auf v4.4 oder vom Snapshot am 12. Juni auf den Snapshot am 20. Juni.
+Wenn du upgradest, wirst du dich normalerweise an die Anleitungen in
+<a href="current.html">Der Entwicklung von -current folgen</a> oder
+im Falle eines Releasewechsels an die
+<a href="upgrade44.html">Upgradeanleitung</a> halten, um benötigte
+Änderungen durchzuführen, damit die upgegradete Version von OpenBSD
+eingesetzt werden kann.
+
+<br>
+<b>Updaten</b> bedeutet Patches in ein System einzuspielen, um die
+Lauffähigkeit zu verbessern OHNE die grundlegenden Funktionen oder
+die Binärkompatibilität zu verändern. Entweder folgst du hierbei den
+Anweisungen wie man <a href="faq10.html#Patches">Patches in OpenBSD
+einfügt</a> oder wie man <a href="../../de/stable.html">-stable
+folgt</a>. Wenn du dein System »updatest«, dann wechselst es von
+<i>-release</i> auf <i>-stable</i> (oder auf ein gepatchtes
+<i>-release</i>) der gleichen OpenBSD-Version (zum Beispiel von
+4.4-release auf 4.4-stable). Später kannst du dann auf eine neuere
+<i>-stable</i>-Version der gleichen OpenBSD-Version updaten. Der
+Updatevorgang geht normalerweise leicht vonstatten, da keine
+<tt>/etc</tt>-Dateien oder andere Systemkonfigurationen geändert
+werden müssen.
+
+<p>
+Du könntest also ein System von CD installieren
+(zum Beispiel 4.3-release), dann ein paar Mal auf 4.3-stable updaten,
+dann auf 4.4-release per CD upgraden, wieder ein paar Mal updaten
+und dann wieder auf die nächste OpenBSD-Version upgraden.
+
+<h3>Die Dinge synchron halten</h3>
+Es ist wichtig zu verstehen, dass OpenBSD ein Betriebssystem ist
+und als ganzes gesehen werden muss, nicht ein Kernel mit einem
+Schwanz an Applikationen, die drangehängt sind. Du musst sicherstellen,
+dass dein Kernel, dein Userland (die unterstützenden Werkzeuge und
+Dateien) und dein <a href="faq15.html#Ports"><tt>Ports</tt></a>-Tree
+alle synchronisiert sind, oder es werden unangenehme Dinge passieren.
+Oder anders ausgedrückt (da es immer wieder Leute gibt, die das
+versuchen), kannst du keine brandneuen <tt>Ports</tt> auf einem System
+laufen lassen, das einen Monat alt ist oder einen Kernel aus
+<i>-current</i> neu erzeugen und dann erwarten, dass er mit einem
+<i>release</i>-Userland zusammenarbeitet. Ja, das heißt, dass du dein
+System auf aktuellem Stand halten musst, wenn du ein neues Programm
+laufen lassen willst, das z.&nbsp;B. erst heute in den Ports-Tree eingefügt
+wurde. Tut uns erneut leid, aber OpenBSD hat nun mal nur sehr begrenzte
+Ressourcen, sodass wir so was nicht ändern können.
+
+<p>
+Man sollte verstehen, dass der Upgradevorgang <b>nur in eine Richtung
+unterstützt wird: von älter zu neuer</b> und von <i>-stable</i> zu
+<i>-current</i>.  Du kannst kein <i>4.4-current</i>
+(oder einen Snapshot) laufen lassen und dich dann entscheiden, dass dir
+das zu gefährlich ist, und einfach nach <i>4.4-stable</i>
+zurückgehen. Du bist auf dich allein gestellt, wenn du einen anderen Weg
+wählst als den normalen und unterstützten, nämlich dein System
+von Grund auf neu zu installieren; erwarte bitte keinerlei Hilfeleistung
+vom OpenBSD-Entwicklerteam.
+
+<p>
+Ja, das soll wirklich heißen, dass du lange und intensiv darüber
+nachdenken sollst, bevor du dich an <i>-current</i> wagst.
+
+<a name="WhySrc"></a>
+<h2>5.2 - Warum sollte ich mein System vom Quelltext aus erzeugen?</h2>
+Eigentlich brauchst du das vermutlich nicht.
+
+<p>
+Einige Gründe, warum man NICHT vom Source aus erzeugen sollte:
+<ul>
+<li>Das Compilieren deines Systems als Weg zum Upgraden zu nutzen, wird
+nicht unterstützt.
+<li>Du wirst KEINE bessere Systemleistung durch das Compilieren deines
+eigenen Systems erhalten.
+<li>Compileroptionen verändern führt eher dazu, dass du dein System
+zerschießt, statt es zu verbessern.
+</ul>
+
+Einige Gründe, warum du tatsächlich vom Source aus erzeugen möchtest
+oder musst:
+<ul>
+<li>Neue Funktionalitäten testen oder entwickeln.
+<li>Das System zu compilieren führt zu einer hohen Last auf deinem
+Computer, was ein Weg sein kann um sicherzustellen, dass das System,
+das du zusammengesetzt oder erworben hast, in ziemlich guter
+Rechenverfassung ist.
+<li>Wenn du dem <a href="../../de/stable.html">Stablebranch</a>
+folgen möchtest.
+<li>Wenn du ein stark angepasstes Release von OpenBSD für einen sehr
+speziellen Verwendungszweck erzeugen willst.
+</ul>
+
+<p>
+Das OpenBSD-Team stellt neue Snapshots bereit, die auf
+<i>-current</i>-Code basieren, in einem sehr regulären Zeitrahmen für
+alle Plattformen bereit.
+Es ist sehr wahrscheinlich, dass das alles ist, das du benötigst, um
+<i>-current</i> laufen zu lassen.
+
+<p>
+Der häufigste Grund, vom Source aus zu erzeugen, ist das Folgen vom
+<i>-stable</i>-Branch, da das Erzeugen vom Source aus die einzige
+unterstützte Option ist.
+
+<a name="Bld"></a>
+<h2>5.3 - OpenBSD vom Quelltext aus erzeugen</h2>
+
+<a name="BldOverview"></a>
+<h3>5.3.1 - Überblick über den Erzeugungsprozess</h3>
+
+OpenBSD vom Source aus zu erzeugen beinhaltet einige Schritte:
+<ul>
+<li><a href="#BldBinary">Zur nächstliegenden Binary aktualisieren.</a>
+<li><a href="#BldGetSrc">Den passenden Source-Code runterladen.</a>
+<li><a href="#BldKernel">Den neuen Kernel erzeugen und von diesem
+  booten</a>
+<li><a href="#BldUserland">Das Userland erzeugen (,make build').</a>
+</ul>
+
+Es gibt ein paar weitere Schritte, die einige Benutzer eventuell
+durchführen möchten, abhängig von dem Verwendungszweck der
+Erzeugung und ob X installiert ist:
+<ul>
+<li><a href="#Release">Ein Release erzeugen.</a>
+<li><a href="#Xbld">X erzeugen.</a>
+</ul>
+
+
+
+<a name="BldBinary"></a>
+<h3>5.3.2 - Zur nächstliegenden Binary aktualisieren oder diese
+installieren</h3>
+
+Der erste Schritt beim Erzeugen vom Source aus besteht darin,
+sicherzustellen, dass du die verfügbare Binary, die am nächsten an
+deinem Ziel liegt, installiert hast.
+
+Verwende diese Tabelle, um zu sehen wo du bist, wo du hingehen
+möchtest und mit welcher Binary du starten solltest:
+
+<p>
+<table border="1" style="empty-cells: show;">
+<tr>
+  <td><b>Du bist beim</b></td> <td><b>Ziel</b></td>
+  <td><b>Binary-Upgrade auf</b></td> <td><b>dann ...</b></td>
+</tr>
+<tr>
+  <td> alten -release </td> <td> neues Release </td> <td> neuestes Release </td>
+  <td> Fertig! </td>
+</tr>
+<tr>
+  <td> -release </td> <td> -stable </td> <td> neuestes Release </td>
+  <td>downloade u. erzeuge <i>-stable</i></td>
+</tr>
+<tr>
+  <td> alten -stable</td> <td> -stable </td> <td> neuestes Release </td>
+  <td>downloade u. erzeuge <i>-stable</i></td>
+</tr>
+<tr>
+  <td> -release </td> <td> -current </td> <td> aktuellsten Snapshot </td>
+  <td> (optional) downloade u. erzeuge <i>-current</i>
+</tr>
+<tr>
+  <td> alten -current </td> <td> -current </td> <td> aktuellsten Snapshot </td>
+  <td> (optional) downloade u. erzeuge <i>-current</i>
+</tr>
+</table>
+
+<p>
+Es ist empfohlen, dass du die Binary unter Verwendung der
+Upgradeoption des Installationsmediums verwendest.
+Wenn das nicht möglich ist, kannst du auch die Binarys entpacken, so
+wie es <a href="upgrade44.html">hier</a> beschrieben steht.
+Unabhängig davon musst du den gesamten Upgradeprozess durchführen,
+einschließlich dem Erzeugen möglicher Benutzer oder notwendiger
+<tt>/etc</tt>-Verzeichnisänderungen.
+
+
+<a name="BldGetSrc"></a>
+<h3>5.3.3 - Den passenden Quelltext runterladen</h3>
+OpenBSD-Source wird unter Verwendung vom Versionskontrollsystem
+<a href="http://ximbiot.com/cvs/cvshome/">CVS</a>
+verwaltet, und
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=cvs&amp;sektion=1">cvs(1)</a>
+wird genutzt, um eine Kopie des gewünschten Sources auf deine lokale
+Maschine zum Compilieren zu ziehen.
+Dies kann unter Verwendung eines
+<a href="../../de/anoncvs.html">AnonCVS</a>-Servers geschehen (einer
+Maschine, die eine öffentlich zugängliche Kopie vom gesamten
+CVS-Repository hält, das vom OpenBSD-Projekt genutzt wird) oder von
+einem lokalen CVS-Repository, das du unter Verwendung von
+<a href="../../de/cvsup.html">CVSup</a> oder
+<a href="../../de/cvsync.html">CVSync</a> pflegst, welche als
+<a href="faq15.html#PkgMgmt">Packages</a> vorliegen.
+CVSup kann ebenfalls in einem ,checkout-Mode genutzt werden, aber das
+wird an dieser Stelle nicht behandelt.
+Wenn du mehrere Maschinen hast, auf denen du den Source-Code-Tree
+bewahren willst, kann es für dich durchaus nützlich sein, ein lokales
+CVS-Repository zu führen, erstellt und gepflegt unter Verwendung von
+CVSup oder CVSync.
+
+<p>
+Nach der Entscheidung, welchen
+<a href="../../de/anoncvs.html">AnonCVS-Server</a> du gerne verwenden
+willst, musst du ein Checkout für den Source-Tree durchführen, danach
+musst du dann den Tree durch das Ausführen von Updates pflegen, um
+aktualisierte Dateien auf deinen lokalen Tree zu ziehen.
+
+<p>
+Das
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=cvs&amp;sektion=1">CVS(1)</a>-Kommando
+hat viele Optionen, einige von ihnen sind <i><b>notwendig</b></i>, um
+ein Checkout und Update für einen nutzbaren Tree durchzuführen.
+Andere Kommandos können dazu führen, dass dein Tree unbrauchbar wird.
+Diesen Anweisungen hier zu folgen und sie zu verstehen ist wichtig.
+
+<p>
+<b><i>-current</i> folgen</b><br>
+<blockquote>
+In diesem Fall nehmen wir an, dass wir einen öffentlichen
+AnonCVS-Server, <b>anoncvs@anoncvs.example.org:/cvs</b>, verwenden.
+Wir nehmen des Weiteren an, dass du
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=sh&amp;sektion=1">sh(1)</a>
+als deine Kommandoshell verwendest, wenn du eine andere Shell nutzen
+solltest, musst du diese Kommandos dementsprechend anpassen.
+
+<p>
+Um ein Checkout für einen <i>-current</i>-CVS-src-Tree durchzuführen,
+kannst du Folgendes nutzen:
+
+<pre>
+    # <b>cd /usr</b>
+    # <b>export CVSROOT=anoncvs@anoncvs.example.org:/cvs</b>
+    # <b>cvs -d$CVSROOT checkout -P src</b>
+</pre>
+
+<p>
+Sobald du einen Tree hast, kannst du ihn später jederzeit
+aktualisieren:
+<pre>
+    # <b>cd /usr/src</b>
+    # <b>export CVSROOT=anoncvs@anoncvs.example.org:/cvs</b>
+    # <b>cvs -d$CVSROOT up -Pd</b>
+</pre>
+</blockquote>
+
+<!-- XXXrelease -->
+<b><i>-Stable</i> folgen</b><br>
+<blockquote>
+Wenn du einen Checkout für einen alternativen Branch des Trees
+durchführen willst, wie zum Beispiel dem <i>-stable</i>-Branch, musst
+du die Option <tt>-r</tt> während des Checkouts nutzen:
+<pre>
+    # <b>cd /usr</b>
+    # <b>export CVSROOT=anoncvs@anoncvs.example.org:/cvs</b>
+    # <b>cvs -d$CVSROOT checkout -rOPENBSD_4_4 -P src</b>
+</pre>
+
+Dies wird die src-Dateien vom OPENBSD_4_4-Branch ziehen, welcher
+ebenfalls als Patchbranch oder
+,<a href="../../de/stable.html">-stable</a>' bekannt ist. Den Code
+würdest du ähnlich aktualisieren:
+<pre>
+    # <b>cd /usr/src</b>
+    # <b>export CVSROOT=anoncvs@anoncvs.example.org:/cvs</b>
+    # <b>cvs -d$CVSROOT up -rOPENBSD_4_4 -Pd</b>
+</pre>
+
+Tatsächlich ist CVS nett genug, eine Markierung (Tag) an die
+runtergeladene Dateien anzuhängen, sodass du dir
+<tt>-rOPENBSD_4_4</tt> für die Kommandozeile nicht merken musst.
+CVS wird sich immer daran erinnern, bis du dies explizit zurücksetzt
+oder eine neue Markierung unter Verwendung der Option <tt>-A</tt> mit
+<tt>update</tt> verwendest.
+Jedoch ist es vermutlich besser, zu viele Informationen in deine
+CVS-Kommandozeilen zu packen als zu wenig.
+</blockquote>
+
+<p>
+Obwohl nur der <tt>src</tt>-Tree so weit gezeigt wurde, wirst du die
+gleichen Schritte für <tt>xenocara</tt> und <tt>ports</tt> durchführen.
+Da alle Teile von OpenBSD synchron gehalten werden müssen, sollten alle
+Trees, die du verwendest, zur gleichen Zeit einem Checkout und Update
+unterzogen werden. Du kannst die Checkouts in einer Zeile
+kombinieren (<i>-stable</i> gezeigt):
+<pre>
+    # <b>export CVSROOT=anoncvs@anoncvs.example.org:/cvs</b>
+    # <b>cd /usr</b>
+    # <b>cvs -d$CVSROOT checkout -rOPENBSD_4_4 -P src ports xenocara</b>
+</pre>
+
+Jedoch müssen Updates Verzeichnis für Verzeichnis durchgeführt werden.
+
+<p>
+Zu diesem Zeitpunkt, ob du nun <i>-stable</i> oder <i>-current</i>
+folgst, solltest du einen einsetzbaren Source-Tree haben.
+Sei vorsichtig damit, welchen Tree du beziehst - es ist einfach zu
+versuchen, <i>-current</i> zu kompilieren, obwohl du auf <i>-stable</i>
+aus bist.
+
+<h4>Den Tree vorladen: <tt>src.tar.gz, sys.tar.gz</tt></h4>
+Obwohl du den gesamten Source-Tree von einem AnonCVS-Server
+herunterladen kannst, ist es möglich, eine Menge Zeit und Bandbreite
+zu sparen, indem du deinen Source-Tree mit den Quelltextdateien von
+der OpenBSD-CD oder einem FTP-Server »vorladen«.
+Dies ist insbesondere dann der Fall, wenn du
+<a href="../../de/stable.html"><i>-stable</i></a> einsetzt, da nur
+wenige Dateien zwischen dieser Version und dem <i>-release</i>, auf dem
+es basiert, geändert werden.
+
+<p>
+Um den Source-Tree von der CD in <i>/usr/src</i> zu entpacken (unter
+der Annahme, dass die CD unter /mnt gemountet wurde):
+<pre>
+    # <b>cd /usr/src; tar xzf /mnt/src.tar.gz</b>
+    # <b>cd /usr; tar xzf /mnt/xenocara.tar.gz</b>
+    # <b>cd /usr; tar xzf /mnt/ports.tar.gz</b>
+</pre>
+
+Die zum Download auf den FTP-Servern vorliegenden Quelltextdateien
+befinden sich in zwei Dateien, um die Downloadzeit für jene Benutzer
+zu minimieren, die nur mit einem Teil des Trees arbeiten wollen. Die
+beiden Dateien sind <tt>sys.tar.gz</tt>, das alle Dateien enthält, um
+einen Kernel zu erstellen, und <tt>src.tar.gz</tt>, das alle anderen
+Userlandwerkzeuge mit Ausnahme des Ports-Trees und den X11-Quellen
+enthält.
+Normalerweise wirst du jedoch beide installieren wollen.
+Angenommen, dass sich die heruntergeladenen Dateien <tt>src.tar.gz</tt>
+und <tt>sys.tar.gz</tt> in <tt>/usr</tt> befinden:
+
+<pre>
+    # <b>cd /usr/src</b>
+    # <b>tar xzf ../sys.tar.gz</b>
+    # <b>tar xzf ../src.tar.gz</b>
+    # <b>cd /usr</b>
+    # <b>tar xzf xenocara.tar.gz</b>
+    # <b>tar xzf ports.tar.gz</b>
+</pre>
+
+<p>
+Nicht jeder möchte alle Dateisets extrahieren, doch das System muss
+synchron gehalten werden: Normalerweise müssen alle Teile des Trees
+eingerichtet werden.
+
+
+<a name="CVSTips"></a>
+<h4>Allgemeine CVS-Tipps</h4>
+
+Wie zuvor schon beschrieben, gibt es einige Optionen, die notwendig
+sind, um einen gültigen <tt>src</tt>-Tree in OpenBSD zu erhalten.
+Die obige Option <tt>-P</tt> ist eine solche: Es entfernt (prunes)
+Verzeichnisse, die leer sind.
+Über die Jahre wurden Verzeichnisse im OpenBSD-Source-Tree erstellt und
+gelöscht, und ab und zu werden die Namen von alten Verzeichnissen als
+Dateinamen genutzt.
+Ohne dieser Option <tt>-P</tt> wird dein gerade erst mit »checkout«
+heruntergeladene Tree NICHT erfolgreich kompilieren.
+
+<p>
+Größtenteils gilt das Gleiche für die <tt>-d</tt>-Option beim
+Updatekommando - es erstellt neue Verzeichnisse, die eventuell
+zum Tree seit deinem ersten Checkout hinzugefügt worden sein.
+Für ein erfolgreiches Update musst du die Optionen <tt>-Pd</tt>
+verwenden.
+
+<p>
+Erfahrene CVS-Anwender wundern sich vielleicht, warum CVSROOT angegeben
+und in diesem Beispiel genutzt wurde, obwohl cvs(1) sich die Angaben
+über den Server vom Tree merkt, auf den ein Checkout ausgeführt
+wurde.
+Das ist korrekt, aber trotzdem gibt es Momente, in denen man den
+standardmäßigen Anoncvs-Server überschreiben muss, viele Leute
+empfehlen daher <i>immer</i> das explizite Angeben vom Repository.
+Es ist an dieser Stelle ebenfalls erwähnenswert, dass, obwohl die
+CVSROOT-Umgebungsvariable direkt von cvs(1) genutzt werden kann,
+sie nur genutzt wird, wenn nichts anderes sie überschreibt (z.&nbsp;B.
+würde cvs(1) einen Fehler ohne dieser haben), wogegen das Angeben
+in der cvs(1)-Kommandozeile alle anderen Werte überschreibt.
+
+<p>
+Es ist oft nützlich, eine <tt>.cvsrc</tt> in deinem Heimatverzeichnis
+zu verwenden, um Standardwerte für einige dieser Optionen anzugeben.
+Ein Beispiel einer solchen <tt>.cvsrc</tt>-Datei:
+<pre>
+    $ <b>more ~/.cvsrc</b>
+    cvs -q -danoncvs@anoncvs.example.org:/cvs
+    diff -up
+    update -Pd
+    checkout -P
+</pre>
+
+Diese Datei veranlasst cvs(1) dazu, den
+<tt>anoncvs@anoncvs.example.org:/cvs</tt>-Server zu verwenden,
+normalerweise unnötige Ausgaben aller Operationen zu unterdrücken
+(<tt>-q</tt> heißt ruhig [quiet]), dass das Kommando ,cvs up'
+standardmäßig <tt>-Pd</tt> nutzt, ein ,cvs diff' standardmäßig
+Unified Diffs wegen dem <tt>-u</tt> bereitstellt und dass ein
+,cvs checkout' die Option <tt>-P</tt> verwenden wird.
+Obwohl diese Datei praktisch ist, wirst du Probleme haben, wenn du
+vergisst, dass diese Datei existiert oder du versuchst, Kommandos
+auf einer Maschine auszuführen, auf der diese Datei nicht existiert.
+
+<p>
+Da der Source-Tree aus einer großen Anzahl kleiner Dateien besteht,
+wird das Aktivieren von <a href="faq14.html#SoftUpdates">Softupdates</a>
+für die Partition, auf der sich der Source-Tree befindet, zu einer
+deutlich spürbaren Leistungssteigerung führen.
+
+
+<a name="BldKernel"></a>
+<a name="Building"></a>  <!-- Old tag -->
+<h3>5.3.4 - Einen Kernel erzeugen</h3>
+Wir nehmen an, dass du einen standardmäßigen (GENERIC oder GENERIC.MP)
+Kernel an dieser Stelle erzeugen möchtest.
+Normalerweise ist es genau das, was du machen möchtest.
+Ziehe <i>nicht</i> in Betracht, einen angepassten Kernel zu erzeugen,
+wenn du noch nicht über den standardmäßigen Erzeugungsprozess hinaus
+bist.
+
+<p>
+Es ist offensichtlich, dass der Kernel eine SEHR hardwareabhängige
+Komponente des Systems ist.
+Der Source für den Kernel ist in dem <tt>/usr/src/sys</tt>-Verzeichnis.
+Einige Teile des OpenBSD-Kernel-Codes werden auf allen Plattformen
+verwendet, andere sind sehr spezifisch für einen Prozessor oder eine
+Architektur.
+Wenn du in das <tt>/usr/src/sys/arch/</tt>-Verzeichnis guckst, wirst
+du eventuelle Dinge sehen, die etwas verwirrend wirken - zum Beispiel
+gibt es dort <tt>mac68k</tt>-, <tt>m68k</tt>- und
+<tt>mvme68k</tt>-Verzeichnisse. In diesem Fall verwendet sowohl die
+mvme68k- als auch die mac68k-Systeme den gleichen Prozessor, aber
+die Maschinen, auf denen sie basieren, sind sehr unterschiedlich, und
+benötigen daher einen sehr unterschiedlichen Kernel (zu einem
+Computer-Design gehört mehr als nur der Prozessor!).
+Jedoch gibt es auch Teile des Kernels die allgemein sind, solche Teile
+werden in dem m68k-Verzeichnis aufbewahrt.
+Wenn du einfach einen Kernel erzeugst, musst du dir über
+Basis-Architektur-Verzeichnisse wie <tt>m68k</tt> keine Gedanken
+machen, du wirst ausnahmslos in den
+compound-Architekturverzeichnissen arbeiten, zum Beispiel
+<tt>mvme68k</tt>.
+
+<p>
+Kernel werden basierend auf den
+<a href="#Options">Kernel-Konfigurationsdateien</a> erzeugt, welche
+sich in dem
+<tt>/usr/src/sys/arch/&lt;<i>deine Plattform</i>&gt;/conf</tt>-Verzeichnis
+befinden. Das Erzeugen des Kernels besteht aus dem Verwenden des
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=config&amp;sektion=8">config(8)</a>-Programms,
+um eine Kernel-Compilier-Verzeichnis zu erstellen und einzurichten,
+welches dann
+<tt>/usr/src/sys/arch/&lt;<i>deine Plattform</i>&gt;/compile/&lt;<i>KernelName</i>&gt;</tt>
+genannt wird. Für dieses Beispiel nehmen wir an, dass du die
+i386-Plattform verwendest.
+
+<blockquote><pre>
+# <b>cd /usr/src/sys/arch/i386/conf</b>
+# <b>config GENERIC</b>
+# <b>cd ../compile/GENERIC</b>
+# <b>make clean && make depend && make</b>
+    <i>[... jede Menge Ausgabe ...]</i>
+# <b>make install</b>
+</pre></blockquote>
+
+Ersetze <tt>i386</tt> in der ersten Zeile mit deinem Plattformnamen.
+Das
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=machine&amp;sektion=1">machine(1)</a>-Kommando
+kann dir sagen, was dein Plattformname ist, sodass eine
+offensichtliche Generalisierung das Nutzen des Kommandos ,<tt>cd
+/usr/src/sys/arch/`machine`/conf</tt>' statt der ersten Zeile ist.
+
+<p>
+Starte deine Maschine nun neu, um den neuen Kernel zu aktivieren.
+Bedenke, dass der neue Kernel vor dem nächsten Schritt laufen sollte,
+wobei es eventuell egal sein kann, wenn du den
+<a href="#BldBinary">oben</a> angegeben Ratschlag, auf die am nächsten
+liegende Binary zu aktualisieren, befolgt hast. Manchmal jedoch ändern
+sich die APIs und der alte Kernel wird nicht in der Lage sein, neue
+Applikationen auszuführen, aber der neue Kernel wird normalerweise die
+alten unterstützen.
+
+<h4>Variationen zu dem obigen Prozess: nur lesbarer Source-Tree</h4>
+Manchmal möchtest du vielleicht sicherstellen, dass dein
+<tt>/usr/src/sys</tt>-Verzeichnis nicht modifiziert wird.
+Dies kann durch das Verwenden des folgenden Prozesses realisiert
+werden:
+
+<blockquote><pre>
+$ <b>cd <i>/irgendwo</i></b>
+$ <b>cp /usr/src/sys/arch/i386/conf/GENERIC .</b>
+$ <b>config -s /usr/src/sys -b . GENERIC</b>
+$ <b>make clean && make depend && make</b>
+   ... jede Menge Ausgabe ...
+</pre></blockquote>
+
+Denke daran, dass du einen Kernel ohne root-Zugriff erzeugen kannst,
+aber du musst root sein, um den Kernel zu installieren.
+
+
+<a name="BldUserland"></a>
+<h3>5.3.5 - Das Userland erzeugen</h3>
+
+Es existiert ein bestimmter Prozess, der von OpenBSD verwendet wird.
+Prozesse, die unter anderen Betriebssystemen, mit denen du vertraut
+bist, genutzt werden, werden vermutlich nicht unter OpenBSD
+funktionieren, und du wirst ausgelacht werden, wenn du fragst, warum.
+
+<p>
+<ul>
+<li>Leere dein <tt>/usr/obj</tt>-Verzeichnis und erstelle die
+symbolischen Links neu:
+<blockquote><pre>
+# <b>rm -rf /usr/obj/*</b>
+# <b>cd /usr/src</b>
+# <b>make obj</b>
+</pre></blockquote>
+
+Bedenke, dass die Verwendung vom <tt>/usr/obj</tt>-Verzeichnis
+notwendig ist. Wenn dieser Schritt vor dem Erzeugen vom Rest des
+Trees fehlschlägt, ist es wahrscheinlich, dass der restliche
+Tree deinen <tt>src</tt>-Tree in schlechter Verfassung belassen wird.
+
+<p>
+<li>Stelle sicher, dass alle passenden Verzeichnisse erstellt werden.
+<blockquote><pre>
+# <b>cd /usr/src/etc && env DESTDIR=/ make distrib-dirs</b>
+</pre></blockquote>
+
+<p>
+<li>Erzeuge das System:
+<blockquote><pre>
+# <b>cd /usr/src</b>
+# <b>make build</b>
+</pre></blockquote>
+Dies compiliert und installiert die Userlandutilitys in der
+passenden Reihenfolge.
+Dieser Schritt nimmt recht viel Zeit in Anspruch - eine sehr schnelle
+Maschine kann ihn unter einer Stunde abschließen, eine sehr langsame
+Maschine benötigt vielleicht mehrere Tage.
+Wenn dieser Schritt abgeschlossen ist, hast du neu compilierte Binarys
+auf dein System installiert.
+
+<p>
+<li><b>Wenn <i>-current</i> erzeugt wird:</b> Aktualisiere
+<tt>/dev</tt> und <tt>/etc</tt> mit den Änderungen, die in
+<a href="current.html">current.html</a> aufgelistet sind.
+Wenn -stable nach einem ordentlichen
+<a href="upgrade44.html">Upgradeprozess</a> oder einer Installation
+der <a href="#BldBinary">ordentlich startenden Binary</a> verfolgt
+wird, ist dieser Schritt weder notwendig noch erwünscht.
+
+</ul>
+
+
+<a name="Release"></a>
+<a name="BldRelease"></a> <!-- old tag -->
+<h2>5.4 - Ein Release erstellen</h2>
+<h3>Was ist ein Release und warum würde ich eines erstellen wollen?</h3>
+Ein Release ist ein kompletter Satz an Dateien, die verwendet werden
+können, um OpenBSD auf einem anderen Rechner zu installieren.
+Wenn du nur einen Computer hast, auf dem OpenBSD läuft, hast du
+wirklich keinen Grund, ein Release zu erstellen, da der
+<a href="#Bld">obige</a> Erzeugungsprozess alles macht, was du
+brauchst.
+Eine Beispielanwendung für den Releaseprozess wäre das Erzeugen von
+<i>-stable</i> auf einer schnellen Maschine und dann das Erstellen von
+einem Release, das auf all deinen Maschinen in deinem Büro
+installiert werden kann.
+
+<p>
+Der Releaseprozess verwendet die Binarys, während dem obigen
+Erzeugungsprozess in dem Verzeichnis <tt>/usr/obj</tt> erstellt
+wurden, sodass du diesen Schritt erfolgreich abschließen musst, und
+nichts das <tt>/usr/obj</tt>-Verzeichnis beeinflusst.
+Eine Situation, in der das ein Problem sein könnte, ist, wenn du
+eine
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=mount_mfs&amp;sektion=8">memory
+disk</a> für dein <tt>/usr/obj</tt> verwendest, um ein wenig
+Extraleistung während dem Erzeugungsprozess, daher wirst du sicherlich
+nicht dein System zwischen dem Erzeugungs- und dem Release-Schritt
+neustarten wollen!
+
+<p>
+Der Releaseprozess erfordert zwei Arbeitsverzeichnisse, welche wir
+DESTDIR und RELEASEDIR nennen werden.
+Alle Dateien, die Teil einer ,sauberen' OpenBSD-Installation sind,
+werden an ihre richtige Stelle im DESTDIR kopiert.
+Sie werden dann getar(1)t und in das RELEASEDIR gelegt.
+Am Ende des Prozesses wird RELEASEDIR ein fertiges OpenBSD-Release
+enthalten.
+Der Releaseprozess wird ebenfalls <tt>/mnt</tt> verwenden, sodass
+dieser Ort für keine anderen Dinge während dem Releaseprozess
+genutzt werden sollte. Als Beispiel werden wir nun DESTDIR mit dem
+Wert <tt>/usr/dest</tt> und RELEASEDIR mit <tt>/usr/rel</tt>
+verwenden.
+
+
+<p>
+Der Releaseprozess bezieht einige Utilitys mit ein, welche nicht
+Teil des Basis-OpenBSD-Systems, crunch und crunchgen(), welche genutzt
+werden, um eine einzelne ausführbare Datei aus mehreren individuellen
+Binarys zu erstellen. Der Name, mit der diese einzelne Binary
+aufgerufen wird, entscheidet, welche Komponenten-Binary ausgeführt
+wird.
+Auf diese Weise werden individuelle Programme in den RAM-Disk-Kernel
+gequetscht, der auf Bootdisketten und anderen Bootmedien vorliegt.
+<i>Diese Utilitys müssen vor dem Beginn des Releaseprozesses
+erstellt werden.</i>
+Sie müssen nur ein einziges Mal erzeugt und installiert werden, aber
+Leute vergessen diesen Schritt häufig, und diese Programme werden
+schnell erzeugt, sodass einige Leute dazu tendieren, crunch und
+crunchgen einfach jedes Mal als Teil des Skriptes zu erzeugen, das
+sie zum Erstellen eines Releases nutzen.
+
+<!-- XXX change for rel -->
+<p>
+<i><b>HINWEIS:</b> Mit -current und dem aufkommenden 4.5 sind crunch
+und crunchgen Teil des Basissystems; überspringe in diesem Fall
+die separate Übersetzung weiter unten.</i>
+
+<p>
+Du musst root-Privilegien haben, um ein Release zu erstellen.
+
+<p>
+<h3>Ein Release erstellen</h3>
+
+Zu aller erst, falls es auf dieser Maschine noch nicht geschehen ist,
+erzeuge crunch und crunchgen:
+<blockquote><pre>
+# <b>cd /usr/src/distrib/crunch && make obj depend all install</b>
+</pre></blockquote>
+
+Nun definieren wir unsere DESTDIR- und RELEASEDIR-Umgebungsvariablen:
+<blockquote><pre>
+# <b>export DESTDIR=/usr/dest</b>
+# <b>export RELEASEDIR=/usr/rel</b>
+</pre></blockquote>
+
+Wir leeren das DESTDIR und erstellen die Verzeichnisse, wenn das
+notwendig ist:
+<blockquote><pre>
+# <b>test -d ${DESTDIR} && mv ${DESTDIR} ${DESTDIR}.old && rm -rf ${DESTDIR}.old &</b>
+# <b>mkdir -p ${DESTDIR} ${RELEASEDIR}</b>
+</pre></blockquote>
+
+RELEASEDIR muss normalerweise nicht vor dem Beginn des Releaseprozesses
+leer sein, jedoch könnten alte Dateien herumliegen bleiben, wenn sich
+Releasedateien oder ihre Namen geändert haben.
+Eventuell möchtest du das Verzeichnis vor dem Beginn ebenfalls löschen.
+
+<p>
+Wir erstellen nun das eigentliche Release:
+<blockquote><pre>
+# <b>cd /usr/src/etc</b>
+# <b>make release</b>
+</pre></blockquote>
+
+Es ist eine gute Idee, nachdem das Release erstellt wurde, das Release
+zu überprüfen, ob die Tar-Dateien mit dem übereinstimmen, was im
+DESTDIR-Verzeichnis liegt. Die Ausgabe von diesem Schritt sollte
+sehr gering sein.
+
+<blockquote><pre>
+# <b>cd /usr/src/distrib/sets</b>
+# <b>sh checkflist</b>
+</pre></blockquote>
+
+Du hast nun vollständige und überprüfte Dateisets in dem
+RELEASEDIR. Diese Dateien können nun verwendet werden, um OpenBSD
+auf anderen Maschinen zu installieren oder zu aktualisieren.
+
+<p>
+Die maßgeblichen Anweisungen, wie man ein Release erstellt, sind
+in
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=release&amp;sektion=8">release(8)</a>.
+
+<p>
+Hinweis: Wenn du die daraus resultierenden Dateien über HTTP für
+die Upgrade- und Installationsskripte zur Verfügung stellen willst,
+musst du eine index.txt-Datei hinzufügen, in der eine Liste aller
+Dateien enthalten ist, die sich in deinem neu erzeugten Release
+befinden.
+<blockquote><pre>
+# <b>/bin/ls -1 >index.txt</b>
+</pre></blockquote>
+
+<a name="Xbld"></a>
+<h2>5.5 - X erzeugen (Xenocara)</h2>
+Beginnend mit <a href="http://x.org/">X.org v7</a> stellte X auf ein
+System zur »modularen Übersetzung« um, das zur Folge hatte, dass der
+X.org-Quelltext in über dreihundert mehr oder weniger unabhängige
+Pakete zerlegt wurde.
+
+<p>
+Um das Leben der OpenBSD-Anwender zu vereinfachen, wurde eine
+»Meta-Übersetzung« mit dem Namen <a href="http://xenocara.org"
+>Xenocara</a> entwickelt. Dieses System »konvertiert« X zurück in einen
+großen Tree, der in einem Prozess übersetzt wird. Ein zusätzlicher
+Bonus ist, dass dieser Übersetzungsprozess dem Übersetzungsprozess
+aller anderen OpenBSD-Komponenten ähnlicher ist, als es die vorherigen
+Versionen waren.
+
+<p>
+Die offiziellen Schritte für die Übersetzung von X befinden sich in der
+Datei <tt>/usr/xenocara/README</tt> auf deinem System und in <a
+href="http://www.openbsd.org/cgi-bin/man.cgi?query=release&amp;sektion=8"
+>release(8)</a>.
+
+<h3>Den Quelltext beziehen</h3>
+Der »übliche« Ort für den xenocara-Sourcetree ist
+<tt>/usr/xenocara</tt> und der Quelltext selbst befinden sich im
+<tt>xenocara</tt>-Modul in CVS. Ein Checkout wird demnach wie folgt
+durchgeführt:
+<blockquote><pre>
+$ <b>cd /usr</b>
+$ <b>cvs -qdanoncvs@anoncvs.example.org:/cvs checkout -P xenocara</b>
+</pre></blockquote>
+
+<h3>Xenocara übersetzen</h3>
+Für die Übersetzung des standardmäßigen Xenocara-Trees (wie von
+OpenBSD unterstützt) werden keine weiteren Werkzeuge benötigt.
+
+<blockquote><pre>
+# <b>cd /usr/xenocara</b>
+# <b>rm -rf /usr/xobj/*</b>
+# <b>make bootstrap</b>
+# <b>make obj</b>
+# <b>make build</b>
+</pre></blockquote>
+
+Wenn du tatsächlich Änderungen am Quelltext vornehmen möchtest, dann
+musst du sehr wahrscheinlich einige <a href="faq15.html">Packages</a>
+installieren. Details hierüber befinden sich in der Datei
+<tt>/usr/xenocara/README</tt>.
+
+<h3>Ein Release erstellen</h3>
+Dies ist dem Hauptsystem-Releaseprozess sehr ähnlich.
+Nach dem erfolgreichen Erzeugen von X wirst du DESTDIR und RELEASEDIR
+aus dem gleichen Grund wie weiter oben erzeugen.
+RELEASEDIR kann das gleiche Verzeichnis sein wie das
+Hauptsystem-RELEASEDIR, aber DESTDIR wird in diesem Prozess gelöscht
+und wieder erstellt.
+Wenn es vorsichtig angestellt wird, ist dies kein Problem, aber
+separate DESTDIRs zu verwenden, kann ,sicherer' sein.
+
+<p>
+Für dieses Beispiel werden wir DESTDIR und RELEASEDIR jeweils mit
+den Werten /usr/dest und /usr/rel nutzen. Dies muss vor dem
+obigen Erzeugungsprozess gemacht werden.
+
+<blockquote><pre>
+# <b>export DESTDIR=/usr/dest</b>
+# <b>export RELEASEDIR=/usr/rel</b>
+# <b>test -d ${DESTDIR} && mv ${DESTDIR} ${DESTDIR}- && \</b>
+  <b>   rm -rf ${DESTDIR}- &</b>
+# <b>mkdir -p ${DESTDIR} ${RELEASEDIR}</b>
+# <b>make release</b>
+</pre></blockquote>
+
+Wenn dieser Prozess abgeschlossen ist, wirst du ein Set der
+Releasedateien in $RELEASEDIR haben.
+
+<p>
+<a name="Why"></a>
+<h2>5.6 - Warum brauche ich einen selbst erstellten Kernel?</h2>
+
+<p>
+Eigentlich brauchst du ihn vermutlich nicht.
+
+<p>
+Ein angepasster Kernel ist ein Kernel, der mit einer anderen
+Konfigurationsdatei als der bereitgestellten
+<tt>GENERIC</tt>-Konfigurationsdatei erstellt wurde.
+Ein angepasster Kernel kann auf <a href="#Flavors"><i>-release-,
+-stable-</i> oder <i>-current</i></a>-Code basieren, genauso wie
+der <tt>GENERIC</tt> es tun kann.
+Während das Kompilieren deines eigenen <tt>GENERIC</tt>-Kernels
+vom OpenBSD-Team unterstützt ist, ist es das Kompilieren eines
+selbst angepassten Kernels <i>nicht</i>.
+
+<p>
+Die standardmäßige OpenBSD-Kernelkonfiguration (<tt>GENERIC</tt>)
+ist dafür ausgerichtet, für die meisten Leute einsetzbar zu sein.
+Mehrere Leute haben beim Versuch, das System zu optimieren, ihr System
+zerschossen, statt die Systemleistung zu verbessern.
+Es gibt Leute, die meinen, dass du deinen Kernel anpassen musst, um
+die optimale Leistung zu erhalten, doch das stimmt nicht für OpenBSD.
+Nur die fortgeschrittensten und erfahrensten Anwender mit den
+anspruchsvollsten Applikationen müssen sich Gedanken über einen
+angepassten Kernel oder ein angepasstes System machen.
+
+<p>
+Einige Gründe warum du vielleicht einen angepassten Kernel erzeugen
+möchtest:
+<ul>
+  <li>Du weißt tatsächlich was du tust und möchtest
+      OpenBSD für einen Computer zurechtschneidern, der nur über
+      sehr wenig RAM verfügt, indem du Gerätetreiber entfernst,
+      die du nicht benötigst.
+  <li>Du weißt tatsächlich was du tust und möchtest
+      standardmäßig aktivierte Optionen oder Optionen, die
+      (aus gutem Grund) normalerweise nicht aktiviert sind, aktivieren.
+  <li>Du weißt tatsächlich was du tust und möchtest
+      experimentelle Optionen aktivieren.
+  <li>Du weißt tatsächlich was du tust, eine
+      spezielle Verwendung hast, die nicht von <tt>GENERIC</tt>
+      bewerkstelligt werden könnte, und nicht nachfragen wirst, warum
+      es nicht funktioniert, wenn etwas schief läuft.
+</ul>
+
+<p>
+Einige Gründe, warum du keinen eigenen angepassten Kernel erzeugen
+solltest:
+<ul>
+  <li>Im Normalfall musst du es nicht.
+  <li>Du wirst kein schnelleres System erhalten.
+  <li>Du wirst wahrscheinlich ein weniger vertrauenswürdiges System
+      erzeugen.
+  <li>Du wirst keine Unterstützung der Entwickler erhalten.
+  <li>Es wird von dir erwartet, dass du jegliches Problem mit einem
+      <tt>GENERIC</tt>-Kernel reproduzieren kannst, bevor Entwickler
+      irgendeine Fehlermeldung ernst nehmen.
+  <li>Anwender und Entwickler werden dich auslachen, wenn du dein System
+      zerschießt.
+  <li>Angepasste Compileroptionen sind normalerweise besser darin,
+      Compilerprobleme hervorzurufen, statt die Systemgeschwindigkeit
+      zu erhöhen.
+
+</ul>
+
+<p>
+Das Entfernen von Gerätetreibern mag den Bootprozess von deinem
+System beschleunigen, aber wird den Wiederherstellungsprozess erschweren,
+wenn du ein Problem mit der Hardware hast, und wird meistens falsch
+durchgeführt.
+Das Entfernen der Gerätetreiber <i>wird nicht</i> dazu beitragen,
+dass dein System spürbar schneller wird, obwohl es einen kleineren
+Kernel erzeugt.
+Debuginformationen und Fehlerüberprüfungsroutinen
+zu entfernen, kann das System spürbar beschleunigen, doch wird es
+die Untersuchung eines Systems unmöglich machen, wenn etwas
+schief geht.
+
+
+<p>
+Es sei an dieser Stelle noch einmal erwähnt, dass Entwickler
+normalerweise Fehlerberichte ignorieren, außer wenn sie ebenfalls
+mit einem <tt>GENERIC</tt>-Kernel hervorgerufen werden können.
+Du wurdest gewarnt.
+
+<p>
+<a name="Options"></a>
+<h2>5.7 - Einen angepassten Kernel erzeugen</h2>
+Es wird angenommen, dass du das <a href="#Why">vorherige</a> gelesen
+hast und wirklich auf Schmerzen stehst.
+Es wird des Weiteren angenommen, dass du ein Ziel hast, das man
+weder durch das Nutzen einer
+<a href="#BootConfig">Bootzeit-Konfiguration (UKC>)</a> noch durch
+<a href="#config">config(8)urieren eines GENERIC-Kernels</a> erreicht
+werden kann. Wenn diesen beiden Annahmen falsch sind, solltest du
+beim Verwenden von GENERIC bleiben.
+Wirklich.
+
+<p>
+Die OpenBSD Kernelgenerierung wird über Konfigurationsdateien verwaltet,
+die sich standardmäßig im
+<tt>/usr/src/sys/arch/<i>&lt;arch&gt;</i>/conf/</tt>-Verzeichnis
+befinden. Alle Architekturen haben eine Datei, <tt>GENERIC</tt>, die
+verwendet wird, um den Standard-OpenBSD-Kernel für diese Architektur zu
+erzeugen. Dort können sich ebenfalls andere Konfigurationsdateien
+befinden, die Kernel erzeugen, die andere Ziele verfolgen, zum Beispiel
+minimalen RAM, Diskless Workstations etc.
+
+<p>
+Die Konfigurationsdatei wird von
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=config&amp;sektion=8">config(8)</a>
+verarbeitet, das ein Compilationsverzeichnis in <tt>../compile</tt>
+erstellt und einrichtet; bei einer typischen Installation wäre es in
+<tt>/usr/src/sys/arch/<i>&lt;arch&gt;</i>/compile/</tt>.  config(8)
+erstellt ebenfalls ein <a
+href="http://www.openbsd.org/cgi-bin/man.cgi?query=make&amp;sektion=1"
+>Makefile</a> und weitere Dateien, die für eine erfolgreiche Erstellung
+des Kernels notwendig sind.
+
+<p>
+Kernelkonfigurationsoptionen bieten dir die Möglichkeit, zusätzliche
+Unterstützung zu deinem Kernel hinzuzufügen. Dies erlaubt dir nur
+die von dir gewünschten Geräte zu unterstützen. Es gibt eine
+Vielzahl an Möglichkeiten, deinen Kernel auf deine Wünsche
+abzustimmen. Hier werden wir nur auf einige der am häufigsten benutzten
+Möglichkeiten eingehen.
+Siehe die
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=options&amp;sektion=4">options(4)</a>-Manualseite
+für eine komplette Liste der Optionen und, da diese sich
+von Zeit zu Zeit ändert, solltest du sicherstellen, dass du auch eine
+Manualseite für die gleiche Version von OpenBSD verwendest, das du
+erzeugst. Du kannst auch die Beispielkonfigurationsdateien
+zu Rate ziehen, die für deine Architektur zur Verfügung
+stehen.
+
+<p>
+<b>Ändere, entferne oder füge niemals Optionen hinzu, wenn du
+keinen triftigen Grund dazu hast!  Editiere nicht die
+<tt>GENERIC</tt>-Konfigurationsdatei!!</b>
+Die einzige Kernelkonfiguration, die vom OpenBSD-Team unterstützt wird,
+ist der GENERIC-Kernel, die eine Kombination der Optionen in
+<tt>/usr/src/sys/arch/&lt;<i>arch</i>&gt;/conf/GENERIC</tt> und
+<tt>/usr/src/sys/conf/GENERIC</tt> ist, <i>so, wie sie vom OpenBSD-Team
+bereit gestellt worden sind</i> (d.&nbsp;h. NICHT verändert). Das Berichten
+eines Fehlers, der mit einem modifizierten Kernel zustande kam,
+resultiert meistens darin, dass dir gesagt wird, dass du versuchen
+sollst, das Problem mit einem GENERIC-Kernel zu reproduzieren. Nicht
+alle Optionen sind kompatibel untereinander und viele Optionen sind
+notwendig, damit das System läuft. Es besteht keine Garantie, dass ein
+Kernel läuft, nur weil du ihn kompilieren konntest. Es besteht außerdem
+keine Garantie, dass ein Kernel, der ,config(8)uriert' werden kann, auch
+erzeugt werden kann.
+
+<p>
+Hier kannst du die plattformspezifischen Konfigurationsdateien sehen:
+<ul>
+<li><a href="http://www.openbsd.org/cgi-bin/cvsweb/src/sys/arch/alpha/conf/">alpha-Kernelkonfgurationsdateien</a>
+<li><a href="http://www.openbsd.org/cgi-bin/cvsweb/src/sys/arch/i386/conf/">i386-Kernelkonfigurationsdateien</a>
+<li><a href="http://www.openbsd.org/cgi-bin/cvsweb/src/sys/arch/macppc/conf/">macppc-Kernelkonfigurationsdateien</a>
+<li><a href="http://www.openbsd.org/cgi-bin/cvsweb/src/sys/arch/sparc/conf/">sparc-Kernelkonfigurationsdateien</a>
+<li><a href="http://www.openbsd.org/cgi-bin/cvsweb/src/sys/arch/sparc64/conf/">sparc64-Kernelkonfigurationsdateien</a>
+<li><a href="http://www.openbsd.org/cgi-bin/cvsweb/src/sys/arch/vax/conf/">vax-Kernelkonfigurationsdateien</a>
+<li><a href="http://www.openbsd.org/cgi-bin/cvsweb/src/sys/arch/hppa/conf/">hppa-Kernelkonfigurationsdateien</a>
+<li><a href="http://www.openbsd.org/cgi-bin/cvsweb/src/sys/arch/">Andere Architekturen</a>
+</ul>
+
+<p>
+Wenn du diese Dateien genauer betrachtest, dann wird dir am Anfang
+eine Zeile wie diese auffallen:
+<pre>
+     include "../../../conf/GENERIC"
+</pre>
+Dies bedeutet, dass ein Verweis auf eine andere
+Konfigurationsdatei vorhanden ist, eine, die plattformunabhängige
+Optionen beinhaltet. Wenn du also deinen eigenen Kernel konfigurieren willst,
+stelle sicher, dass du auch
+<a href="http://www.openbsd.org/cgi-bin/cvsweb/src/sys/conf/GENERIC">/sys/conf/GENERIC</a>
+beachtet hast.
+<p>
+Kernelkonfigurationsoptionen sollten in deiner
+Kernelkonfigurationsdatei im Format von:
+<blockquote>
+<tt>option&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt><i>Name</i>
+</blockquote>
+oder
+<blockquote><pre>
+<tt>option&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt><i>Name=Wert</i>
+</pre></blockquote>
+angeführt sein.
+
+Um beispielsweise die DEBUG-Option in den Kernel zu bringen,
+füge eine Zeile wie die folgende ein:
+<blockquote><pre>
+option      DEBUG
+</pre></blockquote>
+
+Die Optionen im OpenBSD-Kernel werden in Compilerpräprozessoroptionen
+übersetzt, daher würde eine Option wie DEBUG den Quelltext mit der
+Option -DDEBUG kompilieren, was einem <tt>#define DEBUG</tt> im Kernel
+entspricht.
+
+<p>
+Ab und zu möchtest du vielleicht Optionen deaktivieren, die bereits
+definiert wurden, typischerweise in der Datei
+<tt>src/sys/conf/GENERIC</tt>. Obwohl du eine Kopie dieser Datei
+verändern könntest, ist das Verwenden der <i>rmoption</i>-Angabe eine
+bessere Wahl. Falls du zum Beispiel den im Kernel befindlichen Debugger
+deaktivieren möchtest (<i>nicht empfohlen!</i>), würdest du eine Zeile
+wie diese:
+<pre>
+     rmoption DDB
+</pre>
+in deine Kernelkonfigurationsdatei hinzufügen.  <tt>option DDB</tt>
+ist in <tt>src/sys/conf/GENERIC</tt> definiert, aber die oben angegebene
+<tt>rmoption</tt>-Zeile deaktiviert sie wieder.
+
+<p>
+Noch einmal, bitte siehe
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=options&amp;sektion=4">options(4)</a>
+für weitere Informationen über die Spezifikationen dieser
+Optionen. Bedenke auch, dass viele dieser Optionen ihre eigenen
+Manualseiten haben - lies immer alles, was über eine Option verfügbar
+ist, bevor du sie zu deinem Kernel hinzufügst oder aus ihm entfernst.
+
+<p>
+<h3>Einen angepassten Kernel erzeugen</h3>
+
+In diesem Fall werden wir einen Kernel erzeugen, der die
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=boca&amp;sektion=4">boca(4)</a>-ISA-Multiport
+serielle Karte unterstützt.
+Diese Karte ist nicht im GENERIC-Kernel, da er mit anderen Treibern
+in Konflikt gerät.
+
+Eine anderer häufiger Grund, einen angepassten Kernel zu erzeugen,
+wäre RAIDframe, das zu groß ist, um in einem Serienkernel zu sein.
+Es gibt zwei typische Wege, einen angepassten Kernel zu erzeugen:
+die GENERIC-Konfigurationsdatei unter anderem Namen zu kopieren und
+zu editieren oder eine Wrapperdatei zu erstellen, die den
+Standard-GENERIC-Kernel einbindet und du alle Optionen angibst, die du
+benötigst, die nicht in GENERIC sind.
+In diesem Fall sieht unsere Wrapperdatei beispielsweise so aus:
+<blockquote><pre>
+include "arch/i386/conf/GENERIC"
+
+boca0  at       isa? port 0x100 irq 10     # BOCA 8-port serial cards
+pccom* at       boca? slave ?
+</pre></blockquote>
+
+Die zwei Zeilen bezüglich der boca(4)-Karte werden von den
+auskommentierten Zeilen in <tt>GENERIC</tt> kopiert und der IRQ
+nach eigenen Bedürfnissen angepasst.
+Der Vorteil der Nutzung dieser Wrapperdatei ist, dass alle
+anderen Änderungen in der GENERIC automatisch aktualisiert werden,
+ohne dass irgendein anderer Quelltext aktualisiert werden müsste.
+Der Nachteil ist, dass man keine Devices entfernen kann (obwohl das
+normalerweise sowieso eine schlechte Idee ist).
+
+<p>
+Ein anderer Weg, einen angepassten Kernel zu generieren, ist, eine
+Kopie der standardmäßigen <tt>GENERIC</tt> zu machen, ihr einen
+anderen Namen zu geben und dann nach eigenen Bedürfnissen anzupassen.
+Der Nachteil dabei ist, dass spätere Updates für die
+GENERIC-Konfigurationsdatei in deine Kopie übertragen werden müssen
+oder aber du musst deine Konfigurationsdatei erneut erstellen.
+
+<p>
+Verwende in beiden Fällen, nachdem du deine angepasste
+Kernelkonfigurationsdatei erstellt hast, config(1) und erstelle den
+Kernel, wie es <a href="#BldKernel">oben</a> beschrieben wird.
+
+<p>
+Vollständige Instruktionen zum Erstellen deines eigenen angepassten
+Kernels sind in der
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=config&amp;sektion=8#EXAMPLES+(kernel">config(8)</a>-Manualseite.
+
+<a name="BootConfig"></a>
+<h2>5.8 - Konfiguration zur Bootzeit</h2>
+
+<p>
+Manchmal findet der Kernel beim Booten dein Gerät, aber eventuell den
+falschen IRQ. Und vielleicht brauchst du dieses Gerät sofort. Nun, ohne
+den Kernel neu zu bauen, kannst du mit der OpenBSD-eigenen
+Bootzeit-Konfiguration dieses Problem lösen. Dies wird aber dein Problem
+nur einmal lösen. Wenn du rebootest, dann musst du diese Prozedur
+wiederholen. Daher ist dies nur als vorübergehende Lösung gedacht und
+du solltest das Problem mittels <a href="#config">config(8)</a>
+beheben. Dein Kernel wird dennoch <strong>option BOOT_CONFIG</strong>
+benötigen, die GENERIC bereits beinhaltet.
+
+<p>
+Den Großteil dieses Dokumentes kannst du in der Manualseite
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=boot_config&amp;sektion=8">boot_config(8)</a>
+finden.
+
+<p>
+Um in die Benutzerkernelkonfiguration (User Kernel Config) oder
+UKC zu gelangen, musst du die -c-Option beim Hochfahren verwenden.
+
+<blockquote><pre>
+boot&gt; <strong>boot hd0a:/bsd -c</strong>
+</pre></blockquote>
+
+Oder welchen Kernel du auch immer laden willst. So kommst du in die
+UKC. Hier kannst du Befehle ausführen, die kernelspezifische Geräte
+ändern oder deaktivieren.
+
+<p>
+Hier eine Liste der gängigen Befehle in der UKC.
+
+<ul>
+<li><tt>add <strong>device</strong></tt> - Füge ein Gerät durch Kopieren eines anderen hinzu
+<li><tt>change <strong>devno | device </strong></tt> - Ändere ein oder mehrere Geräte
+<li><tt>disable <strong>devno | device </strong></tt> - Deaktiviere ein oder mehrere Geräte
+<li><tt>enable <strong>devno | device </strong></tt> -  Aktiviere ein oder mehrere Geräte
+<li><tt>find <strong>devno | device </strong></tt> - Suche ein oder mehrere Geräte
+<li><tt>help</tt> - Kurze Zusammenfassung dieser Befehle
+<li><tt>list</tt> - Liste ALLE bekannten Geräte auf
+<li><tt>exit/quit</tt> - Setze das Starten fort
+<li><tt>show <strong>[attr [val]]</strong></tt> - Zeige alle Geräte mit Eigenschaft
+	(attr) und optional mit einem angegebenen Wert (val)
+</ul>
+
+<p>
+Wenn du einmal deinen Kernel konfiguriert hast, dann steige
+mit <tt>quit</tt> oder <tt>exit</tt> aus UKC aus und setze das Starten
+fort. Danach solltest du deine Änderung am Kernelimage dauerhaft
+machen, indem du die Schritte gemäß
+<a href="#config">Mittels config(8) deinen Kernel verändern</a>
+ausführst.
+
+<p>
+<a name="config"></a>
+<h2>5.9 - Mittels config(8) deinen Kernel verändern</h2>
+<p>
+Die <b>-e</b>- und <b>-u</b>-Optionen von
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=config&amp;sektion=8">config(8)</a>
+können sehr hilfreich sein und Zeit sparen, die du mit dem
+Neukompilieren von Kerneln verschwenden würdest.
+Die <b>-e</b>-Option erlaubt dir die UKC auf einem laufenden System zu
+benutzen. Die Änderungen werden dann beim nächsten Reboot wirksam.
+Die <b>-u</b>-Option testet, ob irgendwelche Änderungen
+am laufenden Kernel während des Bootens gemacht wurden.
+D.h., ob du mittels <b>boot -c</b> die UKC beim Starten benutzt hast.
+
+<p>
+Das folgende Beispiel zeigt das Deaktivieren des ep*-Gerätes im
+Kernel. Zur Sicherheit musst du die
+<b>-o</b>-Option benutzen, die die Änderung in die angegebene Datei
+schreibt. <strong>config -e -o bsd.new /bsd</strong> zum Beispiel wird die
+Änderungen in bsd.new schreiben. Das folgende Beispiel verwendet die
+<b>-o</b>-Option nicht, daher werden die Änderungen einfach ignoriert
+und nicht in eine Kernelbinärdatei geschrieben.
+Für weitere Informationen über Fehler- und Warnmeldungen
+siehe die
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=config&amp;sektion=8">config(8)</a>-Manualseite.
+
+<!--XXXver -->
+<blockquote><pre>
+$ <strong>sudo config -e /bsd</strong>
+OpenBSD 4.4 (GENERIC) #1021: Tue Aug 12 17:16:55 MDT 2008
+    deraadt@i386.openbsd.org:/usr/src/sys/arch/i386/compile/GENERIC
+warning: no output file specified
+
+Enter 'help' for information
+ukc&gt; ?
+        help                            Command help list
+        add         dev                 Add a device
+        base        8|10|16             Base on large numbers
+        change      devno|dev           Change device
+        disable     attr val|devno|dev  Disable device
+        enable      attr val|devno|dev  Enable device
+        find        devno|dev           Find device
+        list                            List configuration
+        lines       count               # of lines per page
+        show        [attr [val]]        Show attribute
+        exit                            Exit, mitout saving changes
+        quit                            Quit, saving current changes
+        timezone    [mins [dst]]        Show/change timezone
+        nmbclust    [number]            Show/change NMBCLUSTERS
+        cachepct    [number]            Show/change BUFCACHEPERCENT
+        nkmempg     [number]            Show/change NKMEMPAGES
+        shmseg      [number]            Show/change SHMSEG
+        shmmaxpgs   [number]            Show/change SHMMAXPGS
+ukc&gt; <strong>list</strong>
+  0 audio* at sb0|sb*|gus0|pas0|sp0|ess*|wss0|wss*|ym*|eap*|eso*|sv*|neo*|cmpci*|clcs*|clct*|auich*|autri*|auvia*|fms*|uaudio*|maestro*|esa*|yds*|emu* flags 0x0
+  1 midi* at sb0|sb*|opl*|opl*|opl*|opl*|ym*|mpu*|autri* flags 0x0
+  2 nsphy* at aue*|xe*|ef*|gx*|stge*|bge*|nge*|sk*|ste*|sis*|sf*|wb*|tx*|tl*|vr*|ne0|ne1|ne2|ne*|ne*|ne*|dc*|dc*|rl*|fxp*|fxp*|xl*|xl*|ep0|ep0|ep0|ep*|ep*|ep*|ep*|ep* phy -1 flags 0x0
+  3 nsphyter* at aue*|xe*|ef*|gx*|stge*|bge*|nge*|sk*|ste*|sis*|sf*|wb*|tx*|tl*|vr*|ne0|ne1|ne2|ne*|ne*|ne*|dc*|dc*|rl*|fxp*|fxp*|xl*|xl*|ep0|ep0|ep0|ep*|ep*|ep*|ep*|ep* phy -1 flags 0x0
+  4 qsphy* at aue*|xe*|ef*|gx*|stge*|bge*|nge*|sk*|ste*|sis*|sf*|wb*|tx*|tl*|vr*|ne0|ne1|ne2|ne*|ne*|ne*|dc*|dc*|rl*|fxp*|fxp*|xl*|xl*|ep0|ep0|ep0|ep*|ep*|ep*|ep*|ep* phy -1 flags 0x0
+  5 inphy* at aue*|xe*|ef*|gx*|stge*|bge*|nge*|sk*|ste*|sis*|sf*|wb*|tx*|tl*|vr*|ne0|ne1|ne2|ne*|ne*|ne*|dc*|dc*|rl*|fxp*|fxp*|xl*|xl*|ep0|ep0|ep0|ep*|ep*|ep*|ep*|ep* phy -1 flags 0x0
+  6 iophy* at aue*|xe*|ef*|gx*|stge*|bge*|nge*|sk*|ste*|sis*|sf*|wb*|tx*|tl*|vr*|ne0|ne1|ne2|ne*|ne*|ne*|dc*|dc*|rl*|fxp*|fxp*|xl*|xl*|ep0|ep0|ep0|ep*|ep*|ep*|ep*|ep* phy -1 flags 0x0
+  7 eephy* at aue*|xe*|ef*|gx*|stge*|bge*|nge*|sk*|ste*|sis*|sf*|wb*|tx*|tl*|vr*|ne0|ne1|ne2|ne*|ne*|ne*|dc*|dc*|rl*|fxp*|fxp*|xl*|xl*|ep0|ep0|ep0|ep*|ep*|ep*|ep*|ep* phy -1 flags 0x0
+  8 exphy* at aue*|xe*|ef*|gx*|stge*|bge*|nge*|sk*|ste*|sis*|sf*|wb*|tx*|tl*|vr*|ne0|ne1|ne2|ne*|ne*|ne*|dc*|dc*|rl*|fxp*|fxp*|xl*|xl*|ep0|ep0|ep0|ep*|ep*|ep*|ep*|ep* phy -1 flags 0x0
+[...snip...]
+--- more ---
+[snip]
+ukc&gt; <strong>disable ep</strong>
+ 93 ep0 disabled
+ 94 ep* disabled
+ 95 ep* disabled
+261 ep0 disabled
+262 ep0 disabled
+263 ep* disabled
+264 ep* disabled
+323 ep* disabled
+ukc&gt; <strong>quit</strong>
+not forced
+</pre></blockquote>
+
+<p>
+Im obigen Beispiel werden alle ep* Geräte im Kernel deaktiviert und
+auch nicht abgefragt. In einigen Situationen, in denen du die UKC beim
+Booten mittels <b>boot -c</b> benutzt hast, willst du diese Änderungen
+dauerhaft niederschreiben. Dafür brauchst du die <b>-u</b> Option.
+Im folgenden Beispiel wurde die UKC gestartet und das
+wi(4) Gerät deaktiviert. Da diese Änderung mit boot -c NICHT
+dauerhaft ist, müssen die Änderungen erst geschrieben werden. Dieses
+Beispiel schreibt die Änderung in boot -c in eine neue
+Kernelbinärdatei namens bsd.new.
+
+<blockquote><pre>
+$ <strong>sudo config -e -u -o bsd.new /bsd</strong>
+OpenBSD 4.4 (GENERIC) #1021: Tue Aug 12 17:16:55 MDT 2008
+    deraadt@i386.openbsd.org:/usr/src/sys/arch/i386/compile/GENERIC
+Processing history...
+105 wi* disabled
+106 wi* disabled
+Enter 'help' for information
+ukc&gt; <strong>quit</strong>
+</pre></blockquote>
+
+
+<a name="VerboseBoot"></a>
+<h2>5.10 - Ausführlichere Nachrichten während des Bootens erhalten</h2>
+
+Ausführlichere Nachrichten zu erhalten, kann sehr hilfreich sein, wenn
+man versucht, Probleme während des Bootens zu beheben. Wenn du ein
+Bootproblem hast, obwohl ein Diskettenboot keine hat, und mehr
+Informationen erhalten möchtest, starte einfach neu. Wenn du beim
+boot&gt;-Prompt angelangt bist, boote mit boot -c. Dies bring dich
+in den UKC&gt;, wo du dann Folgendes eingibst:
+
+<blockquote><pre>
+UKC&gt; <strong>verbose</strong>
+autoconf verbose enabled
+UKC&gt; <strong>quit</strong>
+</pre></blockquote>
+
+<p>
+Nun werden dir sehr ausführliche Nachrichten beim Booten
+gegeben.
+
+
+
+<p>
+<a name="buildprobs"></a>
+<h2>5.11 - Häufige Probleme beim Kompilieren und Erzeugen des Systems</h2>
+
+Wenn Probleme während der Erzeugung des Systems auftreten, dann liegt
+das meist daran, dass die zuvor genannten Schritte nicht richtig
+befolgt wurden. Ab und zu kann es echte Probleme bei der Übersetzung
+von <i>-current</i> mit einem aktuellen Snapshot geben - bei
+<i>-release</i> oder <i>-stable</i> ist es aber fast immer ein Fehler
+des Anwenders.
+
+<p>
+Die meisten Probleme treten aus einem der folgenden Gründe auf:
+<ul>
+<li>Man versäumt, mit einer <a href="#BldBinary">passenden
+Binary</a> zu beginnen. Dazu zählt auch das Upgraden vom Source aus,
+wenn man davon ausgeht, dass der Snapshot letzter Woche noch
+»aktuell genug ist«.
+<li><a href="#BldGetSrc">Checkout</a> eines falschen Branches des
+Trees.
+<li>Den <a href="faq5.html">Anweisungen</a> nicht richtig folgen.
+<li>Man versucht, das System <a href="#Why">anzupassen</a> oder zu
+»optimieren«.
+</ul>
+
+Es gibt aber noch einige weitere Probleme, die auftreten könnten:
+
+<a name="sig11"></a>
+<h3>5.11.1 - Das Erzeugen bricht mit einem Signal-11-Fehler ab</h3>
+
+<p>
+OpenBSD und andere Programme vom Source aus erzeugen ist eine Aufgabe, die
+die Hardware stärker beansprucht als die meisten anderen, da
+intensive Verwendung der CPU, Festplatte und des Speichers vorliegt. Als
+Ergebnis, wenn du Hardware hast, die einen Fehler hat, ist der
+wahrscheinlichste Zeitpunkt, dass sich das Problem bemerkbar macht, beim
+Kompilieren. Signal 11 Fehler sind <i>typischerweise</i> durch Hardware
+Probleme verursacht, sehr häufig Speicherprobleme, können aber
+auch CPU-, Mainboard- oder Hitzeprobleme sein. Dein System mag ansonsten
+sogar sehr stabil sein, aber nicht in der Lage, Programme zu kompilieren.
+
+<p>
+Du wirst es vermutlich am besten finden, wenn du die Komponente, die die
+Fehler verursacht, reparierst oder austauschst, da Probleme sich auf
+andere Art und Weise in Zukunft zeigen könnten. Falls du Hardware
+hast, die du wirklich verwenden willst und sie dir sonst keine weiteren
+Probleme bereitet, installiere einfach einen Snapshot oder ein Release.
+
+<p>
+Siehe <a href="http://www.bitwizard.nl/sig11/">Sig11 FAQ</a> für
+sehr viel mehr Informationen.
+
+<a name="snake"></a>
+<h3>5.11.2 - »make build« schlägt mit »cannot open output file snake:
+is a directory« fehl</h3>
+
+Dies ist das Resultat von zwei separaten Fehlern:
+<ul>
+<li><b>Du hast deinen CVS-Tree nicht ordentlich heruntergeladen oder
+aktualisiert.</b> Wenn du eine CVS checkout Operation durchführst,
+musst du die "<tt>-P</tt>" Option verwenden; wenn du deinen Source Tree
+mit CVS aktualisierst, musst du die "<tt>-Pd</tt>" Option mit
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=cvs&amp;sektion=1"
+>cvs(1)</a> verwenden,
+so wie es <a href="#BldGetSrc">oben</a> beschrieben steht. Diese
+Optionen stellen sicher, dass neue Verzeichnisse im Tree erstellt und
+entfernt werden, je nachdem wie sich OpenBSD entwickelt.
+
+<li><b>Du hast vor dem Build das <tt>obj</tt>-Verzeichnis nicht
+ordnungsgemäß erstellt.</b> Den Tree ohne einem <tt>/usr/obj</tt>
+Verzeichnis zu Erzeugen ist nicht unterstützt.
+
+</ul>
+Es ist wichtig, den Instruktionen sorgfältig zu folgen, wenn du
+deinen Tree <a href="#BldGetSrc">herunterlädst</a> und
+<a href="#Bld">erzeugst</a>.
+
+<a name="ProbIPv6"></a>
+<h3>5.11.3 - Mein System ohne IPv6 läuft nicht!</h3>
+Stimmt.
+Bitte mach keine Modifikationen am Basis-System, von denen du nicht
+weißt, wie sie sich auswirken.
+Eine ,kleine' Änderung im Kernel kann große Auswirkungen für den
+gesamten Rest des Systems haben.
+Bitte lies <a href="#Why">das hier</a> erneut.
+
+
+<a name="ProbObj"></a>
+<h3>5.11.4 - Hoppla! Ich habe vergessen, zuerst das
+<tt>/usr/obj</tt>-Verzeichnis zu erstellen!</h3>
+
+Durch das Ausführen von ,make build' vor ,make obj' wirst du mit
+Objektdateien da stehen, die in deiem <tt>/usr/src</tt>-Verzeichnis
+herumliegen.
+Das ist eine schlechte Sache.
+Wenn du vermeiden willst, deinen gesamten Src-Tree erneut zu
+beziehen, kannst du Folgendes versuchen, um die Obj-Dateien zu
+entfernen:
+<pre>
+    # <b>cd /usr/src</b>
+    # <b>find . -type l -name obj | xargs rm</b>
+    # <b>make cleandir</b>
+    # <b>rm -rf /usr/obj/*</b>
+    # <b>make obj</b>
+</pre>
+
+<a name="ProbObjPt"></a>
+<h3>5.11.5 - Tipp: Lege <tt>/usr/obj</tt> auf seine eigene
+Partition</h3>
+Wenn du häuft erzeugst, wirst du es vielleicht als schneller empfinden,
+wenn du <tt>/usr/obj</tt> auf seine eigene Partition legst.
+Der Nutzen ist einfach, es ist typischerweise schneller:
+<pre>
+    # <b>umount /usr/obj</b>
+    # <b>newfs <i>DeineObjPartition</i></b>
+    # <b>mount /usr/obj</b>
+</pre>
+durchzuführen als ,rm -rf /usr/obj/*'.
+
+<a name="ProbSKIPDIR"></a>
+<h3>5.11.6 -  Wie verhindere ich das Erzeugen von bestimmten Teilen des
+Trees?</h3>
+Manchmal möchtest du das Erzeugen von bestimmten Teilen des Trees
+verhindern, normalerweise, weil du einen Ersatz für eine mitgelieferte
+Applikation durch Packages hast oder weil du ein ,kleineres' Release
+aus welchem Grund auch immer haben willst.
+Die Lösung hierfür ist, die SKIPDIR-Option von
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=mk.conf&amp;sektion=5">/etc/mk.conf</a>
+zu verwenden.
+
+<p>
+Hinweis: Es ist möglich ein kaputtes (broken) System auf diesem Wege zu
+erzeugen. Die Resultate aus diesen Optionen wird vom OpenBSD-Projekt
+nicht unterstützt.
+
+<a name="ProbMoreInfo"></a>
+<h3>5.11.7 - Wo kann ich mehr über den Erzeugungsprozess erfahren?</h3>
+Hier sind einige andere Ressourcen:
+<ul>
+<li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=release&amp;sektion=8">release(8)</a>
+<li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=afterboot&amp;sektion=8#COMPILING+A">afterboot(8)</a>
+<li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=mk.conf&amp;sektion=5">mk.conf(5)</a>
+<li><a href="http://www.openbsd.org/cgi-bin/cvsweb/src/Makefile"><tt>/usr/src/Makefile</tt></a>
+<li><a href="../../de/stable.html">Patchbranches</a> (<i>-stable</i>)
+<li>(für X) <tt>/usr/X11R6/README</tt> auf deinem installierten System
+
+</ul>
+
+<a name="NoSnaps"></a>
+<h3>5.11.8 - Ich sehe keine Snapshots auf den FTP-Seiten. Wo sind sie
+geblieben?</h3>
+
+<p>
+Snapshots können entfernt werden, wenn sie zu alt werden (oder nicht
+länger relevant sind) oder wenn ein neues <i>-release</i> naht.
+
+<a name="NewCompiler"></a>
+<h3>5.11.9 - Wie führe ich ein Bootstrap für eine neue Version des
+Kompilers (<i>gcc</i>) aus?</h3>
+
+Du solltest wirklich einfach <a href="#BldBinary">den aktuellsten
+Snapshot installieren</a>.
+
+<p>
+OpenBSD unterstützt nun zwei Compiler tree-intern, gcc v3.3.5, das von
+den meisten Plattformen genutzt wird, aber ebenfalls gcc v2.95.3, das
+von einigen wenigen Plattformen genutzt wird, die bisher noch nicht
+konvertiert wurden, oder aber niemals konvertiert werden, da
+Unterstützung vom gcc3 fehlt oder aber gcc3 eine schlechte Leistung
+erbringt.
+
+<p>
+Die zwei Compiler befinden sich an zwei unterschiedlichen Teilen des
+Trees:
+<ul>
+<li>gcc3: <tt>/usr/src/gnu/usr.bin/gcc</tt>
+<li>gcc2: <tt>/usr/src/gnu/egcs/gcc</tt>
+</ul>
+
+<p>
+Weil das Upgraden von einem Compiler in etwa ein Huhn-oder-Ei-Problem
+ist, benötigen Änderungen der tree-internen Compiler ein wenig
+Extra-Aufmerksamkeit. Du musst den Compiler zweimal erzeugen - der
+erste Build erzeugt einen Compiler, der neuen Code erzeugt, aber
+mit Code arbeitet, der vom alten Compiler erzeugt wurde, der zweite
+Build macht ihn vollständig zum einen Compiler. Generell wirst du
+wohl die folgende Prozedur durchführen:
+<pre>
+    <b>Falls deine Plattform gcc 2.95.3 verwendet:</b>
+       # rm -r /usr/obj/gnu/egcs/gcc/*
+       # cd /usr/src/gnu/egcs/gcc
+        <i>- oder -</i>
+    <b>Falls deine Plattform gcc 3.3.5 verwendet:</b>
+       # rm -r /usr/obj/gnu/usr.bin/gcc/*
+       # cd /usr/src/gnu/usr.bin/gcc
+
+    <b>Gemeinsame Build-Prozedur für v3.3.5 und v2.95.3</b>
+    # make -f Makefile.bsd-wrapper clean
+    # make -f Makefile.bsd-wrapper obj
+    # make -f Makefile.bsd-wrapper depend
+    # make -f Makefile.bsd-wrapper
+    # make -f Makefile.bsd-wrapper install
+    # make -f Makefile.bsd-wrapper clean
+    # make -f Makefile.bsd-wrapper depend
+    # make -f Makefile.bsd-wrapper
+    # make -f Makefile.bsd-wrapper install
+</pre>
+
+<p>
+Und führe anschließend ein normales <a href="#BldUserland">make
+build</a> durch.
+
+<a name="UpdateEtc"></a>
+<h3>5.11.10 - Was ist der beste Weg, um <tt>/etc</tt>, <tt>/var</tt> und
+<tt>/dev</tt> zu aktualisieren?</h3>
+
+<p>Als Richtlinie modifiziert Software im OpenBSD-Tree keine Dateien
+automatisch in <tt>/etc</tt>.
+Das bedeutet, dass es <i>immer</i> am Administrator liegt, die
+benötigten Modifikationen dort durchzuführen.
+Upgrades sind keine Ausnahme.
+Um Dateien in diesen Verzeichnissen zu aktualisieren, stelle erst
+einmal fest, welche Änderungen an den Basis- (Distributions) Dateien
+stattgefunden haben, und führe diese Änderungen erneut durch.
+
+<p>
+Um zum Beispiel die Dateien im Tree zu sehen, die zu letzt geändert
+wurden, führe dies aus:
+
+<pre>
+    # cd /usr/src/etc
+    # ls -lt |more
+</pre>
+
+<!-- XXXversion -->
+<p>Um alle Änderungen in <tt>/etc</tt> zwischen zwei bestimmten
+Versionen von OpenBSD zu sehen, kannst du
+<a href="../../de/anoncvs.html">CVS</a> verwenden.
+Um zum Beispiel die Änderungen zwischen 4.3 und 4.4 zu sehen, führe
+dies aus:
+
+<pre>
+    # cd /usr/src/etc
+    # cvs diff -u -rOPENBSD_4_3 -rOPENBSD_4_4
+</pre>
+
+Um die Änderungen zwischen 4.4 und <i>-current</i> (HEAD) zu sehen,
+führe dies aus:
+<pre>
+    # cd /usr/src/etc
+    # cvs diff -u -rOPENBSD_4_4 -rHEAD
+</pre>
+
+Das
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=MAKEDEV&amp;sektion=8&amp;arch=i386">/dev/MAKEDEV</a>-Skript
+wird nicht automatisch als Teil des Prozesses ,make build'
+aktualisiert, jedoch wird es als Teil eines <a href="#BldBinary">Binary
+updates</a> installiert.
+Als generelle Regel sei zu sagen, dass es eine gute Idee ist, dieses
+Skript zu kopieren (falls das notwendig ist) und von deinem
+Source-Tree aus aufzurufen, um ein Upgrade durchzuführen:
+
+<pre>
+    # cd /dev
+    # cp /usr/src/etc/etc.`machine`/MAKEDEV ./
+    # ./MAKEDEV all
+</pre>
+
+<p>
+Sobald du die Änderungen ausgemacht hast, füge sie deinem lokalen Tree
+erneut zu, jegliche lokale Konfiguration, die du gemacht hast,
+bewahrend.
+
+<p>
+Typische <tt>/etc</tt>-Änderungen, auf die zwischen zwei Releases
+geachtet werden muss, sind unter anderem:
+
+<ul>
+<li>Erweiterungen zu <tt>/etc/protocols</tt> und
+  <tt>/etc/services</tt></li>
+<li>Neue sysctls (siehe <tt>/etc/sysctl.conf</tt>)</li>
+<li>Änderungen an den standardmäßigen Cronjobs. Siehe
+  <tt>/etc/daily</tt>, <tt>/etc/weekly</tt>, <tt>/etc/monthly</tt> und
+  <tt>/etc/security</tt>
+<li>Alle rc-Skripte, einschließlich netstart</li>
+<li>Device-Änderungen, siehe weiter oben
+<li>Datei-Hierarchie-Änderungen in <tt>/etc/mtree</tt>, siehe
+  <a href="#Hierarchy">unten</a>
+<li>Neu User (<tt>/etc/passwd</tt>) und Gruppen (<tt>/etc/group</tt>)
+</ul>
+
+<!-- XXXversion -->
+Diese Änderungen werden in
+<a href="upgrade44.html">upgrade44.html</a> (um zum 4.4-Release zu
+gelangen) oder <a href="current.html">current.html</a> (um zu
+<i>-current</i> zu gelangen).
+
+
+<a name="Hierarchy"></a>
+<h3>5.11.11 - Gibt es einen einfachen Weg, um alle Dateihierarchien
+zu ändern?</h3>
+
+<p>
+Von Zeit zu Zeit werden Dateien oder Verzeichnisse zu der Datei
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=hier&amp;sektion=7">hierarchy</a>
+hinzugefügt oder aus ihr entfernt.
+Ebenfalls können sich Besitzer-Informationen für Teile des Dateisystems
+ändern. Ein einfacher Weg, um sicherzustellen, dass deine
+Datei-Hierarchie auf dem neuesten Stand ist, ist das Verwenden von dem
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=mtree&amp;sektion=8">mtree(8)</a>-Utility.
+
+<p>
+Beziehe zuerst den aktuellsten Source, dann führe Folgendes aus:
+
+<pre>
+    # cd /usr/src/etc/mtree
+    # install -c -o root -g wheel -m 600 special /etc/mtree
+    # install -c -o root -g wheel -m 444 4.4BSD.dist /etc/mtree
+    # mtree -qdef /etc/mtree/4.4BSD.dist -p / -u
+</pre>
+
+<p>
+Deine Datei-Hierarchie sollte nun auf dem neuesten Stand sein.
+
+<a name="ProbXComp"></a>
+<h3>5.11.12 - Kann ich cross-compilen? Warum nicht?</h3>
+Es befinden sich Werkzeuge im System, mit denen man cross-compilen
+kann - für Entwickler, die an einer neuen Portierung arbeiten. Sie
+sind aber nicht für den allgemeinen Einsatz gedacht.
+
+<p>
+Wenn ein Entwickler eine neue Plattform unterstützen will, ist eine
+der ersten großen Tests eine native Übersetzung des Systems. Diese
+Übersetzungsphase setzt das Betriebssystem und die Maschine unter hohe
+Last, was wiederum einen guten Test darstellt, wie gut das System
+tatsächlich arbeitet. Aus diesem Grund wird OpenBSD auf der jeweiligen
+Plattform übersetzt, was auch als »native building« bezeichnet wird.
+Ohne diese native Übersetzung ist es viel schwerer sicherzustellen,
+dass die unterschiedlichen Plattformen verlässlich eingesetzt werden
+können und nicht einfach nur booten.
+
+<p>
+<font color= "#0000e0">
+<a href= "index.html">[FAQ-Index]</a>
+<a href= "faq4.html">[Zum Kapitel 4 - Installationsanleitung]</a>
+<a href= "faq6.html">[Zum Kapitel 6 - Netzwerk]</a>
+</font>
+
+<p>
+<hr>
+<a href= "index.html"><img height= "24" width= "24" src= "../../images/back.gif" border= "0" alt= "[zurück]"></a>
+<a href= "mailto:www@openbsd.org">www@openbsd.org</a>
+<br>
+<small>
+<!--
+Originally [OpenBSD: faq5.html,v 1.168 ]<br>
+$Translation: faq5.html,v 1.123 2008/11/30 11:02:31 paldium Exp $<br>
+-->
+$OpenBSD: faq5.html,v 1.108 2008/12/01 07:52:51 tobias Exp $
+</small>
+</body>
+</html>

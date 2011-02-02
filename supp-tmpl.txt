@@ -1,0 +1,45 @@
+# This version of the template is a bib-like file with one
+# line per field except notes, which can be any number of lines.
+# All I want to get back from you is lines like these (minus the
+# # character and the tab indent):
+#	0 This line is a delimiter and must be first (digit zero at the start)
+#	C USA
+#	P Arizona
+#	T Cactus Grove
+#	Z Postal Code
+#	A General Delivery
+# 	O Acme Widgets
+#	I Wile E. Coyote
+#	M w.coyote@acme.com
+#	U http://www.acme.com/openbsd
+#	B 555-555-1212
+#	F 555-555-1213
+#	N Home of the best Acme
+#	widgets around.
+#
+# Do not bother sending this in unless your web site's main page clearly shows
+# that you are engaged in providing support services for OpenBSD.
+# We reserve the right to delete listings that no longer do so.
+#
+# DELETE ALL # COMMENT LINES BEFORE SUBMITTING
+#
+# SEND AS PLAIN TEXT IN THE BODY OF YOUR MAIL: NO MIME OR ATTACHMENTS!
+# Use html character entities (like &egrave;) for accented characters.
+# We reserve the right to edit any and all submissions as we please.
+0
+C Country
+P Province
+T Town or City
+Z Postal/Zip Code
+O Company name or Consultant
+I Individual's Name
+A Street Address
+M email address in form user@host.domain
+U http://www.yourwebsite.com/ # with trailing slash unless a specific resource
+B Business Phone Number
+X FAX Phone Number
+N Notes about your experience, with UNIX, with BSD, and specifically with 
+OpenBSD.  Notes continued. Not more than three or four lines: NO MARKETING
+BAFFLEGAB, like "Our highly-trained staff ensure the realization of ..." :-(
+Can contain <em>simple</em> HTML tags; don't overdo it!
+

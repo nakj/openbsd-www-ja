@@ -1,0 +1,347 @@
+<!DOCTYPE HTML PUBLIC  "-//W3C//DTD HTML 4.01 Transitional//EN"
+	"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>OpenBSD/mvme88k</title>
+<link rev="made" href="mailto:www@openbsd.org">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="resource-type" content="document">
+<meta name="description" content="the OpenBSD/mvme88k page">
+<meta name="keywords" content="openbsd,mvme88k">
+<meta name="distribution" content="global">
+<meta name="copyright" content="This document copyright 1996-2010 by OpenBSD.">
+</head>
+
+<body bgcolor="#ffffff" text="#000000" link="#23238e">
+<a href="index.html"><img alt="[OpenBSD]" height="30" width="141" src="images/smalltitle.gif" border="0"></a>
+<p>
+<h2><font color="#e00000">OpenBSD/mvme88k</font></h2>
+
+<hr>
+
+<p>
+OpenBSD/mvme88k is a port of OpenBSD to the systems built upon
+Motorola's 88xxx-based VME motherboard family.
+
+<p>
+A mailing list for m88k-based ports is available at
+<u><font color="#23238e">m88k@openbsd.org</font></u>.
+To join the OpenBSD/m88k mailing list, send a message body of
+<b>"subscribe m88k"</b> to
+<a href="mailto:majordomo@openbsd.org">majordomo@openbsd.org</a>.
+Please be sure to check our <a href="mail.html">mailing list policy</a> before
+subscribing.
+
+<p>
+The current port maintainer is Miod Vallat
+(<a href="mailto:miod@openbsd.org">miod@openbsd.org</a>), with the help of
+Steve Murphree. Others are definitely welcome to contribute!
+
+<a name="toc"></a>
+<h3><font color="#0000e0"><i>Table of contents</i></font></h3>
+<p>
+<ul>
+  <li><a href="#history">History of the port</a>
+  <li><a href="#status">Current status</a>
+  <li><a href="#projects">Project list</a>
+  <li><a href="#hardware">Supported hardware</a>
+  <li><a href="#install">Getting and installing OpenBSD/mvme88k</a>
+  <li><a href="#details">Hardware details</a>
+</ul>
+
+<hr>
+<a name="history"></a>
+<h3><font color="#0000e0"><strong>History:</strong></font></h3>
+
+<p>
+The Motorola 88k processor is said to be the best RISC processor ever 
+devised.  Its simplicity and elegance combine to make the mvme88k a 
+hearty, robust platform. 
+
+<p>
+Nivas Madhur started the initial mvme88k port for the MVME187 card, but
+has since moved on to another employer.  
+The port was brought in the OpenBSD tree by Dale Rahn, but he did not
+have enough time to work on it.
+Steve Murphree, Jr. eventually completed the port to the MVME187 in
+November 1998.
+
+<p>
+Unfortunately, at the same time, a compiler upgrade from gcc 2.8.1 to
+egcs exposed a lot of problems in the mvme88k support in gcc, which
+could not be fixed in time for mvme88k to be a supported OpenBSD 2.5
+release.
+
+<p>
+The lack of an in-tree toolchain did not prevent further work on the port,
+and a lot of changes were made to the codebase, such as revamped autoconf
+and on-board SCSI driver, greatly expanded VME bus support, a working
+install process that correctly creates a Motorola VID block on the disks,
+and support for MVME188 as well as improving support for MVME197.
+
+<p>
+During summer 2003, an effort to fix the toolchain eventually produced a
+working gcc 2.95 compiler, and allowed the port to be self-hosting again.
+With the help of Mark Kettenis, the toolchain effort eventually produced
+working binutils and gdb in late may 2004.
+
+<p>
+Work towards multiprocessor support on the MVME188 boards started in
+summer 2005 and, after a lot of tedious bugfixing, was eventually
+completed shortly after the 4.2 release in november 2007.
+
+<p>
+The next step was getting the 88110-based MVME197 designs to work.
+Single-processor kernels started to run reliably in december 2007;
+multiprocessor support was completed in march 2009, but kept triggering
+obscure bugs which eventually got tracked down to a processor errata,
+fixed for good in april 2010.
+
+<hr>
+<a name="status"></a>
+<h3><font color="#0000e0"><strong>Current status:</strong></font></h3>
+
+<p>
+Currently, MVME187, MVME188 and MVME197 boards, as well as similar
+designs, are booting multi-user, supporting most of the on-board devices.
+There are still a few caveats; depending on your exact hardware setup,
+your mileage may vary.
+Work is in progress to fix the remaining problems.
+
+<hr>
+<a name="projects"></a>
+<h3><font color="#0000e0"><strong>Projects (in no particular order):
+</strong></font></h3>
+
+<p>
+<ul>
+  <li>Work on unsupported device cards (MVME330, MVME374...).
+  <li>Write code for new binutils (and gdb), switch to ELF and, later,
+      shared libraries.
+</ul>
+
+<hr>
+<a name="hardware"></a>
+<h3><font color="#0000e0"><strong>Supported hardware:</strong></font></h3>
+
+<p>
+<h4>Supported processor boards</h4>
+
+<p>
+<ul>
+<li><strong>MVME187</strong><br>
+A single 88100 processor-based version of the <a href="mvme68k.html">mvme68k</a>
+MVME167 and MVME177 boards. Features two 88200 CMMUs with 16KB cache
+each, SRAM, and on-board ethernet and SCSI controllers, as well as four serial
+ports and one parallel port.<br>
+<li><strong>MVME188 and MVME188A</strong><br>
+Contrary to the other MVME processor boards, this board has no on-board
+devices; it just acts as a container for an <i>HYPERmodule</i> which provides
+one, two or four 88100 processors, and two or four 88200 (16KB cache) or 88204
+(64KB cache) CMMUs per processor.<br>
+All HYPERmodules combinations are supported, but M88200 1P128 and 1P512 have
+not been tested.<br>
+External cards specific to the MVME188 family provide memory and serial ports.
+<br>
+Multi-processor kernels are supported on these boards.
+<li><strong>MVME197LE</strong><br>
+An entry-level design similar to the MVME187, but based on the 88110 processor
+with integrated MMU and cache controller.<br>
+<li><strong>MVME197SP and MVME197DP</strong><br>
+Improved versions of the MVME197LE, with one (SP) or two (DP) 88110 processors,
+and one 88410 external cache controller per processor.<br>
+Multi-processor kernels are supported on these boards.
+</ul>
+
+<p>
+Besides various Motorola complete systems (<strong>M8120</strong>,
+<strong>Series 900</strong>, etc), this port also runs on the
+MVME187-based <strong>Triton Dolphin System 100</strong>.
+
+<p>
+<h4>Supported on-board devices</h4>
+
+<p>
+<ul>
+<li><strong>MVME187 and MVME197</strong>
+  <ul>
+  <li>Cirrus Logic CL2400 serial ports (tty00-tty03/tty07<i>[M8120]</i>) (cl)
+  <li>Intel 82596CA Ethernet interface
+(<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ie&amp;sektion=4&amp;arch=mvme88k">ie</a>)
+  <li>NCR53c710 SCSI Controller
+(<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=osiop&amp;sektion=4&amp;arch=mvme88k">osiop</a>)
+  <li>128KB SRAM (/dev/sram0)
+  <li>8KB NVRAM (/dev/nvram0)
+  </ul>
+</li>
+<li><strong>MVME188</strong>
+  <ul>
+  <li>serial ports on <i>SYSCON</i> board (ttya-ttyb) (dart)
+  <li>2KB NVRAM (/dev/nvram0)
+  </ul>
+</li>
+</ul>
+
+<p>
+<h4>Supported VME boards</h4>
+
+<p>
+<ul>
+  <li><strong>MVME327A</strong> SCSI and floppy Controller
+(<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=vsbic&amp;sektion=4&amp;arch=mvme88k">vsbic</a>),
+currently limited to the SCSI interface
+  <li><strong>MVME328</strong> High Performance SCSI Controller
+(<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=vs&amp;sektion=4&amp;arch=mvme88k">vs</a>)
+  <li><strong>MVME332XT</strong> High Performance Serial I/O Controller
+	(8 serial ports, 1 parallel port) (vx)
+  <li><strong>MVME376</strong> Ethernet Communications Controller
+(<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=le&amp;sektion=4&amp;arch=mvme88k">le</a>)
+</ul>
+
+<p>
+<h4>Unsupported processor boards</h4>
+<p>
+
+<p>
+These boards are currently not supported. There is nothing, apart from lack
+of available hardware, preventing them from being supported eventually.
+<ul>
+<li><strong>MVME180 <i>``Angelfire''</i> and MVME181</strong><br>
+A low-cost, entry level board, featuring a single 88100 processor, two 88200
+CMMUs and two on-board serial ports.
+</ul>
+
+<hr>
+<a name="install"></a>
+<h3><font color="#0000e0">
+<strong>Getting and installing OpenBSD/mvme88k:</strong>
+</font></h3>
+
+<p>
+The latest supported OpenBSD/mvme88k release is
+<a href="46.html">OpenBSD 4.6</a>.
+Here are the
+<a href="ftp://ftp.OpenBSD.org/pub/OpenBSD/4.6/mvme88k/INSTALL.mvme88k">
+OpenBSD/mvme88k 4.6 installation instructions
+</a>.
+
+<p>
+Snapshots are made available from time to time, in
+<a href="ftp://ftp.OpenBSD.org/pub/OpenBSD/snapshots/mvme88k">this location</a>
+as well as in a few
+<a href="ftp.html">mirrors</a>.
+Here are the
+<a href="ftp://ftp.OpenBSD.org/pub/OpenBSD/snapshots/mvme88k/INSTALL.mvme88k">
+OpenBSD/mvme88k snapshot installation instructions
+</a> as well.
+
+<hr>
+<a name="details"></a>
+<h3><font color="#0000e0"><strong>Hardware details:</strong></font></h3>
+
+<p>
+As VME hardware is quite uncommon in the average retail place, and Motorola
+881x0-based hardware is even more rare, this section is here to satisfy the
+well-founded curiosity about the mvme88k hardware.
+
+<p>
+A comprehensive reference about the m88k processor and the various designs
+built upon it is being gathered by Paul Weissmann at
+<a href="http://badabada.org/">badabada</a>.
+
+<a name="pics"></a>
+<p>
+Pictures of a Motorola 900 modular chassis, with a 33MHz MVME187 CPU board,
+32MB RAM, 4 MVME332XT serial boards, and an Archive 250MB QIC tape drive.
+<ul>
+ <li><a href="images/mvme187-1.jpg">MVME187 Series 900 (front view)</a>
+ <li><a href="images/mvme187-2.jpg">MVME187 Series 900 (rear view)</a>
+ <li><a href="images/mvme187-3.jpg">MVME187 Series 900 (rear view w/terminal)</a>
+ <li><a href="images/mvme187-4.jpg">MVME187 Series 900 (rear view close up)</a>
+ <li><a href="images/mvme188-2.jpg">MVME188 Dual proc board</a>
+</ul>
+
+<p>
+This is a boot log of an MVME197DP system.
+<pre>
+[ using 205464 bytes of bsd a.out symbol table ]
+Copyright (c) 1982, 1986, 1989, 1991, 1993
+        The Regents of the University of California.  All rights reserved.
+Copyright (c) 1995-2010 OpenBSD. All rights reserved.  http://www.OpenBSD.org
+
+OpenBSD 4.7-current (GENERIC.MP) #308: Thu Apr 15 21:09:19 GMT 2010
+    miod@arzon.gentiane.org:/usr/src/sys/arch/mvme88k/compile/GENERIC.MP
+real mem = 134217728 (128MB)
+avail mem = 125927424 (120MB)
+mainbus0 at root: Motorola MVME197, 50MHz
+cpu0: M88110 version 0xf, 8K I/D caches
+cpu0: external M88410 cache controller
+cpu1: M88110 version 0xf, 8K I/D caches
+cpu1: external M88410 cache controller
+bussw0 at mainbus0 addr 0xfff00000: rev 4
+pcctwo0 at bussw0 offset 0x0: rev 0
+nvram0 at pcctwo0 offset 0xc0000: MK48T08
+cl0 at pcctwo0 offset 0x45000 ipl 3: console
+osiop0 at pcctwo0 offset 0x47000 ipl 2: NCR53C710 rev 2, 50MHz
+scsibus0 at osiop0: 8 targets, initiator 7
+osiop0: target 0 now using 8 bit 10 MHz 8 REQ/ACK offset xfers
+sd0 at scsibus0 targ 0 lun 0: &lt;SAMSUNG, WN34324U (gm030), 0105&gt; SCSI2 0/direct fixed
+sd0: 4120MB, 512 bytes/sec, 8438976 sec total
+osiop0: target 1 now using 8 bit 10 MHz 8 REQ/ACK offset xfers
+sd1 at scsibus0 targ 1 lun 0: &lt;QUANTUM, FIREBALL_TM3200S, 300X&gt; SCSI2 0/direct fixed
+sd1: 3067MB, 512 bytes/sec, 6281856 sec total
+vme0 at pcctwo0 offset 0x40000
+vme0: using BUG parameters
+vme0: 1phys 0x08000000-0xefff0000 to VME 0x08000000-0xefff0000
+vme0: vme to cpu irq level 1:1
+vmes0 at vme0
+vmel0 at vme0
+ie0 at pcctwo0 offset 0x46000 ipl 3: address 08:00:3e:23:ed:e8
+vscsi0 at root
+scsibus1 at vscsi0: 256 targets
+softraid0 at root
+boot device: sd0
+root on sd0a swap on sd0b dump on sd0b
+Automatic boot in progress: starting file system checks.
+/dev/rsd0a: file system is clean; not checking
+/dev/rsd0f: file system is clean; not checking
+/dev/rsd1a: file system is clean; not checking
+/dev/rsd0d: file system is clean; not checking
+/dev/rsd0h: file system is clean; not checking
+/dev/rsd0e: file system is clean; not checking
+/dev/rsd0g: file system is clean; not checking
+setting tty flags
+ddb.console: 0 -&gt; 1
+kern.splassert: 1 -&gt; 2
+starting network
+starting system logger
+starting initial daemons: portmap ypbind rdate ntpd.
+savecore: no core dump
+checking quotas: done.
+building ps databases: kvm dev.
+clearing /tmp
+starting pre-securelevel daemons:.
+setting kernel security level: kern.securelevel: 0 -&gt; 1
+creating runtime link editor directory cache.
+preserving editor files.
+starting network daemons: sendmail inetd sshd.
+starting local daemons:.
+standard daemons: cron.
+Thu Apr 15 21:12:51 GMT 2010
+
+OpenBSD/mvme88k (arzon.gentiane.org) (console)
+
+login: 
+</pre>
+
+<hr>
+<a href="plat.html">
+<img height="24" width="24" src="back.gif" border="0" alt="Supported platforms">
+</a> 
+<br>
+<small><a href="mailto:www@openbsd.org">www@openbsd.org</a></small>
+<br>
+<small>$OpenBSD: mvme88k.html,v 1.80 2010/04/17 22:23:48 miod Exp $</small>
+
+</body>
+</html>

@@ -1,0 +1,733 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>OpenBSD Upgrade Guide 4.2</title>
+<link rev="made" href="mailto:www@openbsd.org">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="resource-type" content="document">
+<meta name="description"   content="OpenBSD Upgrade Process for 4.1 -> 4.2">
+<meta name="keywords"      content="openbsd,faq,upgrade,4.2">
+<meta name="distribution"  content="global">
+<meta name="copyright"     content="This document copyright 2007 by OpenBSD">
+</head>
+
+<body bgcolor="#ffffff" text="#000000">
+<a href="../index.html">
+<img alt="[OpenBSD]" height=30 width=141 src="../images/smalltitle.gif" border="0">    
+</a>
+<p>
+<font color="#0000e0">
+<a href="upgrade35.html">[3.4 -> 3.5]</a> |
+<a href="upgrade36.html">[3.5 -> 3.6]</a> |
+<a href="upgrade37.html">[3.6 -> 3.7]</a> |
+<a href="upgrade38.html">[3.7 -> 3.8]</a> |
+<a href="upgrade39.html">[3.8 -> 3.9]</a> |
+<a href="upgrade40.html">[3.9 -> 4.0]</a> |
+<a href="upgrade41.html">[4.0 -> 4.1]</a> |
+<a href="upgrade43.html">[4.2 -> 4.3]</a> |
+<a href="index.html">[FAQ Index]</a>
+</font>
+
+<h1><font color="#e00000">Upgrade Guide: 4.1 to 4.2
+</font></h1>
+<hr>
+
+<i>Note: Upgrades are only supported from one release to the release
+immediately following it.
+Do not skip releases.</i>
+
+<p><i>
+It is highly recommended that you read through and fully understand
+this process before attempting it.
+If you are doing it on a critical or physically remote machine, it is
+recommended that you test this process on an identical, local system to
+verify its success before attempting on a critical or remote computer.
+</i>
+
+<p>
+Upgrading is a convenient way to bring your OpenBSD system up to the most
+recent version.
+However, the results are not intended to precisely match the results of
+a wipe-and-reload installation.
+Old library files in particular are not removed in the upgrade process,
+as they may be required by older applications that may or may not be
+upgraded at this time.
+If you REALLY wish to get rid of all these old files, you are probably
+better off reinstalling from scratch.
+
+<p>
+Table of Contents:
+<ul>
+<li><a href="#before">Before upgrading</a>
+  <ul>
+  <li><a href="#libexpat">Packages are now using libexpat shipped with
+    X; xbase42.tgz is your friend</a>
+  <li><a href="#X7.2XF3">Enter X.org v7.2, exit XF3</a>
+  <li><a href="#ahci">Updated ahci driver may change how disks are
+    handled</a>
+  <li><a href="#bgpd">bgpd filter language change</a>
+  <li><a href="#ssh1">SSH protocol 1 discouraged on new installs</a>
+  <li><a href="#sudo">Changes in the way sudo(8) passes environment</a>
+  <li><a href="#dedc">[alpha Only] Some de(4) NICs will become dc(4)</a>
+  <li><a href="#acpi">[i386 Only] apm(4) takes precedence over acpi(4)</a>
+  <li><a href="#rc.conf">rc.conf</a>
+  <li><a href="#kern">Modified kernel</a>
+  </ul>
+<li><a href="#upgrade">The upgrade process</a>
+<li><a href="#final">Final steps</a>
+  <ul>
+  <li><a href="#etcUpgrade">Upgrading <tt>/etc</tt></a>
+  <li><a href="#Kernchk">Checking the kernel</a>
+  <li><a href="#Xup">X configuration files</a>
+  <li><a href="#Pkgup">Upgrading packages</a>
+  </ul> 
+</ul>
+
+<hr>
+<p>
+<a name="before"></a>
+<h2>Before upgrading: things to think about and be aware of</h2>
+
+This is <i>not</i> a complete list of the changes that took place
+between 4.1 and 4.2, but rather some of the important things that will
+impact a large number of users in the upgrade process.
+For a more complete list of changes, see
+<a href="../plus42.html">plus42.html</a> and the CVS change logs.
+
+<!-- XXX add new stuff -->
+
+<a name="libexpat"></a>
+<ul>
+<li><b>Packages are now using libexpat shipped with X;
+xbase42.tgz is your friend:</b><br>
+The libexpat port has been removed.
+Packages now use the libexpat which is shipped with X instead.
+Many packages depend on libexpat through other dependencies.
+For instance, many packages require gettext which depends on 
+libexpat. Therefore, these packages also depend on libexpat.
+
+<p>
+This means that many systems that weren't using X before will now need to
+have <tt>xbase42.tgz</tt> installed.
+If you don't do this and try to install a package that requires libexpat,
+pkg_add(1) will give an error message.
+
+<p>
+Also note that building ports is only supported with a full installation,
+including <i>all</i> X file sets.
+
+<p>
+Finally, after upgrading all your packages to the 4.2 versions, clean up
+by removing the old expat package from your system:
+
+<blockquote><pre>
+# <b>pkg_delete expat</b>
+</pre></blockquote>
+
+<i>This will impact a large number of users!</i>
+This was an unfortunate decision whose ramifications were not recognized
+earlier in the process.
+For 4.3, libexpat will be part of <tt>base43.tgz</tt>, solving this
+problem.
+
+<p>
+<a name="X7.2XF3"></a>
+<li><b>Enter X.org v7.2, exit XF3:</b><br>
+A new version of X is in OpenBSD 4.2.
+Your old X configuration may need to be adjusted, but many people will
+find they don't need an X configuration file at all anymore.
+
+<p>
+As OpenBSD adapts to the newest versions of X.org, support for
+XF3 on the i386 platform (the only platform it was used on still)
+has been dropped.
+XF3 was needed only for some very old video chips which were not
+supported by XF4 and X.org.
+It is not believed this will impact many people.
+
+<p>
+The new X.org version changes a lot of config files, so there is a
+<a href="#Xup">separate section</a> to this upgrade process for X users.
+
+<p>
+<a name="ahci"></a>
+<li><b>Updated
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ahci&amp;sektion=4">ahci</a>
+driver may change how disks are handled:</b><br>
+Systems using the ahci(4) driver may find SATA disks which had been
+recognized and handled by the
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=wd&amp;sektion=4">wd(4)</a>
+(i.e., wd0) to become
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=sd&amp;sektion=4">sd(4)</a>
+(i.e., sd0) devices.
+Watch the <tt>dmesg</tt> output at boot.
+A drive which turned up earlier as:
+
+<p>
+<blockquote><tt>
+pciide1 at pci0 dev 31 function 2 "Intel 82801GBM AHCI SATA" rev 0x02: DMA, channel 0 wired to native-PCI, channel 1 wired to native-PCI<br>
+pciide1: using apic 2 int 11 (irq 11) for native-PCI interrupt<br>
+wd0 at pciide1 channel 0 drive 0: &lt;FUJITSU MHV2080BH&gt;<br>
+wd0: 16-sector PIO, LBA48, 76319MB, 156301488 sectors<br>
+wd0(pciide1:0:0): using PIO mode 4, Ultra-DMA mode 5
+</tt></blockquote>
+
+now instead turns up as:
+
+<p>
+<blockquote><tt>
+ahci0 at pci0 dev 31 function 2 "Intel 82801GBM AHCI SATA" rev 0x02: AHCI 1.1: apic 2 int 16 (irq 11)<br>
+scsibus1 at ahci0: 32 targets<br>
+sd0 at scsibus1 targ 0 lun 0: &lt;ATA, FUJITSU MHV2080B, 0084&gt; SCSI2 0/direct fixed<br>
+sd0: 76319MB, 76319 cyl, 64 head, 32 sec, 512 bytes/sec, 156301488 sec total
+</tt></blockquote>
+
+This will cause problems for people doing remote upgrades of these
+machines, as if the fstab file is not "correct", the system will not
+complete booting.
+Unfortunately, how the driver handles the disk is dependent upon a lot
+of things including BIOS configurations, so IF one has an AHCI SATA
+interface, one will have to experiment with a similarly configured
+local machine to see if the <tt>/etc/fstab</tt> file will need to be
+re-worked.
+
+<p>
+It is believed very few people will be hit by this now, as ahci(4)
+devices are moderately rare on existing hardware, though becoming much
+more common now.
+
+<p>
+<a name="bgpd"></a>
+<li><b>bgpd filter language change:</b><br>
+bgpd filters using only <tt>prefixlen</tt> as filter parameter now need to 
+include an address family identifier like <tt>inet</tt> or
+<tt>inet6</tt>:
+
+<p>
+<blockquote><tt>
+allow from any <b>inet</b> prefixlen 8 - 24<br>
+deny from any <b>inet6</b> prefixlen &gt; 64<br>
+</tt></blockquote>
+
+<p>As a reminder, bgplg and associated binaries are disabled at
+install/upgrade time. If you use them, they must be re-enabled as
+described in
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=bgplg&amp;sektion=8">bgplg(8)</a>.
+
+<p>
+<a name="ssh1"></a>
+<li><b>SSH protocol 1 discouraged on new installs:</b><br>
+New OpenBSD installs will default to not accepting SSH v1 connections.
+This upgrade process will not replace the <tt>/etc/ssh</tt>
+configuration files, but you may wish to manually do this to gain the
+new behavior.
+The following diff shows what has changed on new installs:
+
+<blockquote><pre>
+--- ./etc/ssh/sshd_config       Sat Mar 10 20:31:32 2007
++++ ../42/etc/ssh/sshd_config   Tue Aug 28 11:59:52 2007
+@@ -11,3 +11,2 @@
+ #Port 22
+-#Protocol 2,1
+ #AddressFamily any
+@@ -15,2 +14,7 @@  
+ #ListenAddress :: 
++
++# Disable legacy (protocol version 1) support in the server for new
++# installations. In future the default will change to require explicit
++# activation of protocol 1
++Protocol 2
+        
+</pre></blockquote>
+
+Again, this change is NOT part of the standard upgrade process.
+
+<p>
+<a name="sudo"></a>
+<li><b>Changes in the way sudo(8) passes environment:</b><br>
+For
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=sudo&amp;sektion=8#SECURITY+NOTES"
+>security reasons</a>
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=sudo&amp;sektion=8">sudo(8)</a>
+will now reset the environment to a small default set
+with only certain variables preserved from the previous environment.
+
+<p>
+In order for many things to continue to work as expected, the patch file
+<a href="#patchfile">below</a> will add a "<tt>Defaults env_keep</tt>"
+line to your <tt>/etc/sudoers</tt> file and otherwise try to make the
+file look like the one in <tt>etc42.tgz</tt>, but will possibly fail.
+You will want to make sure your <tt>sudoers</tt> file contains
+a line that looks something like:
+<blockquote><pre>
+%wheel       ALL=(ALL) SETENV: ALL
+  <i>-- or --</i>
+%wheel       ALL=(ALL) NOPASSWD: SETENV: ALL
+</pre></blockquote>
+
+assuming you wish "wheel" group users to have full sudo rights.
+It would probably be wise to test sudo(8) for proper operation before
+logging out of the system after the patch file is applied.
+
+<p>
+<a name="dedc"></a>
+<li><b>[alpha Only] Some de(4) NICs will become dc(4):</b><br>
+On the <a href="../alpha.html">alpha</a> platform, some NICs which had
+been supported by the
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=de&amp;sektion=4">de(4)</a>
+driver will now be supported by
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=dc&amp;sektion=4">dc(4)</a>.
+
+<p>
+IF your NIC is one of these, you will need to alter at least your <tt>/etc/hostname.deX</tt>
+(hint: hard link) and your pf.conf files as appropriate.
+
+<p>
+Again, this is <i>only</i> on the alpha platform.
+
+<p>
+<a name="acpi"></a>
+<li><b>[i386 Only] apm(4) takes precedence over acpi(4)</b><br>
+The device detection on i386 has been modified to make
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=apm&amp;sektion=4&amp;arch=i386">
+apm(4)</a> take precedence over
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=acpi&amp;sektion=4">
+acpi(4)</a>.
+It means that if your hardware has both apm and acpi devices, only apm will
+attach.
+If for some reason you prefer to use acpi, disable <tt>apm</tt> on your
+acpi-enabled kernel using <tt>config(8)</tt> or <tt>boot -c</tt>.
+
+<p>
+<a name="rc.conf"></a>
+<li><b>rc.conf:</b><br>
+Unlike earlier versions of this process, since
+<a href="upgrade41.html">4.1</a> it is assumed that
+<tt>/etc/rc.conf</tt> is not a user-altered file.
+If you have made changes to your <tt>/etc/rc.conf</tt> file, merge those
+changes into <tt>/etc/rc.conf.local</tt>.
+If you have NO <tt>/etc/rc.conf.local</tt>, simply copy your existing
+<tt>/etc/rc.conf</tt> file to <tt>/etc/rc.conf.local</tt> and
+<i>delete the last line of the script!</i>
+Otherwise, pull your existing <tt>rc.conf</tt> into the top of your
+existing <tt>rc.conf.local</tt> file <i>and remove the last line</i>
+before doing the rest of this process.
+
+<p>
+<a name="kern"></a>
+<li><b>Modified kernel:</b><br>
+Check whether you have made any modifications to your kernel.
+For example, you might have modified your network device to use a
+non-default setting using config(8).
+Note your changes, so you can repeat them for the new 4.2 kernel.
+
+</ul>
+
+<p>
+<hr>
+<a name="upgrade"></a>
+<h2>The upgrade process</h2>
+
+<h3>Upgrading by install kernel</h3>
+If you have access to the system's console, the easiest and safest way
+to upgrade is to boot from install media or
+<a href="faq4.html#bsd.rd">bsd.rd</a> and follow the upgrade steps,
+which are very similar to the <a href="faq4.html">install process</a>.
+Afterwards, complete the upgrade by following the <a href="#final">final
+steps</a> as detailed below.
+
+<p>
+One easy way to boot from the install kernel is to place the 4.2 version
+of <i>bsd.rd</i> in the root of your boot drive, then instruct the boot loader
+to boot using this new <i>bsd.rd</i> file.
+On amd64 and i386, you do this by entering "<tt>boot bsd.rd</tt>" at the
+initial <tt>boot&gt;</tt> prompt.
+
+<h3>Upgrading without install kernel</h3>
+<i>This is NOT the recommended process.  Use the install kernel method
+if at all possible!</i>
+
+<p>
+Sometimes, one needs to do an upgrade of a machine when one can't easily
+use the normal upgrade process.
+The most common case is when the machine is in a remote location and you
+don't have easy access to the system console.
+One can usually do this by carefully following this process:
+
+<ul>
+<li><b>Place install files in a "good" location</b>.
+Make sure you have sufficient space!
+
+<p>
+<li><b>Stop any "insecure" applications from starting at boot:</b>
+There will be a time when PF will be unlikely to be running during this
+upgrade process, but your applications may still start and run properly.
+Any application dependent upon PF for security should be disabled 
+before this happens, and should not be re-enabled until proper PF
+operation is verified after upgrade.
+There may be other applications which you wish to keep from running
+during the upgrade, stop and disable them as well.
+
+<p>
+<li><b>Check the kernel:</b>
+Although <b>most people can skip this step</b>, if you had a modified kernel
+in 4.1, it is likely you will need to modify the stock kernel of 4.2.
+Especially when you are performing the upgrade process remotely, now is
+the time to make sure the new kernel will work upon rebooting the machine.
+If any changes must be made to the kernel, the safest thing to do is to
+make those changes on a local 4.2 system.
+This can be as simple as modifying a specific device using config(8),
+or it can involve a recompilation if the option you need is not included
+in the GENERIC kernel.
+Please consult <a href="faq5.html">FAQ 5 - Building the system from source</a>
+before considering to recompile your kernel.
+
+<p>
+<li><b>Install new kernel(s)</b>
+<blockquote><pre>
+<b>export RELEASEPATH=</b><i>/usr/rel</i>   <i># where you put the files</i>
+<b>cd ${RELEASEPATH}</b>
+<b>rm /obsd ; ln /bsd /obsd && cp bsd /nbsd && mv /nbsd /bsd</b>
+<b>cp bsd.rd bsd.mp /</b>
+</pre></blockquote>
+
+Note the extra steps for copying over the primary kernel: those are done
+to ensure that there is always a valid copy of the kernel on the disk
+that the system can boot from should there be a really badly timed power
+outage or system crash.
+
+<p>
+<li><b>Install new <tt>/etc/firmware</tt> files:</b>
+Due to the fact that some uploaded "firmware" files may have been updated,
+you may need to update the files in the <tt>/etc/firmware</tt> directory.
+This will impact users of only a few devices, though all users can use
+this step without harm.
+To extract the firmware files from <tt>base42.tgz</tt>, use the
+following as root:
+
+<blockquote><pre>
+<b>cd /</b>
+<b>tar -C / -xzphf ${RELEASEPATH}/base42.tgz ./etc/firmware</b>
+</pre></blockquote>
+
+<p>
+<li><b>Reboot on the new kernel:</b>
+This might be a tempting step to skip, but it should be done now, as
+usually, the new kernel will run old userland apps (such as the soon to
+be important <tt>reboot</tt>!), but often a new userland will NOT
+work on the old kernel.
+
+<p>
+<li><b>Install new userland applications.</b>
+<i>Do NOT install <tt>etc42.tgz</tt> and <tt>xetc42.tgz</tt> now, because
+that will overwrite your current configuration files!</i>
+
+<blockquote><pre>
+<b>export RELEASEPATH=</b><i>/usr/rel</i>
+<b>cd ${RELEASEPATH}</b>
+<b>tar -C / -xzphf base42.tgz</b>
+<b>tar -C / -xzphf comp42.tgz</b>
+<b>tar -C / -xzphf game42.tgz</b>
+<b>tar -C / -xzphf man42.tgz</b>
+<b>tar -C / -xzphf misc42.tgz</b>
+<b>tar -C / -xzphf xbase42.tgz</b>
+<b>tar -C / -xzphf xfont42.tgz</b>
+<b>tar -C / -xzphf xserv42.tgz</b>
+<b>tar -C / -xzphf xshare42.tgz</b>
+</pre></blockquote>
+
+Note: not all file sets will need to be installed for all applications,
+however if you installed a file set originally, you should certainly
+upgrade it with the new file set now.
+
+<p>
+Note: the files in <tt>/etc</tt> are handled separately below, so
+<tt>etc42.tgz</tt> and <tt>xetc42.tgz</tt> are NOT unpacked here.
+
+<p>
+<li><b>Upgrade <tt>/dev</tt>.</b>
+The new 
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=MAKEDEV&amp;sektion=8&amp;arch=i386">MAKEDEV</a>
+file will be copied to /dev by the installation of
+<tt>base42.tgz</tt>, so you simply need to do the following:
+<blockquote><pre>
+<b>cd /dev</b>
+<b>./MAKEDEV all</b>
+</pre></blockquote>
+
+<p>
+<li><b>Upgrade <tt>/etc</tt> as below</b>.
+
+<p>
+<li><b>Reboot</b>
+</ul>
+
+During this process,
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=sendmail&amp;sektion=8">sendmail(8)</a>
+may produce some error messages like the following:
+<pre>
+    Nov 1 12:47:05 puffy sm-mta[16733]: filesys_update failed: No such file or dire
+    ctory, fs=., avail=-1, blocksize=380204
+</pre>
+These messages can be safely ignored for the moment, or you may wish to
+halt sendmail(8) during the upgrade process.
+Note that sendmail is not working properly at this point, and will need
+to be restarted (as part of the reboot) before mail is expected to be
+handled properly.
+
+<p>
+
+<hr>
+<a name="final"></a>
+<h2>Final steps</h2>
+
+Whether you upgrade by using an install kernel and doing a formal  
+"upgrade" process, or do a "in-place" binary upgrade, there are certain 
+manual steps that have to be performed.
+  
+<a name="etcUpgrade"></a>
+<h3>1. Upgrading <tt>/etc</tt></h3>
+
+<p>
+You will want to extract the <tt>etc42.tgz</tt> files to a temporary
+location:
+<blockquote><pre>
+<b>tar -C /tmp -xzphf ${RELEASEPATH}/etc42.tgz</b>
+</pre></blockquote>
+
+
+Files that can probably be copied from <tt>etc42.tgz</tt> "as is":
+
+<blockquote><pre>
+etc/magic
+etc/man.conf
+etc/netstart
+etc/rc
+etc/rc.conf
+etc/rpc
+etc/services
+etc/mail/helpfile
+etc/mail/localhost.cf
+etc/mail/sendmail.cf
+etc/mail/submit.cf
+etc/mtree/4.4BSD.dist
+etc/mtree/BSD.local.dist
+etc/mtree/special
+</pre></blockquote>
+
+Note that it IS possible to locally modify these files, if this has been
+done, manual merging will be needed.
+Pay special attention to <tt>mail/*</tt> if you are using something
+other than the default Sendmail(8) configuration.
+Here are copy/paste lines for copying these files, assuming you unpacked 
+<tt>etc42.tgz</tt> in the above recommended place:
+
+<blockquote><pre>
+<b>cd /tmp/etc
+cp magic man.conf netstart rc rc.conf rpc services /etc
+cp mtree/* /etc/mtree/
+cp mail/helpfile mail/localhost.cf mail/submit.cf /etc/mail
+cp mail/sendmail.cf /etc/mail     </b><i># Careful on this one!!</i>
+</pre></blockquote>
+
+<p>
+<a name="patchfile"></a>
+Files that must be manually merged, respecting any local 
+changes made to them, if they were modified from the default, 
+otherwise, just copy them over, too:
+
+<blockquote><pre>
+etc/ntpd.conf
+etc/sensorsd.conf
+etc/ssh/ssh_config
+etc/ssl/x509v3.cnf
+etc/sudoers
+etc/sysctl.conf
+etc/wsconsctl.conf
+var/www/conf/httpd.conf
+</pre></blockquote>
+
+The changes to these files are in <a href="upgrade42.patch">this
+patch file</a>.
+You can attempt to use this by executing the following as root:
+<blockquote><pre>
+<b>cd /</b>
+<b>patch -C -p0 &lt; upgrade42.patch</b>
+</pre></blockquote>
+
+This will test the patch to see how well it will apply to YOUR system,
+to actually apply it, leave off the "<tt>-C</tt>" option.
+Note that it is likely that if you have customized files or not kept
+them closely updated, or are upgrading from a snapshot of 3.9, they may
+not accept the patch cleanly.
+In those cases, you will need to manually apply the changes.
+Please test this process before relying on it for a machine you can not
+easily get to.
+
+<p>
+The following files have had changes which should be looked at, but it
+is unlikely they should be directly copied or merged (i.e., if you are
+using bgpd.conf, look at the suggested change of strategy, and decide if
+it is appropriate for your use).
+
+<blockquote><pre>
+etc/bgpd.conf
+etc/mail/spamd.conf
+etc/ospfd.conf
+etc/ssh/sshd_config
+</pre></blockquote>
+
+Finally, use
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=newaliases&amp;sektion=8">newaliases(8)</a>
+to update the aliases database and
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=mtree&amp;sektion=8">mtree(8)</a>
+to create any new directories:
+<blockquote><pre>
+<b>newaliases</b>
+<b>mtree -qdef /etc/mtree/4.4BSD.dist -p / -u</b>
+</pre></blockquote>
+
+<a name="Kernchk"></a>
+<h3>2. Checking the kernel</h3>
+Note: <b>most people can skip this step!</b>
+<p>
+If you followed the instructions for the upgrade process without install
+kernel, you have already completed this step.
+However, if you used the install kernel, and if you had a modified kernel
+in 4.1, it is likely you will need to modify the stock kernel of 4.2.
+This can be as simple as modifying a specific device using config(8),
+or it can involve a recompilation if the option you need is not included
+in the GENERIC kernel.
+Please consult <a href="faq5.html">FAQ 5 - Building the system from source</a>
+before considering to recompile your kernel.
+
+<a name="Xup"></a>
+<h3>3. X configuration files</h3>
+Due to the significant changes in X for this release, the easiest way to
+upgrade your X for 4.2 may be to back up your existing X configuration
+files, unpack xetc42.tgz, and manually merge back any changes you had
+made.
+
+<p>
+The files you are most likely to want to save a copy of are
+<tt>/etc/X11/xorg.conf</tt> and <tt>/etc/X11/xinit/xinitrc</tt>.
+As X now often works with NO xorg.conf file, you may wish to try it
+without one before you copy your file back. 
+
+<p>
+Unpack xetc42.tgz as you would other file sets:
+<blockquote><pre>
+<b>export RELEASEPATH=/usr/rel
+cd ${RELEASEPATH}
+tar -C / -xzphf xetc42.tgz
+</b></pre></blockquote>
+
+<p>
+
+<a name="Pkgup"></a>
+<h3>4. Upgrading packages</h3>
+If you installed any packages on your system, you should upgrade them
+after completing the upgrade of the base system.
+Be aware, however, many packages will require further setup before
+and/or after upgrading the package.
+Check with the application's upgrade guide for details.
+
+<p>
+The following package is known to have significant upgrade issues
+that will impact a large number of users.
+The fact that a package is not on this list doesn't mean it will have a
+trivial upgrade.
+You must do some homework on the applications YOU use.
+
+<ul>
+<li><b>xfce:</b> Configuration base directory and files have completely
+changed.  You will probably have to re-create your configuration from
+scratch.
+</ul>
+
+<p>
+Before continuing, there are some major changes in the 4.2 release which
+you should know about:
+
+<ul>
+<li>The libexpat port has been removed, and packages are now using the
+libexpat shipped with X11 instead.
+Many packages depend on libexpat through other dependencies.
+For instance, all the packages which require gettext also depend on libexpat.
+This means that before you can add or upgrade packages, you most likely
+need to have <tt>xbase42.tgz</tt> installed, even if the packages you are
+installing don't have a graphical operation.
+Refer to the
+<a href="faq4.html#AddFileSet">FAQ</a> about adding
+<tt>xbase42.tgz</tt> to an installed system.
+If you don't do this and try to install a package that requires libexpat,
+pkg_add(1) will give an error message.
+
+<li>If you are using pkg_add(1) in combination with sudo(8), you will
+need to change your <tt>/etc/sudoers</tt> as the
+<a href="#patchfile">patch file</a> attempts to.
+See <a href="#sudo">changes in sudo(8)</a> for more info.
+
+</ul>
+
+The package tools support in-place updating using <tt>pkg_add -u</tt>.
+For instance, to update all your packages, make sure <tt>PKG_PATH</tt> is
+pointing to the 4.2 packages directory on your CD or nearest FTP mirror,
+and use something like
+ 
+<blockquote><pre>
+<b># pkg_add -ui -F update -F updatedepends</b>
+</pre></blockquote>
+
+where the <tt>-u</tt> indicates update mode, and <tt>-i</tt> specifies
+interactive mode, so pkg_add will prompt you for input when it encounters
+some ambiguity. Read the
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=pkg_add&amp;sektion=1&amp;manpath=OpenBSD+4.2">pkg_add(1)</a>
+manual page and the <a href="faq15.html#PkgMgmt">package management</a>
+chapter of the FAQ for more information.
+
+<p>
+You will very possibly see something like this when running the above
+command:
+<blockquote><pre>
+Looking for updates: complete
+Cannot find updates for expat-2.0.0
+Proceed? [y/N] 
+</pre></blockquote>
+
+This is indicating you have run into the libexpat problem and must now
+install <tt>xbase42.tgz</tt> as mentioned above.
+If you have not installed xbase42.tgz, it is recommended that you stop
+the package update, install xbase42.tgz and then re-run the package
+upgrade.
+
+<p>
+Finally, after upgrading all your packages,
+clean up by removing the old expat package from your system:   
+
+<blockquote><pre>
+# <b>pkg_delete expat</b>
+</pre></blockquote>
+
+<p>
+<font color="#0000e0">
+<a href="upgrade35.html">[3.4 -> 3.5]</a> |
+<a href="upgrade36.html">[3.5 -> 3.6]</a> |
+<a href="upgrade37.html">[3.6 -> 3.7]</a> |
+<a href="upgrade38.html">[3.7 -> 3.8]</a> |
+<a href="upgrade39.html">[3.8 -> 3.9]</a> |
+<a href="upgrade40.html">[3.9 -> 4.0]</a> |
+<a href="upgrade41.html">[4.0 -> 4.1]</a> |
+<a href="upgrade43.html">[4.2 -> 4.3]</a> |
+<a href="index.html">[FAQ Index]</a>
+</font>
+
+<p>
+<hr>
+<a href="index.html"><img height="24" width="24" src="../images/back.gif" border="0" alt="[back]"></a>
+<a href="mailto:www@openbsd.org">www@openbsd.org</a>
+<br>
+<small>$OpenBSD: upgrade42.html,v 1.28 2008/04/30 21:27:58 nick Exp $</small>
+
+</body>
+</html>

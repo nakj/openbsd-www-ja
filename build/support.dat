@@ -1,0 +1,2874 @@
+# Build.dat file created by SupGrupWriter at Sat Sep 11 20:26:06 EDT 2004
+# $OpenBSD: support.dat,v 1.272 2010/02/23 05:25:28 jcs Exp $
+
+# Start of Argentina
+0
+C Argentina
+P Buenos Aires
+T Capital Federal
+Z C1172ABN
+O Servicios OpenBSD
+I Marcelo Gulin
+A Gallo 606
+M openbsd@openbsd-support.com.ar
+U http://www.openbsd-support.com.ar/
+B 0054-11-4861-8852
+X 0054-11-4861-8852
+N Instalacion y configuracion del sistema operativo OpenBSD, PF
+firewall y NAT, QoS, VPN IPSec, servidores web, DNS, de correo
+POP/IMAP/SMTP, de bases de datos, de archivos o de impresion.
+Soluciones personalizadas sobre plataforma OpenBSD de acuerdo a su
+necesidad.
+
+# Start of Australia
+0
+C Australia
+P NSW
+T Marsfield
+Z 2122
+O The Institute for Open Systems Technologies Pty Ltd
+I Greg Baker
+A Suite 17, 57 Culloden Road
+M greg.baker@ifost.org.au
+U http://www.ifost.org.au/
+B 0500 545 856, 02 8231 5735, 0408 245 856
+X 02 9868 5793
+N IFOST provides training (courses in OpenBSD administration and use), security consulting (including architecture, VPNs, penetration testing), firewalls (including pf, CARP, etc.) software development (particularly using embedded OpenBSD) and back-porting of OpenBSD patches to older OpenBSD releases.  Current clients include HP, Fujitsu, several Australian government departments, a few utilities, and a number of finance and healthcare companies.
+
+0
+C Australia
+P New South Wales
+T Newtown, Sydney
+Z 2042
+A 5 Wilson St
+O Nullcube Pty Ltd
+I Aldo Cortesi
+M info@nullcube.com
+U http://www.nullcube.com.au/
+B 1300 767 007
+X
+N Nullcube provides services to organisations with exceptional
+security needs. We use OpenBSD to develop and support network
+architectures for security-sensitive environments, including
+firewalls, VPNs, proxies, and IDS / IPS solutions.  We are also
+experts in IT security auditing, penetration testing, risk management,
+and incident response.
+
+0
+C Australia
+P South Australia
+T Adelaide
+O Greyhat Systems
+I Rocco Carbone
+B (+61).1300.306.788
+M openbsdsupport@greyhat.com.au
+U http://www.greyhat.net.au/
+Z 5001
+A GPO Box 1136
+N 10+ years UNIX experience. Setup and support of OpenBSD servers, routers
+and firewalls. E-business consulting. OpenBSD based secure website hosting
+
+0
+C Australia
+P Victoria
+T Bendigo
+O Ionix Technology Pty. Ltd.
+I Joel Sing
+B +61 3 5441 1226
+X +61 3 5441 6699
+M info@ionix.com.au
+U http://www.ionix.com.au/
+Z 3554
+A PO Box 1303
+N Over 5 years experience with OpenBSD and Linux. We build, install, support and administer OpenBSD and Linux based file servers, web servers, mail servers, database servers, routers, firewalls, intrusion detection systems and VPNs. We have a strong emphasis on security and reliability, and provide complete solutions.
+
+0
+C Australia
+P Victoria
+T Melbourne
+O Cybersource Pty. Ltd.
+I Con Zymaris
+B +61 3 9621 2377
+X +61 3 9621 2477
+M info@cyber.com.au
+U http://www.cyber.com.au/
+Z 3000
+A Level 4, 10 Queen Street
+N Cybersource has been working with open source Unix/BSD/Linux platforms and technologies for nearly 10 years. We have a strong focus on systems administration and network security, and offer consulting services in these areas.
+
+0
+C Australia
+P Victoria
+T Melbourne
+O CyberSecure Pty Ltd
+M service@cybersecure.com.au
+U http://www.cybersecure.com.au/
+B +61 3 9457 4338
+X +61 3 9458 1343
+N CyberSecure provides offsite backup, managed firewalls and managed
+OpenBSD servers. To achieve the highest standards, all our server
+installations are exclusively OpenBSD and we try to follow the OpenBSD
+project's goals in security and quality.
+
+0
+C Australia
+P Victoria
+T Melbourne
+Z 3004
+A Level 1, 474 st kilda rd
+O OsBTI
+I Alex M
+M webmaster@osbti.com
+U http://www.osbti.com.au
+B 1300 888 106
+F 03 9869 8899
+N 6+ Years experience with UNIX including Linux, Red Hat, Ubuntu Free BSD,
+Open BSD, Debian, Suse, Fedora Core and RHEL.
+We provide training, consulting and network deployment on various UNIX
+platforms. TCP/IP network planning and deployment. We can build and
+customise OpenBSD routers and firewalls.
+
+0
+C Australia
+P WA
+T Perth
+Z 6157
+O Core Software
+I Chris Kruger
+A 272A Preston Point Road
+M chris.kruger@coresoftware.net.au
+U http://www.coresoftware.net.au/openbsd.html
+B +61 8 63644812
+X +61 8 6267 8014
+N 10 Years of OpenBSD Experience. Firewalls, Web servers and more.
+
+# Start of Austria
+0
+C Austria
+P Oberoesterreich
+T Linz
+Z A-4020
+O Liwicom
+I Mag. Andreas Holzinger
+A Bockgasse 29/4
+M a.holzinger@liwicom.at
+U http://www.liwicom.at/
+B +43 (0) 732 / 600 212
+X +43 (0) 732 / 600 212 20
+N Liwicom installs transparent as well as non transparent Firewall Systems
+and Fileservers based on OpenBSD. We have more than 6 years experience in
+Linux/Unix. We support OpenBSD, Linux, Windows and Mac OS installation,
+configuration and maintenance as well as network administration and Windows
+server integration. We offer services in Austria in Linz and Vienna.
+
+0
+C Austria
+P Steiermark
+T Deutschlandsberg
+O Admins WebSecurity
+I Security Consulting
+B +43-900-970144-1
+M austria@admins.ws
+U http://www.admins.ws/
+Z 8530
+A Postfach 33033
+N Admin WebSecurity offers OpenBSD based HIGH-END Security solutions. We support *BSD and Linux installation, configuration, maintenance, administration. Our staff is specialized in Security Audits, VPN, IDS, IRS and Firewall Design. We offer services in Austria, Germany and Switzerland.
+
+0
+C Austria
+P Vienna
+T Vienna
+O IKTech
+I Dipl.-Ing. Gernot Schmied
+B +43-6991-9235834
+M office@iktech.net
+U http://www.iktech.net/
+Z A-1060
+A Mariahilferstrasse 81, 2/2/9
+N IKTech is a team of experienced security, network and systems engineers. We are systems integrators supporting OpenBSD, FreeBSD, NetBSD, Linux and Solaris and are the authoritative competence center for Open Source as well as commercial UNIX-based routing solutions in the area. We have a strong focus in high-end integrated gateways featuring access, dynamic routing, VPN, firewalling and IDSs.
+
+# Start of Belgium
+0
+C Belgium
+P Liege
+T Amay
+Z Amay
+O Maehdros
+I Bruno Mairlot
+A Rue Terres Rouges, 13
+M openbsd@maehdros.com
+U http://www.maehdros.be/
+B +32.85236863
+X +32.85236863
+N OpenBSD and Linux Firewall Installation - Especially for VPN
+appliances using OpenVPN software.
+24/7 Support and Secure Remote Management
+
+0
+C Belgium
+P Limburg
+T Eigenbilzen
+Z 3740
+O Consultant
+I Dr. Martin Beckmann
+A Lochtstraat 51
+M martin@beckmann-consult.com
+U http://www.beckmann-consult.com/
+B +32-497-546096
+X
+N OpenBSD and Linux consulting, installation, maintenance and support
+services for small business, docter's office, lawyer's office, home
+office etc.
+
+0
+C Belgium
+T Sint-Pieters-Leeuw
+Z 1602
+O cudeso.be
+I Koen Van Impe
+A Postweg 61
+M sales@cudeso.be
+U http://www.cudeso.be
+N Mailservers, webservices, VPN, firewalls, web-applications, vulnerability
+scanning
+
+0
+C Belgium
+P Oost-Vlaanderen
+T Belsele
+Z 9111
+O RootSecurity Solutions and Consulting
+I Thomas Woidt
+A Kerkstraat 52
+M thomas@rootsecurity.be
+U http://www.rootsecurity.be/openbsd/
+B +32 (0)3 555 29 01
+N We implement and provide support on network and security solutions based
+on OpenBSD like firewalls, VPNs and internet routers.
+
+# Start of Brazil
+0
+C Brazil
+P Minas Gerais
+T Belo Horizonte
+O QAC- Quality Assurance Consult Ltda
+I Gustavo Prado
+B 55 xx 31 32920623
+X 55 xx 31 32920623
+M gustavo@qaconsulting.com.br
+U http://www.qaconsulting.com.br/
+Z 30750-330
+A AV Bar&atilde;o Homem de Melo, 4386 7 andar
+N We specialize in network/security/wireless-LAN solutions, and we think that OpenBSD is the best choice.
+
+0
+C Brazil
+P Paran&aacute;
+T Curitiba
+O Consultant
+I Waldir Borba J&uacute;nior
+B +55 41 9127-9782
+X +55 256-5960
+M waldir@xmlbrasil.com.br
+U http://www.xmlbrasil.com.br/
+Z 82620-000
+A R. Dr S&aacute;tilas do Amaral Camargo, 654 - Tingui
+N OpenBSD/Linux installation, configuration, security, web-email-ftp-dns servers, firewall/gateway/proxy for ADSL/ISDN. Database development (PostgreSQL and mySQL). Software development (C,C++,Java,HTML,PHP,SQL,Delphi and Kylix).
+
+0
+C Brazil
+P Paran&aacute;
+T Curitiba
+Z 80240-020
+O Volcano Intelligent Solutions
+I Daniel Gomes Vargas
+A Av Silva Jardim, 2251
+M daniel.vargas@volcano.com.br
+U http://www.volcano.com.br/
+B +55 41 3024-5116
+X +55 41 3024-5116
+N Over 8 years experience with UNIX based systems and Windows Servers. We build, install, support and administer OpenBSD, Linux and Windows based file servers, web servers, mail servers, database servers, routers, firewalls, IDS and VPNs. We provide solutions of security and Internet Services.
+
+0
+C Brazil
+P Rio Grande do Sul
+T Porto Alegre
+O ServiceSul Consultoria em Inform&aacute;tica Ltda.
+I Edward
+B 55 51 3024 3811
+X 55 51 3024 3811
+M edwjr@terra.com.br
+Z 90000 000
+A R. Carneiro da Fontoura, 327
+N Over 5 years experience with OpenBSD, Linux and Windows Servers. We build, install, support and administer OpenBSD, Linux and Windows based file servers, web servers, mail servers, database servers, routers, firewalls, intrusion detection systems and VPNs. We have a strong emphasis on security and Internet Services.
+
+0
+C Brazil
+P Rio Grande do Sul
+T Porto Alegre
+Z 90040193
+A Av. Ven&acirc;ncio Aires, 1137 - Bairro: Rio Branco
+O Lnx-IT Informa&ccedil;&atilde;o e Tecnologia
+I Luciano Goulart
+M comercial@lnx-it.inf.br
+U http://www.lnx-it.inf.br/
+B 55-51-3331.1446
+F 55-51-3331.1446
+N Technical support and consulting services OpenBSD, FreeBSD, Linux, Mac/OS and Unix operating systems and databases MySQL, PostgreSQL and Oracle. Fifteen years of experience in services it has supported the environment of operational system, networks and relational database.
+
+0
+C Brazil
+P SP
+T S&atilde;o Paulo
+O Tecno21 Inform&aacute;tica Ltda.
+I Marcello Morsello
+B +55 (11) 3825-2472
+X +55 (11) 3825-2472
+M morsello@tecno21.com.br
+U http://www.tecno21.com.br/
+Z 01230-000
+A Rua Albuquerque Lins, 804 cj. 31
+N OpenBSD firewall/gateway/proxy for ADSL/ISDN installation and update services.  C/C++, PERL, Java and Kylix development on UNIX (*BSD, Linux, AIX, Solaris, HP-UX, HP-VV).  GNU software configuration and support on commercial UNIXes.
+
+0
+C Brazil
+P Santa Catarina
+T Blumeneau
+O Nunix Consultoria Ltda
+I Leonardo Larsen Rocha
+B 55-47-3395536
+X 55-47-3395536
+M leonardo@nunix.com.br
+U http://www.nunix.com.br/
+Z 89035410
+A Regente Feij&oacute;
+N We supply OpenBSD-based firewalls and internet-gateways, often to small businesses needing an "administrator-less" solution. We do consulting and education work on OpenBSD and on LiNUX as well. We build, install, support and administer OpenBSD and Linux based file servers, web servers, mail servers, database servers, routers, firewalls, intrusion detection systems and VPNs. We have a strong emphasis on security and reliability, and provide complete solutions.
+
+# Start of Bulgaria
+0
+C Bulgaria
+P Sofia
+T Sofia
+O OpenIntegra Ltd.
+I Yovko Lambrev
+B +359 88 826 2552
+X +359 32 630 119
+M info@openintegra.com
+U http://www.openintegra.com/
+Z 1000
+A Beli Brezi, bl.15, ap.6
+N A Bulgarian open source support and services company. BSD and Linux-based solutions provider.
+
+# Start of Canada
+0
+C Canada
+P Alberta
+T Calgary
+O Starblanket Research
+I Bob DeBolt
+B 1-877-280-3695 (North America)
+M bob.debolt@telusplanet.net
+Z T1Y-3S5
+A 521 - Whiteland Dr NE
+N All of our production servers are based on OpenBSD. A partial list of our servers includes the scalable OpenBSD firewall, <em>True Web Content Filtering</em> and caching-proxies, each of which is based on the increasingly sophisticated OpenBSD - PF firewall servers. We develop and manage security policies for educational institutions and SOHO/Corporate environments.
+
+0
+C Canada
+P Alberta
+T Calgary
+O The Bitmill Inc.
+I Don Tetreault
+B (403) 230-1839
+M info _at_ thebitmill.com
+U http://www.thebitmill.com/
+Z T3L 2J5
+A 149 Tuscany Ridge View
+N 7+ years *NIX sysadmin experience, including *BSD, IRIX, Linux, SunOS, Solaris. System security specialization includes PF/IPF firewall and host hardening in data center environments.
+
+0
+C Canada
+P Alberta
+T Edmonton
+O Consultant
+I Tobias Weingartner
+B (780)720-8539
+M weingart@tepid.org
+U http://www.tepid.org/~weingart/
+Z T6G 1G3
+A Apt. B 7707-110 Street
+N Have worked on Intel 386 boot code, Unix administration, etc, etc. If people pay for plane ticket, food and lodging, then I'll travel almost anywhere. :-)
+
+0
+C Canada
+P Alberta
+T Edmonton
+O Obtuse Systems Corporation
+I Bob Beck
+B 780 481 6576
+M beck@obtuse.com
+U http://www.obtuse.com/
+Z T5R 2G9
+A 8101 160 Street
+N Worked on many daemons, kernel network code, transparent proxies, SSL integration. Experienced in Firewalls, IPsec, Kerberos, Intrusion Detection, Secure web servers. Big systems with heavy load. Instruction and Training. Have also used and administered AIX, SunOS/Solaris, IRIX, *BSD, BSDI, HP/UX, Linux, WinNT/95/98/2000, and others which no longer exist.
+
+0
+C Canada
+P Alberta
+T Edmonton
+Z T6A 2P7
+O Neotext
+I Duncan Patton a Campbell
+A 10908 65a st.
+M campbell@neotext.ca
+U http://neotext.ca
+B 780 982 8763
+X 780 469 0930
+N Open Systems Integration and Reverse-Engineering, Legacy Sytems,
+RealTime AI, Air Traffic Control, Remote Sensing, TestBed/Laboratory
+Development, Remote/Onsite Support, Wireless, RFID, Tracking/Mapping
+Systems, Barcoding, Inventory/supply-line, SAP integration, C3I,
+Web Catalogs, Competitive Intelligence Search Engines,
+Risk Assessment&amp;Reduction, Motorola, Intermec, Symbol devices.
+UNIX -- OpenBSD, FreeBSD, HPUX, Solaris/SunOS in Industrial Environments.
+And PCs: 25 years experience, competence and integrity.
+Contact point -- https://neotext.ca/cgi-bin/getxt
+
+0
+C Canada
+P British Columbia
+T Kelowna
+O Prestige Computer Services Inc.
+I Kevin Roosdahl
+B 250-869-7353
+M kevin@prestigecomputers.ca
+U http://www.prestigecomputers.ca/
+Z V1Y 9K1
+A 1815 Bowes Street
+N Over 15 years experience with several flavours of Unix (and Windows). Installation and support services for OpenBSD and Linux based servers and firewalls on PC and Soekris platforms.  Serving the Okanagan but willing to travel.
+
+0
+C Canada
+P British Columbia
+T Vancouver
+O Active Information Corporation
+I Peter William Lount
+B 604-736-2461
+X 604-736-2266
+M OpenBSD@ActiveInfo.CA
+U http://www.ActiveInfo.CA/OpenBSD/
+Z V6J 1M7
+A 1917 West 4th Avenue, #14
+N Twenty two years of UNIX system administration experience. OpenBSD, FreeBSD, Linux installation, configuration, maintenance. We provide consulting, training, security auditing and analysis. We install ready to go monitored firewalls for home and businesses. We support businesses with all aspects of their online activity including servers, e-commerce, security and web. Will work anywhere in Canada, USA, Costa Rica, Singapore, Australia or just about anyplace and anytime.
+
+0
+C Canada
+P British Columbia
+T Vancouver
+O Countersiege Systems Corporation
+I Ryan McBride
+B (604) 726-4225
+X (604) 726-4201
+M mcbride@countersiege.com
+U http://www.countersiege.com/
+Z V6Z 2S1
+A PO Box SP1 - 989 Nelson Street
+N "Defense in depth" oriented consulting and professional services. OpenBSD Installation and configuration with a training focus: we help you do it and teach you how it works, so next time you can do it yourself.
+
+0
+C Canada
+P New Brunswick
+T Fredericton
+O Surety Partners
+I Serge Chevarie-Pelletier
+B +1.506.447.8863
+M OpenBSD@SuretyPartners.ca
+U http://www.SuretyPartners.ca/
+Z E3B 1X6
+A 527 Beaverbrook Court, Suite 191
+N The principals of Surety Partners have more than 20 years experience providing security, software process improvement, architectural and design services to business and organizations globally.
+
+0
+C Canada
+P Ontario
+T London
+O Startech.com
+I Ben Bednarz
+B 800-265-1844
+X 519-455-9425
+M bbednarz@startech.com
+U http://www.startech.com/
+Z N5V 5E9
+A 45 Artisans Crescent
+N <a href="http://www.startech.com/">Startech.com</a> is an ISO 9001 manufacturer of hard-to-find computer parts with 18 years of experience. Large selection of UNIX compatible hardware; online catalog.
+
+0
+C Canada
+P Ontario
+T London
+O UniTECH Communications London
+I Steve Platek
+B (519)521-7901
+X (519)660-6770
+M splatek@unitechlon.ca
+U http://www.unitechlon.ca/
+Z N6A 3C4
+A 383 Richmond Street Suite 403
+N We supply and configure OpenBSD based firewalls and managed Internet servers.We have been involved in the UNIX industry for 15 Years. Sun Solaris, AIX and Linux support also available. We have adapted the OpenBSD kernel for specific use for Automotive, Manufacturing and Internet Service Providers. The only way to RUN the Internet is OpenBSD!
+
+0
+C Canada
+P Ontario
+T Palgrave
+O Consultant
+I Ian F. Darwin
+B +1 905-729-3002
+U http://www.darwinsys.com/contact.jsp
+Z L0N 1P0
+A R R # 1
+N OpenBSD installation, configuration, firewall setup. Software development in C and/or Java. Mac OS X Consulting. Author of <a href="http://www.oreilly.com/catalog/lint/">Checking C Programs with Lint</a> and <a href="http://javacook.darwinsys.com/">The Java Cookbook</a>, co-author of <a href="http://tomcatbook.darwinsys.com/">Tomcat: The Definitive Guide</a>, all from O'Reilly. Wrote a UNIX course and two Java courses for <a href="http://www.learningtree.com/">Learning Tree International</a>. Speaker at conferences including <a href="http://conferences.oreilly.com/oscon/"> O'Reilly Open Source Conference</a>.
+
+0
+C Canada
+P Ontario
+T Toronto
+O Quist Consulting
+I Russell P. Sutherland
+B 416 696-7600
+X 416 978-6620
+M russ@quist.ca
+U http://www.quist.ca/
+Z M4G 2N1
+A 219 Donlea Drive
+N OpenBSD Installation and Configuration. Qmail, Ezmlm, Apache, DNS expertise for small and large sites. Networking (LAN and WAN) and security advice.
+
+0
+C Canada
+P Québec
+T Pointe Claire
+Z H9R 1M2
+O Consultant
+I James P. Sosontovich
+A 128 Prince Rupert
+M rightscript@gmail.com
+U http://rightscript.no-ip.org
+B 514-815-5871
+X 514-227-5345
+N Install, secure, and maintain *BSD based production environments.
+Specialist in database development on OpenBSD and other UNIX platforms.
+
+0
+C Canada
+P Québec
+T Montreal
+Z H2S 2P3
+O Papamike IT Services
+I Peter Matulis
+A 5836, rue de Saint-Vallier
+M info@papamike.ca
+U http://www.papamike.ca/
+B (514) 433-6060
+N We specialize in firewalls, mail servers, and anti-spam/virus gateways.
+
+0
+C Canada
+P British Columbia
+T Vancouver
+Z V6B 4N5
+O Astute Hosting Incorporated
+I Han Hwei Woo
+A 555 West Hastings Street
+M sales@astutehosting.com
+U http://www.astutehosting.com/
+B 604-417-2092
+X 604-735-0518
+N Semi-managed Dedicated Hosting, Co-location, and Consulting Services
+with an emphasis on high availability, security, and flexibility.
+Advanced DDoS mitigation using distributed BGP anycasted  
+infrastructure.
+We specialize in customized solutions, and offer OpenBSD as an option on
+all of our dedicated servers. We also run our routers and firewalls on
+OpenBSD / PF.
+
+# Start of Colombia
+0
+C Colombia
+P DC
+T Bogota
+O IFX NETWORKS
+I Julio Cesar Pinto
+B (571) 3256008
+X (571) 3256025
+M Dirección de correo electrónico (jc@ifx.com.co)
+U http://www.ifx.com.co/
+Z 57111
+A CL 100 # 8A-35 TC PISO 10
+N Especialistas en seguridad (cortafuegos, VPNs, auditoras de seguridad, sistemas de detección de intrusos, etc... ). También ofrecemos instalación y configuración de sistemas, integración de sistemas, afinamiento del rendimiento, recuperación de datos, arquitectura de redes y programación. OpenBSD, NetBSD, FreeBSD, Linux y muchos sistemas comerciales.
+
+0
+C Colombia
+P Cundinamarca
+T Bogotá D.C.
+Z 90052
+O Internet Solutions Ltda.
+I David Eduardo Acosta
+R. A Cra. 11 No. 71-41 of. 202 Edificio Torre Avenida Chile
+M david.acosta@internet-solutions.com.co
+U http://www.internet-solutions.com.co/
+B +571 3120910 F +571 3120577
+N Internet Solutions ofrece servicios de alto nivel basados en soluciones de software que cumplen los estándares de licenciamiento Open Source (Linux, *BSD, poniendo especial énfasis en OpenBSD por su seguridad integrada), consultorías en seguridad informática y soluciones comerciales líderes en el mercado, así como la integración de estos sistemas en las arquitecturas computacionales de nuestros clientes. Nuestro portafolio se enfoca principalmente a conjugar servicios profesionales de calidad con herramientas tecnológicas de primer nivel basadas en sistemas UNIX.
+
+# Start of Costa Rica
+0
+C Costa Rica
+P San Jose
+T San Jose
+O Rawten Latinoamerica, S.A.
+I Luis Cerdas
+B +506 2240432
+X +506 2359864
+M info@rawten.net
+U http://www.rawten.net/
+Z 1000
+A P.O. Box 4224
+N Consulting and professional services work supporting Sun Microsystems and OpenBSD systems, carrier-scale messaging systems and global security infrastructure audits and implementation throughout Latin America.
+
+0
+C Costa Rica
+P Heredia
+T Heredia
+Z 3000
+O RTR Webworks CR S.A.
+I Denes Kelenyi
+A Centro Comercial Plaza Heredia
+M info@rtrwebworks.com
+U http://www.rtrwebworks.com/
+B 506-835-2716
+X 506-835-2716
+N Installations, maintenance and configuration of networks and UNIX-like servers e.g. (Free)BSD and Linux. Database and website development for these platforms (Apache, Mysql). Willing to help charity / educational organisations or groups with hosting or other help. Can outsource *nix programming projects to/for other countries as well.
+
+# Start of Czech Republic
+0
+C Czech Republic
+T &Uacute;st&iacute; nad Labem
+O LOGIOS system solutions
+I Ond&#xc599;ej Such&yacute;
+B +420 777 103 944
+X +420 475 201 967
+M info@logios.cz
+U http://www.logios.cz/
+Z 400 01
+A Å aldova 7
+N Consulting and support services for OpenBSD, FreeBSD and Linux systems. Server installation and maintenance. Security analysis, incident handling, contingency plans, intrusion detection and firewalls.
+
+0
+C Czech Republic
+T Prague
+O ZOOM International
+I Simon Vostr&yacute;
+B (+420 2)21 667 557
+X (+420 2)21 667 553
+M openbsd@zoom-int.cz
+U http://www.zoom-int.cz/
+Z 110 00
+A Perlov&aacute;
+N OpenBSD, NetBSD, FreeBSD and Linux installation, maintenance, support services. Setup, configuration and firewall maintenance of OpenBSD based servers; system and network administration. Security design and application development under *BSD and Linux. Firewalls, IDS and bastion hosts building, server performance tuning.
+
+# Start of Denmark
+0
+C Denmark
+T K&oslash;benhavn N
+Z DK-2200
+O Zen Systems
+I Martin Hein
+A Esromgade 15, opg 1, 2. sal
+M info@zensystems.dk
+U http://zensystems.dk/
+B +45 33 917 913
+N Zen Systems has installed and maintained OpenBSD and Linux platforms since
+the beginning of the millenium.
+
+0
+C Denmark
+P Kastrup
+T Copenhagen
+Z DK-2770
+O Security6.net
+I Henrik Kramshoej
+A Avnboel Alle 7
+M hlk@security6.net
+U http://www.security6.net/
+B +45 2026 6000
+X +45 2026 6000
+N Security6.net provides IT-security training including OpenBSD
+firewalls, Computer Forensics, Intrusion Detection, UNIX Security and
+Apache HTTP server. Penetration testing and hacker courses using
+OpenBSD as scanserver.
+
+# Start of Finland
+0
+C Finland
+T Helsinki
+Z 00100
+O EPTE Oy
+I Petri Niemela
+A Aurorankatu 15B
+M sales@epte.fi
+U http://epte.fi/
+B +358 40 7000110
+X +358 9 5487557
+N EPTE Oy has more than five years of expertise on systems built on
+OpenBSD and Linux. Beside using OpenBSD on our internal systems, we build
+and maintain OpenBSD based servers and firewalls for our customers.
+
+# Start of France
+0
+C France
+T Levallois-Perret
+O Hervé Schauer Consultants (HSC)
+I Jean-Jacques Bernard-Gundol
+B +33 141 409 700
+X +33 141 409 709
+M Jean-Jacques.Bernard@hsc.fr
+U http://www.hsc.fr/
+Z F-92300
+A 4bis, rue de la gare
+N Consultancy firm since 1989 with emphasis on Unix Security, TCP/IP and Internet security. BSD experience since 386BSD. OpenBSD installation, support and consulting. Also Apache, DNS (Bind), Sendmail, Postfix...
+
+0
+C France
+P IDF 95030
+T Cergy Pontoise Cedex
+O ARCANE NETWORKS
+I Benoit Lecocq
+B +33 1 30 32 66 06
+X +33 1 30 32 66 06
+M lecocq@arcane-networks.fr
+U http://www.arcane-networks.fr/
+Z 95030
+A 1 Boulevard de l'Oise
+N Consultancy and Web Hosting firm providing many services : installation, maintenance and configuration of Firewall, VPN, IDS, Web Server under OpenBSD and Linux.
+
+0
+C France
+P IDF
+T Paris
+O HAPSIS
+I Saâd Kadhi
+B +33 1 44 35 70 70
+X +33 1 44 35 70 71
+M saad.kadhi@hapsis.fr
+U http://www.hapsis.fr/
+Z 75008
+A 66, Avenue des Champs Elysées
+N Consultancy and training firm focusing on Information Security  and Open Source. Our service offerings include OpenBSD training, deployment, and expertise. Whenever possible, we recommend OpenBSD for deploying secure servers and gateways. Zone of operation includes France and other countries as well.
+
+0
+C France
+P IDF
+T Paris
+Z 75007
+O IDEALX
+I Pierre-Olivier Fur
+A 15/17 Avenue de SEGUR
+B +33 1 44 42 00 00
+X +33 1 44 42 00 01
+M contact@IDEALX.com
+U http://www.IDEALX.com/
+N IDEALX, as an OpenSource engineering company, support *BSD and Linux platforms, and particularly OpenBSD for security-needed solutions.
+
+0
+C France
+P IdF
+T Montigny-lès-Cormeilles
+O DIABLOTIN
+I Yannick Cadin
+B +33 (0)6 60 60 10 48
+X +33 (0)6 61 60 10 48
+M info@diablotin.com
+U http://www.diablotin.com/
+Z 95370
+A 3, rue Jacques Daguerre
+N Formations systeme, services et applications sur les *BSD libres (OpenBSD, NetBSD et FreeBSD), Linux (certification Red Hat RHCE/RHCX) et Mac OS X.  Prestation directe, partenariat, sous-traitance, intra et inter, partout dans le monde.  Formations <b>"Utile and Agreable"</b>: <b>vacances studieuses</b> avec alternance de cours de haut niveau et de loisirs en fonction de la saison et la region d'accueil. Traduction, relecture et redaction en francais, anglais, allemand et espagnol.
+
+0
+C France
+P Ile de france
+T Paris
+Z 75003 Paris
+O Oxalide
+I Maxime Kurkdjian
+A 13 rue Greneta
+M contact@oxalide.com
+U http://www.oxalide.com
+B +33 1 44 78 63 68
+X +33 1 44 78 63 65
+N Oxalide is a consultancy firm and solution provider.  Our fields of expertise include UNIX software system deployment such as secure mail systems (SMTP, POP, IMAP), advanced Web server configurations, high-availability firewalling, etc.  Our knowledge of OpenBSD, *BSD, Commercial Unix and Linux is thorough.
+
+0
+C France
+P Bouches du Rh&ocirc;ne
+T Marseille
+Z 13013 Marseille
+O Evolix
+I
+A 58 rue Paul Langevin
+M info@evolix.fr
+U http://www.evolix.fr/
+B +33 4 91 05 92 54
+X +33 4 91 05 92 54
+N Evolix is providing Unix infrastructures, consulting services,
+development, support and training for OpenBSD and Linux. We are using
+OpenBSD for our infrastructure, and for firewalls, mail/web/DNS servers,
+IPsec gateways and Intrusion Detection Systems.
+
+0
+C France
+P Pays de la Loire
+T Le Mans
+Z 72000
+O ZELITES
+I Anne-Gaelle Lunot
+A 49, place de la Ripublique
+M info@zelites.org
+U http://www.zelites.org
+B +33 2 43 46 94 24
+X +33 1 79 75 02 58
+N Many services are provided by Zilites: support, installation,
+maintenance, administration of servers like firewall, VPN, IDS, web
+server, mail server, DNS or whatever you need. Our services offerings
+include a high-level of security using OpenBSD and other Unix systems
+
+# Start of Germany
+0
+C Germany
+P Baden-Wuerttemberg
+T Alfdorf
+O TBits.net GmbH
+I Herr Boernert
+B +49(0)7172-18391-0
+X +49(0)7172-18391-99
+M info@tbits.net
+U http://www.tbits.net/
+Z 73553
+A Seeweg 6
+N OpenBSD Installation, Konfiguration, Support. Firewall-Systeme mit OpenBSD
+
+0
+C Germany
+P NRW
+T Bochum
+O Adimus GmbH &amp; Co. KG
+I Christoph Haas
+B +49-(0)234-971971-0
+X +49-(0)234-971971-9
+M info@adimus.de
+U http://www.adimus.de/
+Z 44805
+A Harpener Hellweg 41
+N Setup, configuration and maintenance of various firewalls configuration and sale of OpenBSD based servers and workstations; system and network administration
+
+0
+C Germany
+P Hessen
+T Darmstadt
+O Alexander Khine EDV-Service
+I Alexander Khine
+B (+49) 6151-429 515
+X (+49) 6151-429 514
+M service@khine.de
+U http://www.khine.de/
+Z 64287
+A Darmstr. 7
+N System and network administration, security services, programming and support for various flavours of Windows and UN*X-like systems, including Linux, NetBSD and OpenBSD. Development of custom networking and security solutions and all-in-one-services.
+
+0
+C Germany
+P NRW
+T Dormagen
+O TronicGuard GmbH
+I Martin Wundram
+B +49 2133 502594 0
+X +49 2133 502594 5
+M info@tronicguard.com
+U http://www.tronicguard.com/
+Z 41541
+A Martinusstr. 18
+N We use OpenBSD since the late 90s and offer support and many services around and based on OpenBSD. These are especially security appliances, file-/database-servers, all-in-one office-solutions and mini-servers based on VIA epia.
+
+0
+C Germany
+P NRW
+T Essen
+Z 45279
+O linuxhotel
+I Ingo Wichmann
+A Antonienallee 1
+M rezeption@villa-vogelsang.de
+U http://www.linuxhotel.de/
+B 0049-201-8536-600
+X 0049-201-8536-605
+N OpenBSD Kurs von erfahrenen OpenBSD-Entwicklern und -administratoren.
+
+0
+C Germany
+P HH
+T Hamburg
+O sysfive.com GmbH
+I Philipp B&uuml;hler
+B +49 (0) 40 63647481
+X +49 (0) 40 63647482
+M info@sysfive.com
+U http://sysfive.com/
+Z 20459
+A R&ouml;dingsmarkt 14
+N Consulting, Konfigurations- und Kapazit&auml;tsplanung, Implementation, Integration, Fehler- und Sicherheitsanalysen von UNIX-Servern. Einsatz von OpenBSD als Basis f&uuml;r Sicherheits-Infrastruktur Komponenten (NIDS, Firewalls, VPN, Proxies).
+
+0
+C Germany
+T Hamburg
+Z D-22399
+O Tegtmeier Internet Solutions
+A Reinckeweg 11
+U http://www.tegtmeier.de/
+B +49 40 60671199
+X +49 1212 512384131
+N Beratung, Planung und Entwicklung von Internet-Projekten in C, Perl, SQL, PHP, HTML, etc. Installation, Konfiguration, Sicherheits-Hartung und Wartung von Servern und Firewalls. Spezialisiert auf Server- und Applikations-Sicherheit, redundante Systeme und Geschwindigkeits-Optimierung.
+
+0
+C Germany
+P Hamburg
+T Hamburg
+Z 20253
+O Hamburgnet
+I Sebastian Schmitzdorff
+A Kottwitzstrasse 49
+M info@hamburgnet.de
+U http://www.hamburgnet.de/
+B +49 40 736 72 322
+X +49 40 736 72 321
+N OpenBSD based Firewall and Server Solutions and Consulting.
+We offer many years of experience with Solaris, OpenBSD, Linux and other
+Unix-like Systems. Storage, Server, Cluster, Unix & Consulting.
+
+0
+C Germany
+P Lower Saxony
+T Hannover
+Z
+O .vantronix | secure systems GmbH
+I Reyk Floeter
+A
+M openbsd-support@vantronix.com
+U http://www.vantronix.com/
+F true
+B +49 511 69 6044823
+X
+N Products based on OpenBSD, consulting, support, development and training in all fields of information security.
+
+0
+C Germany
+P Bayern
+T Nuernberg
+Z 90409
+O swapspace
+I Stefan Wieseckel
+A Nordring 98a
+M info@swapspace.de
+U http://www.swapspace.de/
+B +49-(0)-911-5182757
+F +49-(0)-911-5182756
+N System and network administration; setup, configuration and maintenance of Linux- and OpenBSD-based systems (firewalls, mailservers, webservers, DNS-servers, ...).
+
+0
+C Germany
+P RLP
+T Mainz
+Z 55116
+O Triona - Information und Technologie GmbH
+I Igor Chemnitz
+A Rheinstrasse 4e
+M bsd@triona.de
+U http://www.triona.de/
+B +49-6131-2019-422
+X +49-6131-2019-200
+N IT consulting, installation and administration of UNIX (BSD, Linux),
+web-, application- and database-servers
+
+0
+C Germany
+P Baden-Wuerttemberg
+T Mannheim
+O Symetric GmbH
+B +49-621-8425630
+X +49-621-8425650
+M office@symetric.de
+U http://www.symetric.de/
+Z 68219
+A Besselstr. 9
+N OpenBSD Installation, Konfiguration und Wartung.Projekte: Mail-, Proxy-, Web- und File Server sowie Intrusion Detection und Firewallsysteme.
+
+0
+C Germany
+P NRW
+T Muenster
+Z 48153
+O Warp9 GmbH
+I Dr. Klaus Schmoltzi
+A Scheibenstr. 109
+M ks@warp9.de
+U http://www.warp9.de/
+B +49 251 973190
+X +49 251 9731929
+N We offer our customer IT services within the ranges consulting,
+support and training with a strong focus on security. Since 2001, we
+deployed many OpenBSD Systems, mainly as firewalls and vpn gateways.
+
+0
+C Germany
+P Nordrhein-Westfalen
+T Muenster
+O immutec GmbH
+I Stephan Holtwisch
+B +49 (0) 251 / 980-1230
+X +49 (0) 251 / 980-1231
+M info@immutec.com
+U http://www.immutec.com/
+Z 48149
+A Mendelstr. 11
+N OpenBSD based Security Services &amp; Setups (Firewall, VPN, IDS, Secure Fileservers, Application Proxies...), PenTests, Code &amp; Security Auditing, *BSD based embedded Firewall, average staff member has +5 years UNIX &amp; Coding experience
+
+0
+C Germany
+P Bavaria
+T N&uuml;rnberg
+O OSTC Open Source Training and Consulting GmbH
+I Hermann Gottschalk
+B +49 (0) 911 - 34 74 54 4
+X +49 (0) 911 - 18 06 27 7
+M hg@ostc.de
+U http://www.ostc.de
+Z 90425
+A Delsenbachweg 32
+N Planung, Installation und Betreuung von OpenBSD-Servern in Embedded-, Workstation- und Servergr&ouml;&szlig;e. Internet- und Firmenl&ouml;sungen, Migration und Schulungen.<br />Beratung beim Erstellen von heterogenen L&ouml;sungen ebenso m&ouml;glich wie Sicherheitsaudits und Anpassungen durch eigens erstellte Individualsoftware.<br />Gro&szlig;e Erfahrung mit anderen UNIX-Systemen (Linux, *BSD, Solaris) vorhanden.
+
+0
+C Germany
+P Bavaria
+T Schwandorf
+Z 92421
+O msuess unternehmensberatung
+I Matthias S&uuml;&szlig;
+A Brunnleite 2 / Postfach 1502
+M openbsd@msuess.de
+U http://www.msuess.de/
+B +49(9431)39 99 - 85
+N We are providing support for ZOPE / Plone on OpenBSD and developing
+individual solutions (in Python, Tcl/Tk and ADA) <br/>
+<a href="http://www.freeunix.de" target="_blank">We are the main sponsor
+of the german *iX-Wiki</a>
+
+0
+C Germany
+P Bayern
+T Regen
+O Admins WebSecurity
+I Security Consulting
+B +49-9921-960888
+M germany@admins.ws
+U http://www.admins.ws/
+Z 94209
+A Rodenstocksiedlung 4
+N Admin WebSecurity offers OpenBSD based HIGH-END Security solutions. We support *BSD and Linux installation, configuration, maintennance, administration. Our staff is specialized in Security Audits, VPN, IDS, IRS and Firewall Design. We offer services in Austria, Germany and Switzerland.
+
+0
+C Germany
+P NRW
+T Siegen
+O os-cillation
+I Oliver Schweissgut
+B 0049 271 485336 0
+X 0049 271 485336 1
+M info@os-network.de
+U http://www.os-cillation.de/
+Z 57072
+A L&ouml;rstr. 15
+N Software development (C/C++/Java/HTML/PHP/Perl/SQL). Installation and support of OpenBSD based mail, web, firewall, database, news, dns, ftp, and samba servers. OpenBSD and Windows desktop integration. Also experienced with NetBSD, Solaris and Linux.
+
+0
+C Germany
+P NW
+T Wiehl
+O Öko.neT Müller &amp; Brandt
+I Toni Müller
+B +49 2261 979364
+X +49 2261 979366
+M support@oeko.net
+U http://www.oeko.net/
+Z 51674
+A Werner-von-Siemens-Str. 4
+N Beratung, Konzeption, Installation und Konfiguration, Betrieb sowie Softwareentwicklung für OpenBSD und Debian Linux, für VPN, Firewall, NIDS, Mail-, Web-, DNS- und Proxy-Server, Datenbanken, ERP-Anbindungen, Shop-Systeme
+
+0
+C Germany
+P NRW
+T Monschau
+Z 52156
+O Maruweb
+I Ren&eacute; Maroufi
+A Jungchenb&uuml;chel 54
+M info@maruweb.de
+U http://www.maruweb.de/
+B +49 2472 9126905
+X +49 2472 2587
+N Administration und Beratung zu OpenBSD und Linux.
+Firewalls, Mail-, Web-, DNS- und Sambaserver.
+Schulungen zu OpenBSD und Linux, sowie f&uuml;r
+verschiedene Netzwerkdienste (Apache, Samba, Postfix, etc.)
+
+0
+C Germany
+P NDS
+T Oldenburg
+Z 26129
+O bytemine
+I Felix Kronlage
+A Marie-Curie-Str. 1
+M info@bytemine.net
+U http://www.bytemine.net/
+B +49 441 36116410
+X +49 441 36116419
+N Consultancy, support, deployment and allround OpenBSD services with focus
+on, but not limited to, firewall and network security, VPN Solutions, hosting
+and housing as well as software development in the unix environment.
+
+0
+C Germany
+P Hessen
+T Flieden
+Z 36103
+O PuzzWorks OHG
+I Simon Bertrang
+A Bornm&uuml;hle 8
+M info@puzzworks.com
+U http://puzzworks.com/
+B +49 700 78777777
+X +49 700 78777777
+N PuzzWorks is specialized on planning, development and implementation of
+web-based management systems in all areas.  Very important aspects of our work
+include security, usability and seamless workflows.  We provide the opportunity
+to realize projects together with the required infrastructure and technologies
+and offer support for firewalls, mail-, dns-, web-, file- and database-servers,
+network connectivity, installation, configuration and maintenance.
+
+# Start of Greece
+0
+C Greece
+P Crete
+T Heraklion
+Z 71414
+I Manolis Tzanidakis
+A 4, 62 Martiron - Ammoudara
+M manolis@tzanidakis.gr
+U http://www.tzanidakis.gr/~manolis/
+B +302810257418, +306947345635
+X +302810322692
+N IT Consulting and technical support. Specialize in OpenBSD and Linux systems.
+
+0
+C Greece
+P Attica
+T Athens
+Z 161 21
+O thinkBinary
+I Stefanos Spanoudakis
+A 31, Ag. Polykarpou str. Kaisariani
+M info@thinkbinary.gr
+U http://www.thinkbinary.gr/
+B +30 210 7296 486
+X +30 210 7296 486
+N IT services and technical consulting. Unix/Linux specialization.
+Implementing security solutions based on OpenBSD.
+
+# Start of India
+0
+C India
+P Maharashtra
+T Mumbai
+O AMAFHH
+I Hozefa / Joel
+B 91-022-98201 54122 / 91-022-98205 33294
+M joel@hotmail.com
+Z 400004
+A 4, Rangari Bldg., 2nd Bhandari X lane, Duncan Road
+N We are computer assemblers and maintenance company. We have expertise in Win / Linux installation. We wish to encourage usage of OpenBSD (or any BSD variant) in India.
+
+# Start of Ireland
+0
+C Ireland
+P ROI
+T Dublin
+Z
+O ITWise Ltd
+I
+A Kilmullen, Portarlington, Co.Kildare
+M enquiries@itwise.net
+U http://www.itwise.net/
+B +353 (0)87 224 3379
+X +353 (0)87 224 3379
+N  <a href="http://www.itwise.net/"><strong>ITWise</strong> </a> is a leading provider of IT consultancy in Ireland. Company is comprised of consultants from various backgrounds, who provide expertise across our solutions range. We posess vast experience in most of Unix including OpenBSD, FreeBSD, AIX, HPUX, Solaris and Linux. We provide commercial support for lots of open source software packages including <b>business applications, firewalls, network monitoring, virus and spam control, intrusion detection</b> and many more.
+
+0
+C Ireland
+P Dublin
+T
+Z
+O CatSoft Network Technology LTD
+I Catalin Tomozei - Network & System Engineer
+A
+M catalin.tomozei@gmail.com
+U
+B +353-0862207457
+X
+N  Linux, *BSD and Solaris server consulting, *auditing*, support and
+management.
+
+# Start of Italy
+0
+C Italy
+P Bologna
+T Bologna
+O Infosec S.r.l.
+I Stefano Venturoli
+B +39 051 386460
+X +39 051 385140
+M venturoli@infosec.it
+U http://www.infosec.it/
+Z 40133
+A Security
+N Internet security and data defense realized mainly with open source software. Particular knowledge of firewalls, internet applications, IDS and network administration from LAN to WAN. Also we have developed a range of products based on OpenBSD with the purpose to be "administrators tools", for better internet network administration.
+
+0
+C Italy
+P GE
+T Genova
+O AG - IT Consulting
+I Andrea Gedda
+B +39 3479409611
+X +49 1212520385194
+M contact@studioinf.com
+U http://www.studioinf.com/
+Z 16154
+A CP 5012
+N IT Consulting, Linux/BSD Server, Development, Training, E-business and System Engineering are our services and products. We install the well-designed and secure operating system OpenBSD on servers, in order to guarantee a high security environment.
+
+0
+C Italy
+T Milan
+O Sinapto srl
+I Matteo Cantoni
+B +39 02 20241141
+X +39 02 700444445
+M matteo.cantoni@sinapto.net
+U http://www.sinapto.com
+Z 20133
+A Via Sansovino 4
+N Linux and *BSD installation, maintenance and support services. Setup, configuration and maintenance firewalls on OpenBSD based servers; system and network administration.
+
+0
+C Italy
+P MI
+T Milano
+O Impulso Srl
+I Fabrizio Frosali
+B +39.028244031
+X +39.028255925
+M info@impulso.it
+U http://www.impulso.it/
+Z 20100
+A Viale Milanofiori, Palazzo F1
+N OpenBSD is our choice for all our firewall installations. Our experience ranges from setting up a simple SOHO firewall pf based to a complete ISP class redundant firewall with bandwidth control and load balancing. Offriamo consulenza ed assistenza nella realizzazione di soluzioni basate su OpenBSD e Linux.
+
+0
+C Italy
+P Modena
+T Mirandola
+O Arcanet Consulting
+I Marcello Scacchetti
+B +39 535 611520
+X +39 535 611521
+M marcello.scacchetti@arcanetconsulting.com
+U http://www.arcanetconsulting.com/
+Z 41037
+A Viale Gramsci 349
+N &nbsp;
+
+0
+C Italy
+P Napoli
+T Napoli
+Z 80134
+O Consultant
+I Giovanni Federico
+A Via Pallonetto Santa Chiara 15
+M info@giovannifederico.net
+U http://www.giovannifederico.net
+B +39 3289555569
+X +39 0810608042
+N IT Security Consultancy Services, GNU/Linux-OpenBSD installation,
+maintenance, support and consulting, Unix software development,
+System and Network administration.
+
+0
+C Italy
+P TS
+T Trieste
+O E*MAZE Communications S.p.a.
+I Rodolfo G. Rosini
+B 39-040-8321332
+X 39-040-8321340
+M info@emaze.net
+U http://www.emaze.net/
+Z 34100
+A Via Flavia 23/1
+N E*MAZE develops network security products, support and services for vulnerability assessment and IDSes on OpenBSD systems for Global 2000 companies
+
+0
+C Italy
+P VE
+T Santa Maria di Sala
+Z 30036
+O Open Company
+I Fabio Cazzin
+A Via Firenze, 11
+M info@opencompany.it
+U http://www.opencompany.it/
+B +39 041 5761070
+X +39 041 8109910
+N IT Consulting, Linux/OpenBSD Server, Firewalls (PF / Carp), VPN, Embeded
+systems, Training, Security, System and Network administration.
+
+0
+C Italy
+P Verona
+T Colognola ai Colli
+Z 37030
+O Alba s.r.l.
+I Alessio Pennasilico / mayhem
+A Via Stra' 164/3a
+M a.pennasilico@alba.st
+U http://www.alba.st/
+B +39 3489044903 / sip:222@voip.alba.st
+X +39 0456172490
+N We support OpenBSD and Linux installations that act as secure
+antispam mail gateway, web server, firewalls and fulfill any customer
+requirements. We develop unix software on-demand, usually releasing
+source code under the GPL license.
+
+0
+C Italy
+P UD
+T Udine
+Z 33100
+O Consultant
+I Patrik Bergamasco
+A Via Morpurgo 4
+M patrik.bergamasco@ud.camcom.it
+N Netadmin from 7+ years on schools and government networks, 4 years
+experience with OpenBSD. Support: web/ftp/mail servers, firewalls and
+authentication mechanism, IDS, VOIP server, VPN, proxy server, file
+servers and data defense on OpenBSD environment.
+
+# Start of Japan
+0
+C Japan
+P Meguro-Ku
+T Tokyo
+Z 152-0002
+O OpenBSD Support Japan Inc.
+I Mark Toraki Uemura
+A Meguro Honchou 6-6-2
+M support@openbsd-support.com
+U http://www.openbsd-support.com/
+F true
+B +81-(0)3-3715-3032
+X +81-(0)3-3715-7275
+N We specialise in OpenBSD systems support and services in Japan.  Our focus is on security, reliability, cost savings and interoperability.
+
+0
+C Japan
+P Kanagawa
+T Yokohama
+Z 2450016
+O nihonsoft LLC
+A 4353-5 izumi-cyo izumi-ku
+M info@nihonsoft.jp
+U http://www.nihonsoft.com/
+B +81 45 804 5242
+X +81 45 804 524243
+N We provide consulting in English and Japanese to help your business
+get started in Japan. We especially like to help FOSS companies set up
+branches in Japan, and promote the use of FOSS Systems such as Debian,
+Ubuntu, FreeBSD, OpenBSD and NetBSD throughout industries and schools in
+Japan.
+
+# Start of Latvia
+0
+C Latvia
+P
+T Cesis
+Z LV-4101
+O CHC Ltd.
+I
+A Lencu str. 44A-13
+M chc@chc.lv
+U http://www.chc.lv/
+B +371 9223245
+X
+N Unix like systems support and maintenance. Solutions based on *BSD.
+
+0
+C Latvia
+P
+T Riga
+Z LV-1014
+O Consultant
+I Artis Schlossberg
+A
+M artis@proit.lv
+U http://proit.lv/~artis/support/
+B +371 28 60 81 30
+X
+N To Serve and Protect: securing your online presence, e-commerce or otherwise.
+
+# Start of Moldova
+0
+C Moldova
+T Chisinau
+O Consultant
+I Evgeniy
+B 373 2 9549019
+M evgeniy@riscom.net
+Z 2012
+N Setup, support, hosting and administration. Internet solution using OpenBSD: Firewalls, Mail, WWW.
+
+# Start of M&eacute;xico
+0
+C M&eacute;xico
+P Sonora
+T Hermosillo
+O Onyx Consultorias
+I Juan Pablo Feria
+B (62) 576097
+M jferiago@netscape.net
+U http://www.pitic.com.mx/onyx
+Z 83000
+A Luis donaldo Colosio esquna con calle Yañez
+N We have 10 Years in Unix Consulting (*BSD, Linux, Solaris, HP-UX among others), including experience in OpenBSD on Firewalls and Bastion Hosts. We can develop any solution to our customers.
+
+# Start of Netherlands
+0
+C Netherlands
+P Overijssel
+T Enschede
+Z 7544 WP
+O OpenFortress
+A Haarlebrink 5
+M info@openfortress.nl
+U http://openfortress.nl/
+B +31 53 4782239
+X +31 842 244827
+N OpenFortress is a technology provider for cryptograpic solutions, notably
+applications of digital signatures. We can set up securely signing systems
+at your location, preferably based on OpenBSD.
+
+0
+C Netherlands
+T Heemstede
+O Consultant
+I Otto Moerbeek
+B +31-650-682261
+M otto@drijf.net
+U http://www.drijf.net/
+Z 2102 GV
+A Franz Leharlaan 112
+N OpenBSD developer with nearly 20 years of Unix experience.  You can hire me to do contract programming, code auditing, troubleshooting or general consulting work.
+
+0
+C Netherlands
+P Limburg
+T Baarlo
+O Kruse ICT
+I Arno Kruse
+B +31 43 4090604
+X +31 43 4090605
+M kruse@kruse-ict.nl
+U http://www.kruse-ict.nl/
+Z 5991BA
+A Kerkveldstraat 1a
+N We build OpenBSD-based (web)servers, routers and firewalls.  We also provide support and education on UNIX, general security and Win32.  Our security solutions (Intrusion Detection, Virtual Private Networking, and encrypted data transport/storage) are all based on OpenBSD.  OpenBSD runs on all our servers, workstations and notebooks. We work in the Netherlands, Belgium and Germany.
+
+0
+C Netherlands
+P NB
+T Oosterhout
+O Radécom B.V.
+I Richard Zoontjens / Deni Strik
+B +31 162 467770
+X +31 162 466864
+M info@radecom.nl
+U http://www.radecom.nl/
+Z 4907 EW
+A Werkmansbeemd 10
+N We have expertise in the areas of *BSD based servers. We use FreeBSD for file, web and database services. OpenBSD is used for custom enterprise-grade firewalls.
+
+0
+C Netherlands
+P NH
+T Amsterdam
+O Sentia Internet Security B.V.
+I Camiel Dobbelaar
+B +31-20-7505 733
+X +31-20-698 1036
+M info@sentia.nl
+U http://www.sentia.nl/
+Z 1101CS
+A Hullenbergweg 385
+N OpenBSD support contracts. Custom-built OpenBSD internet appliances (dns, firewall, ids, mail, vpn, web, etc). Security consultancy. Specialized in hosting environments.
+
+0
+C Netherlands
+P Overijssel
+T Deventer
+O BWSS
+I Hendrik-Jan Verheij
+B +31 570 665140
+X +31 570 665141
+M info@bwss.nl
+U http://www.bwss.nl/
+Z 7421 RE
+A Ruysdaelstraat 31
+N We use OpenBSD in our product BWSS Connect, a complete office solution for internet connectivity, file sharing, email, fax and printing. We also build OpenBSD-based systems to customer specification.
+
+0
+C Netherlands
+P ZH
+T Delft
+O Fox-IT
+B +31-15-2847999
+X +31-15-2847990
+M fox@fox-it.com
+U http://www.fox-it.com/
+Z 2611BC
+N Fox-IT dedicates its products and services to a more secure society. We are specialists in security and intelligence solutions for government bodies and other major organizations throughout the world. Our core business is developing solutions for the protection of state secrets, the investigation of digital crime, audits, managed security services, consulting and training courses.
+
+
+0
+C Netherlands
+P Groningen
+T Middelstum
+Z 9991AM
+O ADIB
+I Arthur Donkers
+A Burg. F. v. Ankenweg 5
+M info@adib.nl
+U http://www.adib.nl/
+B +31 595 557057
+X +31 595 557046
+N Support contracts, custom built openbsd solutions, support and implementation for ISP environments (PF, failover setups, transparant bridging), virtual server hosting, e-mail and web services, also for Linux
+
+# Start of New Zealand
+0
+C New Zealand
+P Auckland
+T Auckland
+O FFF Managed Technology Ltd.
+I Steve Jenkins
+B +64 9 356 2911
+X +64 9 358 9070
+M enquiries@fff.co.nz
+U http://www.fff.co.nz/
+Z AKL
+A 60 Cook St
+N FFF Managed Technology provides services-based technology solutions for heterogeneous environments. We are strong proponents of Open Source software and currently support several large Linux and OpenBSD installations in New Zealand.
+
+0
+C New Zealand
+P Canterbury
+T Christchurch
+O NetXSecure NZ Limited
+I Michael A. Williams
+B +64.3.318.2973
+X +64.3.318.2975
+M mike@netxsecure.net
+U http://www.netxsecure.net/
+Z 8171
+A 122 Whitecliffs Road
+N Netx specialize in Berkeley Unix providing design and implementation support for OpenBSD and FreeBSD. We prefer to use OpenBSD for perimeter firewalls and FreeBSD for DMZ based servers and inner firewall. With over 20 years in the computing industry and still studying the BSD operating system we are actively involved with security and OpenBSD.
+
+# Start of Norway
+0
+C Norway
+T Bergen
+O Bitsec
+I Eirik Seim
+B +4799521600
+M es@bitsec.no
+U http://www.bitsec.no/
+Z N-5305
+A St 13
+N Security consulting and solutions, mostly using OpenBSD and other UNIXes.  Specializes in network security, forensics and security testing, but also involves in some auditing, development and security research.
+
+0
+C Norway
+P Hordaland
+T Bergen
+Z NO-5003
+O bsdly.net
+I Peter N. M. Hansteen
+A Sandviksveien 32
+M bsdly@bsdly.net
+U http://www.bsdly.net/
+B +47 9807 1263
+X
+N Network planning, configuration, training and maintenance services
+using OpenBSD, FreeBSD or GNU/Linux.
+
+0
+C Norway
+T Oslo
+O Copyleft Software AS
+I Daniel Mikkelsen
+B +4799279251
+M info@copyleft.no
+U http://www.copyleft.no/
+Z N-0134
+A Pobox 9271 Grønland
+N We do development of free software and support/maintenance of free software-based platforms, including OpenBSD, FreeBSD and Linux.
+
+0
+C Norway
+P Oslo
+T Oslo
+Z N-0349
+O FreeCode AS
+A Gaustadalleen 21
+M mail@freecode.no
+U http://www.freecode.no/
+B +47-21536900
+X +47-21536909
+N Giving the control back to the user with Free Software and
+Service Management processes. Strong security focus based on OpenBSD.
+
+0
+C Norway
+P Oslo
+T Oslo
+Z N-0597
+O SystemNet
+I All staff members
+A &Oslash;kernveien 121b
+M info@systemnet.no
+U http://www.systemnet.no/
+B +47 92439800
+N SystemNet is a consulting company providing services related
+to data and telecoms. We are specialists in IP based communications,
+security and continuous service provision. OpenBSD is one of our
+primary tools, and one which we provide support for.
+
+# Start of Peru
+0
+C Peru
+P Lima
+T Lima
+Z 51
+O Aureal Systems
+I Breno Colom
+A Av. Angamos Oeste 355 Oficina 1302 - Miraflores
+M info@aureal.com.pe
+U http://www.aureal.com.pe/
+B +51-1-243-0131
+X +51-1-243-0131
+N Aureal Systems se especializa en soluciones de Seguridad
+Inform&aacute;tica, consultor&iacute;a en sistemas operativos
+basados en UNIX y desarrollo. Tenemos experiencia en sistemas basados
+en 4.4BSD UNIX como OpenBSD funcionando como firewalls, IDS,
+concentradores VPN y sistemas de servicio multipr&oacute;posito.
+
+0
+C Peru
+P Lima
+T Lima
+Z Lima 41
+O HTU Networks
+I Eder M. Gutierrez Alarcon
+A Av. Del Parque Sur 565 - San Borja
+M egutierrez@htu.pe
+U http://www.htu.pe/
+B +51-1-7193264
+N Implementamos y ofrecemos soporte para sistemas OpenBSD utilizados
+como firewalls, IDS, Proxys, VPN, servidores de archivos, Wireless Auth
+Servers, servidores de correo, servidores web y para otros prop&oacute;sitos;
+adem&aacute;s ofrecemos consultor&iacute;a y asesor&iacute;a en seguridad de
+la informaci&oacute;n, redes y desarrollo. Trabajamos con otros sistemas de
+tipo BSD y GNU/Linux. Contamos con m&aacute;s de 5 a&ntilde;os de experiencia.
+
+# Start of Philippines
+0
+C Philippines
+P Metro Manila
+T Pasay City
+Z 1302
+O Systems Security Practitioner
+I Rodel "Sparc" Collado Urani
+A 2702 Park Avenue corner F. Sanchez Street
+M sparc@uraniid.net
+U http://www.UraniID.net/
+B +63.917.534.1128
+N Deploys public key infrastructure, single sign-on and systems security
+primarily on OpenBSD, other UNIX-like systems and Windows. Administer and
+test security of computing systems. Setup and support of corporate firewall,
+virtual private network including Internet, data and voice services.
+
+# Start of Poland
+0
+C Poland
+P Dolnyslask
+T Zgorzelec
+Z 59-900
+O "Mucha"
+A Turowska 1
+M bok@sieciuch.com
+U http://www.sieciuch.com/
+B +48 75 77 57 767
+N Building certified Krone networks with Cisco and OpenBSD systems.
+
+0
+C Poland
+P
+T Krakow
+Z 30-095
+O ONS Opensource Network Solutions sp. z o.o.
+I
+A Zloty Rog 53
+M info@openetworks.pl
+U http://www.openetworks.pl/
+B +48 889 504 844
+X
+N ONS provides expertise in the areas of Firewalls, VPN Gateways, Web Servers, Intrusion Detection and Mail Servers. We also offer security audits and develops security policies.
+
+0
+C Poland
+P Mazowieckie
+T Warszawa
+Z 04-217
+O Void Systems
+I Michal Kosinski
+A Grochowska 14E
+M openbsd@voidsystems.pl
+U http://www.voidsystems.pl/
+B +48(22)6101357
+X +48(22)8798231
+N Installation and support for entire spectrum of OpenBSD solutions,
+from nat/firewall/vpn all the way to application servers,
+with focus on highest possible security levels.
+Additional research and development of embedded OpenBSD devices.
+
+0
+C Poland
+P Pomorskie
+T Gdansk
+O Consultant
+I Adam Naguszewski
+B 0048609102752 0048583425919
+M admin@bmtmc.gda.pl
+U http://www.bmtmc.gda.pl/
+Z 80-292
+A Goralska 61/42
+N OpenBSD installations and configurations. Worked for government institutions as well as for large corporations. Intrusion Detection Systems, firewalls, nats, proxies, webservers, heavy load mail systems with GUI interface. Security advisor experienced in firewalling. Training. Maintainer of anoncvs.pl.openbsd.org.
+
+0
+C Poland
+T Wroclaw
+Z 54-434
+A Gubinska 8
+O E-Systems
+I Jakub Werelich
+M info@e-systems.pl
+U http://www.e-systems.pl
+B +48 71 78-55-77-5
+N Installation and administration of *BSD and Linux systems.
+
+# Start of Portugal
+0
+C Portugal
+P Lisbon
+T Lisbon
+O Mr Net - Serviços informáticos lda
+I Paulo Laureano
+B +351217826920
+X +351217826929
+M pls@mrnet.pt
+U http://www.mrnet.pt/
+Z 1050 LISBOA
+A Av Elias Garcia. 147. 2 esq.
+N Over 7 years using UNIX for e-commerce and firewalls. We use and support both Linux and OpenBSD servers, being the latest used on all high security applications (firewalls, critical databases, etc). The company handles rapid response to break-ins and provides security audits to servers, connected networks and VPN connect networks.
+
+0
+C Portugal
+P Loures
+T Lisboa
+O InteligenSis Lda.
+I Paulo Sopa
+B +351 21 994 82 17
+X +351 21 994 35 21
+M psopa@ies.pt
+U http://www.ies.pt/
+Z 2695-548 São João da Talha
+A Bairro da Castelhana, Rua dos Eucaliptos, 452
+N Focus on Security since 1991. We design, implement and support high security OpenBSD file, database, web, mail, E-commerce, and B2B servers.  Intranet solutions based on Lan-to-Lan and Host-to-Lan VPN,´s (IPsec) and strong Firewalls. We provide low response-time local assistance, telemaintenance and security audits.
+
+0
+C Portugal
+P Lisbon
+T Lisbon
+Z 1200-685 Lisbon
+O Cidreira - Sistemas de Informa&ccedil;&atilde;o Lda.
+I Pedro Rebello de Andrade
+A Rua dos Industriais, 25, 1E
+M cidreira@net.novis.pt
+B +351 21 392 89 75
+X + 351 21 392 89 79
+N Consulting services and project implementation on OpenBSD, FreeBSD, Linux and Windows. Our main focuses are network security, system interoperability and intra-network normalization of services. We're specialized in small to medium networks.
+
+0
+C Portugal
+P
+T Coimbra
+Z 3030-069
+O Secure Networks Lda.
+I Pedro Almeida
+A Rua Pedro Alvares Cabral, N-119, 4-C
+M palmeida@securenetworks.pt
+U http://www.securenetworks.pt/
+B +351-914039968
+X +351-239701521
+N Secure Networks is a company dedicated to network related technologies and our
+solutions and products are focused in open source. Nowadays the simplicity,
+versatility and quality are very important factors. Since these are some of the
+strong points of the OpenBSD operating system, and we have a solid knowledge on
+it, most of our solutions and products are OpenBSD based.
+
+# Start of Romania
+0
+C Romania
+P Bacau
+T Bacau
+Z 5500
+A str. CONSTRUCTORULUI nr.4 bl.4 sc.D ap.10
+O Network &amp; System Administrator
+I Catalin TOMOZEI
+M catalin@bc.onrc.ro
+U
+B +40234520502 int 45
+F +40745076027
+N  *BSD and Linux server consulting, support and management.
+
+# Start of Russia
+0
+C Russia
+P
+T Moscow
+Z 141101
+O Consultant
+I Elizarov Andrej
+A
+M vigilancer@gmail.com
+U
+B
+X
+N Over 6 years experience with OpenBSD. OpenBSD consulting, installation, maintenance and support for mailservers, webservices, VPN, firewalls, web-applications.
+
+# Start of Singapore
+0
+C Singapore
+P Singapore
+T Singapore
+O AUX MicroSystems PTE. LTD.
+I Lin Xiaohan
+B +65-97995569
+M linxh@megamesh.com
+Z 550504
+A 504, Serangoon North Ave 4, #14-468
+N BSD systems setup, maintenance and coding. Web applications with PostgreSQL/MySQL backend. Various server software (BIND, Apache, Sendmail, etc.) related installation and programming.
+
+0
+C Singapore
+P Singapore
+T Singapore
+O Forgotten Technologies
+I Gilbert Foo
+B 63680200
+X 62757498
+M gilbert@forgotten.com.sg
+U http://www.forgotten.com.sg/
+Z 729045
+A 17 Sungei Kadut St 4
+N Open-Source Business Solutions
+
+# Start of Slovak Republic
+0
+C Slovak Republic
+T Banska Bystrica
+O Juraj Bednár
+I Juraj Bednár
+M juraj@bednar.sk
+U http://juraj.bednar.sk/
+Z 974 11
+A Ruzova 7
+N Experience with FreeBSD server farms and OpenBSD firewalls, routers and snort-based intrusion detection systems. Installation and support services.
+
+# Start of South Africa
+0
+C South Africa
+P Gauteng
+T Johannesburg
+O BSDHosting
+I James Wright
+B +27 11 706 1939
+X +27 11 706 1939
+M jamesw@bsdhosting.co.za
+U http://www.bsdhosting.co.za/
+Z PO Box 98233 Sloan Park 2152
+A 53 Grosvenor Road Bryanston
+N Network and Security Consulting Services, support for OpenBSD and other BSDs, OpenBSD Hosted Internet Services, pre-built and installed OpenBSD Servers and Workstations.  Focused on OpenBSD/i386 and OpenBSD/sparc.
+
+# Start of Spain
+0
+C Spain
+P Castellon
+T Alcora
+Z 12110
+O Novestec Systems
+I Jose M Mejia
+A Font Nova 1
+M networking@novestec.com
+U http://www.novestec.com/
+B +34 964360824
+X +34 964360824
+N Empresa especializada en redes, seguridad y sistemas informaticos.
+Servidores de red, proxies y firewalls bajo OpenBSD.
+Gran experiencia en otros sabores de Unix y productos Cisco.
+
+0
+C Spain
+P A Coruña
+T A Coruña
+O iProyectos
+I Daniel Alcántara de la Hoz
+B +34 981 900 129
+X +34 981 148 048
+M openbsd@iproyectos.com
+U http://www.iproyectos.com/
+Z 15008
+A Avenida de Finisterre 327 2
+N We do open source development, <strong>strong security auditing</strong> and other IP services. We provide OpenBSD consulting among other unixes. Although based in A Coruña, we work nationwide. Also, we are members of the FSF.
+
+# Start of Sweden
+0
+C Sweden
+P BD
+T Lulea
+O InterACT
+I Jonas Eriksson
+B +46-920-88803
+X +46-920-88399
+M info@interact.se
+U http://www.interact.se/
+Z 972 36
+A Sandviksgatan 18
+N We supply *BSD installation, maintenance and services, along with consulting services within Apache, Squid, Samba and SQL. We also offer consulting services across Europe for security and mission critical solutions on *BSD platforms.
+
+0
+C Sweden
+P
+T Stockholm
+Z 114 86
+A Engelbrektsgatan 7
+O Init AB
+I Per-Olov Sjoholm
+M info@init.se
+U http://www.init.se/
+B +46-8-4070100
+F +46-8-4070199
+N We supply *BSD and Linux expertise since 1994. On OpenBSD we have many installations with everything from DNS, SMTP, WEB, routers, VPN to redundant firewalls. We also provide security analysis, network planning, training and support among other things in these areas.
+
+# Start of Switzerland
+0
+C Switzerland
+P Basel-Stadt
+T Basel
+O micro systems
+I Marc Balmer
+B +41 61 383 05 10
+X +41 61 383 05 12
+M marc@msys.ch
+U https://www.msys.ch/
+F true
+Z CH-4019
+A Wiesendamm 2a, Postfach
+N 15+ Years UNIX experience, training, consulting and software development on UNIX.  TCP/IP network planning and realization. OpenBSD routers and firewalls, OpenBSD training for system administrators.  Preinstalled OpenBSD systems (out of the box servers and firewalls).
+
+0
+C Switzerland
+P Geneva
+T Geneva
+O SMAT Engineering LLC
+I Mathias Schmocker
+B +41 22 800 3400
+X +41 22 800 3401
+M smat@acm.org
+U http://www.smat.ch/
+Z CH-1204
+A Boulevard Georges-Favon 20
+N We are a team of specialists in IT consulting and software development. We've specialized in Unix system administration and security since 1992. We've been using OpenBSD for our client's Internet infrastructure since 1999 (firewalls, secure servers, etc.)
+
+0
+C Switzerland
+P ZH
+T Oetwil Am See
+O Codeangels Solutions GmbH
+I Kirill Ponazdyr
+B +41 (0)43 844 90 10
+X +41 (0)43 844 90 12
+U http://www.codeangels.com/
+Z 8618
+A Industriestrasse 8
+N Offers its customers a range of IT Security, Network and UNIX Services. We utilize and support OpenBSD in our services and solutions.
+
+0
+C Switzerland
+P Zurich
+T Uetikon am See
+O Apsis GmbH
+B +41-1-920 49 04
+M info@apsis.ch
+U http://www.apsis.ch/
+Z CH-8707
+A Postfach
+N We supply a wide range of OpenBSD-based security solutions, including Internet gateways, firewalls, IDS, VPN, etc. We have developed our own security appliance <a href="http://www.apsis.ch/asd2v.html">ASD2v</a>, which is itself based on OpenBSD. Additionally we offer our customers consulting services for network optimisations and deployment.
+
+0
+C Switzerland
+P ZH
+T Zurich
+Z 8118
+O StarTek Rickauer
+I Stephan A. Rickauer
+A Postbox 19
+M info@startek.ch
+U http://startek.ch/
+B +41 32 512 8000
+X +41 32 512 8000
+N StarTek is an enterprise specialised in Unix/Linux system
+infrastructure, which aims to be "secure by design". The company
+concentrates on consulting, design and implementation of Free Unix
+systems (as OpenBSD) and offers training, maintenance and support.
+
+# Start of Tonga
+0
+C Tonga
+P Tongatapu
+T Nuku'alofa
+O Infotech Tonga
+I Tonga Siliva
+A Suite 16/17 Tungi Arcade Business Centre
+M info@infotech.tbu.to
+U http://www.tbu.to/
+B +(676) 27-399
+X +(676) 27-637
+N We have been working with OpenBSD since version 2.8. OpenBSD is our OS of
+choice for servers and desktop systems alike.
+
+# Start of Turkey
+0
+C Turkey
+P Alsancak
+T Izmir
+O SecurityOffice
+I Tamer Sahin
+B +905422448157
+M ts@securityoffice.net
+U http://www.securityoffice.net
+Z 35370
+A 1452 sok. no:70
+N Security consulting services work supporting OpenBSD and other *nix systems.
+
+0
+C Turkey
+P Istanbul
+T Beykoz
+O Bilcag A.S.
+I Metin Pasaoglu
+B +902164654950
+X +902164654865
+M metin@bilcag.net
+U http://www.bilcag.net/
+Z 34610
+A Kavacik Mah. Percemlikiz Sok. Kondur Apt. A Blok No:34/6
+N *BSD installation, maintenance, support and consulting services (file servers, web servers, mail servers, database servers, routers). OpenBSD used for any security related appliances.
+
+0
+C Turkey
+P Uskudar
+T Istanbul
+Z 34381
+O EnderUNIX
+I EnderUNIX Yazilim Gelistirme Ekibi
+A Büyükdere cad. Garaj sok. No:3 Kat:7 Mecidiyeköy-ISTANBUL
+M core@enderunix.org
+U http://www.enderunix.org/
+B 90 505 526 0064
+X
+N *BSD consultant and Unix services support. Firewall, VPN and NIDS/NIPS
+solution using OpenBSD.
+
+# Start of United Arab Emirates
+0
+C UAE
+P Dubai
+T Dubai
+Z 18654
+O DSI Gulf
+I Dan Handley
+A NB06, Jebel Ali,
+M daniel.handley@dsi-gulf.ae
+U http://www.dsi-gulf.ae
+B +9714 883 0955
+X +0814 883 0956
+N BSD / Linux Support Outfit.  We Provide support on vpn, firewalls, file servers, mail servers, database servers, web servers,  intrusion detection, PKI and proxy services.
+
+0
+C UAE
+P Dubai
+T Dubai
+Z 1172
+O Mejo Jose
+I Mejo Jose
+A Barsha
+M info@kannayath.com
+U http://www.kannayath.com/
+B 055 7685725
+X 055 7685725
+N I am an Open source consultant based in Dubai, UAE. Please check
+out my website for more details.
+
+# Start of USA
+0
+C USA
+P Alabama
+T Florence
+Z 35630
+O James Jerkins Computer Consulting
+I James Jerkins
+A 1809 North Wood Avenue
+U http://www.jamesjerkinscomputer.com/
+N OpenBSD and Linux installation, maintenance, and support for
+businesses and institutions. Systems supported include IDS,
+firewalls, VPNs, DNS, web caches and proxies, ftp servers, and web
+servers.
+
+0
+C USA
+P Arizona
+T Tempe
+O TrumpetPower!
+I Ben Goren
+B 480-966-9472
+M ben@trumpetpower.com
+U http://www.trumpetpower.com/
+Z 85280-0964
+A Post Office Box 964
+N I specialize in database-backed Web sites run on OpenBSD; a <a href="http://www.trumpetpower.com/Code/Site">live sample</a> is available. I can provide OpenBSD (or other Unix-like operating system) installation, administration, and consultation services. Experience in and certifications for teaching and training; can write documentation.
+
+0
+C USA
+P Arizona
+T TucsonZ 85702-1936
+O Artisan Computer Services LLC
+I Zack Williams
+A P.O. Box 1936
+M zdw@artisancomputer.com
+U http://www.artisancomputer.com/
+B (520) 977-2973
+N We provide firewalls, internet servers, and network security using OpenBSD on diverse hardware platforms.  We also do general system administration and computer consulting on a variety of platforms (Mac OS X, Windows, *BSD, Linux), with an emphasis on integration and security.
+
+0
+C USA
+P Arizona
+T Tucson
+O Superblock
+I joshua stein
+B +1-520-399-7899
+M openbsd@superblock.net
+U http://superblock.net/
+Z 85717
+A PO Box 40162
+N Commercial support and deployment of OpenBSD firewalls and application
+servers.  Network design and OpenBSD integration.  Custom OpenBSD feature
+development.
+
+0
+C USA
+P California
+T Alameda
+O Consultant
+I Justin Reigle
+B 510-864-2094
+M inert@sysmatrix.net
+Z 94501
+A 1409 Lafayette St. Apt. 6
+N Worked with companies offering professional-grade OpenBSD systems. Also, expertise in coding on the OpenBSD and *BSD platforms.
+
+0
+C USA
+P California
+T Campbell
+O Protectix, Inc.
+B (408) 331-1972
+X (866) 642-7438
+M sales@protectix.com
+U http://protectix.com/
+Z 95008-2310
+A 1875 South Bascom Avenue #116-219
+N Protectix provides commercial support for OpenBSD and professional training
+on installation and setup. Other services include outsourced network
+management, vulnerability testing, Firewall, VPN and comprehensive security
+consulting.
+
+0
+C USA
+P California
+T Orange
+Z 92867
+O eRacks Open Source Systems
+I Max Haskvitz
+A 1444 N Batavia
+M consulting@eracks.com
+U http://www.eracks.com/
+B 714-532-5322
+X 714-532-5324
+N We provide ready-to-run OpenBSD servers, both rackmount and other form
+factors. Firewalls, Mail/DNS/Web servers, other bastion hosts. We also
+provide Network design, planning, and architecture services, as well as
+custom-configured OpenBSD systems. We will preinstall & configure CARP,
+pfw, firewall rules, pfsync, IPSEC, VPNs, etc.  We've been doing this
+since 1999.
+
+0
+C USA
+P Colorado
+T Golden
+Z 80402-0051
+O SoftWoehr dot com
+I Jack Woehr
+A PO Box 51
+M jax@well.com
+U http://www.softwoehr.com/softwoehr/
+B 303-277-9574
+X
+N Expert software developer - team mentor and better than mediocre OpenBSD
+admin since 2.5.
+
+0
+C USA
+P Connecticut
+T Somers
+Z 06071
+A 74 Stebbins Road
+O Turing Labs, LLC
+I Doug Maxwell
+M doug@turinglabs.com
+U http://www.turinglabs.com/
+B +1 860-272-9103
+N Turing Labs provides stable and highly secure network services,
+(firewall, database, web, email,  backup, and file) with OpenBSD and
+Linux. We also offer per-incident support, training and managed
+services. A portion of our OpenBSD-related profits are donated
+directly to the project.
+
+0
+C USA
+P Connecticut
+T Plantsville
+Z 06479
+O Strongpoint Networks
+I Bill Chmura
+A 962 South Main St. #17
+M bill.chmura@StrongpointNetworks.com
+U http://www.strongpointnetworks.com/
+B (860) 621.6030
+X
+N OpenBSD installation and configuration for firewalls, e-mail servers,
+web servers, and routers. Internet access monitoring and caching along
+with bandwidth management. Network monitoring systems and services. 10
+years Unix experience.
+
+0
+C USA
+P Florida
+T Cocoa
+A P.O. Box 218
+Z 32923
+O Cocoa Village Publishing
+I Paul Pruett
+M ppruett@webengr.com
+U http://www.webengr.com/
+B 321-633-4990
+X 321-633-4997
+N Setup, support, hosting and consulting. We also use OpenBSD for our web
+services including Sendmail for Email, SSL Apache for Web Servers with PHP
+MailMan for EMail Lists, Mysql and more. We can show you how to use
+anonCVS to rebuild kernel, /usr/src and /usr/ports :-)
+
+0
+C USA
+P Florida
+T Tallahassee
+O Ouellet Consulting Inc.
+I Dan Ouellet
+B 850-907-9757
+M dan@danosoft.com
+Z 32309
+A 7996 Grant Court
+N OCI specialize in systems/networks design, implementation and security
+solutions, including solutions meeting HIPPA requirements. We spec out,
+configure and support firewalls, proxy-arrays, servers, switches, mail
+systems, web servers, databases, etc. We are familiar with and support
+most Windows and Unix/Linux systems including OpenBSD. We offer remote
+administration services worldwide, on all supported platforms. We plan and
+assist with Active Directory migrations.
+
+0
+C USA
+P Illinois
+T Chicago
+O Catastrophe.NET
+I Eric Pancer
+B +1-312-222-3119
+X +1-312-222-3119
+M eric@catastrophe.net
+U http://users.catastrophe.net/eric/
+Z 60611
+A 435 North Michigan Avenue, TT815
+N Installation, configuration and troubleshooting of a variety of UNIX
+operating systems focusing on OpenBSD. Specialist in computer and network
+security issues; experienced in incident response and forensic analysis.
+
+0
+C USA
+P Maryland
+T Laurel
+O AutumnTECH, LLC
+I Todd Boyer, CISSP
+B 301-498-2503
+M Support@AutumnTECH.com
+U http://www.AutumnTECH.com/
+Z 20724
+A 126 Autumn End Place
+N Enterprise Spam and E-mail Virus filtering hardware based on OpenBSD. Security Consulting services for new and existing OpenBSD implementations.
+
+0
+C USA
+P Maryland
+T Westminster
+O DixonGroup Consulting
+I Jason Dixon
+B 443-722-6673
+M jason@dixongroup.net
+U http://www.dixongroup.net
+Z 21158
+A 385 Winged Foot Drive
+N DixonGroup Consulting is a full service computer consulting firm specializing in Internet Systems, Custom Programming and Deployment, and Network Services.  Our focus continues to be on stable, secure solutions built on the OpenBSD and Linux platforms.
+
+0
+C USA
+P Michigan
+T Pinckney
+Z 48169
+O BSD Group Consulting
+I James Turner
+M james@bsdgroup.org
+U http://www.bsdgroup.org/
+N BSD Group Consulting provides technical support for OpenBSD and other
+UNIX-like operating systems from top to bottom, start to finish. We also
+specialize in the development of dynamic web-based applications built on
+top of PHP and PostgresSQL/MySQL.
+
+0
+C USA
+P Michigan
+T Traverse City
+Z 49686
+O Ironkeep Technologies LLC
+I Zachary Schneider
+A 1129 woodmere ave. suite J
+M info@ironkeep.net
+U http://www.ironkeep.net/
+B 231-922-3577
+X 231-922-7328
+N Custom secure Internet solutions utilizing OpenBSD including:
+Firewalls, Mail, WWW, E-commerce etc.
+
+0
+C USA
+P Minnesota
+T Maple Grove
+Z 55369
+O Consultant
+I Marshall M. Midden
+A 9792 Hemlock Lane North
+M marshallmidden@yahoo.com
+U http://www.umn.edu/~m4/
+B
+X
+N Used OpenBSD for many years. In 2001, implemented embedded no-MMU mips port
+(with speciality driver help) including fork().  [Not a mistake.] Inexperience
+with the VM system stopped NFS from working -- no customer would ever use it
+[compiling the whole system without an MMU?], but almost everything else worked!
+Fixed uclinux port.  Used kernel.org linux and put in fork(). Lots more stuff!
+
+0
+C USA
+P Missouri
+T St. Louis
+O Omnitec Corporation
+I L. V. Lammert, PhD
+B 314-997-4600
+M info@omnitec.net
+U http://www.omnitec.net/
+Z 63141
+A PO Box 411010
+N Over 20 years experience in software development, networking, Internet. Building, maintaining, and developing on OpenBSD since 2.6. We provide consulting, software development (C, C++), web development (PHP, Perl), hosting, support, and sys admin services for OpenBSD and Linux.
+
+0
+C USA
+P New York
+T Averill Park
+O Averill Park Networking
+I Richard Welty
+B 518-573-7592
+M rwelty@averillpark.net
+U http://www.averillpark.net/
+Z 12018
+A P.O. Box 629
+N OpenBSD setup/installation/remote administration. Network engineering, firewalls, VPNs, software development (C/Java/PHP/PostgreSQL/MySQL). Also experienced with Solaris and Linux.
+
+0
+C USA
+P New York
+T East Aurora
+Z 14052
+O Balius Inc.
+I Chad Stewart, GCFW, GCIH
+A 460 Buffalo Road
+M Chad@Balius.com
+U http://www.balius.com/
+B 716-805-8393
+X 716-805-3338
+N Balius Inc. is a IT full services firm specializing in Internet systems. OpenBSD and Linux/Unix installation, configuration, maintenance, and support of systems providing: firewall, web, email, DNS, IDS, VPN, etc..  We also offer fully managed services and monitoring.
+
+0
+C USA
+P New York
+T Rochester
+O I.T. Xpress, Inc.
+I Douglas Dillon
+B 585-458-0590
+X 585-458-0590
+M dougd@itxpressinc.com
+U http://www.itxpressinc.com/
+Z 14615
+A 1225 Ridgeway Ave.
+N We specialize in Compaq/Digital, Alpha/Vax systems and hardware utilizing UNIX OS. Also Sun and HP. We configure systems for use with Open BSD.
+
+0
+C USA
+P New York
+T Rochester
+Z 14607
+O Sentry Labs llc.
+I Jason Walker
+A 73 Wilmer St.
+M walkerjg@smtp.sentrylabs.com
+B 585-256-2568
+N Available for system consulting on OpenBSD (general), Linux clusters, VOIP, data security.
+
+0
+C USA
+P North Carolina
+T Boone
+Z 28607
+O openMindShare
+I Brian Shumate
+A 383 River Ridge Road
+M info@openmindshare.com
+U http://www.openmindshare.com/
+B 828-719-0706
+X 828-719-0706
+N Fifteen years of UNIX-like experience- We've been using,
+supporting, and looking forward to releases of OpenBSD since version
+2.0. We specialize in networking applications, from appliance devices
+based on the OpenBSD packet filter, to intrusion detection systems,
+and other network services, like LDAP, Mail, HTTP, LAMP, and more. If
+it runs OpenBSD, we'll work with it!
+
+0
+C USA
+P North Carolina
+T Charlotte
+Z 28262
+O Calyptix Security
+I Lawrence Teo
+A 8701 Mallard Creek Rd
+M openbsd-consult@calyptix.com
+U http://www.calyptix.com/
+B 704-971-8989
+X 704-971-8990
+N Calyptix Security provides all-in-one network security solutions
+to small and medium-sized businesses. Our AccessEnforcer product
+line consists of OpenBSD-based security appliances that comprise a
+comprehensive range of features including firewall, Snort IDS/IPS,
+VPN, email antivirus, anti-spyware, spam filtering, web filtering,
+and IM management. We also perform consulting services including
+vulnerability assessments for regulatory compliance, mitigation,
+remediation and network monitoring.
+
+0
+C USA
+P Oklahoma
+T Oklahoma City
+O Free Daemon Consulting
+I Todd T. Fries
+B 405-227-9094
+M todd@fries.net
+U http://FreeDaemonConsulting.com/
+Z 73120
+A 1417 Oxford Way
+N OpenBSD/UNIX consulting in support of free software solutions.
+
+0
+C USA
+P Pennsylvania
+T Pittsburgh
+O Consultant
+I Mike Jarsulic
+B 412-953-9323
+M m.jarsulic@verizon.net
+Z 15220
+A 440 Chatham Park Dr.
+N Installation and support of OpenBSD servers (mail, Web, DNS, database, FTP), firewalls, IDS, and VPNs.  Also experienced in Linux, NT, and Netware.  Working with OpenBSD since 2.4.
+
+0
+C USA
+P Texas
+T Austin
+O Collective Technologies
+B 512-263-5500
+X 512-263-0606
+M contact@colltech.com
+U http://www.colltech.com/
+Z 78733
+A 9433 Bee Caves Road
+N Systems management services for distributed enterprise computing environments. Collective Technologies specializes in keeping complex computer systems running reliably offering a full range of support services including UNIX, NT, Linux, FreeBSD, OpenBSD and NetBSD.
+
+0
+C USA
+P Texas
+T Austin
+O Fortuitous Technologies
+I Philip Carinhas
+B 512-218-9561
+M support@fortuitous.com
+U http://www.fortuitous.com/
+Z 78766
+A P.O. Box 9895
+N Support and Training for OpenBSD, FreeBSD, Linux, and Mac OSX. System administration, configuration, and networking. Firewall, VPN, and secure network configuration for all OS flavors. Postfix, Qmail, DNS, and Apache.
+
+0
+C USA
+P Texas
+T Houston
+Z 77002
+O Pate Consulting, Inc.
+I Kevin Pate
+A 1621 Milam, Suite 220
+M info@pateconsulting.com
+U http://www.pateconsulting.com/
+B 713.333.5468
+X 713.333.5494
+N We specialize in providing solid open source solutions for businesses
+using OpenBSD, FreeBSD, and Linux.  6 years in business. 12 years of
+experience - MCSE, CCNA, RHCE certifications - Also MySQL, PostgreSQL.
+VPNs, firewalls, wireless, DNS, squidGuard, mail - even training with
+OpenBSD.
+
+0
+C USA
+P Texas
+T McKinney
+O Consultant
+I Andras Kende
+B 214-578-0400
+X N/A
+M andras@kende.com
+U http://www.kende.com/
+Z 75071
+A 301 Lake Village Dr
+N OpenBSD installation, support and consulting services. Also Apache, Squid, Samba, Qmail, MySQL, Gateways, Firewalls, VPN.
+
+0
+C USA
+P Utah
+T Draper
+O Enclavix LLC
+I Brad Davis
+B 801-913-4506
+X 801-553-2675
+M brad.davis@enclavix.com
+U http://www.enclavix.com/
+Z 84020
+A Street Address
+N Enclavix can provide development, support, porting, and configuration services for OpenBSD.  We can work at any level, from applications (web servers, databases, etc.) to kernel hacking (including drivers). We specialize in secure, embedded OpenBSD systems for information appliances.
+
+0
+C USA
+P Virginia
+T Arlington
+Z 22203
+O Envescent
+I Alexander G. Chamandy
+A 4201 Wilson Blvd, Suite 110-448
+M info@envescent.com
+U http://www.envescent.com/
+B 866-536-3001
+X 703-892-3132
+N Envescent is a leading provider of technology products and services focused on Unix and Unix-like operating systems.  We offer consulting, application development, pre-installed workstations and servers, hardware, outsourced system and network administration and implementation, security auditing, technical support and much more.
+
+0
+C USA
+P Virginia
+T Purcellville
+O Omniscient Technologies
+I Todd M. Kover
+B +1-540-668-7602
+M info@omniscient.com
+U http://www.omniscient.com/
+Z 20132
+A 36051 Birch Hollow Lane
+N Washington D.C. based consulting group with a broad array of experience in *BSD, Solaris, Linux and many other varieties of unix specializing in highly scalable systems, systems integration and network security. Custom application design also available.
+
+0
+C USA
+P Virginia
+T Woodbridge
+O TekSecureLabs
+I Sales
+B 703-730-2100
+X 703-730-1900
+M sales@teksecurelabs.com
+U http://www.teksecurelabs.com/index.php
+Z 22192
+A 4300 Ridgewood Center
+N We are mostly concerned with the security implementation of OpenBSD. Our interest is the operation and implementation of network and Internet security. Please contact us for more information.
+
+0
+C USA
+P Virginia
+T Reston
+Z 20190
+O ShieldWolf Technologies, LLC
+A 11921 Freedom Drive, Suite 550
+M openbsd-support@shieldwolf.com
+U http://www.shieldwolf.com/
+B 866.814.2620
+N Provider of network assurance solutions based on OpenBSD.
+
+0
+C USA
+P Washington
+T Marysville
+O Puget Sound Technology
+I Jeremy C. Reed
+B 360-658-5676
+M info@pugetsoundtechnology.com
+U http://www.pugetsoundtechnology.com/
+Z 98271
+N Provides classroom training specifically for OpenBSD, and offers technical support services for various open source software.
+
+0
+C USA
+P Washington
+T Seattle
+O IOActive
+I Josh Pennell
+B 206-297-3155
+M joshp@ioactive.com
+U http://www.ioactive.com/
+A 8314 Greenwood Avenue North Suite 1300
+N IOActive specializes in secure web hosting for internet developers. We utilize OpenBSD to help us achieve this goal.  We also specialize in network audits, intrusion detection systems and custom crypto applications written in Java.
+
+# Start of United Kingdom
+0
+C United Kingdom
+P Buckinghamshire
+T Milton Keynes
+Z MK3 6EB
+O IP Cortex Ltd
+I Rob Pickering
+A Bletchley Park
+M rob@ipcortex.co.uk
+U http://www.ipcortex.co.uk/
+B +44 1908 276650
+X +44 1908 276699
+N 16 years experience setting up and developing software on BSD based
+platforms. Currently specialise in building <b>inexpensive firewall and VPN
+setups, including VoIP infrastructure</b> using OpenBSD. Also work on
+secure service provider implementations.
+
+0
+C United Kingdom
+P East Sussex
+T Brighton
+O Red Cube Systems Limited
+I Dave Pullig
+B 08707 459140
+X 08707 459141
+M openbsd@redcubesystems.com
+U http://www.redcubesystems.com/
+Z BN1 2NW
+A Suite 144, 91 Western Road
+N We design and install and administer OpenBSD based servers and firewalls both for private and public networks. Security and reliablity are always our priority.
+
+0
+C United Kingdom
+P East Sussex
+T Brighton
+Z BN2 0DF
+O Venture 37
+I Sevan Janiyan
+A Coalbrook House, Freshfield Business Park, Stevenson Road
+M info@venture37.com
+U http://www.venture37.com/
+B 01273 808563
+N We provide Mail,Web &amp; DNS hosting solutions based on Open &amp;
+FreeBSD as well
+as technical support (on site or remote (Windows, OS X, *BSD, Linux),
+server management, connectivity &amp; collocation in Brighton or London.
+
+0
+C United Kingdom
+P London
+T London
+Z SW1P 2LX
+O Valdo Alvarez
+I Valdo Alvarez
+A 21 Vincent Square
+M info@unixconsulting.info
+U http://www.unixconsulting.info/
+B +44 20 8938 6702
+N Focused on BSD/Linux and Open Source consultancy and support.
+
+0
+C United Kingdom
+P London
+T Marylebone
+Z NW1 5RS
+O NetSecured Solutions Ltd
+I Jay Quadri
+A Baker Street
+M info@net-secured.com
+U http://www.net-secured.com/
+B +44(0)7775567567
+X +44(0) 0207 7872068
+N We provide cheaper Network &amp; Host Centric Security with emphasis on
+OpenBSD PF, Intrusion Detection Systems &amp; Network Vulnerability Assessment,
+Penetration Testing, VPN, Wireless Networks, Firewall Deployment, ISO 17799
+Compliance, Security Policy, Technical writing, PKI technology, Unix &amp;
+Linux Admin &amp; Web Presence.
+
+0
+C United Kingdom
+P Middlesex
+T Harrow
+O Linux4biz
+I Kapil Sharma
+B +44 7786061440
+X +44 2089334691
+M sales@linux4biz.net
+U http://www.linux4biz.net/
+Z HA1 2HB
+A 16, Gayton Court, Gayton Road, Harrow
+N Linux4biz is an independent provider of comprehensive Internet solutions, specialising in the Solaris, LINUX, FreeBSD, OpenBSD, NetBSD operating systems and Open Source Software. Linux4biz Consultants are able to advise on all aspects of implementing and administrating Unix/Linux servers and FreeBSD solutions, E-mail servers, Mailing list servers, Web servers, DNS, Internet Security, Security Audits, Intrusion detection, Stress testing, Intranet setup, High Availability server solutions, Network solutions, Remote administration solutions.
+
+0
+C United Kingdom
+P Staffordshire
+T
+O Allen-Greig IT Consulting
+I Bruce D. Allen-Greig
+B +44 (0)1782 399 135
+X +44 (0)1782 399 135
+M openbsd@allen-greig.com
+U http://www.allen-greig.com/
+N Over 12 years IT Consultancy and Management, we specialize in Information Technology for businesses of any size who want to take advantage of high quality Consultancy and Services.
+
+0
+C United Kingdom
+P Surrey
+T Weybridge
+Z KT15 2SF
+A Rivermead House, Hamm Moor Lane
+O Sirius Corporation
+I Tom Callway
+M tom.callway@siriusit.co.uk
+U http://www.siriusit.co.uk
+B +44 (0) 870 608 0063
+F +44 (0) 1932 841 488
+N Sirius Corp. delivers professional OpenBSD deployment and support
+Europe. We recommend OpenBSD for security related appliances but have
+extensive experience with major UNIX-based systems including Linux,
+Solaris, NetBSD and FreeBSD. Our clients include some of the largest
+corporations and public sector organisations in the UK.
+
+# Start of Ukraine
+0
+C Ukraine
+T Kiev
+Z 03035
+O ATMNIS
+I Sergey Prysiazhnyi
+A Uritskogo 45 Street
+M s.prysiazhnyi@atmnis.com
+U http://www.atmnis.com/
+B +380 44 245 6495
+X +380 44 245 6398
+N 7+ years of UNIX experience, mostly with OpenBSD. All complex solution
+models of company are based on OpenBSD. Network and security consulting
+services. Consulting and support for OpenBSD.
+
+# Start of Venezuela
+0
+C Venezuela
+P Región Capital
+T Caracas
+O COMPUTACION UNIXSUPPORT, C.A.
+I JesUs Lima
+B (+58 212) 5631295, 5631503
+X (+58 212) 5631337
+M unixsup@unixsup.com
+U http://www.unixsup.com/
+Z 01010
+A Av. Urdaneta, Edf. Iberia, P.H., La Candelaria.
+N Soporte, instalación y configuración de Redes TCP/IP y Servidores UNIX, *BSD, Linux, Solaris, SCO Unix, AIX; contamos con más de 10 años de experiencia desarrollando proyectos e implementando plataformas informáticas con Servidores basados en Unix y Redes TCP/IP.
+
+# end of file

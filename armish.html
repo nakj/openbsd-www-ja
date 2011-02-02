@@ -1,0 +1,137 @@
+<!DOCTYPE HTML PUBLIC  "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>OpenBSD/armish</title>
+<link rev="made" href="mailto:www@openbsd.org">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="resource-type" content="document">
+<meta name="description" content="the OpenBSD/armish page">
+<meta name="keywords" content="openbsd,arm">
+<meta name="distribution" content="global">
+<meta name="copyright" content="This document copyright 1996-2009 by OpenBSD.">
+</head>
+
+<body bgcolor="#ffffff" text="#000000" link="#23238e">
+<a href="index.html"><img alt="[OpenBSD]" height="30" width="141" src="images/sm
+alltitle.gif" border="0"></a>
+<p>
+<h2><font color="#e00000">OpenBSD/armish</font></h2>
+
+<hr>
+
+<p>
+OpenBSD/armish runs on various ARM-based appliances,
+using the Redboot boot loader (and which boot Linux by default).
+
+<p>
+A mailing list for ARM-based ports is available at
+<u><font color="#23238e">arm@openbsd.org</font></u>.
+To join the OpenBSD/arm mailing list, send a message body of
+<b>"subscribe arm"</b> to
+<a href="mailto:majordomo@openbsd.org">majordomo@openbsd.org</a>.
+Please be sure to check our <a href="mail.html">mailing list policy</a> before
+subscribing.
+
+<p>
+The current port maintainer is Dale Rahn
+(<a href="mailto:drahn@openbsd.org">drahn@openbsd.org</a>).
+
+
+<a name="toc"></a>
+<h3><font color="#0000e0"><i>Table of contents</i></font></h3>
+<ul>
+  <li><a href="#history">History of the port</a>
+  <li><a href="#status">Current status</a>
+  <li><a href="#projects">Project list</a>
+  <li><a href="#install">Getting and installing OpenBSD/armish</a>
+</ul>
+
+<hr>
+<a name="history"></a>
+<h3><font color="#0000e0"><strong>History:</strong></font></h3>
+<p>
+OpenBSD/armish is the 3rd OpenBSD port to ARM based machines, after
+<a href="cats.html">cats</a> and <a href="zaurus.html">zaurus</a>.
+It is intended to support a variety of rather similar ARM-based
+machines:
+
+<ul>
+<li><a href="http://www.quantum.com/ServiceandSupport/SoftwareandDocumentationDownloads/DPA/Index.aspx">
+    Certance CP3100</a>
+<li><a href="http://www.thecus.com/products_over.php?cid=12&amp;pid=1">
+    Thecus N2100</a> (plus rebadged versions: Allnet ALL6500, Evesham SilverSTOR M-Box)
+<li><a href="http://www.thecus.com/products_over.php?cid=10&amp;pid=46">
+    Thecus N4100</a> (plus rebadged versions: Allnet ALL6400, Evesham SilverSTOR XS)
+<li>IO-DATA HDL-Gxxx, HDL-GWxxx, and HDL-GZxxx series
+    <ul>
+    <li>These models are a subset of the "Giga-landisk" product line, but the
+    HDL-GXxxx models are not compatible (use Marvell CPUs).
+    <li>The standard "landisk" (100mbit) machines are instead supported by the
+    <a href="landisk.html">landisk</a> architecture.
+    </ul>
+</ul>
+
+<hr>
+<a name="status"></a>
+<h3><font color="#0000e0"><strong>Current status:</strong></font></h3>
+
+<p>
+Development is currently pretty active.
+
+<ul>
+<li>The Thecus N2100 runs multiuser and boots from disk using its own
+bootloader, or from the network using built-in Redboot.
+<li>The IO-DATA HDL-G series is multiuser and will soon be able to
+boot from disk as well.
+</ul>
+
+<hr>
+<a name="projects"></a>
+<h3><font color="#0000e0"><strong>Projects (in no particular order):
+</strong></font></h3>
+
+<ul>
+<li>Finish the Certance CP3100 support
+<li>Support more devices
+<li>Better support for i2c devices on the Thecus
+<li>Redboot flash configuration support
+<li>Put the bootloader into IO-DATA HDL flash, to permit native booting.
+<li>Support other similar machines
+</ul>
+
+<hr>
+<a name="install"></a>
+<h3><font color="#0000e0">
+<strong>Getting and installing OpenBSD/armish</strong>
+</font></h3>
+
+<p>
+The latest supported OpenBSD/armish release is
+<a href="46.html">OpenBSD 4.6</a>.
+Here are the
+<a href="ftp://ftp.OpenBSD.org/pub/OpenBSD/4.6/armish/INSTALL.armish">
+OpenBSD/armish 4.6 installation instructions
+</a>.
+
+<p>
+Snapshots are made available from time to time, in
+<a href="ftp://ftp.OpenBSD.org/pub/OpenBSD/snapshots/armish">this location</a>
+as well as in a few
+<a href="ftp.html">mirrors</a>.
+Here are the
+<a href="ftp://ftp.openbsd.org/pub/OpenBSD/snapshots/armish/INSTALL.armish">
+OpenBSD/armish snapshot installation instructions
+</a> as well.
+
+<hr>
+<a href="plat.html">
+<img height="24" width="24" src="back.gif" border="0" alt="Supported platforms">
+</a>
+<br>
+<small><a href="mailto:www@openbsd.org">www@openbsd.org</a></small>
+<br>
+<small>$OpenBSD: armish.html,v 1.26 2010/02/18 22:34:31 jasper Exp $</small>
+
+</body>
+</html>

@@ -1,0 +1,1036 @@
+# Build.dat file created by SupGrupWriter at Sat Sep 11 20:25:12 EDT 2004
+# $OpenBSD: groups.dat,v 1.113 2009/11/13 00:01:58 sthen Exp $
+
+
+# Start of Argentina
+0
+C Argentina
+P Ciudad de Buenos Aires
+F irregular
+O OpenBSDeros
+M contacto@openbsderos.org
+U http://www.openbsderos.org/
+N OpenBSD
+
+0
+C Argentina
+T Buenos Aires
+O EnsamblE  - Wireless
+I Alejandro A. F. Japkin
+M ArpateC@gmx.net
+F No establecida
+N OpenBSD | *BSD
+
+0
+C Argentina
+P Santa F&eacute;
+T Rosario
+F Irregular
+O OpenBSD Rosario
+I Gast&oacute;n Senac
+M gaston_senac@hotmail.com
+N OpenBSD
+
+
+# Start of Australia
+0
+C Australia
+T Sydney
+O BSD Users Group of Sydney
+U http://www.bugs.au.freebsd.org/
+F Irregular
+N *BSD
+
+
+# Start of Austria
+0
+C Austria
+T
+O bugat
+I Philipp Huber
+M uebs@gmx.at
+U http://www.bugat.at/
+F irregular
+N *BSD
+
+
+# Start of Belgium
+0
+C Belgium
+T Gent
+O bsdaemon.be
+I Nick Nauwelaerts
+M inphobia@bsdaemon.be
+U http://www.bsdaemon.be/
+F irregular
+N *BSD
+
+
+# Start of Brazil
+0
+C Brazil
+P SP
+T Sao Paulo
+F irregular
+O OpenBSD-BR
+I Vagner Rodrigues Fernandes
+M vagner@openbsd-br.org
+U http://www.openbsd-br.org/
+N OpenBSD
+
+0
+C Brazil
+P SP
+T Sao Paulo
+O Grupo dos Usuarios de *BSD de Sao Paulo - GUB-SP
+I Christiano Anderson
+M neptune@terra.com.br
+F Irregular
+N *BSD
+
+0
+C Brazil
+P Salvador
+T Bahia
+O Security Analyze Team
+I Gleydson Soares "Eyd"
+M eyd@securityanalyze.com
+U http://securityanalyze.com/members/eyd/
+F irregular
+N OpenBSD
+
+0
+C Brazil
+P Para
+T Belem
+F Web Group
+O OpenBSD-PA
+I Joao Salvatti
+M salvatti@openbsd-pa.org
+U http://www.openbsd-pa.org/openbsdpa.html
+N OpenBSD
+
+0
+C Brazil
+P Pernambuco
+O Openbsd-Pernambuco
+I Richardson Edson de Lima < HACHID >
+M p4ck37f1lt3r@gmail.com
+U http://openbsd-pe.codigolivre.org.br/
+N OpenBSD | *BSD
+
+# Start of Bulgaria
+0
+C Bulgaria
+P Bulgaria
+T Sofia
+O Bulgarian BSD Users Group (BBSDUG)
+I Andrey Rousseff
+M zethix@sofiaonline.com
+U http://www.daemon.online.bg/
+F irregular
+N *BSD
+
+0
+C Bulgaria
+P Sofia
+T Sofia
+O BSD Users Group, Sofia (BUGS)
+I Stanislav Grozev
+M tacho@daemonz.org
+U http://daemonz.org/bugs/
+F irregular
+N *BSD
+
+
+# Start of Canada
+0
+C Canada
+P Ontario
+T Toronto
+O Greater Toronto BSD User's Group
+U http://www.gtabug.ca/
+F third Wednesday of each month at 19:00 (7:00 PM)
+N *BSD
+
+0
+C Canada
+P Ontario
+T Windsor
+O Windsor Unix Users Group
+I Alan P. Laudicina
+M alanp@wuug.org
+U http://www.wuug.org/
+F Irregular
+N *BSD
+
+
+# Start of Chile
+0
+C Chile
+P Chile
+T Chile
+O todoBSD
+I Owner Respectivo (Freddy,Jorge, Ricardo)
+M bsd@inf.utfsm.cl
+U http://www.todobsd.cl/
+F Todos los dias
+N *BSD
+
+0
+C Chile
+P Region Metropolitana
+T Santiago
+O OpenBSD Chile
+I Pablo Aravena Martinez
+M bjunk@openbsd.cl
+U http://www.openbsd.cl/
+F Cada sabado o domingo a las 3pm
+N OpenBSD, FreeBSD
+
+0
+C Chile
+P Region Metropolitana
+T Santiago
+O Sistemas BSD Chile
+I Alex M. Alvarez A.
+M kuarzo@freebsd.cl
+U http://www.freebsd.cl/
+F Viernes 20:00 Hrs
+N FreeBSD, OpenBSD, NetBSD, PicoBSD
+
+
+# Start of China
+0
+C China
+P Hubei
+T Wuhan
+O BSD Users Group
+I stick
+M yli@wtwh.com.cn
+U http://www.hust.edu.cn/
+F irregular
+N OpenBSD, *BSD
+
+
+# Start of Denmark
+0
+C Denmark
+T
+O Danish *BSD User Group, BSD-DK
+M majordomo@bsd-dk.dk
+U http://www.bsd-dk.dk/
+F
+N *BSD
+
+
+
+# Start of Germany
+0
+C Germany
+P Baden Wuertemberg
+T Ulm
+F last Thursday in the month
+O Ulmer BSD User Stammtisch
+I Dirk Mader
+M sierrax@u-bus.de
+U http://www.u-bus.de/
+N *BSD
+
+0
+C Germany
+P Bavaria
+T Munich
+F every 28 days
+O BSE (BSD Social Event)
+I Michael Moll
+M bse@42.org (list)
+U http://bse.42.org/
+N *BSD
+
+0
+C Germany
+P NRW
+T Cologne
+F in the first months irregular
+O Cologne BSD UserGroup
+I Christian Schroeder, Tim Saueressig
+M info@cbug.de
+U http://cbug.de/
+N *BSD
+
+0
+C Germany
+P Saxony
+T Dresden
+F irregular
+O BSD-Crew Dresden
+I BSD-Crew
+M bsd-crew@mail.skyhub.de (list)
+U http://www.bsd-crew.de/
+N *BSD
+
+0
+C Germany
+T Hamburg
+O BSD User Group Hamburg
+U http://www.bsdhh.org/
+F First Wednesday of month, 7 PM
+N *BSD
+
+
+# Start of Greece
+0
+C Greece
+T Thessaloniki
+O Greek BSD Users Group (BSD.GR)
+I Patroklos Argyroudis
+M argp@bsd.gr
+U http://www.bsd.gr/
+F irregular
+N *BSD
+
+
+# Start of Hungary
+0
+C Hungary
+T Budapest
+O Magyar BSD Egyesület
+M titkar@bsd.hu
+U http://www.bsd.hu/egyesulet/
+F irregular
+N *BSD
+
+
+# Start of India
+0
+C India
+P Andhra Pradesh
+T Hyderabad
+F 1st and 3rd Saturday each month
+O TWINCLING Society
+I Saifi Khan
+M info@twincling.org
+U http://www.twincling.org/
+N *BSD
+
+
+# Start of Indonesia
+0
+C Indonesia
+P Central Java/Jogja Municipal
+T Solo/Jogja
+O BSD YK
+I Fery Wibowo
+M ferywu@artdico.or.id
+U http://ferywu.sysadmin.or.id/
+F "irregular"
+N *BSD
+
+0
+C Indonesia
+P DIY
+T Jogjakarta
+O  Kelompok Studi OpenBSD UGM 
+I Reynaldo Parulian
+M root@bumbustudio.com
+U http://www.bumbustudio.com/ 
+F Every Thursday 13.00 WIB
+N OpenBSD
+
+0
+C Indonesia
+P DKI
+T Jakarta
+O Great Indonesia OpenBSD User Group (Kelompok Pengguna OpenBSD Indonesia)
+I Abdullah A. Koro
+M koro@alliance.globalnetlink.com
+U http://www.openbsd.or.id/
+F irregular
+N *BSD.
+
+0
+C Indonesia
+P East-Java
+T Surabaya
+O OpenBSD Indonesia User Group
+I Bayu Krisna
+M krisna@palapa.org
+U http://openbsd.rtfm.or.id/
+F Every 1st. Each month
+N OpenBSD
+
+
+# Start of Ireland
+0
+C Ireland
+P Dublin
+T Dublin
+O Irish *BSD users group
+I Mark Reardon
+M mcr@gofree.indigo.ie
+U http://gofree.indigo.ie/~mcr/
+F irregular
+N *BSD
+
+
+# Start of Israel
+0
+C Israel
+T
+O Israeli BSD Users group
+I Yaron Zabary
+M yaron@aristo.tau.ac.il
+U http://il-bsd@post.tau.ac.il/
+F
+N *BSD.
+
+
+# Start of Italy
+0
+C Italy
+T Venice 
+O Beer OpenBSD User Group
+I Fabio Cazzin
+M fabio@openbeer.it
+U http://www.OpenBEER.it/
+F irregular
+N OpenBSD
+
+
+# Start of Japan
+0
+C Japan
+P Kansai
+T
+O Kansai *BSD User's Group, K*BUG
+I Takahiro Kambe
+M kbug-admin@kbug.gr.jp
+U http://www.kbug.gr.jp/
+F irregular
+N *BSD
+
+0
+C Japan
+P Nara
+T
+O Wakakusa OpenBSD Users Group
+I Kamo Hiroyasu
+M wakakusa-admin@openbsd.ics.nara-wu.ac.jp
+U http://www.openbsd.ics.nara-wu.ac.jp/wakakusa/
+F
+N OpenBSD
+
+# Start of Kazakhstan
+0
+C Kazakhstan
+P Western Kazakhstan
+T Uralsk
+F irregular
+O OpenBSD KZ-Crew
+I Artur Fatkulin
+M mindart@mail.ru
+U
+N OpenBSD
+
+# Start of Kuwait
+0
+C Kuwait
+P Kuwait
+T Salmiya
+O Kuwaity Unix Group
+I Sulaiman Alhasawi
+M selmux@bigfoot.com
+U http://selmux.tripod.com/
+F
+N OpenBSD
+
+0
+C Kuwait
+P Kuwait
+T Kuwait
+F irregular
+O Kuwait linux user group
+I Meshal Alawadhi
+M q8linux@gmail.com
+U http://www.q8linux.net/
+N *BSD
+
+
+# Start of Kyrgyzstan
+0
+C Kyrgyzstan
+P KG
+T Bishkek
+O Kyrgyzstan Active BSD User's Group
+I Kuzmin Artem (Erta Slash)
+M slash@kabug.org.kg
+U http://www.kabug.org.kg/
+F 2nd Sunday
+N *BSD
+
+
+# Start of Malaysia
+0
+C Malaysia
+P Wilayah Persekutuan
+T Kuala Lumpur
+O MyBSD Malaysia Project
+I Ariff bin Abdullah
+M skywizard@MyBSD.org.my
+U http://www.MyBSD.org.my/
+F Every Sunday, 9 p.m.
+N *BSD
+
+
+# Start of Mexico
+0
+C Mexico
+P Chiapas
+T Tuxtla Gutierrez
+O OpenBSD Mexico
+I Gerardo Santana Gomez Garrido
+M santana@openbsd.org.mx
+U http://www.openbsd.org.mx/
+F irregular
+N OpenBSD
+
+0
+C Mexico
+P Hermosillo
+T Sonora.
+O Dos grupos: Adiora, y Malexa.
+I daemon
+M pelon@antionline.org
+F Irregulares.
+N *BSD
+
+0
+C Mexico
+P DF
+T Coyoacan
+F irregular
+O MonoNeurona.org
+I Manuel Montoya
+M manuel@mononeurona.org
+U http://www.mononeurona.org/
+N *BSD.
+
+0
+C Mexico
+P Sonora
+T Hermosillo
+F Last Thursday of each month
+O GULP!
+I Juan Pablo Feria
+M jferiago@gmail.com
+U http://www.gulp.org.mx/
+N *BSD, Linux
+
+
+# Start of Norway
+0
+C Norway
+T
+O Norwegian BSD User Group
+U http://www.nobug.no/
+F Irregular
+N *BSD
+
+
+# Start of Pakistan
+0
+C Pakistan
+P Punjab
+T Lahore
+F "irregular"
+O OpenBSD Pakistan User's Group
+I S. Hussain
+M shahrukh@oxtersolutions.com
+U http://oxtersolutions.com/openbsd/
+N OpenBSD
+
+0
+C Pakistan
+P Sindh
+T Karachi
+F Irregular
+O BSD Pakistan Promoters and Users group
+I M Asad Rasheed
+M Asad@bsdpakistan.org
+U http://bsdpakistan.org/
+N *BSD
+
+
+# Start of Philippines
+0
+C Philippines
+P Metro Manila
+T Pasig
+F Quarterly, any day in the first week
+O Philippine OpenBSD Users Group
+I Sparc Urani
+M sparc@uraniid.net
+U http://groups.google.com/group/poug
+N OpenBSD Systems
+
+
+# Start of Portugal
+0
+C Portugal
+T Setubal
+O OpenBSD Portuguese User Group
+I Vitor Mendes
+M Abyss@sysfuck.com
+U http://Abyss.homeunix.org
+F irregular
+N *BSD
+
+0
+C Portugal
+P All
+T Country
+F Yearly
+O OpenBSD Portuguese Users Group
+I Nuno Morgadinho
+M www@openbsd-pt.com
+U http://www.openbsd-pt.com/
+N OpenBSD
+
+# Start of Russia
+0
+C Russia
+P Mid Volga
+T Penza
+O Penza UNIX Users Group
+I Michael Marackaew
+M mm@puug.org.ru
+U http://www.puug.org.ru/
+F irregular
+N *BSD
+
+
+# Start of Slovenia
+0
+C Slovenia
+T Ljubljana
+O OBSD.si
+I Primoz Gabrijelcic
+M gabr@17slon.org
+U http://obsd.17slon.org/
+F irregular
+N OpenBSD
+
+
+# Start of Spain
+0
+C Spain
+P Tenerife, Canary Islands
+T La Laguna
+F irregular
+O ETSII-BSD
+I Jacobo Arvelo
+M unix4all@gulic.org
+U http://bsd.corralito.org
+N *BSD
+
+
+# Start of Sweden
+0
+C Sweden
+T Stockholm, Gothenburg, Luleå
+O BSD Users Sweden (a.k.a BUS)
+M bus@stacken.kth.se
+F irregular, quarterly
+N *BSD
+
+0
+C Sweden
+P Ronneby
+T Ronneby
+F irregular
+O OpenBSD.nu
+I Olof Kasselstrand
+M seemer@openbsd.nu
+U http://www.openbsd.nu/
+N OpenBSD
+
+0
+C Sweden
+O OpenBSD Sweden
+I Peter Laur
+T Uppsala
+C Sweden
+F Irregular
+M peter@openbsd.se
+U http://www.openbsd.se/
+N OpenBSD
+
+# Start of USA
+0
+C USA
+P Arizona
+T Phoenix
+F 1st Tuesday, 7:00PM
+O Phoenix BSD Users Group
+I Darrin Chandler
+M dwc@bsd.phoenix.az.us
+U http://bsd.phoenix.az.us/
+N OpenBSD, *BSD
+
+0
+C USA
+P Arizona
+T Tucson
+F Irregular
+O Tucson Free Unix Group (TFUG)
+I Shawn Nock
+M nock@email.arizona.edu
+U http://www.tfug.org/
+N *BSD
+
+0
+C USA
+P California
+T Antelope Valley
+O Antelope Valley BSD User's Group
+I Jason
+M root@intheav.com
+U http://bsd.avlug.org/
+F irregular
+N *BSD
+
+0
+C USA
+P California
+T Berkeley
+O Berkeley Unix User Group
+I Zeke Krahlin
+M buug-admin@weak.org
+U http://www.weak.org/buug/
+F Every Thursday, 7pm
+N *BSD
+
+0
+C USA
+P California
+T Central California
+F 2nd Saturday, 2:00 PM
+O Central California BSD Users Group
+I D. Adam Karim
+M adam@akarsoft.com
+U http://www.ccbug.org
+N OpenBSD|*BSD.
+
+0
+C USA
+P California
+T San Diego
+O San Diego BSD Users Group
+I Ben Lovett
+U http://www.sdbug.org/
+F 1st Thursday of every month at 7PM
+N *BSD
+
+0
+C USA
+P California
+T San Francisco
+O San Francisco OpenBSD Users Group
+I Dan Weeks
+M info@sfobug.org
+U http://www.sfobug.org/
+F 1st Tuesday 7pm AND 2nd Saturday Noon
+N OpenBSD
+
+0
+C USA
+P California
+T San Jose
+O SVBUG Silicon Valley BSD User Group
+I Jesse Monroy
+M jessemonroy@email.com
+U http://www.svbug.com/
+F 1st Thursday each month at 7PM
+N *BSD; including OS X
+
+0
+C USA
+P California
+T Silicon Valley
+O OpenBSD Users Group of Silicon Valley
+M obug@ungeek.com
+U http://www.ungeek.com/obug/
+F Third Monday of the month at 7PM in Mtn View
+N OpenBSD
+
+0
+C USA
+P Connecticut
+T New Haven
+O Southern Connecticut OpenSource User Group
+I Joe Phillips
+M info@scosug.org
+U http://www.scosug.org/
+F Monthly
+N *BSD, Linux, other UNIX
+
+0
+C USA
+P Florida
+T Orlando
+O BSD Users Group of Orlando
+U http://bugo.zepa.net/
+F
+N *BSD
+
+0
+C USA
+P Florida
+T Orlando
+F 1st Saturday of every month
+O BSD Enthusiasts and Professionals
+I David T. Harris
+M blueninja83@yahoo.com
+U http://www.beap-cf.org/
+N *BSD
+
+0
+C USA
+P Iowa
+T Cedar Rapids
+O Eastern Iowa Free Unix Society
+I Brian Ring
+M drzharko@eifus.org
+U http://www.eifus.org/
+F 1st Thursday every month, 7:00 p.m.
+N *BSD
+
+0
+C USA
+P Kansas
+T Wichita
+O WLABUG - Wichita Linux And BSD User Group
+I Patrick Klee
+M drwho@futureks.net
+U http://www.geocities.com/mykros78/wlabug.html
+F Friday and Saturday on irc.slashnet.org #wlabug
+N *BSD, some Linux and occasional OS X
+
+0
+C USA
+P Louisiana
+T New Orleans
+O New Orleans *BSD User Group
+U http://www.nolug.org/
+F Third Thursday each month
+N *BSD
+
+0
+C USA
+P Maryland, Virginia, DC
+F Last Tuesday or Wednesday of the month
+O CapBUG
+I Mike Erdely
+M mike@erdelynet.com
+U http://capbug.org/
+N *BSD
+
+0
+C USA
+P Massachusetts
+T Boston
+O New England Area BSD Users Group
+I Pat Lynch
+M bsdpat@neabug.org
+U http://neabug.org/
+F irregular
+N *BSD.
+
+0
+C USA
+P Michigan
+T Detroit-area
+O SouthEast Michigan BSD User Group
+M semibug@mail.msen.com
+U http://www.semibug.mi.org/
+F 2nd Wednesday each month at 8PM
+N *BSD
+
+0
+C USA
+P Minnesota
+T Princeton
+O Princeton Area OpenBSD Users
+I Brian Hershey
+M brian@lanwatchsecurity.com
+F irregular/virtual
+N OpenBSD
+
+0
+C USA
+P Missouri
+T Saint Louis
+O St. Louis BSD Users Group
+I Buck Pyland
+M buck@stlbsd.org
+U http://www.stlbsd.org/
+F irregular
+N *BSD
+
+0
+C USA
+P Missouri
+T Springfield
+O Ozarks Linux Users Group (OzLUG)
+I Cheryl Jones
+M moo@bluecows.com
+U http://www.ozlug.org/
+F 1st Monday each month
+N *BSD
+
+0
+C USA
+P New York
+T Albany
+F Last Sunday Each Month at 5pm
+O Capital District *BSD Users Group (CDBUG)
+I Jonathan Franks
+M jonathan.franks@gmail.com
+U http://lists.nycbug.org/mailman/listinfo/cdbug-talk/
+N *BSD
+
+0
+C USA
+P New York
+T New York
+O NYC *BSD Users Group (NYCBUG)
+U http://nycbug.org/
+F 1st Wednesday each month at 6:00 PM
+N *BSD
+
+0
+C USA
+P New York
+T Broome County
+F 4th Tuesday of every month
+O BC BUG
+I Eric Radman
+M theman@eradman.com
+U http://www.bcbug.org/
+N *BSD.
+
+0
+C USA
+P North Carolina
+T Research Triangle Park
+O Triangle Area BSD Users Group
+I Ryan Younce
+M info@tribug.org
+U http://www.tribug.org/
+F 3rd Thursday each month at 7:00 PM
+N *BSD
+
+0
+C USA
+P Oregon
+T Bend
+O Bend Unix Users Group
+I Tim Howe
+M thowe@empnet.com
+U http://www.bendug.org/
+F To be determined
+N *BSD
+
+0
+C USA
+P Utah
+T Salt Lake City
+O SLLUG-BUG
+I Wes Peters
+M sllug-bug@bsdconspiracy.net
+U http://bsdconspiracy.net/sllug-bug/
+F 3rd Wednesday of the month at 7:10 pm
+N BSD
+
+0
+C USA
+P Washington
+T Tacoma
+O Tacoma BSD/Unix User Group
+I Bruce Dang
+M bd@alpha.slogin.org
+U http://www.tbug.org/
+F irregular
+N *BSD
+
+0
+C USA
+P Wyoming
+T Laramie
+O Laramie Wyoming Freenix Users Group(LWFUG)
+I Russ Ingram
+M ringram@gargoylecc.com
+U http://www.lwfug.org/
+F irregular
+N *BSD
+
+# Start of Ukraine
+0
+C Ukraine
+T Kiev
+F On OpenBSD Release days.
+O Ukrainian OpenBSD Users Group (UAOUG)
+I Sergey Prysiazhnyi
+M apelsin@atmnis.com
+U http://www.uaoug.org.ua/
+N OpenBSD
+
+# Start of United Kingdom
+0
+C United Kingdom
+T Manchester
+O Manchester BSD User Group
+I Sam Smith
+U http://www.bsdgroups.org.uk/manchester/
+F Usually 2nd week of the month
+N *BSD
+
+0
+C United Kingdom
+P Greater London
+T London
+O LONBUG: London BSD User Group
+I Shriman Gurung
+M shriman@venus.co.uk
+U http://www.juiceco.com/html/lonbug.html
+F Last week in each month, day varies
+N *BSD
+
+
+# Start of Venezuela
+0
+C Venezuela
+P Carabobo
+T Valencia
+O Grupo de usuarios BSD Venezuela
+I Juan Jos&eacute; D'Alessandro M
+B (+58412) 7407112
+X (+58241) 8679003
+M juancho@bsd.org.ve
+U http://www.bsd.org.ve/
+F Desconocido
+N Grupo de usuarios que se encargan de dar soporte y asesorías referente a sistemas UNIX, BSD a todos los usuarios Venezolanos que deseen aprender y/o a usuarios ya experimentados en los sistemas.
+
+
+# Start of Yugoslavia
+0
+C Yugoslavia
+T
+O BSD Users of Yugoslavia
+M bsdyu@bsd.org.yu
+U http://www.bsd.org.yu/
+F
+N *BSD
+
+# end of file

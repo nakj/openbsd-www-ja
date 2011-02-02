@@ -1,0 +1,533 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>1 - Introduction to OpenBSD</title>
+<link rev="made" href="mailto:www@openbsd.org">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-2022-JP">
+<meta name="resource-type" content="document">
+<meta name="description"   content="the OpenBSD FAQ page">
+<meta name="keywords"      content="openbsd,faq">
+<meta name="distribution"  content="global">
+<meta name="copyright"     content="This document copyright 1998-2010 by OpenBSD.">
+</head>
+
+<body bgcolor="#ffffff" text="#000000">
+<!-- validator.w3.org をパスしています。この方法を守ってください。
+1 行当たり最大 72 文字までにしてください。 -->
+
+<a href="../../index.html">
+<img alt="[OpenBSD]" height=30 width=141 src="../../images/smalltitle.gif" border="0">
+</a>
+<p>
+<font color="#0000e0">
+<a href= "index.html">[FAQ の目次]</a>
+<a href= "faq2.html">[2 章- 他のOpenBSD 情報源]</a>
+</font>
+
+<h1><font color="#e00000">1 - OpenBSD 入門</font></h1>
+<hr>
+
+<p>
+<h3>目次</h3>
+<ul>
+<li><a href="#WhatIs">1.1 - OpenBSD って何でしょう ?</a>
+<li><a href="#Platforms">1.2 - OpenBSD はどのようなシステム上で動くのでしょう ?</a>
+<li><a href="#ReallyFree">1.3 - OpenBSD って本当にフリーなのでしょうか ?</a>
+<li><a href="#WhyUse">1.4 - なぜ私は OpenBSD を使わなければならないのでしょう ?</a>
+<li><a href="#Support">1.5 - OpenBSD をサポートするにはどうすれば良いでしょう ?</a>
+<li><a href="#WhoMaintains">1.6 - OpenBSD は誰がメンテナンスしているのでしょう ?</a>
+<li><a href="#Next">1.7 - OpenBSD の次のリリースはいつでしょうか ?</a>
+<li><a href="#Included">1.8 - OpenBSD には何が含まれているのでしょう ?</a>
+<li><a href="#WhatsNew">1.9 - OpenBSD 3.4 では何が新しくなったのでしょうか ?</a>
+<li><a href="#Desktop">1.10 - OpenBSD デスクトップとして使用できますか ?</a>
+<li><a href="#HowAbout">1.11 - どうして<i>あのソフトウェア</i>が入っている/いないのでしょうか ?</a>
+</ul>
+
+<hr>
+
+<p>
+<a name="WhatIs"></a>
+<h2>1.1 - OpenBSD って何でしょう ?</h2>
+
+<p>
+<a href="../../ja/index.html">OpenBSD</a> プロジェクトは、フリーで入手可能なマルチプラットホームの
+4.4BSD ベースの UNIX 系オペレーティングシステムです。
+<a href="../../ja/goals.html">私たちが強調する</a>のは
+<a href="../../ja/plat.html">移植性</a>、標準化、正しさ、
+<a href="../../ja/security.html">セキュリティ</a>です。
+<a href="../../ja/index.html">OpenBSD</a>は SVR4 (Solaris)、FreeBSD、Linux、BSDI、SunOS、HPUX
+の各種バイナリ・エミュレーションをサポートしています。
+
+<!-- XXXrelease -->
+<p>
+この FAQ は、特に最も最近の OpenBSD のリリースであるバージョン
+4.6 だけを網羅しています。
+
+<p>
+<a name="Platforms"></a>
+<h2>1.2 - OpenBSD はどのようなシステム上で動くのでしょう ?</h2>
+<!-- XXXrelease -->
+<p>
+OpenBSD 4.6 は以下のプラットホーム上で動きます。
+<ul>
+    <li><a href="../../alpha.html">alpha</a> - FTP のみ
+    <li><a href="../../amd64.html">amd64</a> - CD に収録
+    <li><a href="../../armish.html">armish</a> - FTP のみ
+    <li><a href="../../hp300.html">hp300</a> - FTP のみ
+    <li><a href="../../hppa.html">hppa</a> - FTP のみ
+    <li><a href="../../i386.html">i386</a> - CD に収録
+    <li><a href="../../landisk.html">landisk</a> - FTP のみ
+    <li><a href="../../mac68k.html">mac68k</a> - FTP のみ
+    <li><a href="../../macppc.html">macppc</a> - CD に収録
+    <li><a href="../../mvme68k.html">mvme68k</a> - FTP のみ
+    <li><a href="../../mvme88k.html">mvme88k</a> - FTP のみ
+    <li><a href="../../sgi.html">sgi</a> - FTP のみ
+    <li><a href="../../socppc.html">socppc</a> - FTP のみ
+    <li><a href="../../sparc.html">sparc</a> - FTP のみ
+    <li><a href="../../sparc64.html">sparc64</a> - CD に収録
+    <li><a href="../../vax.html">vax</a> - FTP のみ
+    <li><a href="../../zaurus.html">zaurus</a> - FTP のみ
+</ul>
+
+<p>
+<i>CD に収録</i> というのはそのプラットフォームが <a href="../orders.html">
+公式 CD セット</a>  に多くの<a href="faq15.html">パッケージ</a>と
+ともに収録されているということです。
+いくつかのプラットフォーム向けベースシステムCD ISOイメージもまた
+ダウンロード可能です。
+
+<p>
+OpenBSD プラットフォームに関する更なる情報は、
+<a href="../plat.html">プラットフォーム</a> のページをご参照ください。
+
+<p>
+どうしてそんなにたくさんの "奇妙な"マシンをサポートするのですか、と時々聞かれます。
+「我々が欲するからです」が答えです。
+もし、十分なスキルを持った人が（時には「十分」が本当にスキルを持った
+一人でも！）そのプラットフォームをサポートする事を望むなら、
+そのプラットフォームをサポートします。
+新しいプラットフォームが現れた時、コードツリーは移植性を破壊するバグや
+デザインの欠陥から相対的に自由でいられることが、
+OpenBSDがマルチプラットフォームを続ける事による実用的な利益です。
+OpenBSDプラットフォームは32ビット及び64ビットプロセッサー、リトルエンディアンと
+ビッグエンディアンのマシン、そしてたくさんの違ったデザインを含んでいます。
+そしてもちろん、より「普通の」プラットフォーム向けの質の高いコードベースが
+「変な」プラットフォームをサポートする助けになります。
+
+<p>
+<a name="WhyUse"></a>
+<h2>1.3 - なぜ私はOpenBSDを使わなければいけないのでしょうか?</h2>
+
+<p>
+新しいユーザは、OpenBSD が他のフリーな UNIX 系 OS に比べて優れている
+のかどうか、頻繁に知りたがるものです。しかし、この質問は、おおむね
+回答不能ですし、無数の (そして無益な) 宗教論争のネタになってきたものです。
+いかなる状況においても、このような質問は OpenBSD のメーリングリストに
+投げたりしないようにしてください。
+
+<p>
+以下に、なぜ私たちが OpenBSD を有用な OS だと思うのか、
+いくつか理由をあげてみました。しかし、OpenBSD があなたに
+とって適切かどうかは、あなた自身が判断するしかありません。
+
+<p>
+<ul>
+  <li>OpenBSD は<a href="../../plat.html">いろいろな
+   ハードウェアプラットホーム上で動きます。</a>
+   <li>OpenBSD は、決して終ることのない徹底的な
+   ソースコードのセキュリティ監査のおかげで、多くのセキュリティ専門家
+   によって、最も<a href="../../security.html">高いセキュリティ</a>
+   を誇る UNIX 系 OS と判断されています。
+   <li>OpenBSD は、ソースコードの形で提供されている、
+   完全な UNIX 系 OS で、無料です。
+   <li>OpenBSD には、最先端のセキュリティ技術が統合されていますので、
+   ファイアウォールや<a href="../../crypto.html#hardware">プライベート
+   ネットワークサービス</a>を分散環境で構築するのに適しています。
+   <li>OpenBSD は、いろいろな分野での強力な継続的開発の成果の提供を受けて、
+   できたての技術を国際的なプログラマやエンドユーザのコミュニティとともに
+   活用する機会を提供しています。
+   <li>OpenBSDはカスタマイズや微調整の必要性を最小化しようとします。
+   大多数のユーザーにとっては、 OpenBSD は彼らのハードウェア上で、ソフトウェアが
+   "すぐに動作します"。微調整やカスタマイズはほとんど必要ありません。
+   それは大変 <a href="../faq5.html#Why">やる気を失わせ</a>てしまいます。
+
+</ul>
+
+<a name="ReallyFree"></a>
+<h2>1.4 - OpenBSD って本当にフリーなのでしょうか ?</h2>
+
+<p>
+OpenBSD はすべてフリーです。バイナリはフリーですし、ソースも
+フリーです。OpenBSD のすべての部分は、フリーの配布を認める、
+まっとうなコピーライト条件を持っています。これは、個人的に
+であっても商業的な目的であっても、OpenBSD のほとんどの部分を
+再利用できるということです。OpenBSD は、もともとの BSD
+ライセンスで含意されているもの以上の制限を一切加えていません。
+もっと厳しいライセンス条件のもとで書かれたソフトは、
+OpenBSD の正規ディストリビューションには含められません。
+これは、OpenBSD のフリーな利用を守るためのものです。
+たとえば、OpenBSD は個人利用でも、アカデミックな利用でも、
+政府機関でも非営利組織でも、商業組織でも自由に使うことができます。
+OpenBSD やその構成部品はまた、自由に
+<a href="../../products.html">商用製品</a>に利用できます。
+
+<p>
+我々のフリーな仕事が商用製品
+に組み込まれたら困りませんかと時々聞かれます。
+答えは、商用製品ベンダーが、再実装し、悪いコードを作りだし、既に解決済みの問題に対する
+互換性のない解決をするよりも、
+我々のよいコードが <i>広く使われる</i>ほうがいいです。
+例えば、SSHはこの自由の
+ために広く使われるプロトコルですが、OpenSSH のコードに制限が加えられていたら
+これだけ広く使われる事はなかったでしょう。もしベンダーが自由に使えるSSHソリューションが
+なかったら（彼らの早急に開発された製品に)、 
+彼らは書くかすぐに手に入る見窄らしいものを
+買うかするでしょう。
+
+<p>
+これは、我々が<a href="../../donations.html">金銭的あるいはハードウェアサポート</a>
+に対する感謝に反対すると言っているのではありません。 
+実際、呆然とします。OpenBSD(もしくはOpenSSH)に依存した製品を作っている会社からの
+どんなとても少しのサポートでも素晴らしいと思います。
+ですが、報酬は必須ではありません。
+
+<p>
+他の一般的なライセンスについてのより詳しいことは、
+<a href="../policy.html">OpenBSD の著作権のポリシー</a>を参照してください。
+
+<p>
+OpenBSD のメンテナたちは、プロジェクトをもっぱら自分の持ち出しで
+サポートしています。これはプロジェクトのためのプログラミングにかけた時間、
+各種の移植をサポートするための機器、OpenBSD をあなたに届けるために使われた
+ネットワーク資源、そしてユーザからの質問に答えたり、バグ報告を調べたり
+するのに使う時間なんかも含んでいます。しかし、OpenBSD 開発者たち個人は
+お金持ちではありませんから、ほんの少しでも時間や機器やリソースで貢献して
+いただければ、大きな違いとなって表われてきます。
+
+<p>
+<a name="Support"></a>
+<h2>1.5 - OpenBSD をサポートするにはどうすれば良いでしょう ?</h2>
+
+<p>
+私たちは、OpenBSD プロジェクトに貢献してきた人々や組織に大いなる
+恩があります。彼らのお名前を
+<a href="../../ja/donations.html">寄付のページ</a>に掲載しています。
+
+<p>
+OpenBSD は、ユーザコミュニティからの、常に何通りかのサポートを必要としています。 
+もし OpenBSD が使えると思ったなら、ぜひともプロジェクトに貢献してください。 
+もし以下の提案がどれもあなたにとって適切でないのでしたら、
+メールで別の方法を提案していただければ幸いです。送り先は
+<a href= "mailto:donations@openbsd.org">donations@openbsd.org</a> です。
+
+<p>
+<ul>
+    <li><a href="../../orders.html">OpenBSD CD セットの購入</a>。今の OpenBSD
+    のフルリリースが入っていますし、多くのプラットホームでは起動 CD として使えます。
+    それに、OpenBSD を支える収入を生み出してくれますし、ディストリビューションを
+    インターネット経由で配布するための、ネットワーク資源を節約してくれます。
+    この、廉価な 3 枚組の CD セットには、すべてのソースコードも含まれています。
+    そうそう、お友だちのためにも CD を買っておいてあげましょう !
+    <li><a href="../../donations.html">お金の寄付</a>。プロジェクトは、
+    機器やネットワーク接続、CD を発行するための費用など、いつも現金を
+    必要としているのです。CD のプレスは、OpenBSD 開発者にとって前払いの
+    持ち出し投資を必要とするもので、しかもそれが帰ってくる保証はありません。
+    寄付の方法についての詳しいことは、
+    <a href="mailto:donations@openbsd.org">donations@openbsd.org</a>
+    までメールをお送りください。
+    ほんの少しのお金でも、大きな差が出るものなのです。
+    <li><a href="../../ja/want.html">機器やパーツの寄付</a>。プロジェクトは絶えず
+   一般的なハードや、特定のハードを欲しいと思っています。IDE や SCSI ディスク、
+    各種 RAM はいつでも大歓迎しています。その他、各種コンピュータシステムや
+    マザーボードの場合、いま何が必要とされているかについては、
+    まずお問い合わせください。発送のための手続き等については、
+    <a href="mailto:donations@openbsd.org">donations@openbsd.org</a>
+    まで御連絡ください。
+    <li>時間や技能で貢献。オペレーティングシステムを書くのが
+    大好きなプログラマはもちろん大歓迎ですが、
+    役にたつ方法はそれ以外にも何十とあります。
+    <a href="../ja/mail.html">メーリングリスト</a>を読んで、
+    新しいユーザの質問に答えてあげてください。
+   <li>FAQ のネタを送って、ドキュメンテーションの充実に貢献してください
+   (送り先は <a href="mailto:faq@openbsd.org">faq@openbsd.org</a> です)。
+   地域の<a href="../../groups.html">ユーザグループ</a>を組織して、友だちを
+   OpenBSD の虜にしてしまいましょう。雇用者に、仕事で OpenBSD を使うよう
+   説得しましょう。学生なら、コンピュータ科学やエンジニアリングの講義で
+   OpenBSD を使いませんか、と教授に話してみましょう。
+   また、OpenBSD プロジェクトを助けようとして、オペレーティングシステムの
+   フレーム合戦に加わって時間を無駄にしたりしないことが、最も重要なことの
+   ひとつであると意識することも、価値のあることです。
+   プロジェクトの新しいユーザ探しにも役に立ちませんし、
+   開発者同士の関係にも非常に有害な影響を与える場合さえあるのです。
+</ul>
+
+
+<p>
+<a name="WhoMaintains"></a>
+<h2>1.6 - OpenBSD は誰がメンテナンスしているのでしょう ?</h2>
+
+<p>
+OpenBSD は、<a href="../../images/map.jpg">世界各国</a>に分散した開発チーム
+によって維持されています。また、プロジェクトをとりまとめているのは、
+カナダ在住の Theo de Raadt です。
+
+<p>
+<a name="Next"></a>
+<h2>1.7 - OpenBSD の次のリリースはいつでしょうか ?</h2>
+
+OpenBSD チームでは、5 月 1 日と 11 月 1 日のリリースを目標に、新しい
+リリースを 6 ヶ月ごとに行っています。開発サイクルに関するより詳しい情報は、
+<a href="../faq5.html#Flavors">here</a> を参照してください。
+
+<a name="Included"></a>
+<h2>1.8 - OpenBSD には何が含まれているのでしょう ?</h2>
+OpenBSD は、以下のものを含む、多数のサードパーティソフトウェア製品とともに
+出荷されています。
+<!-- XXXrelease -->
+
+<ul>
+<li><a href="http://www.x.org">X.org 7.4</a>,
+X Window 環境。ローカルパッチ適用済み。
+<a href="faq4.html#FilesNeeded">インストール用ファイルセット</a>.
+<tt>x*.tgz</tt> がインストールされています。
+
+<li>GNU C コンパイラ<a href="http://gcc.gnu.org/">GCC</a> バージョン 2.95.3 と 3.3.5.
+  OpenBSD チームはスタック保護技術
+<a href="http://www.trl.ibm.com/projects/security/ssp">Propolice</a>
+を追加し、デフォルトで有効にしています。 OpenBSD ユーザーランドのすべてと OpenBSD で
+コンパイルされたアプリケーションは、デフォルトでこれが使用されています。
+インストール用<a href="faq4.html#FilesNeeded">ファイルセット</a> 
+<tt>comp46.tgz</tt> の一部としてインストールされています。
+
+<li><a href="http://www.perl.com/">Perl 5.10.0</a> （＋パッチ）
+および OpenBSD チームによる改良。
+
+<li>我々の改良とセキュア化がなされた Apache 1.3 web サーバ。 
+OpenBSD チームは、<a href="faq10.html#httpdchroot">デフォルトでの
+chroot</a>、特権分離、およびその他のセキュリティ関連の改良を
+追加しています。また、mod_ssl 2.8 と DSO のサポートも組み込まれています。
+
+<li><a href="http://www.openssl.org">OpenSSL 0.9.8j</a>（＋パッチ）および 
+OpenBSD チームによる改良。
+
+<li><a href="http://www.gnu.org/software/groff/groff.html">Groff 1.15</a>
+テキストプロセッサ。
+
+<li><a href="http://www.sendmail.org/">Sendmail 8.14.3</a> メールサーバ
+と libmilter メールフィルタライブラリ。
+
+<li><a href="http://www.isc.org/products/BIND/">BIND 9.4.2-P2</a> DNS サーバ
+（＋パッチ）。OpenBSD では、chroot による運用や他のセキュリティ関連の問題等に対する
+多数の改良を実装しています。
+
+<li>テキストベース web ブラウザ <a href="http://lynx.isc.org/">Lynx 2.8.5rel.5</a>。
+また、OpenBSD チームによるパッチと HTTPS サポートが追加されています。
+
+<li><a href="http://www.isc.org/products/BIND/">BIND 9.4.2</a> DNS サーバ。
+OpenBSD では、chroot による運用や他のセキュリティ関連の問題等に対する
+多数の改良を実装しています。
+
+<li><a href="http://www.courtesan.com/sudo/">Sudo v1.7.2</a>。これは、ユーザが
+個々のコマンドを root として実行することを許可できるようにするためのものです。
+
+<li><a href="http://www.gnu.org/software/ncurses/ncurses.html">Ncurses
+5.2</a>
+
+<li><a href="http://www.kame.net/">KAME</a> IPv6
+
+<li><a href="http://www.pdc.kth.se/heimdal/">Heimdal 0.7.2</a> （＋パッチ）
+
+<li><a href="http://www.stacken.kth.se/projekt/arla/">Arla 0.35.7</a>
+
+<li><a href="http://www.gnu.org/software/binutils/">Binutils 2.15</a> 
+（＋パッチ）
+
+<li><a href="http://www.gnu.org/software/gdb/gdb.html">gdb 6.3</a> （＋パッチ）
+
+
+<li><a href="http://www.openssh.com">OpenSSH 5.3</a>
+
+<li><a href="http://www.openntpd.org">OpenNTPD</a> OpenNTPD。セキュアで
+シンプルなネットワークタイムプロトコル実装。
+
+<li><a href="http://www.openbgpd.org/">OpenBGPD and OpenOSPFD</a>
+ルーティングアプリケーション
+</ul>
+
+上記のように、OpenBSD チームでは、(通常は) セキュリティやコードの品質の改良のため、
+サードパーティの製品にしばしばパッチを当てることがあります。いくつかのケースでは、
+ユーザにとって、操作性の違いを感ずることはありませんが、他の場合では、
+操作性の違いが一部のユーザに対して影響を及ぼすことがあるかも知れません。
+同じソフトウェアの異なるバージョンをを盲目的に追加する前に、これらの拡張の維持を
+心がけてください。
+新しいバージョンのものを追加することはできますが、セキュリティの低いシステム
+になってしまうかもしれません。
+
+<p>
+もちろん、OpenBSD では、さらなるアプリケーションを
+<a href="../faq8.html#Packages">packages</a> や 
+<a href="../faq8.html#Ports">ports</a> システムを使用して追加することができます。
+
+<p>
+
+<a name="WhatsNew"></a>
+<h2>1.9 - OpenBSD 4.6 では何が新しくなったのでしょうか ?</h2>
+<!-- XXXrelease -->
+
+<a href="../../plus46.html">plus46.html</a>に、またハイライトは
+<a href="../../46.html">OpenBSD 4.6 情報</a>にありますが、 
+ここでは以前のバージョンを熟知しOpenBSD4.6にアップグレードまたは
+これをインストールしようとする人たちに対し、OpenBSDチームが予想するいくつかの変更は、
+以下のように特別の注意が必要となっています。
+<ul>
+<li><b>新しいインストーラ!</b><br>
+OpenBSD の歴史的で無駄のないシンプルなインストーラが
+より無駄を省いてシンプルになりました。
+<a href="../faq4.html">FAQ 4 章</a> に詳細があります。
+もちろん、新しいインストーラは、以前フロッピーからインストールできた
+全てのプラットフォームでは、一枚のフロッピーに収まります。
+
+<li><b>Multi-adapter X is broken</b><br>
+While X can be run with multiple heads on ONE video card, the
+ability to use multiple video cards on one system was broken "upstream"
+by the X.org team.
+
+<li><b><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=tmux&amp;sektion=1"
+>tmux(1)</a>
+が移植され、ベースシステムの一部に加えられました。</b><br>
+ほとんどの
+ユーザーにとって、tmux(1)は一般的にインストールされる "screen" (とほとんど使われな
+いウィンドウ)の機能的代替品です。 "screen" ユーザーは、確認する事を強く推奨します。
+
+<li><b><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=softraid&amp;sektion=4">softraid(4)</a>
+の強化</b><br>
+softraid(4) 
+は故障したドライブをリビルド出来るようになり、失われたメンバーとともに立ち上がります。
+
+<li><b>PF の変更</b><br>
+詳細は <a href="upgrade46.html#newPF">アップグレードガイド</a> にあります。
+
+</ul>
+
+
+<a name="Desktop"></a>
+<h2>1.10 - OpenBSDをデスクトップとして使用できますか？</h2>
+これは、「デスクトップ」という言葉の意味をきちんと説明せずに尋ねられることが多い質問です。
+この質問は「何が必要なのか」に依るため、答えることができるのは質問した人だけです。
+
+<p>
+OpenBSDは「サーバ用途の」オペレーティングシステムとして高い評価を得ていますが、デスク
+トップ用途に使うことも可能です。
+多くの" デスクトップ" アプリケーションが 
+<a href="../faq15.html">packages と ports</a>にあります。
+そして、オペレーティングシステムを選ぶときに考えたこと、つまり
+「それは自分のやりたい内容を、自分の望むようにやってくれるだろうか」
+という質問を考えてください。
+この質問には、あなたが自分自身で答えを出さなければなりません。
+
+<p>
+OpenBSDの開発の大きな部分はラップトップ上で行われていることから、
+その質問には意味がないかもしれません。
+
+<a name="HowAbout"></a>
+<h2>1.11 - どうして <i>あのソフトウェア</i> が入っている/いないのでしょうか？</h2>
+
+何故特定の製品がOpenBSDに入っているのか、あるいは入ってないのかとよく聞かれます。
+開発者の希望と、我々のプロジェクトの<a href="../../goals.html">目標</a>と合致するか、
+の二つに基づいている、というのが回答です。単に性能がよいというだけの理由で、
+その製品がOpenBSDに含まれる事はありません。ーーその製品が自由に利用可能であり、
+我々の標準に合致するよう改良し再配布可能でなければなりません。また、そのソフト
+ウェアが安定していてセキュアであることも必要ですーーバージョン番号が大きいからと
+いって以前より改良されているとは限らないのです。
+
+<p>
+よく、大きな問題になるのはライセンスです。わたしたちはOpenBSDを世界中の誰もが、
+どんな目的にも使えるようにしたいと考えています。
+
+<p>
+他に考慮しなくてはいけない事は、開発者の希望です。 OpenBSD 開発者は、何をプロジェクトに
+追加し、追加しないか、究極の判断をします。単にアプリケーションがよいから、というのは
+OpenBSDプロジェクトがメンテナンスのためのリソースを捧げる事を望んだり、 OpenBSDに
+置きつづける他の人の熱意を分け与えることを意味しません。
+
+<p>
+以下は、いくつかのサードパーティ製ソフトウェアに関してよく尋ねられる質問です。<ul>
+<ul>
+<li><i>どうして Sendmailが含まれているのでしょうか？あれはセキュアでない事では有名ではないですか？</i><br>
+いままでSendmail は、
+セキュリティに関してよくない経歴を持っていましたが、Sendmail の作者と
+メンテナはコードをよりセキュアにするための作業に非常に高い理解を
+示してくれています（これは滅多にないことです）。
+最近のSendmail のセキュリティに関する経歴は、他の「よりセキュアである」とされているソフト
+ウェアと、ほとんど変わりません。
+
+<li><i>どうしてPostfixが含まれていないのでしょうか？</i><br>
+ライセンスがフリーではありませんので、
+検討される事はありません。
+
+<li><i>どうしてqmail やdjbdnsが含まれてないのですか？</i><br>
+それらのプログラムはなんと多くのUnixユーザーから消えてほしいと願われているでしょうか。
+
+<li><i>どうして Apache 我含まれているのですか？ほとんどの人には必要ないじゃないで
+すか！</i><br>
+開発者が含めることを望んでいるからです。
+
+<li><i>どうして新しいバージョンのApacheは含まれていないのですか？</i><br>
+新しいバージョンのライセンスは、
+受け入れることができないからです。
+
+<li><i>どうしてgzipの代わりにbzip2 が含まれていないのですか？</i><br>
+パフォーマンスが悲惨で、利が少ないからです。
+m68k や VAX のような遅いプラットフォームには受け入れられません。
+
+<li><i>どうしてグラフィカルな、あるいは 
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=curses&amp;sektion=3">curses(3)</a> 
+ベースのインストーラがないのですか？</i><br>
+いくつかの理由により、インストールメディアを一枚のフロッピーに納める目標 実際、一
+つのインストーラはすべての構成、すべてのプラットフォームで使うことができます。 
+事実として、実際にほとんどのユーザーは2回目か３回目にOpenBSDをインストールした後
+OpenBSDのインストーラはもっとも簡単でももっとも速い事がわかるでしょう。ほとんど
+の開発者とユーザーは、スピードとパワーと簡単に使える今のインストーラが
+、他のよりカラフルでかわいいインストーラよりも大好きです。
+
+<li><i>ZFSはOpenBSDに追加されますか？</i><br>
+誰かがOracle にOpenBSD の <a href="../../policy.html">ポリシー</a>
+と互換性のあるライセンスに変更させる事を納得させない限り（ないでしょう）。
+</ul>
+
+これらの話題の多くは、 <a href="faq2.html#MailLists">メーリングリスト</a>で
+嫌になるほど議論されたものです。もし情報が必要ならば、これらのアーカイブをご覧く
+ださい。
+<p>
+もちろん、このようなパッケージを使いたいと望んでおり、ライセンスに違反しない
+使い方をしている限り、誰もあなたがそれを使うのを妨げるものはありません
+（私たちがそうしてしまうと、真にフリーではなくなってしまうのです）。ただし、あなた
+が必要としているものは変わるかもしれません。つまりあなたはフリーでないソフトウェ
+アを組み込むことによって、販売や再配布、利益を得ることを禁じるような「キラーアプ
+リケーション」を開発してしまう化もしれないわけです。そういうのはやめた方がいいで
+しょう。
+
+<p>
+
+<font color="#0000e0">
+<a href= "index.html">[FAQ の目次]</a>
+<a href= "faq2.html">[2 章 - 他のOpenBSD 関連情報]</a>
+</font>
+
+<p>
+<hr>
+<a href="index.html"><img height="24" width="24" src="../images/back.gif" border="0" alt="[back]"></a> 
+<a href="mailto:www@openbsd.org">www@openbsd.org</a>
+<br>
+<small>
+<!--
+Originally [OpenBSD: faq1.html,v 1.114 ]
+<br>
+$Translation$
+<br>
+-->
+$OpenBSD: faq1.html,v 1.114 2010/03/23 00:41:11 nick Exp $
+</small>
+
+</body>
+</html> 

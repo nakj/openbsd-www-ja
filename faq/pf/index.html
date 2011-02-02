@@ -1,0 +1,146 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>PF: The OpenBSD Packet Filter</title>
+<link rev="made" href="mailto:www@openbsd.org">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="resource-type" content="document">
+<meta name="description"   content="the OpenBSD FAQ page">
+<meta name="keywords"      content="openbsd,faq,pf">
+<meta name="distribution"  content="global">
+</head>
+
+<!--
+Copyright (c) 2003, Nick Holland <nick@openbsd.org>
+Copyright (c) 2003-2005, Joel Knight <enabled@myrealbox.com>
+
+Permission to use, copy, modify, and distribute this documentation for
+any purpose with or without fee is hereby granted, provided that the
+above copyright notice and this permission notice appear in all copies.
+
+THE DOCUMENTATION IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL
+WARRANTIES WITH REGARD TO THIS DOCUMENTATION INCLUDING ALL IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE
+AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL
+DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR
+PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
+TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS DOCUMENTATION
+-->
+
+<body bgcolor="#ffffff" text="#000000">
+<!-- Passes validator.w3.org, please keep it this way;
+please, use a max of 72 chars per line -->
+
+<a href="../../index.html">
+<img alt="[OpenBSD]" height=30 width=141 src="../../images/smalltitle.gif" border="0">
+</a>
+<p>
+<big><b>Language:</b></big>&nbsp;<b>en</b>
+&nbsp;<a href="../../translation.html">[teams]</a><br>
+<a href="de/index.html">de</a>
+&nbsp;<a href="fr/index.html">fr</a>
+&nbsp;<a href="it/index.html">it</a>
+&nbsp;<a href="nl/index.html">nl</a>
+&nbsp;<a href="pl/index.html">pl</a>
+&nbsp;<a href="pt/index.html">pt</a>
+&nbsp;<a href="ru/index.html">ru</a>
+<p>
+<a href="../index.html">[up to FAQ]</a>
+<a href="config.html">[Next: Getting Started]</a>
+<h1><font color="#e00000">PF: The OpenBSD Packet Filter</font></h1>
+<hr>
+
+<p>
+<h3>Table of Contents</h3>
+<ul>
+<li>Basic Configuration
+	<ul>
+	<li><a href="config.html">Getting Started</a>
+	<li><a href="macros.html">Lists and Macros</a>
+	<li><a href="tables.html">Tables</a>
+	<li><a href="filter.html">Packet Filtering</a>
+	<li><a href="nat.html">Network Address Translation</a>
+	<li><a href="rdr.html">Traffic Redirection (Port Forwarding)</a>
+	<li><a href="shortcuts.html">Shortcuts For Creating Rulesets</a>
+	</ul>
+<li>Advanced Configuration
+	<ul>
+	<li><a href="options.html">Runtime Options</a>
+<!--	<li><a href="scrub.html">Scrub (Packet Normalization)</a> -->
+	<li><a href="anchors.html">Anchors</a>
+	<li><a href="queueing.html">Packet Queueing and Prioritization</a>
+	<li><a href="pools.html">Address Pools and Load Balancing</a>
+	<li><a href="tagging.html">Packet Tagging (Policy Filtering)</a>
+	</ul>
+<li>Additional Topics
+	<ul>
+	<li><a href="logging.html">Logging</a>
+	<li><a href="perf.html">Performance</a>
+	<li><a href="ftp.html">Issues with FTP</a>
+	<li><a href="authpf.html">Authpf: User Shell for Authenticating
+Gateways</a>
+	<li><a href="carp.html">Firewall Redundancy with CARP and pfsync</a>
+	</ul>
+<li>Example Rulesets
+	<ul>
+	<li><a href="example1.html">Firewall for Home or Small
+	Office</a>
+	</ul>
+</ul>
+
+<hr>
+
+<p>
+Packet Filter (from here on referred to as PF) is OpenBSD's system
+for filtering TCP/IP traffic and doing Network Address Translation. PF
+is also capable of normalizing and conditioning TCP/IP traffic and
+providing bandwidth control and packet prioritization. PF has been a
+part of the GENERIC OpenBSD kernel since OpenBSD 3.0. Previous OpenBSD
+releases used a different firewall/NAT package which is no longer
+supported.
+
+<p>
+PF was originally developed by Daniel Hartmeier and is now maintained and
+developed by the entire OpenBSD team.
+
+<p>
+This set of documents, also available in
+<a href="ftp://ftp.openbsd.org/pub/OpenBSD/doc/pf-faq.pdf">PDF</a>
+format, is intended as a general introduction to the
+PF system as run on OpenBSD. Even if it covers all of PF's major
+features, it is only intended to be used as a supplement
+to the <a href="http://www.openbsd.org/cgi-bin/man.cgi"
+>man pages</a>, and not as a replacement for them.
+
+<p>
+For a complete and in-depth view of what PF can do, please start by
+reading the
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=pf&amp;sektion=4&amp;manpath=OpenBSD+4.6"
+>pf(4)</a> man page.
+
+<p>
+As with the rest of the FAQ, this set of documents is focused on users of
+<a href="../../46.html">OpenBSD 4.6</a>.
+As PF is always growing and developing, there are changes and
+enhancements between the
+4.6-release
+version and the version in OpenBSD-current as well as differences
+between
+4.6 
+and earlier versions.
+The reader is advised to see the man pages for the version of OpenBSD
+they are currently working with.
+
+<p>
+<a href="../index.html">[up to FAQ]</a>
+<a href="config.html">[Next: Getting Started]</a>
+
+<hr>
+<a href="../index.html"><img height="24" width="24" src="../../images/back.gif" border="0" alt="[back]"></a> 
+<a href="mailto:www@openbsd.org">www@openbsd.org</a>
+<br>
+<small>$OpenBSD: index.html,v 1.46 2009/10/19 02:51:11 nick Exp $</small>
+
+</body>
+</html> 

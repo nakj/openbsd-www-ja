@@ -1,0 +1,778 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>OpenBSD 4.2 Release</title>
+<link rev=made href="mailto:www@openbsd.org">
+<meta name="resource-type" content="document">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="description" content="OpenBSD 4.2">
+<meta name="keywords" content="openbsd,main">
+<meta name="distribution" content="global">
+<meta name="copyright" content="This document copyright 2007 by OpenBSD.">
+</head>
+
+<body bgcolor="#ffffff" text="#000000" link="#24248E">
+
+<a href="index.html">
+<img alt="[OpenBSD]" height="30" width="141" hspace="24" src="images/smalltitle.gif" border="0"></a>
+<hr>
+
+<p>
+<a href="images/Marathon.jpg">
+<img align="left" width="227" height="343" hspace="24" vspace="30"
+src="images/Marathon.jpg" alt="OpenBSD 4.2 logo"></a>
+<h2><font color="#0000e0">The OpenBSD 4.2 Release:</font></h2>
+<p>
+Released Nov 1, 2007<br>
+Copyright 1997-2007, Theo de Raadt.<br>
+<font color="#e00000">ISBN 978-0-9784475-0-2</font>
+<br>
+<a href="lyrics.html#42">4.2 Song: "100001 1010101"</a>
+<p>
+
+<a href="#new">What's New</a><br>
+<a href="#install">How to install</a><br>
+<a href="#upgrade">How to upgrade</a><br>
+<a href="#ports">How to use the ports tree</a><br>
+<a href="orders.html">Ordering a CD set</a><br>
+
+<p>
+<h3><font color="#0000e0">
+To get the files for this release:
+<ul>
+<li>Order a CDROM from our <a href="orders.html">ordering system</a>.
+<li>See the information on <a href="ftp.html">The FTP page</a> for
+    a list of mirror machines.
+<li>Go to the <font color="#e00000">pub/OpenBSD/4.2/</font> directory on
+    one of the mirror sites.
+<li>Briefly read the rest of this document.
+<li>Have a look at <a href="errata42.html">The 4.2 Errata page</a> for a list
+    of bugs and workarounds.
+<li>See a <a href="plus42.html">detailed log of changes</a> between the
+    4.1 and 4.2 releases.
+</ul>
+</font></h3>
+<br clear=all>
+
+<strong>Note:</strong> All applicable copyrights and credits can be found
+in the applicable file sources found in the files src.tar.gz, sys.tar.gz,
+xenocara.tar.gz, or in the files fetched via ports.tar.gz.  The distribution
+files used to build packages from the ports.tar.gz file are not included on
+the CDROM because of lack of space.
+<p>
+
+<a name="new"></a>
+<hr>
+<p>
+<h3><font color="#0000e0">What's New</font></h3>
+<p>
+This is a partial list of new features and systems included in OpenBSD 4.2.
+For a comprehensive list, see the <a href="plus42.html">changelog</a> leading
+to 4.2.
+<p>
+
+<ul>
+
+<li>New/extended platforms:
+<ul>
+<li><a href="sparc64.html">OpenBSD/sparc64</a>.<br>
+    The PCIe UltraSPARC IIIi machines like the V215 and V245 are now
+    supported.
+<li><a href="hppa.html">OpenBSD/hppa</a>.<br>
+    Four-digit B/C/J-class workstations like the B2000, C3750 or J6750
+    are now supported (in 32-bit mode).
+<li><a href="alpha.html">OpenBSD/alpha</a>.<br>
+    Add support in the alpha platform for a couple of new Alpha
+    models, AlphaServer 1200 and 4100.
+</ul>
+<p>
+
+<li>Platforms skipped this release:
+<ul>
+<li><a href="sgi.html">OpenBSD/sgi</a>.<br>
+    Due to various issues, this architecture will not be released
+    this time.
+</ul>
+<p>
+
+<li>Improved hardware support, including:
+<ul>
+<li> Native Serial-ATA support:
+ <ul>
+ <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ahci&sektion=4">ahci(4)</a>
+    driver for  SATA controllers conforming to the Advanced Host Controller
+    Interface specification.
+  <li><a href=http://www.openbsd.org/cgi-bin/man.cgi?query=jmb&amp;sektion=4&amp;arch=i386>jmb(4)</a> driver for the JMicron JMB36x SATA II and PATA Host Controller.
+ <li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=sili&sektion=4">sili(4)</a>
+    driver for SATA controllers using the Silicon Image 3124/3132/3531 SATALink
+    chipsets.
+ </ul>
+<li>The <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=pciide&amp;sektion=4">pciide(4)</a> driver has had support added for newer chipsets, including:
+<ul>
+<li>Intel ICH8M PATA
+<li>JMicron JMB36x PATA
+<li>VIA CX700/VX700 PATA
+</ul>
+<li>The <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=lm&amp;sektion=4">lm(4)</a>
+  driver now supports Winbond W83627DHG and W83627EHF-A Super I/O Hardware Monitors.
+<li> The <a
+href="http://www.openbsd.org/cgi-bin/man.cgi?query=siop&sektion=4">siop(4)</a>
+driver now has support for NCR 53C720/770 controllers in big endian mode.
+In particular this means that the onboard Fast-Wide SCSI on many hppa
+machines is supported now.
+<li> New <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=tht&sektion=4">tht(4)</a>
+  driver for Tehuti Networks 10Gb Ethernet controllers.
+<li> The <a
+href="http://www.openbsd.org/cgi-bin/man.cgi?query=malo&sektion=4">malo(4)</a>
+driver now supports Marvell 88W8385 802.11g based Compact Flash devices.
+<li> New <a
+href="http://www.openbsd.org/cgi-bin/man.cgi?query=uts&sektion=4">uts(4)</a>
+driver for USB touch screens, and the <a
+href="http://www.openbsd.org/cgi-bin/man.cgi?query=xtsscale&sektion=1">xtsscale(1)</a>
+calibration utility.
+<li> The <a
+href="http://www.openbsd.org/cgi-bin/man.cgi?query=i810&sektion=4">i810(4)</a>
+X.Org driver and the PCI AGP driver now support Intel i965GM chips.
+<li> New <a
+href="http://www.openbsd.org/cgi-bin/man.cgi?query=led&arch=sparc64">led(4)</a>
+driver for the front panel LEDs on the V215/245.
+<li> New <a
+href="http://www.openbsd.org/cgi-bin/man.cgi?query=bbc&arch=sparc64">bbc(4)</a>
+driver providing support for the BootBus Controllers in UltraSparc III systems.
+<li> New <a
+href="http://www.openbsd.org/cgi-bin/man.cgi?query=pmc&arch=sparc64">pmc(4)</a>
+driver for the
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=watchdog&section=4">
+watchdog(4)</a> timer on the National Semiconductor PC87317 SuperIO chip.
+<li>New <a href=http://www.openbsd.org/cgi-bin/man.cgi?query=pyro&amp;sektion=4&amp;arch=sparc64>pyro(4)</a> driver for the SPARC64 Host/PCIe bridge.
+<li>New <a href=http://www.openbsd.org/cgi-bin/man.cgi?query=astro&amp;sektion=4&amp;arch=hppa>astro(4)</a> driver for the Astro Memory and I/O controller on hppa.
+<li>New <a href=http://www.openbsd.org/cgi-bin/man.cgi?query=elroy&amp;sektion=4&amp;arch=hppa>elroy(4)</a> driver for the Elroy PCI hostbridge on hppa.
+<li>New <a href=http://www.openbsd.org/cgi-bin/man.cgi?query=lcd&amp;sektion=4&amp;arch=hppa>lcd(4)</a> driver for the front panel LCD display on hppa.
+<li>New <a href=http://www.openbsd.org/cgi-bin/man.cgi?query=ssio&amp;sektion=4&amp;arch=hppa>ssio(4)</a> driver for the National Semiconductor PC87560 Legacy IO on hppa.
+<li>New <a href=http://www.openbsd.org/cgi-bin/man.cgi?query=pxammc&amp;sektion=4&amp;arch=zaurus>pxammc(4)</a> driver for the MMC/SD/SDIO controller on zaurus.
+<li>New <a href=http://www.openbsd.org/cgi-bin/man.cgi?query=&amp;sektion=4&amp;arch=macppc>xlights(4)</a> driver for the front panel lights on the Xserve G4.
+<li>New <a href=http://www.openbsd.org/cgi-bin/man.cgi?query=sysbutton&sektion=4&arch=macppc>sysbutton(4)</a> driver for the system identification button on the Xserve G4.
+<li>New <a href=http://www.openbsd.org/cgi-bin/man.cgi?query=piixpcib&sektion=4&arch=i386>piixpcib(4)</a> driver for System Management Mode initiated speedstep frequency scaling on certain pairings of the Intel PIIX4 ISA bridges and Intel Pentium 3 processors.
+<li>CPU frequency and voltage can now be scaled on all CPUs when running GENERIC.MP on a multiprocessor i386 or AMD64 machine with enhanced speedstep or powernow.
+<li>Intel enhanced speedstep is now supported on OpenBSD/amd64.
+<li>New support for the on die CPU temperature sensor found on the Intel Core family of processors.
+<li>The <a href=http://www.openbsd.org/cgi-bin/man.cgi?query=nvram&amp;sektion=4&amp;arch=amd64>nvram(4)</a> driver is now available on OpenBSD/amd64.
+</ul>
+<p>
+
+
+<li>New tools:
+<ul>
+<li> <a
+href="http://www.openbsd.org/cgi-bin/man.cgi?query=cwm&sektion=1">cwm(1)</a>
+has replaced wm2 as a simple-looking low-resource window manager.
+<li> <a
+href="http://www.openbsd.org/cgi-bin/man.cgi?query=zless&sektion=1">zless(1)</a>,
+view compressed files with
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=less&sektion=1">less(1)</a>.
+<li><a href=http://www.openbsd.org/cgi-bin/man.cgi?query=mount_vnd&amp;sektion=8&amp;arch=i386>mount_vnd(8)</a>, a utility to configure vnode disks from <a href=http://www.openbsd.org/cgi-bin/man.cgi?query=fstab&amp;sektion=5&amp;arch=i386>fstab(5)</a>.
+</ul>
+<p>
+
+
+<li>New functionality:
+<ul>
+<li>FFS2, the updated version of the fast file system.
+<li><a
+href="http://www.openbsd.org/cgi-bin/man.cgi?query=ftp&sektion=1">ftp(1)</a>
+now can send cookies loaded from a netscape-like cookiejar, supports
+proxies requiring a password, and has a keep-alive option to avoid
+overly aggressive control connection dropping.
+<li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=pkg_add&sektion=1">pkg_add(1)</a> has been vastly improved. It is more robust, outputs more 
+consistent error messages, and can deal with a lot more update scenarios
+gracefully.  It also has much better look-up capabilities for multiple entries
+in <code>PKG_PATH</code>, stopping at the first directory with suitable 
+candidates.
+<li><a
+href="http://www.openbsd.org/cgi-bin/man.cgi?query=ftp-proxy&sektion=8">ftp-proxy(8)</a>
+is now able to automatically tag packets passing through the <a
+href="http://www.openbsd.org/cgi-bin/man.cgi?query=pf&sektion=4">pf(4)</a> rule with a supplied name.
+<li>Kernel work queues, 
+<a href=http://www.openbsd.org/cgi-bin/man.cgi?query=workq_add_task&amp;sektion=9&amp;arch=i386>workq_add_task(9)</a>,
+<a href=http://www.openbsd.org/cgi-bin/man.cgi?query=workq_create&amp;sektion=9&amp;arch=i386>workq_create(9)</a>,
+<a href=http://www.openbsd.org/cgi-bin/man.cgi?query=workq_destroy&amp;sektion=9&amp;arch=i386>workq_destroy(9)</a> provides a mechanism to defer tasks to a process context when it is impossible to run such a task in the current context.
+<li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ifconfig&sektion=8">ifconfig(8)</a>
+now understands IP address/mask in CIDR notation.
+<li>Add IP (v4 and v6) load balancing to <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=carp&sektion=4&format=html">carp(4)</a>, similar to the ARP balancing.
+<li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=sensorsd&sektion=8">sensorsd(8)</a>
+  now supports a zero-configuration monitoring and has a more intuitive logging
+  for all sensors that automatically provide sensor state.  It also features
+  advancements in user-specified monitoring, including monitoring of sensors
+  that are periodically flagged as invalid.
+<li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=sensorsd.conf&sektion=5">sensorsd.conf(5)</a>
+  now supports sensor matching by sensor type, allowing easier configuration.
+<li>The i386 bootloader can now load amd64 kernels.
+<li>The amd64 bootloader can now load i386 kernels.
+</ul>
+<p>
+
+<li>Assorted improvements and code cleanup:
+<ul>
+<li>Huge performance improvements in the network stack, including:
+<ul>
+<li>In pf, store routing table ID, queue ID etc directly in the packet header mbuf instead of using
+mbuf tags (which use malloc'd memory). This yields a 100% improvement in pf performance.
+<li>Packet forwarding can skip IPSEC stack if no IPSEC flows are defined. This
+yields a further 5% improvement in packet forwarding performance.
+<li>Skip TCP/UDP/ICMP/ICMP6 checksumming when not necessary.
+This yields a further 10% improvement in pf performance.
+<li>A change in the way the kernel random pool is stirred greatly increases
+performance with network interface cards that support interrupt mitigation, especially
+on architectures where reading the clock is expensive (such as amd64).
+<li>Enable interrupt holdoff on <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=sis&sektion=4">sis(4)</a>
+chips that support it. Significant performance gain for slower CPU devices with sis(4), such as Soekris.
+</ul>
+<li>Large (&gt;1TB) disk and partition support in the disklabel and buffer cache
+code and in the userland utilities that manipulate disk blocks. Note
+that some parts of the system are not 64-bit disk block clean yet, so partition
+larger than 2TB cannot be used at the moment.
+<li>Large (&gt;2^32-1 sectors) SCSI disk sizes now probed.
+<li>Thread support for the Objective-C library (libobjc).
+<li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=carp&sektion=4">carp</a>
+route handling has been fixed, solving some problems the routing daemons were exhibiting.
+<li>i386 TLB handling improved to avoid possible corruption on Core2Duo processors.
+<li>Rework TLB shootdown code for i386 and amd64, gives fairly large speed
+improvements.
+<li>i386 and amd64 use the BIOS disk geometry when creating default disklabels.
+<li>Default disk geometry changed from 64 heads/32 sectors to 255 heads/63 sectors.
+<li>More usb devices with various quirks coaxed to work.
+<li>Archive/Wangtek cartridge tape drives (wt*) no longer supported.
+<li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=rcs&sektion=1">rcs</a> has improved GNU compatibility.
+<li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=make&sektion=1">make(1)</a> has improved stability of -j option.
+<li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=isakmpd&sektion=8">isakmpd(8)</a> now allows key exchange with RSA signature authentication to work with Cisco IOS.
+<li>Fixed <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=isakmpd&sektion=8">isakmpd(8)</a> interop-issues with peers, that start rekeying on port 4500 for NAT-T (e.g. Cisco, Openswan)
+<li>The stability of <a href="alpha.html">OpenBSD/alpha</a> has been greatly improved.
+<li>The stability of <a href="hppa.html">OpenBSD/hppa</a> has been greatly improved.
+</ul>
+<p>
+
+<li>Install/Upgrade process changes:
+<ul>
+<li>Allow the specification of an NTP server during installation.
+<li>Allow no fsck'ing of clean non-root partitions during upgrade.
+<li>Check for INSTALL.&lt;arch&gt; to confirm sets are for the correct architecture.
+<li>Create and format the MSDOS partition for macppc installs in a more flexible and reliable way.
+</ul>
+<p>
+
+<li>OpenBGPD 4.2:
+<ul>
+<li>Include support for Four-octet AS Number Space.
+<li>Allow matching on communities using 0 in the AS part.
+<li>Filtering on IPv6 prefixes is now possible.
+<li>Various bugs in the encoding of multiprotocol updates were fixed.
+<li>Allow the use of pkill -HUP bgpd to reload the config.
+<li>bgpctl can filter prefix output by community now
+</ul>
+<p>
+
+<li>OpenNTPD 4.2:
+<ul>
+<li>Improved support for timedelta sensors.
+</ul>
+<p>
+
+<li>OpenOSPFD 4.2:
+<ul>
+<li>Added support for RFC 3137: OSPF Stub Router Advertisement
+<li>It is possible to specify a carp demote group on interfaces and areas.
+<li>Added support for mapping route labels to AS-external route tags and vice versa.
+<li>Allow the use of pkill -HUP ospfd to reload the config.
+</ul>
+<p>
+
+<li>Hoststated 4.2:
+<ul>
+<li>Added support for Layer 7 load balancing (or relay).</li>
+<li>Added support for reloading through hoststatectl or SIGHUP.</li>
+</ul>
+<p>
+
+<li>OpenSSH 4.7:
+<ul>
+<li>Prevent
+    <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ssh&sektion=1">ssh(1)</a>
+    from using a trusted X11 cookie if creation of an
+    untrusted cookie fails; found and fixed by Jan Pechanec.
+<li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=sshd&sektion=8">sshd(8)</a>
+    in new installations defaults to SSH Protocol 2 only.
+    Existing installations are unchanged.
+<li>The SSH channel window size has been increased, and both
+    <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ssh&sektion=1">ssh(1)</a>
+    and
+    <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=sshd&sektion=8">sshd(8)</a>
+    now send window updates more aggressively.<br>
+    These improves performance on high-BDP (Bandwidth Delay Product) networks.
+<li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ssh&sektion=1">ssh(1)</a>
+    and
+    <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=sshd&sektion=8">sshd(8)</a>
+    now preserve MAC contexts between packets, which
+    saves 2 hash calls per packet and results in 12-16% speedup for
+    arcfour256/hmac-md5.
+<li>A new MAC algorithm has been added, UMAC-64 (RFC4418) which is
+    approximately 20% faster than HMAC-MD5.
+<li>A -K flag was added to
+    <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ssh&sektion=1">ssh(1)</a>
+    to set GSSAPIAuthentication=Yes.
+<li>Failure to establish a
+    <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ssh&sektion=1">ssh(1)</a>
+    TunnelForward is now treated as a
+    fatal error when the ExitOnForwardFailure option is set.
+<li><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ssh&sektion=1">ssh(1)</a>
+    returns a sensible exit status if the control master goes
+    away without passing the full exit status. (bz #1261)
+</ul>
+<p>
+
+<li>Over 4,500 ports, minor robustness improvements in package tools.
+<li>Many pre-built packages for each architecture:
+    <table border=0 cellspacing=0 cellpadding=2 width="95%">
+    <tr>
+    <td valign="top" width="33%">
+    <ul>
+    <li>i386:       4360
+    <li>sparc64:    4205
+    <li>alpha:      3779
+    <li>sh:          817
+</ul></td><td valign=top width="33%"><ul>
+    <li>amd64:      4283
+    <li>powerpc:    4230
+    <li>sparc:      3283
+    <li>m68k:       1107
+</ul></td><td valign=top width="33%"><ul>
+    <li>arm:        2131
+    <li>hppa:       3215
+    <li>vax:         108
+</ul></td></tr></table>
+Some highlights:
+<ul>
+<!-- XXX double check versions -->
+<li>Gnome 2.18.
+<li>GNUstep 1.14.
+<li>KDE 3.5.7 and koffice 1.6.3.
+<li>Xfce 4.4.1.
+<li>OpenMotif 2.3.0.
+<li>OpenOffice.org 2.2.1.
+<li>Mozilla Firefox 2.0.0.6.
+<li>PostgreSQL 8.2.4.
+<li>GHC 6.6.1 (amd64 and i386 only)
+</ul>
+<p>
+
+<li>As usual, steady improvements in manual pages and other documentation.
+<p>
+
+<li>The system includes the following major components from outside suppliers:
+<ul>
+<li>Xenocara (based on X.Org 7.2 + patches, freetype 2.2.1, fontconfig
+2.4.2, expat 2.0.0, Mesa 6.5.2, xterm 225 and more)
+<li>Gcc 2.95.3
+(+ <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=gcc-local&amp;sektion=1">patches</a>)
+and 3.3.5
+(+ <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=gcc-local&amp;sektion=1">patches</a>)
+<li>Perl 5.8.8 (+ patches)
+<li>Our improved and secured version of Apache 1.3, with SSL/TLS and DSO support
+<li>OpenSSL 0.9.7j (+ patches)
+<li>Groff 1.15
+<li>Sendmail 8.14.1, with libmilter
+<li>Bind 9.3.4 (+ patches)
+<li>Lynx 2.8.5rel.4 with HTTPS and IPv6 support (+ patches)
+<li>Sudo 1.6.9p4
+<li>Ncurses 5.2
+<li>Latest KAME IPv6
+<li>Heimdal 0.7.2 (+ patches)
+<li>Arla 0.35.7
+<li>Binutils 2.15 (+ patches)
+<li>Gdb 6.3 (+ patches)
+<!-- XXX double check versions -->
+</ul>
+<p>
+
+</ul>
+
+<a name="install"></a>
+<hr>
+<p>
+<h3><font color="#0000e0">How to install</font></h3>
+<p>
+Following this are the instructions which you would have on a piece of
+paper if you had purchased a CDROM set instead of doing an alternate
+form of install.  The instructions for doing an FTP (or other style
+of) install are very similar; the CDROM instructions are left intact
+so that you can see how much easier it would have been if you had
+purchased a CDROM instead.
+<p>
+
+<hr>
+Please refer to the following files on the three CDROMs or FTP mirror for
+extensive details on how to install OpenBSD 4.2 on your machine:
+<p>
+<ul>
+<li>CD1:4.2/i386/INSTALL.i386
+<p>
+<li>CD2:4.2/amd64/INSTALL.amd64
+<li>CD2:4.2/macppc/INSTALL.macppc
+<p>
+<li>CD3:4.2/sparc64/INSTALL.sparc64
+<p>
+<li>FTP:.../OpenBSD/4.2/alpha/INSTALL.alpha
+<li>FTP:.../OpenBSD/4.2/armish/INSTALL.armish
+<li>FTP:.../OpenBSD/4.2/hp300/INSTALL.hp300
+<li>FTP:.../OpenBSD/4.2/hppa/INSTALL.hppa
+<li>FTP:.../OpenBSD/4.2/landisk/INSTALL.landisk
+<li>FTP:.../OpenBSD/4.2/mac68k/INSTALL.mac68k
+<li>FTP:.../OpenBSD/4.2/mvme68k/INSTALL.mvme68k
+<li>FTP:.../OpenBSD/4.2/mvme88k/INSTALL.mvme88k
+<li>FTP:.../OpenBSD/4.2/sparc/INSTALL.sparc
+<li>FTP:.../OpenBSD/4.2/vax/INSTALL.vax
+<li>FTP:.../OpenBSD/4.2/zaurus/INSTALL.zaurus
+</ul>
+<hr>
+
+<p>
+Quick installer information for people familiar with OpenBSD, and the
+use of the "disklabel -E" command.  If you are at all confused when
+installing OpenBSD, read the relevant INSTALL.* file as listed above!
+<p>
+
+<h3><font color="#e00000">OpenBSD/i386:</font></h3>
+<ul>
+Play with your BIOS options to enable booting from a CD. The OpenBSD/i386
+release is on CD1. If your BIOS does not support booting from CD, you will need
+to create a boot floppy to install from. To create a boot floppy write
+<i>CD1:4.2/i386/floppy42.fs</i> to a floppy and boot via the floppy drive.
+
+<p>
+Use <i>CD1:4.2/i386/floppyB42.fs</i> instead for greater SCSI controller
+support, or <i>CD1:4.2/i386/floppyC42.fs</i> for better laptop support.
+
+<p>
+NOTE: some older BIOSes appear to have problems booting CD1.
+A workaround can be found on the
+<a href="errata42.html#003_i386_boot">4.2 errata page</a>.
+
+<p>
+If you can't boot from a CD or a floppy disk,
+you can install across the network using PXE as described in
+the included INSTALL.i386 document.
+
+<p>
+If you are planning on dual booting OpenBSD with another OS, you will need to
+read INSTALL.i386.
+
+<p>
+To make a boot floppy under MS-DOS, use the &quot;rawrite&quot; utility located
+at <i>CD1:4.2/tools/rawrite.exe</i>. To make the boot floppy under a Unix OS,
+use the
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=dd&amp;sektion=1">dd(1)</a>
+utility. The following is an example usage of
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=dd&amp;sektion=1">dd(1)</a>,
+where the device could be &quot;floppy&quot;, &quot;rfd0c&quot;, or
+&quot;rfd0a&quot;.
+
+<ul><pre>
+# <strong>dd if=&lt;file&gt; of=/dev/&lt;device&gt; bs=32k</strong>
+</pre></ul>
+
+<p>
+Make sure you use properly formatted perfect floppies with NO BAD BLOCKS or
+your install will most likely fail. For more information on creating a boot
+floppy and installing OpenBSD/i386 please refer to
+<a href="faq/faq4.html#MkFlop">FAQ 4.3.1</a>.
+</ul>
+
+<p>
+<h3><font color="#e00000">OpenBSD/amd64:</font></h3>
+<ul>
+The 4.2 release of OpenBSD/amd64 is located on CD2.
+Boot from the CD to begin the install - you may need to adjust
+your BIOS options first.
+If you can't boot from the CD, you can create a boot floppy to install from.
+To do this, write <i>CD2:4.2/amd64/floppy42.fs</i> to a floppy, then
+boot from the floppy drive.
+
+<p>
+If you can't boot from a CD or a floppy disk,
+you can install across the network using PXE as described in the included
+INSTALL.amd64 document.
+
+<p>
+If you are planning to dual boot OpenBSD with another OS, you will need to
+read INSTALL.amd64.
+</ul>
+
+<p>
+<h3><font color="#e00000">OpenBSD/macppc:</font></h3>
+<ul>
+Put CD2 in your CDROM drive and poweron your machine while holding down the
+<i>C</i> key until the display turns on and shows <i>OpenBSD/macppc boot</i>.
+
+<p>
+Alternatively, at the Open Firmware prompt, enter <i>boot cd:,ofwboot
+/4.2/macppc/bsd.rd</i>
+</ul>
+
+<p>
+<h3><font color="#e00000">OpenBSD/sparc64:</font></h3>
+<ul>
+Put CD3 in your CDROM drive and type <i>boot cdrom</i>.
+
+<p>
+If this doesn't work, or if you don't have a CDROM drive, you can write
+<i>CD3:4.2/sparc64/floppy42.fs</i> or <i>CD3:4.2/sparc64/floppyB42.fs</i>
+(depending on your machine) to a floppy and boot it with <i>boot
+floppy</i>. Refer to INSTALL.sparc64 for details.
+
+<p>
+Make sure you use a properly formatted floppy with NO BAD BLOCKS or your install
+will most likely fail.
+
+<p>
+You can also write <i>CD3:4.2/sparc64/miniroot42.fs</i> to the swap partition on
+the disk and boot with <i>boot disk:b</i>.
+
+<p>
+If nothing works, you can boot over the network as described in INSTALL.sparc64.
+</ul>
+
+<p>
+<h3><font color="#e00000">OpenBSD/alpha:</font></h3>
+<ul>
+<p>Write <i>FTP:4.2/alpha/floppy42.fs</i> or
+<i>FTP:4.2/alpha/floppyB42.fs</i> (depending on your machine) to a diskette and
+enter <i>boot dva0</i>. Refer to INSTALL.alpha for more details.
+
+<p>
+Make sure you use a properly formatted floppy with NO BAD BLOCKS or your install
+will most likely fail.
+
+</ul>
+
+<p>
+<h3><font color="#e00000">OpenBSD/armish:</font></h3>
+<ul>
+<p>
+After connecting a serial port, Thecus can boot directly from the network
+either tftp or http. Configure the network using fconfig, reset,
+then load bsd.rd, see INSTALL.armish for specific details.
+IOData HDL-G can only boot from an EXT-2 partition. Boot into linux
+and copy 'boot' and bsd.rd into the first partition on wd0 (hda1)
+then load and run bsd.rd, preserving the wd0i (hda1) ext2fs partition.
+More details are available in INSTALL.armish.
+</ul>
+
+<p>
+<h3><font color="#e00000">OpenBSD/hp300:</font></h3>
+<ul>
+<p>
+Boot over the network by following the instructions in INSTALL.hp300.
+</ul>
+
+<p>
+<h3><font color="#e00000">OpenBSD/hppa:</font></h3>
+<ul>
+<p>
+Boot over the network by following the instructions in INSTALL.hppa or the
+<a href="hppa.html#install">hppa platform page</a>.
+</ul>
+
+<p>
+<h3><font color="#e00000">OpenBSD/landisk:</font></h3>
+<ul>
+<p>
+Write <i>miniroot42.fs</i> to the start of the CF
+or disk, and boot normally.
+</ul>
+
+<!--
+<p>
+<h3><font color="#e00000">OpenBSD/luna88k:</font></h3>
+<ul>
+<p>
+Copy bsd.rd to a Mach or UniOS partition, and boot it from the PROM.
+Alternatively, you can create a bootable tape and boot from it. Refer to
+the instructions in INSTALL.luna88k for more details.
+</ul>
+-->
+
+<p>
+<h3><font color="#e00000">OpenBSD/mac68k:</font></h3>
+<ul>
+<p>
+Boot MacOS as normal and extract the Macside "BSD/Mac68k Booter" utility from
+<i>FTP:4.2/mac68k/utils</i> onto your hard disk.  Configure the "BSD/Mac68k
+Booter" with the location of your bsd.rd kernel and boot into the installer.
+Refer to the instructions in INSTALL.mac68k for more details.
+</ul>
+
+<p>
+<h3><font color="#e00000">OpenBSD/mvme68k:</font></h3>
+<ul>
+<p>
+You can create a bootable installation tape or boot over the network.<br>
+The network boot requires a MVME68K BUG version that supports the <i>NIOT</i>
+and <i>NBO</i> debugger commands. Follow the instructions in INSTALL.mvme68k
+for more details.
+</ul>
+
+<p>
+<h3><font color="#e00000">OpenBSD/mvme88k:</font></h3>
+<ul>
+<p>
+You can create a bootable installation tape or boot over the network.<br>
+The network boot requires a MVME88K BUG version that supports the <i>NIOT</i>
+and <i>NBO</i> debugger commands. Follow the instructions in INSTALL.mvme88k
+for more details.
+</ul>
+
+<p>
+<h3><font color="#e00000">OpenBSD/sparc:</font></h3>
+<ul>
+Boot from one of the provided install ISO images, using one of the two
+commands listed below, depending on the version of your ROM.
+
+<ul><pre>
+ok <strong>boot cdrom 4.2/sparc/bsd.rd</strong>
+or
+&gt; <strong>b sd(0,6,0)4.2/sparc/bsd.rd</strong>
+</pre></ul>
+
+<p>
+If your SPARC system does not have a CD drive, you can alternatively boot from floppy.
+To do so you need to write <i>floppy42.fs</i> to a floppy.
+For more information see <a href="faq/faq4.html#MkFlop">FAQ 4.3.1</a>.
+To boot from the floppy use one of the two commands listed below,
+depending on the version of your ROM.
+
+<ul><pre>
+ok <strong>boot floppy</strong>
+or
+&gt; <strong>b fd()</strong>
+</pre></ul>
+
+<p>
+Make sure you use a properly formatted floppy with NO BAD BLOCKS or your install
+will most likely fail.
+
+<p>
+If your SPARC system doesn't have a floppy drive nor a CD drive, you can either
+setup a bootable tape, or install via network, as told in the
+INSTALL.sparc file.
+</ul>
+
+<p>
+<h3><font color="#e00000">OpenBSD/vax:</font></h3>
+<ul>
+Boot over the network via mopbooting as described in INSTALL.vax.
+</ul>
+
+<p>
+<h3><font color="#e00000">OpenBSD/zaurus:</font></h3>
+<ul>
+<p>
+Using the Linux built-in graphical ipkg installer, install the
+openbsd42_arm.ipk package.  Reboot, then run it.  Read INSTALL.zaurus
+for a few important details.
+</ul>
+
+<p>
+<h3><font color="#e00000">Notes about the source code:</font></h3>
+<ul>
+src.tar.gz contains a source archive starting at /usr/src.  This file
+contains everything you need except for the kernel sources, which are
+in a separate archive.  To extract:
+<p>
+<ul><pre>
+# <strong>mkdir -p /usr/src</strong>
+# <strong>cd /usr/src</strong>
+# <strong>tar xvfz /tmp/src.tar.gz</strong>
+</pre></ul>
+<p>
+sys.tar.gz contains a source archive starting at /usr/src/sys.
+This file contains all the kernel sources you need to rebuild kernels.
+To extract:
+<p>
+<ul><pre>
+# <strong>mkdir -p /usr/src/sys</strong>
+# <strong>cd /usr/src</strong>
+# <strong>tar xvfz /tmp/sys.tar.gz</strong>
+</pre></ul>
+<p>
+Both of these trees are a regular CVS checkout.  Using these trees it
+is possible to get a head-start on using the anoncvs servers as
+described <a href="anoncvs.html">here</a>.
+Using these files
+results in a much faster initial CVS update than you could expect from
+a fresh checkout of the full OpenBSD source tree.
+<p>
+</ul>
+
+<a name="upgrade"></a>
+<hr>
+<p>
+<h3><font color="#0000e0">How to upgrade</font></h3>
+<p>
+If you already have an OpenBSD 4.1 system, and do not want to reinstall,
+upgrade instructions and advice can be found in the
+<a href="faq/upgrade42.html">Upgrade Guide</a>.
+
+<a name="ports"></a>
+<hr>
+<p>
+<h3><font color="#0000e0">Ports Tree</font></h3>
+<p>
+A ports tree archive is also provided.  To extract:
+<p>
+<ul><pre>
+# <strong>cd /usr</strong>
+# <strong>tar xvfz /tmp/ports.tar.gz</strong>
+# <strong>cd ports</strong>
+</pre></ul>
+<p>
+The <i>ports/</i> subdirectory is a checkout of the OpenBSD ports tree.  Go
+read the <a href="ports.html">ports</a> page
+if you know nothing about ports
+at this point.  This text is not a manual of how to use ports.
+Rather, it is a set of notes meant to kickstart the user on the
+OpenBSD ports system.
+<p>
+The <i>ports/</i> directory represents a CVS (see the manpage for
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=cvs&amp;apropos=0&amp;sektion=1&amp;manpath=OpenBSD+Current&amp;arch=i386&amp;format=html">
+cvs(1)</a> if
+you aren't familiar with CVS) checkout of our ports.  As with our complete
+source tree, our ports tree is available via anoncvs.  So, in
+order to keep current with it, you must make the <i>ports/</i> tree
+available on a read-write medium and update the tree with a command
+like:
+<p>
+<ul><pre>
+# <strong>cd [portsdir]/; cvs -d anoncvs@server.openbsd.org:/cvs update -Pd -rOPENBSD_4_2</strong>
+</pre></ul>
+<p>
+[Of course, you must replace the local directory and server name here
+with the location of your ports collection and a nearby anoncvs
+server.]
+<p>
+Note that most ports are available as packages through FTP. Updated
+packages for the 4.2 release will be made available if problems arise.
+<p>
+If you're interested in seeing a port added, would like to help out, or just
+would like to know more, the mailing list ports@openbsd.org is a good
+place to know.
+<p>
+
+<hr>
+<a href="index.html"><img height="24" width="24" src="back.gif" border="0"
+alt="OpenBSD"></a>
+<a href="mailto:www@openbsd.org">www@openbsd.org</a>
+<br><small>
+$OpenBSD: 42.html,v 1.68 2007/11/03 12:40:18 miod Exp $
+</small>
+
+</body>
+</html>

@@ -1,0 +1,839 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>2 - Weitere Informationsquellen zu OpenBSD</title>
+<link rev="made" href="mailto:www@openbsd.org">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="resource-type" content="document">
+<meta name="description"   content="the OpenBSD FAQ page">
+<meta name="keywords"      content="openbsd,faq">
+<meta name="distribution"  content="global">
+<meta name="copyright"     content="This document copyright 1998-2007 by OpenBSD.">
+</head>
+
+<body bgcolor="#ffffff" text="#000000">
+<!-- Passes validator.w3.org, please keep it this way;
+please, use a max of 72 chars per line -->
+
+<a href="../../de/index.html">
+<img alt="[OpenBSD]" height=30 width=141 src="../../images/smalltitle.gif" border="0">
+</a>
+<p>
+<font color="#0000e0">
+<a href="index.html">[FAQ-Index]</a>
+<a href="faq1.html">[Zum Kapitel 1 - Einführung in OpenBSD]</a>
+<a href="faq3.html">[Zum Kapitel 3 - Wo man OpenBSD herbekommt]</a>
+</font>
+
+<h1><font color="#e00000">2 - Andere Informationsquellen zu OpenBSD</font></h1>
+<hr>
+
+<p>
+<h3>Inhaltsverzeichnis</h3>
+<ul>
+<li><a href="#WebSites">2.1 - Webseiten</a>
+<li><a href="#MailLists">2.2 - Mailinglisten</a>
+<li><a href="#ManPages">2.3 - Manualseiten</a>
+<li><a href="#Bugs">2.4 - Fehlerberichte</a>
+</ul>
+
+<hr>
+
+
+<p>
+<a name="WebSites"></a>
+<h2>2.1 - Interessante Webseiten</h2>
+
+<p>
+Die offizielle Website des OpenBSD-Projekts findest du unter
+<a href="http://www.openbsd.org/de/">http://www.OpenBSD.org/de/</a>.
+
+<p>
+Hier kannst du viele wertvolle Informationen über alle Aspekte des
+OpenBSD-Projekts finden.
+
+<p>
+Das <a href="http://www.undeadly.org">OpenBSD Journal</a> ist ein
+Neuigkeiten- und Meinungsportal, das auf OpenBSD fokussiert ist.
+
+<p>
+<a href="http://www.openbsdsupport.org/">OpenBSDsupport.org</a> ist
+eine Seite, die benutzerverwaltete Dokumentationen von unterschiedlicher
+Qualität sammelt. Häufig werden aber Themen abgedeckt, die nicht in
+dieser FAQ oder anderen offiziellen Dokumenten behandelt werden.
+
+<p>
+Viele Benutzer haben Webseiten und Homepages mit OpenBSD-spezifischen
+Informationen erstellt.
+Wie mit allem im Internet wird eine gute Suchmaschine dein Leben
+einfacher machen - so wie es auch mit einer gesunden Dosis an Skepsis
+der Fall ist. Wie immer gilt: Gib keine Befehle blindlings in deinen
+Computer ein, die du nicht verstehst.
+
+
+<p>
+<a name="MailLists"></a>
+<h2>2.2 - Mailinglisten</h2>
+
+<p>
+Das OpenBSD-Projekt betreibt mehrere populäre Mailinglisten, die
+die Benutzer abonnieren und lesen sollten. Um eine Mailingliste zu
+abonnieren, schicke eine E-Mail an
+<a href="mailto:majordomo@openbsd.org">majordomo@openbsd.org</a>. Diese
+Adresse ist ein automatischer Abonnementservice. Im Textkörper der
+Nachricht sollte in einer einzigen Zeile der Befehl stehen, um sich in
+die gewünschte Liste einzutragen. Zum Beispiel:
+
+<blockquote>
+<pre>
+<strong>subscribe announce</strong>
+</pre>
+</blockquote>
+
+<p>
+Der Mailinglistendienst wird dir antworten und dich um Bestätigung
+bitten, sodass andere nicht in der Lage sind, dich mit einer Flut von
+unerwünschten E-Mails zu überschwemmen. Die Nachricht beinhaltet
+mehrere verschiedene Optionen für die Bestätigung; dazu gehören
+ein <a href="http://lists.openbsd.org">Listserver</a>-Webseitenlink
+und die Möglichkeit, der Bestätigungs-E-Mail oder
+<tt>majordomo@openbsd.org</tt> zu antworten. Verwende die Option,
+die für dich am einfachsten ist. Du wirst feststellen, dass alle drei
+Varianten ebenfalls eine einzigartige und zeitlich begrenzte
+Identitätsnummer beinhalten (z.&nbsp;B. <tt>A56D-70D4-52C3</tt>), um zu
+gewährleisten, dass <i>du</i> tatsächlich die Person bist, die den
+Mailinglisteneintrag angefordert hat (das ist <i>wirklich</i>
+»opt-in«).
+
+<p>
+Nach deiner Bestätigung wirst du sofort in die Liste eingetragen
+und der Mailinglistendienst schickt dir eine Erfolgsbestätigung.
+
+<p>
+Um dich wieder von einer Liste abzumelden, schickst du eine Nachricht
+an <a href="mailto:majordomo@openbsd.org">majordomo@openbsd.org</a>.
+Sie könnte etwa so aussehen:
+
+<blockquote>
+<pre>
+<strong>unsubscribe announce</strong>
+</pre>
+</blockquote>
+
+<p>
+Solltest du Schwierigkeiten mit dem Mailinglistensystem haben, dann lies
+zunächst die Anweisungen und Hinweise. Wenn du eine E-Mail mit dem
+Textkörper »help« an <a
+href="mailto:majordomo@openbsd.org">majordomo@openbsd.org</a> schickst,
+bekommst du sie als Antwort gesendet.
+
+<p>
+Dein Abonnement der OpenBSD-Mailinglisten kann ebenfalls über das
+Webinterface auf
+<a href="http://lists.openbsd.org">http://lists.openbsd.org</a>
+verwaltet werden.
+
+<p>
+Einige der beliebtesten OpenBSD-Mailinglisten sind:
+
+<p>
+<ul>
+    <li><b>announce</b> - Wichtige Ankündigungen; sehr wenige E-Mails.
+    <li><b>security-announce</b> - Bekanntmachungen von
+    Sicherheitsempfehlungen; sehr wenige E-Mails.
+    <li><b>misc</b> - Benutzerfragen und Antworten. Dies ist die
+    aktivste Liste und sollte daher für fast alle Fragen genutzt werden.
+    <li><b>bugs</b> - Mittels sendbug(1) eingereichte Fehlerberichte und
+    Diskussionen darüber.
+    <li><b>source-changes</b> - Automatisierter Verteiler von Änderungen
+    des CVS der Quelltexte. Jedes Mal, wenn ein Entwickler eine Änderung
+    am Source-Tree durchführt, wird
+    <a href="../../de/why-cvs.html">CVS</a> eine Kopie der (recht
+    kurzen) Mitteilung der Änderung über diese Liste versenden.
+    <li><b>ports</b> - Diskussionen über das OpenBSD-Ports-System.
+    <li><b>ports-changes</b> - Automatische E-Mails der
+    portsspezifischen Änderungen am CVS-Source-Tree.
+    <li><b>advocacy</b> - Diskussionen, um die Nutzung von OpenBSD
+    populärer zu machen - ebenfalls auch Diskussionen, die einfach zu
+    themenunbezogen für <b>misc</b> sind.
+</ul>
+
+<p>
+Bevor du eine Frage auf <b>misc</b> oder einer anderen Mailingliste
+stellst, überprüfe bitte zunächst, ob deine Frage nicht schon in den
+Archiven auftaucht, da die meisten Fragen schon einmal gestellt wurden.
+Auch wenn du das Problem zum ersten Mal siehst, ist es anderen doch
+oftmals schon begegnet. Wurden die Mailinglisten vielleicht schon letzte
+Woche damit überschwemmt, freuen sich die Leser sicher nicht auf
+eine Wiederholung.
+Falls du eine Frage stellst, die möglicherweise mit Hardware zu tun
+hat, <i>füge immer eine
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=dmesg&amp;sektion=8"
+>dmesg(8)</a> mit ein!</i>
+
+<p>
+Du kannst einige Archive, andere Mailinglistenrichtlinien und weitere
+Informationen auf der
+<a href="../../de/mail.html">Mailinglistenseite</a> finden.
+
+<p>
+Eine inoffizielle Mailingliste, die insbesondere für neue Anwender
+von OpenBSD interessant sein könnte, ist die Liste mit dem Namen
+<a href="http://mailman.theapt.org/listinfo/openbsd-newbies">OpenBSD
+Newbies</a>.
+
+
+<p>
+<a name="ManPages"></a>
+<h2>2.3 - Manualseiten</h2>
+
+<p>
+OpenBSD wird von einer ausführlichen Dokumentation in Form von
+Manualseiten und weiteren, längeren Artikeln begleitet, die sich auf
+spezielle Anwendungen beziehen. Besonders viel Wert wird darauf gelegt
+sicherzustellen, dass die Manualseiten aktuell und genau sind. In allen
+Fällen werden die Manualseiten als maßgebliche Informationsquelle für
+OpenBSD angesehen.
+
+<p>
+<!-- XXXrelease -->
+Um die Manualseiten lesen zu können, müssen die <tt>man44.tgz</tt>-
+und <tt>misc44.tgz</tt>-<a href="faq4.html#FilesNeeded">Dateisets</a>
+installiert sein.
+
+<p>
+Hier eine Liste der nützlichsten Manualseiten für Anfänger:
+
+<p>
+
+<b>Einführung</b>
+<ul>
+<li><b><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=afterboot&amp;sektion=8"
+  >afterboot(8)</a></b> - Dinge, die man nach dem ersten Start beachten
+  sollte.
+
+<li><b><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=help&amp;sektion=1"
+  >help(1)</a></b> - Hilfe für neue Benutzer und Administratoren.
+
+<li><b><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=hier&amp;sektion=7"
+  >hier(7)</a></b> - Struktur der Dateisysteme.
+
+<li><b><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=man&amp;sektion=1"
+  >man(1)</a></b> - Anzeigen der Onlinemanualseiten.
+
+<li><b><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=intro&amp;sektion=1"
+>intro(1)</a></b> - Einführung für generelle Befehle. Siehe auch
+  die Einführungen der anderen Kapitel des Manuals:
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=intro&amp;sektion=2">intro(2)</a>,
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=intro&amp;sektion=3">intro(3)</a>,
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=intro&amp;sektion=4&amp;arch=i386">intro(4)</a>
+(beachte: intro(4) ist <a href="../../de/plat.html">plattform</a>abhängig),
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=intro&amp;sektion=5">intro(5)</a>,
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=intro&amp;sektion=6">intro(6)</a>,
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=intro&amp;sektion=7">intro(7)</a>,
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=intro&amp;sektion=8">intro(8)</a>
+und
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=intro&amp;sektion=9">intro(9)</a>.
+
+<li><b><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=adduser&amp;sektion=8"
+  >adduser(8)</a></b> - Befehl, um neue Benutzer anzulegen.
+
+<li><b><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=vipw&amp;sektion=8"
+  >vipw(8)</a></b> - Editieren der Passwortdatei.
+
+<li><b><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=disklabel&amp;sektion=8"
+  >disklabel(8)</a></b> - Auslesen und Schreiben der Plattenstruktur.
+
+<li><b><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=reboot&amp;sektion=8"
+  >reboot, halt(8)</a></b> - Neustarten und Stoppen des Systems.
+
+<li><b><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=shutdown&amp;sektion=8"
+  >shutdown(8)</a></b> - Runterfahren des Systems zu einer bestimmten
+  Zeit.
+
+<li><b><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=dmesg&amp;sektion=8"
+  >dmesg(8)</a></b> - Kernelbootmeldungen erneut anzeigen.
+
+<li><b><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=sudo&amp;sektion=8"
+  >sudo(8)</a></b> - Melde dich nicht als root an, sondern führe Befehle
+  als root aus.
+
+<li><b><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=mg&amp;sektion=1"
+		>mg(1)</a></b> - emacsähnlicher Texteditor.
+</ul>
+
+<b>Für fortgeschrittenere Anwender</b>
+<ul>
+
+<li><b><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=boot&amp;sektion=8&amp;arch=i386"
+  >boot(8)</a></b> - Systemstartprozeduren.
+
+<li><b><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=boot_config&amp;sektion=8"
+  >boot_config(8)</a></b> - Wie man die Kernelkonfiguration während
+  des Bootens ändert.
+
+<li><b><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=gcc-local&amp;sektion=1"
+  >gcc_local(1)</a></b> - OpenBSD-spezifische Modifikationen am
+  <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=gcc&amp;sektion=1">gcc(1)</a>.
+
+<li><b><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ifconfig&amp;sektion=8"
+  >ifconfig(8)</a></b> - Konfiguration der Netzwerkadapterparameter.
+
+<li><b><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=login.conf&amp;sektion=5"
+  >login.conf(5)</a></b> - Format der Konfigurationsdatei für
+  Loginklassen.
+
+<li><b><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=netstat&amp;sektion1"
+  >netstat(1)</a></b> - Netzwerkstatus anzeigen.
+
+<li><b><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=release&amp;sektion=8"
+ >release(8)</a></b> - Ein OpenBSD-Release erzeugen.
+
+<li><b><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=sendbug&amp;sektion=1"
+  >sendbug(1)</a></b> - Einen Fehlerbericht über OpenBSD an die
+  Supportzentrale schicken.
+
+<li><b><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=style&amp;sektion=9"
+  >style(9)</a></b> - Stilrichtlinie für den OpenBSD-Kernelquelltext.
+
+<li><b><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=sysctl&amp;sektion=8"
+  >sysctl(8)</a></b> - Kernelstatus lesen oder setzen.
+
+</ul>
+
+<p>
+<!-- XXXrelease -->
+Die OpenBSD-Manualseiten sind im Web über
+<a href="http://www.openbsd.org/cgi-bin/man.cgi">http://www.openbsd.org/cgi-bin/man.cgi</a>
+und auch auf deinem eigenen Computer zu finden, wenn du das
+<tt>man43.tgz</tt>-Dateiset installierst.
+
+<p>
+Im Allgemeinen kannst du die Manualseite eines dir namentlich
+bekannten Befehls erreichen, indem du <kbd>man Befehl</kbd> eingibst.
+Zum Beispiel zeigt dir <kbd>man vi</kbd> die Manualseite des
+Vi-Editors an. Solltest du den genauen Namen des Befehls nicht wissen
+oder <kbd>man Befehl</kbd> nicht die gewünschte Manualseite bringt,
+kannst du mittels <kbd>apropos irgendwas</kbd> oder <kbd>man -k
+irgendwas</kbd> nach dem Namen des Befehls suchen, wobei »irgendwas«
+möglicherweise in der von dir gesuchten Manualseite enthalten sein
+sollte. Zum Beispiel:
+
+<blockquote>
+<pre>
+# <strong>apropos "time zone"</strong>
+tzfile (5) - time zone information
+zdump (8) - time zone dumper
+zic (8) - time zone compiler
+</pre>
+</blockquote>
+
+<p>
+Die Zahlen in Klammern deuten auf das Kapitel, in dem sich die
+Manualseite befindet. In einigen Fällen enthalten die Manualseiten den
+gleichen Befehl in verschieden Kapiteln. Ein Beispiel: Du möchtest
+das Format der Konfigurationsdatei des Cron-Daemons nachlesen. Wenn du
+einmal weißt, in welchem Kapitel sich die gewünschte Manualseite
+befindet, kannst du mittels <kbd>man x Befehl</kbd> (x ist die
+Kapitelnummer) die gewünschte Seite direkt aufrufen.
+
+<blockquote>
+<pre>
+# <strong>man -k cron</strong>
+cron (8) - clock daemon
+crontab (1) - maintain crontab files for individual users
+crontab (5) - tables for driving cron
+# <strong>man 5 crontab</strong>
+</pre>
+</blockquote>
+
+<p>
+<!-- XXXrelease -->
+Zusätzlich zu den Unix-Manualseiten gibt es noch einen weiteren
+Dokumentensatz (enthalten im <tt>misc44.tgz</tt>-Dateiset). Dieser
+befindet sich im Verzeichnis <tt>/usr/share/doc</tt>. Wenn du auch die
+Textdistribution installiert hast, dann kannst du jedes Dokument
+mittels make im entsprechenden Verzeichnis formatieren. Das
+Unterverzeichnis <tt>psd</tt> beinhaltet die »Programmer's Supplementary
+Documents«-Distribution. Im Unterverzeichnis <tt>smm</tt> liegt das
+»System Manager's Manual«. Im Unterverzeichnis <tt>usd</tt> findest du
+die »UNIX User's Supplementary Documents«-Distribution. Du kannst
+<tt>make</tt> in den drei Distributionsunterverzeichnissen aufrufen
+oder ein spezielles Kapitel einer Distribution auswählen und dort ein
+make in dessen Unterverzeichnis ausführen.
+
+<p>
+Einige der Unterverzeichnisse sind leer.
+Standardmäßig werden die Dokumente im Postscriptformat ausgegeben,
+das sich für den Ausdruck eignet. Die Postscriptausgabe kann sehr groß
+werden - etwa 250 - 300&nbsp;% Zuwachs an Größe. Ohne Postscriptdrucker
+oder -anzeige kannst du die Dokumente auch für die Betrachtung auf einer
+Terminalanzeige formatieren. Jedes Dokumentenunterverzeichnis hat ein
+Ziel für die Erstellung von ASCII-Kopien dieser Dokumente (genannt
+paper.txt), welches mit
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=make&amp;sektion=1"
+>make(1)</a> generiert werden kann.
+Zum Beispiel:
+
+<blockquote>
+<pre>
+# <strong>cd /usr/share/doc/usd/04.csh</strong>
+# <strong>make paper.txt</strong>
+# <strong>more paper.txt</strong>
+</pre>
+</blockquote>
+
+<p>
+Bedenke, dass Superuser-Privilegien benötigt sein können, um die
+Dokumente in diesen Verzeichnissen zu erstellen. Der Aufruf von
+<strong>make clean</strong> löscht alle Dokumente, die von vorherigen
+make-Aufrufen erstellt worden sind. Siehe /usr/share/doc/README für
+weitere Details über die Dokumente in /usr/share/doc/.
+
+<p>
+Die Unix-Manualseiten sind im Allgemeinen aktueller und
+vertrauenswürdiger als die formatierten Dokumente, die aber manchmal
+kompliziertere Anwendungen in größerem Detailumfang als die
+Manualseiten erklären.
+
+<p>
+Für viele Anwender ist eine ausgedruckte Manualseite nützlich. Hier
+folgen die Richtlinien, um eine Manualseite auszudrucken.
+
+<h3>Wie kann ich einen Manualseitenquelltext anzeigen lassen (d.&nbsp;h.
+eine Datei, deren Name mit einer Zahl endet [wie tcpdump.8])?</h3>
+
+<p>
+Dies gilt für den gesamten Source-Tree. Die Manualseiten befinden
+sich unformatiert im Verzeichnisbaum und werden automatisch mit
+<a href="../../de/anoncvs.html">CVS</a> aktualisiert. Um sich diese
+Seiten anzusehen:
+
+<blockquote>
+<pre>
+# <b>nroff -Tascii -mandoc &lt;Datei&gt; | more</b>
+</pre>
+</blockquote>
+
+
+<h3>Wie bekomme ich eine reine Manualseite ohne Formatierung oder
+Escapesequenzen?</h3>
+
+<p>
+Dies ist nützlich, um die Manualseite ohne nicht druckbare Zeichen zu
+erhalten.<br>
+Beispiel:
+
+<blockquote>
+<pre>
+# <b>man &lt;Befehl&gt; | col -b</b>
+</pre>
+</blockquote>
+
+<h3>Wie erhalte ich eine postscriptformatierte, druckreife Ausgabe einer
+Manualseite?</h3>
+
+<p>
+Beachte, dass <tt>&lt;Datei&gt;</tt> die Manualseitenquelltextdatei
+ist (wahrscheinlich eine Datei, die mit einer Zahl endet [z.&nbsp;B.
+<tt>tcpdump.8</tt>]).
+Die Postscriptversionen der Manualseiten sehen sehr gut aus. Sie können
+ausgedruckt oder am Bildschirm mit einem Programm wie gv (GhostView)
+betrachtet werden. GhostView kannst du in unserer
+<a href="faq15.html">Packagekollektion</a> finden.
+Benutze die folgenden
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=nroff&amp;sektion=1"
+>nroff(1)</a>-Befehlsoptionen,
+um eine Postscriptversion aus einer OpenBSD-Systemmanualseite zu
+erstellen:
+
+<blockquote>
+<pre>
+# <b>nroff -Tps -mandoc &lt;Datei&gt; &gt; Ausgabedatei.ps</b>
+</pre>
+</blockquote>
+
+<h3>Wie erstelle ich komprimierte Ausgaben der Manualseiten?</h3>
+
+<p>
+Für Leute, die ihr System vom Quelltext aus erzeugen, gibt es einige
+Optionen, um Manualseiten zu entwickeln. Diese Optionen können in
+/etc/mk.conf (vielleicht muss diese Datei erst angelegt werden)
+geschrieben und somit in die Systemerzeugung mit integriert werden. Eine
+besonders gebräuchliche Option ist, komprimierte Manualseiten zu
+erzeugen, um Plattenspeicher sparen zu können. Diese Dateien können
+unter Verwendung des Befehls »man« auf üblichen Weg angezeigt werden.
+Um diese Option zu setzen, füge Folgendes in <tt>/etc/mk.conf</tt>
+ein:
+
+<blockquote>
+<pre>
+MANZ=yes
+</pre>
+</blockquote>
+
+Eine andere nützliche Option ist, während der Systemkompilierung
+die Manualseiten im Postscriptformat sowie als ASCII-Text entwickeln zu
+lassen. Dafür muss nur die Option <tt>MANPS=yes</tt> in /etc/mk.conf
+gesetzt werden. Siehe
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=mk.conf&amp;sektion=5">mk.conf(5)</a>
+für weitere Einzelheiten.
+
+<h3>Was sind Infodateien?</h3>
+
+<p>
+Einige Teile der Dokumentation für OpenBSD liegt in Infodateien vor -
+typischerweise befinden sie sich im
+<tt>/usr/share/info</tt>-Verzeichnis. Dies ist eine alternative Form der
+Dokumentation, die von GNU angeboten wird. Viele dieser Dateien sind
+aktueller als die Manualseiten von GNU und können mit dem
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=info&amp;sektion=1"
+>info(1)</a>-Befehl betrachtet werden. Um zum Beispiel die Informationen
+über den GNU-Compiler
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=gcc&amp;sektion=1"
+>gcc(1)</a> anzusehen, gib Folgendes ein:
+
+<blockquote>
+<pre>
+# <b>info gcc</b>
+</pre>
+</blockquote>
+
+Nach der Verwendung von info wirst du unsere Manualseiten zu schätzen
+wissen!
+
+<h3>Wie bekomme ich farbige Manualseiten im XTerm?</h3>
+
+<p>
+Die standardmäßige Konfigurationsdatei für
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=xterm&amp;sektion=1"
+>xterm(1)</a> zeigt keine farbigen Manualseiten an.
+Um farbige Ausgabe zu erhalten, kopiere die Datei
+<tt>/etc/X11/app-defaults/XTerm-color</tt> in dein Heimatverzeichnis und
+benenne sie in <tt>.Xdefaults</tt> um.
+Sei vorsichtig, damit du nicht irgendwelche aktuellen Einstellungen in
+<tt>.Xdefaults</tt> überschreibst. Diese Datei beinhaltet alle
+Einstellungen, um Farbe im XTerm zu aktivieren. Allerdings müssen
+diese drei Zeilen auskommentiert werden, bevor sie funktionieren können:
+
+<blockquote>
+<pre>
+!*VT100*colorULMode: on
+!*VT100*underLine: off
+!*VT100*colorBDMode: on
+</pre>
+</blockquote>
+
+Der Rest der Datei erlaubt dir, Farben für verschiedene Einstellungen
+zu wählen. Relevant für die Manualseiten sind:
+
+<blockquote>
+<pre>
+*VT100*colorUL: yellow
+*VT100*colorBD: white
+</pre>
+</blockquote>
+
+Mit diesen Einstellungen werden die Manualseiten recht hell
+dargestellt, daher ändere sie nach deinen Bedürfnissen.
+Wir empfehlen Rot für »colorUL« und Magenta für »colorBD«.
+
+Es ist ebenfalls ein Manualseitenbetrachter für X11 namens
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=xman&amp;sektion=1"
+>xman</a> verfügbar, welcher eine alternative (grafische) Oberfläche für
+die Manualseiten bietet.
+
+<h3>Wie schreibe ich meine eigene Manualseite?</h3>
+
+<p>
+Falls du eine eigene Manualseite für dein selbst entwickeltes Programm
+schreiben möchtest, kannst du die Anleitung verwenden, die in
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=mdoc.samples&amp;sektion=7">mdoc.samples(7)</a>
+zur Verfügung gestellt wird. Ein weiterer handlicher Referenzguide wird
+in
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=mdoc&amp;sektion=7">mdoc(7)</a>
+bereitgestellt.
+
+<p>
+<a name="Bugs"></a>
+<h2>2.4 - Fehlerberichte</h2>
+
+Bevor du »Fehler!« schreist solltest du sicherstellen, dass du es
+tatsächlich mit einem zu tun hast.
+Falls du stattdessen nicht verstehst, wie etwas in OpenBSD funktioniert
+und auch das Problem nicht mit Hilfe der
+<a href="#ManPages">Manualseiten</a> oder der OpenBSD-Website lösen
+kannst, verwende die <a href="#MailLists">Mailinglisten</a> (für
+gewöhnlich misc@openbsd.org), um nach Hilfe zu fragen.
+Falls dies deine erste OpenBSD-Erfahrung ist, sei realistisch: Du wirst
+vermutlich keinen unbekannten Fehler gefunden haben. Bedenke auch, dass
+fehlerhafte Hardware einen Softwarefehler vortäuschen kann. Bitte
+überprüfe den aktuellen Zustand deiner Hardware, bevor du entscheidest,
+dass du einen »Fehler« gefunden hast.
+
+<p>
+Bevor du schließlich einen Fehler berichtest, solltest du
+<a href="../../de/report.html">http://www.openbsd.org/de/report.html</a>
+lesen.
+
+<p>
+Richtige Fehlerberichte sind eine der wichtigsten Aufgaben von
+Endbenutzern. Sehr detaillierte Informationen werden benötigt, um die
+schwersten Fehler zu diagnostizieren. Entwickler erhalten häufig
+Fehlerberichte per E-Mail wie diesen:
+<p>
+<table border=0 width="90%"><tr><td nowrap bgcolor="#EEEEEE"><pre>
+From: joeuser@example.com
+To: bugs@openbsd.org
+Subject: HELP!!!
+
+I have a PC and it won't boot!!!!! It's a 486!!!!!
+
+</pre></td></tr></table>
+
+<p>
+Hoffentlich verstehen die meisten Menschen, warum solche Fehlerberichte
+gelöscht werden. Jeder Fehlerbericht sollte detaillierte Informationen
+enthalten. Wenn ein normaler Benutzer wirklich die Untersuchung seines
+Fehlers wünscht, dann sollte sein Fehlerbericht in etwa so aussehen:
+
+<p>
+<table border=0 width="90%"><tr><td nowrap bgcolor="#EEEEEE"><pre>
+From: smartuser@example.com
+To: bugs@openbsd.org
+Subject: 3.3-beta panics on a SPARCStation2
+
+OpenBSD 3.2 installed from an official CD-ROM installed and ran fine
+on this machine.
+
+After doing a clean install of 3.3-beta from an FTP mirror, I find the
+system randomly panics after a period of use, and predictably and
+quickly when starting X.
+
+This is the dmesg output:
+
+OpenBSD 3.3-beta (GENERIC) #9: Mon Mar 17 12:37:18 MST 2003
+    deraadt@sparc.openbsd.org:/usr/src/sys/arch/sparc/compile/GENERIC
+real mem = 67002368
+avail mem = 59125760
+using 200 buffers containing 3346432 bytes of memory
+bootpath: /sbus@1,f8000000/esp@0,800000/sd@1,0
+mainbus0 (root): SUNW,Sun 4/75
+cpu0 at mainbus0: CY7C601 @ 40 MHz, TMS390C602A FPU; cache chip bug
+- trap page uncached
+cpu0: 64K byte write-through, 32 bytes/line, hw flush cache enabled
+memreg0 at mainbus0 ioaddr 0xf4000000
+clock0 at mainbus0 ioaddr 0xf2000000: mk48t02 (eeprom)
+timer0 at mainbus0 ioaddr 0xf3000000 delay constant 17
+auxreg0 at mainbus0 ioaddr 0xf7400003
+zs0 at mainbus0 ioaddr 0xf1000000 pri 12, softpri 6
+zstty0 at zs0 channel 0 (console i/o)
+zstty1 at zs0 channel 1
+zs1 at mainbus0 ioaddr 0xf0000000 pri 12, softpri 6
+zskbd0 at zs1 channel 0: reset timeout
+zskbd0: no keyboard
+zstty2 at zs1 channel 1: mouse
+audioamd0 at mainbus0 ioaddr 0xf7201000 pri 13, softpri 4
+audio0 at audioamd0
+sbus0 at mainbus0 ioaddr 0xf8000000: clock = 20 MHz
+dma0 at sbus0 slot 0 offset 0x400000: rev 1+
+esp0 at sbus0 slot 0 offset 0x800000 pri 3: ESP100A, 25MHz, SCSI ID 7
+scsibus0 at esp0: 8 targets
+sd0 at scsibus0 targ 1 lun 0: &lt;SEAGATE, ST1480 SUN0424, 8628&gt; SCSI2 0/direct fixed
+sd0: 411MB, 1476 cyl, 9 head, 63 sec, 512 bytes/sec, 843284 sec total
+sd1 at scsibus0 targ 3 lun 0: &lt;COMPAQPC, DCAS-32160, S65A&gt; SCSI2 0/direct fixed
+sd1: 2006MB, 8188 cyl, 3 head, 167 sec, 512 bytes/sec, 4110000 sec total
+le0 at sbus0 slot 0 offset 0xc00000 pri 5: address 08:00:20:13:10:b9
+le0: 16 receive buffers, 4 transmit buffers
+cgsix0 at sbus0 slot 1 offset 0x0: SUNW,501-2325, 1152x900, rev 11
+wsdisplay0 at cgsix0
+wsdisplay0: screen 0 added (std, sun emulation)
+fdc0 at mainbus0 ioaddr 0xf7200000 pri 11, softpri 4: chip 82072
+fd0 at fdc0 drive 0: 1.44MB 80 cyl, 2 head, 18 sec
+root on sd0a
+rootdev=0x700 rrootdev=0x1100 rawdev=0x1102
+
+This is the panic I got when attempting to start X:
+
+panic: pool_get(mclpl): free list modified: magic=78746572; page 0xfaa93000;
+ item addr 0xfaa93000
+Stopped at      Debugger+0x4:   jmpl            [%o7 + 0x8], %g0
+RUN AT LEAST 'trace' AND 'ps' AND INCLUDE OUTPUT WHEN REPORTING THIS PANIC!
+DO NOT EVEN BOTHER REPORTING THIS WITHOUT INCLUDING THAT INFORMATION!
+ddb> trace
+pool_get(0xfaa93000, 0x22, 0x0, 0x1000, 0x102, 0x0) at pool_get+0x2c0
+sosend(0x16, 0xf828d800, 0x0, 0xf83b0900, 0x0, 0x0) at sosend+0x608
+soo_write(0xfac0bf50, 0xfac0bf70, 0xfac9be28, 0xfab93190, 0xf8078f24, 0x0)
+at soo_write+0x18
+dofilewritev(0x0, 0xc, 0xfac0bf50, 0xf7fff198, 0x1, 0xfac0bf70) at
+dofilewritev+0x12c
+sys_writev(0xfac87508, 0xfac9bf28, 0xfac9bf20, 0xf80765c8, 0x1000, 0xfac0bf70)
+at sys_writev+0x50
+syscall(0x79, 0xfac9bfb0, 0x0, 0x154, 0xfcffffff, 0xf829dea0) at syscall+0x220
+slowtrap(0xc, 0xf7fff198, 0x1, 0x154, 0x1, 0xfac87508) at slowtrap+0x1d8
+ddb> ps
+
+   PID   PPID   PGRP    UID  S       FLAGS  WAIT       COMMAND
+ 27765   8819  29550      0  3        0x86  netio      xconsole
+  1668  29550  29550      0  3      0x4086  poll       fvwm
+ 15447  29550  29550      0  3     0x44186  poll       xterm
+  8819  29550  29550     35  3      0x4186  poll       xconsole
+  1238  29550  29550      0  3      0x4086  poll       xclock
+ 29550  25616  29550      0  3      0x4086  pause      sh
+  1024  25523  25523      0  3     0x40184  netio      XFree86
+*25523  25616  25523     35  2     0x44104             XFree86
+ 25616  30876  30876      0  3      0x4086  wait       xinit
+ 30876  16977  30876      0  3      0x4086  pause      sh
+ 16977      1  16977      0  3      0x4086  ttyin      csh
+  5360      1   5360      0  3        0x84  select     cron
+ 14701      1  14701      0  3     0x40184  select     sendmail
+ 12617      1  12617      0  3        0x84  select     sshd
+ 27515      1  27515      0  3       0x184  select     inetd
+  1904      1   1904      0  2        0x84             syslogd
+  9125      1   9125      0  3        0x84  poll       dhclient
+     7      0      0      0  3    0x100204  crypto_wa  crypto
+     6      0      0      0  3    0x100204  aiodoned   aiodoned
+     5      0      0      0  3    0x100204  syncer     update
+     4      0      0      0  3    0x100204  cleaner    cleaner
+     3      0      0      0  3    0x100204  reaper     reaper
+     2      0      0      0  3    0x100204  pgdaemon   pagedaemon
+     1      0      1      0  3      0x4084  wait       init
+     0     -1      0      0  3     0x80204  scheduler  swapper
+
+Thank you!
+</pre></td></tr></table>
+
+<p>
+In <a href="../../de/report.html">report.html</a> finden sich weitere
+Informationen über die Erstellung und Einsendung von Fehlerberichten.
+Detaillierte Informationen über deine Hardware sind absolut notwendig,
+wenn du glaubst, dass der Fehler <i>irgendwie</i> mit deiner Hardware
+oder deiner Hardwarekonfiguration zusammenhängen könnte. Normalerweise
+ist die Ausgabe von
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=dmesg&amp;sektion=8"
+>dmesg(8)</a> in dieser Hinsicht ausreichend. Eine detaillierte
+Beschreibung deines Problems ist notwendig. Dmesg beschreibt deine
+Hardware, der Text erklärt warum Smart User denkt, das System sei defekt
+(3.2 lief noch bestens), wie dieser Absturz erzeugt wurde (indem er X
+gestartet hat) und die Ausgabe der Debuggerbefehle <tt>ps</tt> und
+<tt>trace</tt>. In diesem Fall hat Smart User die Informationen
+bereitgestellt, die er über <a href="faq7.html#SerCon">serielle
+Konsole</a> bekommen hat. Wenn du das nicht tun kannst, bist du
+gezwungen, mittels Stift und Papier die Informationen vom Absturz
+aufzuzeichnen (das Beispiel oben war im Übrigen ein echtes Problem und
+die oben bereitgestellten Informationen führten dazu, dass dieses Problem,
+das Sun4c-Systeme betraf, behoben werden konnte).
+
+<p>
+Wenn Smart User ein funktionierendes OpenBSD-System gehabt hätte, von
+dem aus er einen Fehlerbericht abschicken wolle, dann hätte er <a
+href="http://www.openbsd.org/cgi-bin/man.cgi?query=sendbug&amp;sektion=1"
+>sendbug(1)</a>
+verwendet, um den Fehlerbericht zu verfassen und zum
+GNATS-Problemerfassungssystem zu senden. Wenn dein System nicht startet,
+dann kannst du <a
+href="http://www.openbsd.org/cgi-bin/man.cgi?query=sendbug&amp;sektion=1"
+>sendbug(1)</a>
+selbstverständlich nicht verwenden - du solltest es aber nutzen,
+wann immer du kannst. Du wirst noch zusätzliche Informationen, wie
+z.&nbsp;B. was geschah und deine genaue Konfiguration einfügen müssen
+und wie man das Problem reproduzieren kann. Der <a
+href="http://www.openbsd.org/cgi-bin/man.cgi?query=sendbug&amp;sektion=1"
+>sendbug(1)</a>-Befehl benötigt eine Verbindung zum Internet und einen
+funktionsfähigen MTA, um den Fehlerbericht per E-Mail versenden zu
+können.
+Beachte, dass der Mailserver ein auf
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=spamd&amp;sektion=8">spamd(8)</a>
+basiertes Greylisting verwendet, sodass es eine halbe Stunde oder
+länger dauern kann, bevor der Mailserver deinen Fehlerbericht
+akzeptiert. Habe also bitte Geduld!
+
+<p>
+Nach der Einsendung eines Fehlerberichts per sendbug(1) wirst du per
+E-Mail über den Status informiert. Du kannst auch von Entwicklern
+kontaktiert werden, die dich nach weiteren Informationen fragen oder
+dich bitten, Patches zu testen. Des Weiteren kannst du dir auch die
+Archive der <tt>bugs@openbsd.org</tt>-Mailingliste ansehen - Details dazu
+gibt es auf der <a href="../../de/mail.html">Mailinglistenseite</a>.
+Du kannst auch den Status des Fehlerberichts auch im
+<a href="../../query-pr.html">Bugtrackingsystem</a>
+online abfragen.
+
+<h3>Weitere Möglichkeiten, wie man nützliche Informationen für Entwickler
+anbringen kann</h3>
+Hier sind ein paar zusätzliche Tipps:
+
+<p>
+<b>Die Panicmessage verloren?</b><br>
+Unter bestimmten Umständen kannst du die ersten Zeilen vom Panic
+verlieren, die den Grund für den Panic angeben. Dies ist eine sehr
+wichtige Nachricht - du solltest sie daher ebenfalls berichten. Du
+kannst diese wiederbekommen, indem du den Befehl »show panic« in ddb>
+wie folgt verwendest:
+<p>
+<table border=0 width="90%"><tr><td nowrap bgcolor="#EEEEEE"><pre>
+ddb> <b>show panic</b>
+0:      kernel: page fault trap, code=0
+ddb>
+</pre></td></tr></table>
+<p>
+In diesem Fall war die Panicmessage »Kernel: page fault trap,
+code=0«.
+
+<p>
+<b>Besonderer Hinweis für SMP-Systeme:</b><br>
+Du solltest einen Trace von jedem Prozessor als Teil deines Berichts
+holen:
+
+<p>
+<table border=0 width="90%"><tr><td nowrap bgcolor="#EEEEEE"><pre>
+ddb{0}> <b>trace</b>
+pool_get(d05e7c20,0,dab19ef8,d0169414,80) at pool_get+0x226
+fxp_add_rfabuf(d0a62000,d3c12b00,dab19f10,dab19f10) at fxp_add_rfabuf+0xa5
+fxp_intr(d0a62000) at fxp_intr+0x1e7
+Xintr_ioapic0() at Xintr_ioapic0+0x6d
+--- interrupt ---
+idle_loop+0x21:
+ddb{0}> <b>machine ddb 1</b>
+Stopped at      Debugger+0x4:   leave
+ddb{1}> <b>trace</b>
+Debugger(d0319e28,d05ff5a0,dab1bee8,d031cc6e,d0a61800) at Debugger+0x4
+i386_ipi_db(d0a61800,d05ff5a0,dab1bef8,d01eb997) at i386_ipi_db+0xb
+i386_ipi_handler(b0,d05f0058,dab10010,d01d0010,dab10010) at i386_ipi_handler+0x
+4a
+Xintripi() at Xintripi+0x47
+--- interrupt ---
+i386_softintlock(0,58,dab10010,dab10010,d01e0010) at i386_softintlock+0x37
+Xintrltimer() at Xintrltimer+0x47
+--- interrupt ---
+idle_loop+0x21:
+ddb{1}>
+</pre></td></tr></table>
+
+<p>
+Wiederhole <tt>machine ddb x</tt> gefolgt von <tt>trace</tt> für
+jeden einzelnen Prozessor in deiner Maschine.
+
+
+<p>
+<font color="#0000e0">
+<a href="index.html">[FAQ-Index]</a>
+<a href="faq1.html">[Zum Kapitel 1 - Einführung in OpenBSD]</a>
+<a href="faq3.html">[Zum Kapitel 3 - Wo man OpenBSD herbekommt]</a>
+</font>
+
+<p>
+<hr>
+<a href="index.html"><img height="24" width="24" src="../../images/back.gif" border="0" alt="[zurück]"></a>
+<a href="mailto:www@openbsd.org">www@openbsd.org</a>
+<br>
+<small>
+<!--
+Originally [OpenBSD: faq2.html,v 1.94 ]<br>
+$Translation: faq2.html,v 1.78 2008/10/31 19:20:40 simon Exp $<br>
+-->
+$OpenBSD: faq2.html,v 1.73 2008/11/01 11:02:21 tobias Exp $
+</small>
+
+</body>
+</html>

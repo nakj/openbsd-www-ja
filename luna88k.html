@@ -1,0 +1,162 @@
+<!DOCTYPE HTML PUBLIC  "-//W3C//DTD HTML 4.01 Transitional//EN"
+	"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>OpenBSD/luna88k</title>
+<link rev="made" href="mailto:www@openbsd.org">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="resource-type" content="document">
+<meta name="description" content="the OpenBSD/luna88k page">
+<meta name="keywords" content="openbsd,luna88k">
+<meta name="distribution" content="global">
+<meta name="copyright" content="This document copyright 2004-2008 by OpenBSD.">
+</head>
+
+<body bgcolor="#ffffff" text="#000000" link="#23238e">
+<a href="index.html"><img alt="[OpenBSD]" height="30" width="141" src="images/smalltitle.gif" border="0"></a>
+<p>
+<h2><font color="#e00000">OpenBSD/luna88k</font></h2>
+
+<hr>
+
+<p>
+OpenBSD/luna88k is an effort to port OpenBSD to the
+<a href="http://www.omron.com">OMRON</a> LUNA-88K and LUNA-88K2 workstations.
+
+<p>
+Due to hardware difficulties, the OpenBSD/luna88k port has not been
+updated after the 4.1 release.
+</p>
+
+<p>
+A mailing list for m88k-based ports is available at
+<u><font color="#23238e">m88k@openbsd.org</font></u>.
+To join the OpenBSD/m88k mailing list, send a message body of
+<b>"subscribe m88k"</b> to
+<a href="mailto:majordomo@openbsd.org">majordomo@openbsd.org</a>.
+Please be sure to check our <a href="mail.html">mailing list policy</a> before
+subscribing.
+
+<p>
+The current port maintainer is Kenji Aoyama
+(<a href="mailto:aoyama@openbsd.org">aoyama@openbsd.org</a>), with the help of
+Miod Vallat. Others are definitely welcome to contribute!
+
+<a name="toc"></a>
+<h3><font color="#0000e0"><i>Table of contents</i></font></h3>
+<ul>
+  <li><a href="#history">History of the port</a>
+  <li><a href="#status">Current status</a>
+  <li><a href="#projects">Project list</a>
+  <li><a href="#hardware">Supported hardware</a>
+  <li><a href="#install">Getting and installing OpenBSD/luna88k</a>
+</ul>
+
+<hr>
+<a name="history"></a>
+<h3><font color="#0000e0"><strong>History:</strong></font></h3>
+
+<p>
+The LUNA workstation family was manufactured by
+<a href="http://www.omron.com">OMRON corporation</a> in the early 1990s.
+After several models based upon the Motorola 680x0 family,
+the last designs were multiprocessor systems based upon the
+Motorola 88100 processor.
+
+<p>
+Kenji Aoyama wanted to run a modern operating system on his LUNA-88K2 and
+eventually got tired of waiting for someone else to do this effort, so he
+started to merge the
+<a href="http://www.netbsd.org/Ports/luna68k/">NetBSD/luna68k</a> device
+support with the
+<a href="mvme88k.html">OpenBSD/mvme88k</a> hardware support in January 2002.
+His efforts were eventually successful and his machine booted multi-user near
+the end of 2003.
+<p>
+Unfortunately, his machine died shortly before the OpenBSD 4.2 release.
+As long as no developer has a working luna88k machine, the port is kept
+stagnant and neither snapshots nor releases are built.
+
+<hr>
+<a name="status"></a>
+<h3><font color="#0000e0"><strong>Current status:</strong></font></h3>
+
+<p>
+Both Luna-88k and Luna-88k2 models are supported, and will boot multi-user.
+Most of the on-board devices are supported, but the system will currently
+run on one processor only.
+
+<hr>
+<a name="projects"></a>
+<h3><font color="#0000e0"><strong>Projects (in no particular order):
+</strong></font></h3>
+
+<ul>
+  <li>Better mouse support, and X server.
+  <li>Multiprocessor (SMP) support.
+  <li>Support for the remaining unsupported devices (extra serial ports,
+      external floppy port, NEC PC-98 C-bus...)
+</ul>
+
+<hr>
+<a name="hardware"></a>
+<h3><font color="#0000e0"><strong>Supported hardware:</strong></font></h3>
+
+<h4>Supported machines</h4>
+
+<ul>
+<li><strong>LUNA-88K</strong><br>
+The first 88100-based LUNA workstation, with one to four 25 MHz processors,
+and 16 to 64 MB of memory depending upon the model.
+<li><strong>LUNA-88K2</strong><br>
+An improved version of the previous design, with one to four 33 MHz processors,
+16 to 112 MB of memory, and more on-board devices.
+</ul>
+
+<h4>Supported on-board devices</h4>
+
+<ul>
+<li>On-board console serial port (siotty)
+<li>On-board LANCE Ethernet interface
+(<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=le&amp;sektion=4&amp;arch=luna88k">le</a>)
+<li>On-board SCSI controllers
+(<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=spc&amp;sektion=4&amp;arch=luna88k">spc</a>)
+<li>LCD display on front panel
+(<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=lcd&amp;sektion=4&amp;arch=luna88k">lcd</a>)
+<li>Keyboard, mouse and frame buffer (suitable as a console too)
+</ul>
+
+<h4>Unsupported devices</h4>
+
+<ul>
+<li>On-board non-console serial ports (tty00, tty01)
+<li>On-board printer port (lp)
+<li>On-board floppy port (rfd)
+<li>NEC PC-98 slot
+</ul>
+
+<hr>
+<a name="install"></a>
+<h3><font color="#0000e0">
+<strong>Getting and installing OpenBSD/luna88k:</strong>
+</font></h3>
+
+<p>
+The latest supported OpenBSD/luna88k release is
+<a href="41.html">OpenBSD 4.1</a>.
+Here are the
+<a href="ftp://ftp.openbsd.org/pub/OpenBSD/4.1/luna88k/INSTALL.luna88k">
+OpenBSD/luna88k 4.1 installation instructions
+</a>.
+
+<hr>
+<a href="plat.html">
+<img height="24" width="24" src="back.gif" border="0" alt="Supported platforms">
+</a> 
+<br>
+<small><a href="mailto:www@openbsd.org">www@openbsd.org</a></small>
+<br>
+<small>$OpenBSD: luna88k.html,v 1.26 2008/10/31 20:46:39 miod Exp $</small>
+
+</body>
+</html>

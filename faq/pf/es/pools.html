@@ -1,0 +1,343 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>PF: Reservas (pools) de direcciones y balanceo de carga</title>
+<link rev="made" href="mailto:www@openbsd.org">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Language" content="es">
+<meta name="resource-type" content="documento">
+<meta name="description"   content="página de OpenBSD">
+<meta name="keywords"      content="openbsd,faq,pf">
+<meta name="distribution"  content="global">
+</head>
+
+<!--
+Copyright (c) 2003, 2004 Joel Knight <enabled@myrealbox.com>
+
+Permission to use, copy, modify, and distribute this documentation for
+any purpose with or without fee is hereby granted, provided that the
+above copyright notice and this permission notice appear in all copies.
+
+THE DOCUMENTATION IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL
+WARRANTIES WITH REGARD TO THIS DOCUMENTATION INCLUDING ALL IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE
+AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL
+DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR
+PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
+TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS DOCUMENTATION
+-->
+
+<body bgcolor="#ffffff" text="#000000">
+<!-- Passes validator.w3.org, please keep it this way;
+please, use a max of 72 chars per line -->
+
+<img alt="[OpenBSD]" height="30" width="141" src="../../../images/smalltitle.gif">
+<p>
+[<a href="queueing.html">Anterior: Formaci&oacute;n de Colas y
+Prioridades de Paquetes</a>]
+[<a href="index.html">Contenido</a>]
+[<a href="tagging.html">Siguiente: Marcado de Paquetes</a>]
+
+<p>
+<h1>
+<font color="#e00000">PF: Reservas (<i>pools</i>) de direcciones y balanceo
+de carga</font>
+</h1>
+
+<hr>
+
+<h3>&Iacute;ndice de Contenidos</h3>
+<ul>
+<li><a href="#intro">Introducci&oacute;n</a>
+<li><a href="#nat">Reserva de direcciones de NAT</a>
+<li><a href="#incoming">Balanceo de carga en conexiones entrantes</a>
+<li><a href="#outgoing">Balanceo de carga en tr&aacute;fico saliente</a>
+	<ul>
+	<li><a href="#outexample">Ejemplo de grupo de reglas</a>
+	</ul>
+</ul>
+
+<hr>
+
+<a name="intro"></a>
+<h2>Introducci&oacute;n</h2>
+<p>
+Una reserva de direcciones es un grupo de dos o m&aacute;s
+direcciones cuyo uso comparten un grupo de usuarios.  Una reserva de
+direcciones puede aparecer como la dirección de redirección en las reglas
+<a href="rdr.html"><tt>rdr</tt></a>, como la dirección de traducción en las
+reglas <a href="nat.html"><tt>nat</tt></a>
+y como la dirección de destino en las opciones <tt>route-to</tt>,
+<tt>reply-to</tt>, y <tt>dup-to</tt> de las reglas de
+<a href="filter.html">filtrado de paquetes</a>.
+
+<p>
+Existen cuatro m&eacute;todos para usar una reserva de direcciones:
+<ul>
+<li><tt>bitmask</tt> - incrusta la parte referente a la red que
+corresponde a la reserva de direcciones en la direcci&oacute;n
+que se est&eacute; modificando (que ser&iacute;a la direcci&oacute;n de
+origen para las reglas de <tt>nat</tt>, y la direcci&oacute;n de redirección
+para las reglas <tt>rdr</tt>).  Ejemplo: si la reserva de direcciones
+es 192.0.2.1/24 y la direcci&oacute;n que se
+est&aacute; modificando es 10.0.0.50, la direcci&oacute;n resultante
+ser&aacute; 192.0.2.50;  si la reserva de direcciones es
+192.0.2.1/25 y la direcci&oacute;n que se est&aacute; modificando es
+10.0.0.130, la direcci&oacute;n resultante ser&aacute; 192.0.2.2.
+<li><tt>random</tt> - selecciona una de las direcciones de la reserva
+de forma aleatoria.
+<li><tt>source-hash</tt> - usa un resumen criptogr&aacute;fico
+(<i>hash</i>) de la direcci&oacute;n de origen para determinar
+qu&eacute; direcci&oacute;n de la reserva debe usar.  Este
+m&eacute;todo asegura que una direcci&oacute;n de origen que venga
+indicada se asigne siempre a la misma dirección de la reserva. La
+clave que se le pasa al algoritmo del resumen se puede especificar de
+modo opcional despu&eacute;s de la clave <tt>source-hash</tt>, en
+formato hexadecimal o como una cadena.  En su modo predeterminado,
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=pfctl&amp;sektion=8&amp;manpath=OpenBSD+3.5"
+>pfctl(8)</a> generar&aacute; una clave aleatoria
+cada vez que se cargue un grupo de reglas.
+<li><tt>round-robin</tt> - este m&eacute;todo realiza una
+rotaci&oacute;n en secuencia por la reserva de direcciones.  Es
+el m&eacute;todo predeterminado en PF, y tambi&eacute;n el &uacute;nico
+m&eacute;todo permitido cuando se especifica una reserva de
+direcciones usando una <a href="tables.html">tabla</a>.
+</ul>
+
+<p>
+A excepci&oacute;n del m&eacute;todo <i>round-robin</i>, la reserva
+de direcciones se debe expresar como un bloque
+<a href="http://public.pacbell.net/dedicated/cidr.html">CIDR</a>
+(Enrutamiento de Inter-Dominios Sin Clase).  El m&eacute;todo
+<i>round-robin</i> aceptar&aacute; m&aacute;s de una direcci&oacute;n
+individual cuando se use una
+<a href="macros.html#lists">lista</a> o una
+<a href="tables.html">tabla</a>.
+
+<p>
+La opción <tt>sticky-address</tt> puede ser usada con los tipos de reserva
+<tt>random</tt> y <tt>round-robin</tt> para asegurarse de que una dirección
+de origen en particular sea siempre asignada a la misma dirección de
+redirección.
+
+<a name="nat"></a>
+<h2>Reserva de direcciones de NAT</h2>
+<p>
+Se puede usar una reserva de direcciones como la
+dirección de traducción en las reglas <a href="nat.html"><tt>nat</tt></a>.
+La direcci&oacute;n de origen de
+las conexiones se traducirá a la de una de las direcciones de la
+reserva, bas&aacute;ndose en el m&eacute;todo escogido.  Esto puede
+ser muy &uacute;til en situaciones en las que PF est&eacute; realizando
+NAT para una red muy grande.  Dado que el n&uacute;mero de conexiones
+con NAT por direcci&oacute;n de traducci&oacute;n es limitado, al
+a&ntilde;adir direcciones de traducci&oacute;n adicionales la pasarela
+de NAT podr&aacute; escalar y as&iacute; servir a un n&uacute;mero mayor
+de usuarios.
+
+<p>
+En el siguiente ejemplo, se usa una reserva de dos direcciones para
+traducir los paquetes salientes.  Por cada conexi&oacute;n saliente, PF
+rotar&aacute; las direcciones seg&uacute;n el m&eacute;todo
+<i>round-robin</i>.
+<blockquote>
+<tt>
+nat on $ext_if inet from any to any -&gt; { 192.0.2.5, 192.0.2.10 }
+</tt>
+</blockquote>
+
+<p>
+Un problema con este m&eacute;todo es que las conexiones sucesivas desde
+una misma direcci&oacute;n interna no se traducir&aacute;n siempre a la
+misma direcci&oacute;n.  Esto puede causar
+interferencias, por ejemplo, cuando se est&eacute; navegando por sitios
+<i>web</i> que realicen seguimientos de los ingresos de los usuarios
+bas&aacute;ndose en la direcci&oacute;n IP.  Una alternativa es usar el
+m&eacute;todo <i>source-hash</i>, para que siempre se traduzca cada
+direcci&oacute;n interna a la misma dirección.  Para ello, la reserva de
+direcciones debe ser un bloque de red
+<a href="http://public.pacbell.net/dedicated/cidr.html">CIDR</a>
+<blockquote>
+<tt>
+nat on $ext_if inet from any to any -&gt; 192.0.2.4/31 source-hash
+</tt>
+</blockquote>
+
+<p>
+Esta regla de <tt>nat</tt> usa la reserva de direcciones
+192.0.2.4/31 (192.0.2.4 - 192.0.2.5) como la direcci&oacute;n de
+traducci&oacute;n de los paquetes salientes.  Cada direcci&oacute;n
+interna se traducir&aacute; siempre a la misma direcci&oacute;n de
+traducci&oacute;n, por indicaci&oacute;n de la clave
+<tt>source-hash</tt>.
+
+<a name="incoming"></a>
+<h2>Balanceo de carga en conexiones entrantes</h2>
+<p>
+Las reservas de direcciones tambi&eacute;n se pueden usar para
+el balanceo de carga de las conexiones entrantes.  Por ejemplo, se
+pueden distribuir a trav&eacute;s de varios servidores de <i>web</i> las
+conexiones entrantes al servidor de <i>web</i>:
+<blockquote>
+<tt>
+web_servers = &quot;{ 10.0.0.10, 10.0.0.11, 10.0.0.13 }&quot;<br>
+<br>
+rdr on $ext_if proto tcp from any to any port 80 -&gt; $web_servers \<br>
+&nbsp;&nbsp;&nbsp;&nbsp;round-robin sticky-address
+</tt>
+</blockquote>
+
+<p>
+Las conexiones sucesivas se redireccionar&aacute;n a los servidores de
+<i>web</i> de acuerdo con el m&eacute;todo <i>round-robin</i>, enviando al
+mismo servidor web las conexiones provenientes del mismo origen.
+Esta "conexión pegajosa" existirá mientras haya estados que hagan referencia
+a esta conexión.
+Una vez que los estados expiren, esta "conexión pegajosa" lo hará también.
+Las siguientes conexiones provenientes de este host serán redirigidos al
+siguiente servidor web en el round robin.
+
+<a name="outgoing"></a>
+<h2>Balanceo de carga en tr&aacute;fico saliente</h2>
+<p>
+Las reservas de direcciones se pueden usar en
+combinaci&oacute;n con la opci&oacute;n de filtrado <tt>route-to</tt>,
+con el fin de balancear la carga de dos o m&aacute;s conexiones de
+Internet cuando no se encuentre disponible un protocolo de enrutamiento
+de m&uacute;ltiples caminos apropiado (como
+<a href="http://www.rfc-editor.org/rfc/rfc1771.txt">BGP4</a>).  Usando
+<tt>route-to</tt> con una reserva de direcciones
+<tt>round-robin</tt>, se pueden distribuir las conexiones salientes a
+partes iguales entre m&uacute;ltiples caminos salientes.
+
+<p>
+Un pieza adicional de informaci&oacute;n necesaria para esto es la
+direcci&oacute;n IP del enrutador adyacente en cada conexi&oacute;n de
+Internet.  Esta informaci&oacute;n se pasa a la opci&oacute;n
+<tt>route-to</tt> para controlar el destino de los paquetes salientes.
+
+<p>
+El siguiente ejemplo balancea el tr&aacute;fico saliente a trav&eacute;s
+de dos conexiones de Internet:
+<blockquote>
+<tt>
+lan_net = &quot;192.168.0.0/24&quot;<br>
+int_if &nbsp;= &quot;dc0&quot;<br>
+ext_if1 = &quot;fxp0&quot;<br>
+ext_if2 = &quot;fxp1&quot;<br>
+ext_gw1 = &quot;68.146.224.1&quot;<br>
+ext_gw2 = &quot;142.59.76.1&quot;<br>
+<br>
+pass in on $int_if route-to \<br>
+&nbsp;&nbsp;&nbsp;{ ($ext_if1 $ext_gw1), ($ext_if2 $ext_gw2) } round-robin \<br>
+&nbsp;&nbsp;&nbsp;from $lan_net to any keep state
+</tt>
+</blockquote>
+
+<p>
+La opci&oacute;n <tt>route-to</tt> se usa sobre el tr&aacute;fico que
+<i>entra</i> en la interfaz <i>interna</i> para especificar las
+interfaces de red salientes a trav&eacute;s de las cuales se
+balancear&aacute; el tr&aacute;fico, junto con sus respectivas
+pasarelas.  N&oacute;tese que la opci&oacute;n <tt>route-to</tt> debe
+estar presente en <i>cada una</i> de las reglas de filtrado para las que
+se balancear&aacute; el tr&aacute;fico.  Los paquetes de respuesta se
+devolver&aacute;n a la misma interfaz externa por la que salieron (esto
+es lo que hacen los ISP), y enrutados de vuelta a la red interna como
+paquetes normales.
+
+<p>
+Para asegurarse de que los paquetes con una direcci&oacute;n de origen
+que pertenezca a <tt>$ext_if1</tt> sean siempre enrutados a
+<tt>$ext_gw1</tt> (y lo mismo para <tt>$ext_if2</tt> y
+<tt>$ext_gw2</tt>), hay que incluir las siguientes dos l&iacute;neas en
+el grupo de reglas:
+<blockquote>
+<tt>
+pass out on $ext_if1 route-to ($ext_if2 $ext_gw2) from $ext_if2 \<br>
+&nbsp;&nbsp;&nbsp;to any<br>
+pass out on $ext_if2 route-to ($ext_if1 $ext_gw1) from $ext_if1 \<br>
+&nbsp;&nbsp;&nbsp;to any 
+</tt>
+</blockquote>
+
+<p>
+Finalmente, tambi&eacute;n se puede usar NAT en cada una de las
+interfaces salientes:
+<blockquote>
+<tt>
+nat on $ext_if1 from $lan_net to any -&gt; ($ext_if1)<br>
+nat on $ext_if2 from $lan_net to any -&gt; ($ext_if2)
+</tt>
+</blockquote>
+
+<a name="outexample"></a>
+<p>
+Un ejemplo completo que balancea la carga del tr&aacute;fico saliente
+ser&iacute;a algo parecido al siguiente:
+
+<p>
+<table border="0" width="650">
+<tr><td nowrap bgcolor="#EEEEEE">
+<pre>
+lan_net = &quot;192.168.0.0/24&quot;
+int_if  = &quot;dc0&quot;
+ext_if1 = &quot;fxp0&quot;
+ext_if2 = &quot;fxp1&quot;
+ext_gw1 = &quot;68.146.224.1&quot;
+ext_gw2 = &quot;142.59.76.1&quot;
+
+#  conexiones salientes de nat en cada interfaz de internet
+nat on $ext_if1 from $lan_net to any -&gt; ($ext_if1)
+nat on $ext_if2 from $lan_net to any -&gt; ($ext_if2)
+
+#  denegaci&oacute;n predeterminada
+block in  from any to any
+block out from any to any
+
+#  permitir el paso a todos los paquetes salientes en la interfaz interna
+pass out on $int_if from any to $lan_net
+#  permitir el paso <i>quick</i> a cualquier paquete destinado para la pasarela
+pass in quick on $int_if from $lan_net to $int_if
+#  balancear la carga del tr&aacute;fico tcp saliente desde la red interna
+pass in on $int_if route-to \
+    { ($ext_if1 $ext_gw1), ($ext_if2 $ext_gw2) } round-robin \
+    proto tcp from $lan_net to any flags S/SA modulate state
+#  balancear la carga del tr&aacute;fico udp y icmp saliente desde la red interna
+pass in on $int_if route-to \
+    { ($ext_if1 $ext_gw1), ($ext_if2 $ext_gw2) } round-robin \
+    proto { udp, icmp } from $lan_net to any keep state
+
+#  reglas &quot;pass out&quot; gen&eacute;ricas para las interfaces externas
+pass out on $ext_if1 proto tcp from any to any flags S/SA modulate state
+pass out on $ext_if1 proto { udp, icmp } from any to any keep state
+pass out on $ext_if2 proto tcp from any to any flags S/SA modulate state
+pass out on $ext_if2 proto { udp, icmp } from any to any keep state
+
+#  enrutar paquetes desde cualquier IP en $ext_if1 hacia $ext_gw1
+#  y lo mismo para $ext_if2 y $ext_gw2
+pass out on $ext_if1 route-to ($ext_if2 $ext_gw2) from $ext_if2 to any 
+pass out on $ext_if2 route-to ($ext_if1 $ext_gw1) from $ext_if1 to any 
+</pre>
+</td></tr>
+</table>
+
+<p>
+[<a href="queueing.html">Anterior: Formaci&oacute;n de Colas y
+Prioridades de Paquetes</a>]
+[<a href="index.html">Contenido</a>]
+[<a href="tagging.html">Siguiente: Marcado de Paquetes</a>]
+
+<p>
+<hr>
+<a href="index.html"><img height="24" width="24" src="../../../images/back.gif" border="0" alt="[&Iacute;ndice]"></a> 
+<a href="mailto:www@openbsd.org">www@openbsd.org</a>
+<br>
+<small>
+Originally [OpenBSD: pools.html,v 1.12 ]<br>
+$OpenBSD: pools.html,v 1.7 2004/09/09 20:46:31 saad Exp $<br>
+$Translation: pools.html,v 1.7 2004/09/09 01:37:55 santana Exp $
+</small>
+</body>
+</html> 

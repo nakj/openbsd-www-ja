@@ -1,0 +1,231 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>OpenBSD 4.6 errata</title>
+<link rev=made href="mailto:www@openbsd.org">
+<meta name="resource-type" content="document">
+<meta name="description" content="the OpenBSD CD errata page">
+<meta name="keywords" content="openbsd,cd,errata">
+<meta name="distribution" content="global">
+<meta name="copyright" content="This document copyright 1997-2009 by OpenBSD.">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+</head>
+
+<body bgcolor="#ffffff" text="#000000" link="#23238E">
+
+<a href="index.html"><img alt="[OpenBSD]" height="30" width="141" src="images/smalltitle.gif" border="0"></a>
+<h2><font color="#0000e0">
+This is the OpenBSD 4.6 release errata &amp; patch list:
+
+</font></h2>
+
+<hr>
+<a href=stable.html>For OpenBSD patch branch information, please refer here.</a><br>
+<a href=pkg-stable.html>For important packages updates, please refer here.</a><br>
+<br>
+For errata on a certain release, click below:<br>
+<a href="errata21.html">2.1</a>,
+<a href="errata22.html">2.2</a>,
+<a href="errata23.html">2.3</a>,
+<a href="errata24.html">2.4</a>,
+<a href="errata25.html">2.5</a>,
+<a href="errata26.html">2.6</a>,
+<a href="errata27.html">2.7</a>,
+<a href="errata28.html">2.8</a>,
+<a href="errata29.html">2.9</a>,
+<a href="errata30.html">3.0</a>,
+<a href="errata31.html">3.1</a>,
+<a href="errata32.html">3.2</a>,
+<a href="errata33.html">3.3</a>,
+<a href="errata34.html">3.4</a>,
+<a href="errata35.html">3.5</a>,
+<a href="errata36.html">3.6</a>,
+<br>
+<a href="errata37.html">3.7</a>,
+<a href="errata38.html">3.8</a>,
+<a href="errata39.html">3.9</a>,
+<a href="errata40.html">4.0</a>,
+<a href="errata41.html">4.1</a>,
+<a href="errata42.html">4.2</a>,
+<a href="errata43.html">4.3</a>,
+<a href="errata44.html">4.4</a>,
+<a href="errata45.html">4.5</a>,
+<a href="errata47.html">4.7</a>.
+<br>
+<hr>
+
+<a href="ftp://ftp.openbsd.org/pub/OpenBSD/patches/4.6.tar.gz">
+You can also fetch a tar.gz file containing all the following patches</a>.
+This file is updated once a day.
+
+<p> The patches below are available in CVS via the
+<code>OPENBSD_4_6</code> <a href="stable.html">patch branch</a>.
+
+<p>
+For more detailed information on how to install patches to OpenBSD, please
+consult the <a href="./faq/faq10.html#Patches">OpenBSD FAQ</a>.
+<hr>
+
+<!-- Temporarily put anchors for all archs here.  Remove later. -->
+<a name="all"></a>
+<a name="alpha"></a>
+<a name="amd64"></a>
+<a name="armish"></a>
+<a name="cats"></a>
+<a name="hp300"></a>
+<a name="hppa"></a>
+<a name="i386"></a>
+<a name="luna88k"></a>
+<a name="mac68k"></a>
+<a name="macppc"></a>
+<a name="mvme68k"></a>
+<a name="mvme88k"></a>
+<a name="sgi"></a>
+<a name="sparc"></a>
+<a name="sparc64"></a>
+<a name="vax"></a>
+<a name="zaurus"></a>
+
+<ul>
+<li><a name="010_openssl"></a>
+<font color="#009000"><strong>010: SECURITY FIX: April 14, 2010</strong></font> &nbsp; <i>All architectures</i><br>
+In TLS connections, certain incorrectly formatted records can cause
+an OpenSSL client or server to crash due to a read attempt at NULL.
+<br>
+<a href="ftp://ftp.openbsd.org/pub/OpenBSD/patches/4.6/common/010_openssl.patch">
+A source code patch exists which remedies this problem</a>.<br>
+<p>
+
+<li><a name="009_mpi"></a>
+<font color="#009000"><strong>009: RELIABILITY FIX: April 4, 2010</strong></font> &nbsp; <i>All architectures</i><br>
+When updating sensors showing the state of RAID volumes
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=mpi&sektion=4">mpi(4)</a>
+allocates temporary memory and then returns it to the kernel as
+device memory.
+This causes kernel memory usage to be misrepresented, eventually
+leading to a denial of service when a resource limit is apparently
+reached.
+<br>
+<a href="ftp://ftp.openbsd.org/pub/OpenBSD/patches/4.6/common/009_mpi.patch">
+A source code patch exists which remedies this problem</a>.<br>
+<p>
+
+<li><a name="008_kerberos"></a>
+<font color="#009000"><strong>008: RELIABILITY FIX: March 31, 2010</strong></font> &nbsp; <i>All architectures</i><br>
+When decrypting packets, the internal decryption functions were not
+paranoid enough in checking for underruns, which could potentially
+lead to crashes.
+<br>
+<a href="ftp://ftp.openbsd.org/pub/OpenBSD/patches/4.6/common/008_kerberos.patch">
+A source code patch exists which remedies this problem</a>.<br>
+<p>
+
+<li><a name="007_ftpd"></a>
+<font color="#009000"><strong>007: RELIABILITY FIX: March 12, 2010</strong></font> &nbsp; <i>All architectures</i><br>
+Due to a null pointer dereference, it would be possible to crash ftpd when
+handling glob(3)'ing requests. This is non-exploitable.
+<br>
+<a href="ftp://ftp.openbsd.org/pub/OpenBSD/patches/4.6/common/007_ftpd.patch">
+A source code patch exists which remedies this problem</a>.<br>
+<p>
+
+<li><a name="006_openssl"></a>
+<font color="#009000"><strong>006: SECURITY FIX: March 12, 2010</strong></font> &nbsp; <i>All architectures</i><br>
+OpenSSL is susceptible to a buffer overflow due to a failure
+to check for NULL returns from bn_wexpand function calls.
+<br>
+<a href="ftp://ftp.openbsd.org/pub/OpenBSD/patches/4.6/common/006_openssl.patch">
+A source code patch exists which remedies this problem</a>.<br>
+<p>
+
+<li><a name="005_ptrace"></a>
+<font color="#009000"><strong>005: RELIABILITY FIX: January 29, 2010</strong></font> &nbsp; <i>All architectures</i><br>
+By using ptrace(2) on an ancestor process, a loop in the process tree
+could be created, violating assumptions in other parts of the kernel
+and resulting in infinite loops.
+<br>
+<a href="ftp://ftp.openbsd.org/pub/OpenBSD/patches/4.6/common/005_ptrace.patch">
+A source code patch exists which remedies this problem</a>.<br>
+<p>
+
+<li><a name="004_openssl"></a>
+<font color="#009000"><strong>004: SECURITY FIX: November 26, 2009</strong></font> &nbsp; <i>All architectures</i><br>
+The SSL/TLS protocol is subject to man-in-the-middle attacks related to
+renegotiation (see CVE-2009-3555, draft-ietf-tls-renegotiation-00).
+OpenSSL permitted this protocol feature by default and had no way to
+disable it.
+<br>
+<a href="ftp://ftp.openbsd.org/pub/OpenBSD/patches/4.6/common/004_openssl.patch">
+A source code patch exists which remedies this problem</a>.<br>
+<p>
+
+<li><a name="003_getsockopt"></a>
+<font color="#009000"><strong>003: RELIABILITY FIX: October 28, 2009</strong></font> &nbsp; <i>All architectures</i><br>
+getsockopt(2) with any of IP_AUTH_LEVEL, IP_ESP_TRANS_LEVEL, IP_ESP_NETWORK_LEVEL,
+IP_IPCOMP_LEVEL will crash the system.
+<br>
+<a href="ftp://ftp.openbsd.org/pub/OpenBSD/patches/4.6/common/003_getsockopt.patch">
+A source code patch exists which remedies this problem</a>.<br>
+<p>
+
+<li><a name="002_xmm"></a>
+<font color="#009000"><strong>002: RELIABILITY FIX: October 05, 2009</strong></font> &nbsp; <i>i386 only</i><br>
+XMM exceptions are not correctly handled resulting in a kernel panic.
+<br>
+<a href="ftp://ftp.openbsd.org/pub/OpenBSD/patches/4.6/i386/002_xmm.patch">
+A source code patch exists which remedies this problem</a>.<br>
+<p>
+
+<li><a name="001_bind"></a>
+<font color="#009000"><strong>001: RELIABILITY FIX: July 29, 2009</strong></font> &nbsp; <i>All architectures</i><br>
+A vulnerability has been found in BIND's named server
+(<a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0696">CVE-2009-0696</a>).
+An attacker could crash a server with a specially crafted dynamic update message to a
+zone for which the server is master.
+<br>
+<a href="ftp://ftp.openbsd.org/pub/OpenBSD/patches/4.6/common/001_bind.patch">
+A source code patch exists which remedies this problem</a>.<br>
+<p>
+</ul>
+
+<hr>
+<a href=stable.html>For OpenBSD patch branch information, please refer here.</a><br>
+<a href=pkg-stable.html>For important packages updates, please refer here.</a><br>
+<br>
+For errata on a certain release, click below:<br>
+<a href="errata21.html">2.1</a>,
+<a href="errata22.html">2.2</a>,
+<a href="errata23.html">2.3</a>,
+<a href="errata24.html">2.4</a>,
+<a href="errata25.html">2.5</a>,
+<a href="errata26.html">2.6</a>,
+<a href="errata27.html">2.7</a>,
+<a href="errata28.html">2.8</a>,
+<a href="errata29.html">2.9</a>,
+<a href="errata30.html">3.0</a>,
+<a href="errata31.html">3.1</a>,
+<a href="errata32.html">3.2</a>,
+<a href="errata33.html">3.3</a>,
+<a href="errata34.html">3.4</a>,
+<a href="errata35.html">3.5</a>,
+<a href="errata36.html">3.6</a>,
+<br>
+<a href="errata37.html">3.7</a>,
+<a href="errata38.html">3.8</a>,
+<a href="errata39.html">3.9</a>,
+<a href="errata40.html">4.0</a>,
+<a href="errata41.html">4.1</a>,
+<a href="errata42.html">4.2</a>,
+<a href="errata43.html">4.3</a>,
+<a href="errata44.html">4.4</a>,
+<a href="errata45.html">4.5</a>,
+<a href="errata47.html">4.7</a>.
+<br>
+
+<hr>
+<a href=index.html><img height=24 width=24 src=back.gif border=0 alt=OpenBSD></a> 
+<a href="mailto:www@openbsd.org">www@openbsd.org</a>
+<br><small>$OpenBSD: errata46.html,v 1.14 2010/04/14 14:47:08 jasper Exp $</small>
+
+</body>
+</html>
