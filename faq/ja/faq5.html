@@ -256,18 +256,19 @@ release version.
 アップグレードし、そして 4.8-releaseに再びアップグレードするのは少しの時間で
 済みます。
 
-<h3>Keeping Things in Sync</h3>
-It is important to understand that OpenBSD is an Operating System, 
-intended to be taken as a whole, not a kernel with a bunch of utilities
-stuck on.  You must make sure your kernel, "userland" (the supporting
-utilities and files) and <a href="faq15.html#Ports"><tt>ports</tt></a> tree
-are all in sync, or unpleasant things will happen.  Said another way
-(because people just keep making the error), you can not run brand new
-<tt>ports</tt> on a month old system, or rebuild a kernel from <i>-current</i>
-source and expect it to work with a <i>-release</i> userland.  Yes,
-this does mean you need to upgrade your system if you want to run a new 
-program which was added to the ports tree today.  Sorry,
-but again, OpenBSD has limited resources available.
+<h3>同期を維持しましょう</h3>
+OpenBSDが、カーネルと一束のユーティリティとしてではなく、
+全体として扱われることを意図したオペレーティングシステムだと
+理解するのは重要です。あなたは確実に、カーネル、「ユーザーランド」（サポートしている
+ユーティリティとファイル） そして <a href="faq15.html#Ports"><tt>ports</tt></a> ツリー
+の全てを同期しておかなければなりません。そうしないと、不愉快なことがおきるでしょう。別の言い方をすれば
+(なぜなら人々は単に間違いをし続けるので)、一ヶ月前のシステムで最新の
+<tt>ports</tt> を動かすことは出来ませんし、あるいは <i>-current</i> のソースのカーネルを再構築
+して <i>-release</i> ユーザーランドで動くことはきたいできません。そうです、
+これは、もしあなたが今日ports ツリーに追加された新しいプログラムを
+動かしたいのであれば、
+システムをアップグレードする必要があることを意味しています。すいませんが
+もう一度いいます。OpenBSDには限られたリソースしかないのです。
 
 <p>
 One should also understand that the upgrade
