@@ -271,48 +271,48 @@ OpenBSDが、カーネルと一束のユーティリティとしてではなく、
 もう一度いいます。OpenBSDには限られたリソースしかないのです。
 
 <p>
-One should also understand that the upgrade
-process is supported in <b>only one direction: from older to newer</b>,
+ひとつ理解しておかなければいけないことはアップグレード
+プロセスがサポートしているのは <b>一方向のみです： 以前のバージョンからそれ以降に</b>
 and from <i>-stable</i> to <i>-current</i>.  You can not run
-<i>4.8-current</i> (or a snapshot), then decide you are living too
-dangerously, and step back to <i>4.8-stable</i>.  You are on your own if
-you choose any path other than the supported option of reloading your
-system from scratch, do not expect assistance from the OpenBSD
-development team.
+そして <i> -stable</i> から <i>-current</i> に。あなたは
+<i>4.8-current</i> （あるいはスナップショット）を動かせず、とても危険なことに
+気づいて、<i>4.8-stable</i> に戻ろうとしても。 あなたの場合あなたの
+選ぶどんな方法よりも、最初からシステムを再読み込みする方が
+いいでしょう。決してOpenBSD 開発チームの援助を
+期待しないでください。
 
 <p>
-Yes, this does mean you should think long and hard before committing
-yourself to using <i>-current</i>.
+そうです、これは<i>-current</i>を使用する前に長い間真剣に考える必要があるという
+意味です。
 
 <a name="WhySrc"></a>
-<h2>5.2 - Why do I need to compile the system from source?</h2>
-Actually, you very possibly do not.
+<h2>5.2 - どうしてソースからシステムをコンパイルする必要があるのでしょうか</h2>
+実際には、可能性はないでしょう。
 
 <p>
-Some reasons why NOT to build from source:
+ソースからビルドする必要がないいくつかの理由：
 <ul>
-<li>Compiling your own system as a way of upgrading it is not supported.
-<li>You will NOT get better system performance by compiling your own system.
-<li>Changing compiler options is more likely to break your system than
-to improve it.
+<li>アップグレードのためにあなたのシステムをコンパイルする方法はサポートされていません。
+<li>システムをコンパイルすることでより良いパフォーマンスを得られ*なく*なります
+コンパイルオプションを変更することは改善よりもシステムを壊してしまうのに
+近いです
 </ul>
 
-Some reasons why you might actually wish or need to build from source:
+あなたが望むかもしれない、またはソースからビルドする必要があるいくつかの理由：
 <ul>
-<li>Test or develop new features.
+<li>新機能のテストあるいは開発のため
 <li>Compiling the system puts a lot of stress on the computer, it can be
 a way to make sure the system you just put together or acquired is
 actually in pretty good operational condition.
-<li>You wish to follow the <a href="../stable.html">stable branch.</a>
-<li>You wish to make a highly customized version of OpenBSD for some
-special application.
+<li><a href="../../stable.html">stable ブランチ</a>に追随したい
+<li>ある特別なアプリケーションのために高度にカスタマイズしたバージョンのOpenBSD
+を作りたくなった
 </ul>
 
 <p>
-The OpenBSD team puts out new snapshots based on <i>-current</i> code on
-a very regular basis for all platforms.
-It is likely this will be all you need for running <i>-current</i>.
-
+OpenBSDチームは <i>-current</i>のコードに基づいた新しいスナップショットを
+非常に定期的に全てのプラットフォーム向けに出しています。
+これは<i>-current</i>を動かすのに必要な全ての可能性があります。
 <p>
 The most common reason to build from source is to follow the
 <i>-stable</i> branch, where building from source is the only supported
