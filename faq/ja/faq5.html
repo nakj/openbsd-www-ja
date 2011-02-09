@@ -328,10 +328,10 @@ OpenBSD$B%A!<%`$O(B <i>-current</i>$B$N%3!<%I$K4p$E$$$??7$7$$%9%J%C%W%7%g%C%H
 $B$3$l$O(B <i>-stable</i> $B$N9=C[$G$OH/@8$9$kLdBj$G$O$J$$$G$7$g$&!#(B
 
 <a name="Bld"></a>
-<h2>5.3 - Building OpenBSD from source</h2>
+<h2>5.3 - $B%=!<%9$+$i$N(B OpenBSD $B$N9=C[(B</h2>
 
 <a name="BldOverview"></a>
-<h3>5.3.1 - Overview of the building process</h3>
+<h3>5.3.1 - $B9=C[%W%m%;%9$N35MW(B</h3>
 
 $B%=!<%9%3!<%I$+$i(B OpenBSD $B$r9=C[$9$k$N$O$$$/$D$+$N%9%F%C%W$rMW7o$H$7$^$9!#(B
 <ul>
@@ -341,22 +341,22 @@ OpenBSD$B%A!<%`$O(B <i>-current</i>$B$N%3!<%I$K4p$E$$$??7$7$$%9%J%C%W%7%g%C%H
 <li><a href="#BldUserland">"$B%f!<%6!<%i%s%I(B" $B$r9=C[$9$k(B("make build").</a>
 </ul>
 
-There are a couple additional steps that some users may wish to perform, 
-depending on the purpose of the build and if X is installed:
+$B$b$7(BX$B$,%$%s%9%H!<%k$5$l$F$?$j!"9=C[$NL\E*$K1~$8$F(B
+$B0lIt$N%f!<%6!<$,<B9T$7$?$$$+$b$7$l$J$$$$$/$D$+$N<j=g$,$"$j$^$9!#(B
 <ul>
-<li><a href="#Release">Building a "release".</a>
-<li><a href="#Xbld">Building X.</a>
+<li><a href="#Release"> "release" $B$N9=C[(B</a>
+<li><a href="#Xbld">X$B$N9=C[(B</a>
 </ul>
 
 
 <a name="BldBinary"></a>
-<h3>5.3.2 - Install or Upgrade to closest available binary</h3>
+<h3>5.3.2 - $BD>6a$N;HMQ$G$-$k%P%$%J%j$X$N%$%s%9%H!<%k$b$7$/$O%"%C%W%0%l!<%I(B</h3>
 
-The first step in building from source is to make sure you have the
-closest available binary installed.
+$B%=!<%9$+$i9=C[$9$k:G=i$N<j=g$O!"%$%s%9%H!<%k$5$l$F$$$k$b$N$KBP$7$F;HMQ$G$-$kD>6a$N(B
+$B%P%$%J%j$r;}$C$F$$$k$3$H$r3NG'$7$^$9!#(B
 
-Use this table to look at where you are, where you wish to go, and what binary
-you should start with:
+$B$3$N%F!<%V%k$rMQ$$$F8=:_$I$3$K$$$k$N$+!":G8e$K9T$-Ce$/@h$O$I$3$+!"$=$7$F$I$N%P%$%J%j(B
+$B$r;H$C$F$O$8$a$k$N$,$h$$$N$+C5$7$F$/$@$5$$!#(B
 
 <p>
 <table border="1" style="empty-cells: show;">
@@ -387,8 +387,8 @@ you should start with:
 </table>
 
 <p>
-It is recommended that you install the binary by using the "Upgrade" 
-option of the install media.
+$B%P%$%J%j$N%$%s%9%H!<%k$K$O(B
+$B%$%s%9%H!<%k%a%G%#%"$N(B "Upgrade" $B%*%W%7%g%s$r;H$&$3$H$,$*4+$a$G$9!#(B
 If that is not possible, you can also unpack the binaries as described
 <a href="upgrade48.html">here</a>.
 Regardless, you must do the entire upgrade process, including creating 
