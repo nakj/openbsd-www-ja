@@ -8,7 +8,7 @@
 <meta name= "keywords"      content= "openbsd,faq">
 <meta name= "distribution"  content= "global">
 <meta name= "copyright"     content= "This document copyright 1998-2010 by OpenBSD.">
-<meta http-equiv="Content-Type" content="text/html; charset=iso-2022-jp">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 </head>
 
 <body bgcolor= "#ffffff" text= "#000000">
@@ -19,36 +19,36 @@
 </a>
 <p>
 <font color= "#0000e0">
-<a href= "index.html">[FAQ $B$NL\<!(B]</a>
-<a href= "faq4.html">[4$B>O(B - $B%$%s%9%H!<%k%,%$%I(B]</a>
-<a href= "faq6.html">[6$B>O(B - $B%M%C%H%o!<%/(B]</a>
+<a href= "index.html">[FAQ の目次]</a>
+<a href= "faq4.html">[4章 - インストールガイド]</a>
+<a href= "faq6.html">[6章 - ネットワーク]</a>
 </font>
 
-<h1><font color="#e00000">5 - $B%=!<%9%3!<%I$+$i%7%9%F%`$r9=C[$9$k(B</font></h1>
+<h1><font color="#e00000">5 - ソースコードからシステムを構築する</font></h1>
 <hr>
 
 <p>
-<h3>$BL\<!(B</h3>
+<h3>目次</h3>
 <ul>
 <li><a href="#Flavors">5.1 - OpenBSD's Flavors</a>
 <li><a href="#WhySrc">5.2 - Why should I build my system from source?</a>
-<li><a href="#WhySrc">5.2 - $B$J$<%=!<%9%3!<%I$+$i%7%9%F%`$r9=C[$7$J$1$l$P$$$1$J$$$N$G$7$g$&$+(B ?</a>
-<li><a href="#Bld">5.3 - OpenBSD $B$r%=!<%9$+$i9=C[$9$k(B</a>
+<li><a href="#WhySrc">5.2 - なぜソースコードからシステムを構築しなければいけないのでしょうか ?</a>
+<li><a href="#Bld">5.3 - OpenBSD をソースから構築する</a>
 n<ul>
-  <li><a href="#BldOverview">5.3.1 - $B354Q(B</a>
-  <li><a href="#BldBinary">5.3.2 - $BB8:_$9$k$b$C$H$b6a$$%P%$%J%j$r%$%s%9%H!<%k(B
-    $B$"$k$$$O%"%C%W%0%l!<%I$9$k(B</a>
-  <li><a href="#BldGetSrc">5.3.3 - $BBEEv$J%=!<%9%3!<%I$r(B
-    $B<hF@$9$k(B</a>
-  <li><a href="#BldKernel">5.3.4 - $B%+!<%M%k$N9=C[(B</a>
-  <li><a href="#BldUserland">5.3.5 - $B%f!<%6!<%i%s%I$N9=C[(B</a>
+  <li><a href="#BldOverview">5.3.1 - 概観</a>
+  <li><a href="#BldBinary">5.3.2 - 存在するもっとも近いバイナリをインストール
+    あるいはアップグレードする</a>
+  <li><a href="#BldGetSrc">5.3.3 - 妥当なソースコードを
+    取得する</a>
+  <li><a href="#BldKernel">5.3.4 - カーネルの構築</a>
+  <li><a href="#BldUserland">5.3.5 - ユーザーランドの構築</a>
 </ul>
-<li><a href="#Release">5.4 - $B%j%j!<%9$N9=C[(B</a>
-<li><a href="#Xbld">5.5 - X $B$N9=C[(B</a>
-<li><a href="#Why">5.6 - $B$I$&$7$F%+%9%?%`%+!<%M%k$,I,MW$J$N$G$7$g$&$+(B ?</a>
-<li><a href="#Options">5.7 - $B%+%9%?%`%+!<%M%k$N9=C[(B</a>
-<li><a href="#BootConfig">5.8 - $B5/F0;~$N@_Dj(B</a>
-<li><a href="#config">5.9 - config(8) $B$rMQ$$$?%+!<%M%k$NJQ99(B</a>
+<li><a href="#Release">5.4 - リリースの構築</a>
+<li><a href="#Xbld">5.5 - X の構築</a>
+<li><a href="#Why">5.6 - どうしてカスタムカーネルが必要なのでしょうか ?</a>
+<li><a href="#Options">5.7 - カスタムカーネルの構築</a>
+<li><a href="#BootConfig">5.8 - 起動時の設定</a>
+<li><a href="#config">5.9 - config(8) を用いたカーネルの変更</a>
 <li><a href="#VerboseBoot">5.10 - Getting more verbose output during
   boot</a>
 <li><a href="#buildprobs">5.11 - Common problems, tips and questions
@@ -84,17 +84,17 @@ n<ul>
 <a name="Flavors"></a>
 <h2>5.1 - OpenBSD's Flavors</h2>
 <!-- XXXversion - revise doodle -->
-OpenBSD $B$K$O(B3$B$D$N(B "$B%U%l!<%P!<(B"$B$,$"$j$^$9!#(B
+OpenBSD には3つの "フレーバー"があります。
 <ul>
-<li><b>-release:</b> 6$B%v7n$4$H$K(BCD $B$G=P2Y$5$l$k(B OpenBSD$B$N%P!<%8%g%s(B
-<li><b>-stable:</b>  $B%j%j!<%9$H!"%;%-%e%j%F%#$H?.Mj@-$r9MN8$7$?(B
-    $B=EMW$J%Q%C%A!#(B
+<li><b>-release:</b> 6ヶ月ごとにCD で出荷される OpenBSDのバージョン
+<li><b>-stable:</b>  リリースと、セキュリティと信頼性を考慮した
+    重要なパッチ。
 <li><b>-current:</b> Where new development work is presently being done,
     and eventually, it will turn into the next release.
 </ul>
 
-$B3($K$9$k$H!"$3$l$i%U%l!<%P!<$N3+H/$O(B
-$B0J2<$N$h$&$K$J$j$^$9!#(B
+絵にすると、これらフレーバーの開発は
+以下のようになります。
 
 <blockquote>
 <pre>
@@ -114,60 +114,60 @@ OpenBSD $B$K$O(B3$B$D$N(B "$B%U%l!<%P!<(B"$B$,$"$j$^$9!#(B
 </blockquote>
 
 <p>
-<i>-Current</i> $B$O!"3hH/$J3+H/3hF0$,=*N;$7!"$=$7$F7k6I$O(B
-$B<!$N(B OpenBSD $B$N(B<i>-release</i> $B$K$J$j$^$9!#(B
-$B#6%v7n$*$-$K?7$7$$%P!<%8%g%s$N(B OpenBSD $B$,%j%j!<%9$5$l$?$H$-!"(B
-<i>-current</i> $B$O!"%?%0$,$D$1$i$l$F(B<i>-release</i>$B$K$J$j$^$9!"%=!<%9%D%j!<$N(B
-$BMzNr$KE`7kE@$H$7$F;D$j$^$9!#(B
-$B$9$Y$F$N(B <i>-release</i> $B$O7h$7$FJQ99$5$l$^$;$s!#!#(B
-$B$=$l$i$O(B <a href="../../orders.html">CD</a> $B$d(B
-<a href="../../ftp.html">FTP $B%5!<%P(B</a>$B>e$KCV$+$l$^$9!#(B
+<i>-Current</i> は、活発な開発活動が終了し、そして結局は
+次の OpenBSD の<i>-release</i> になります。
+６ヶ月おきに新しいバージョンの OpenBSD がリリースされたとき、
+<i>-current</i> は、タグがつけられて<i>-release</i>になります、ソースツリーの
+履歴に凍結点として残ります。
+すべての <i>-release</i> は決して変更されません。。
+それらは <a href="../../orders.html">CD</a> や
+<a href="../../ftp.html">FTP サーバ</a>上に置かれます。
 
 <p>
-<i>-Stable</i> $B$O(B <i>-release</i> $B$r%Y!<%9$K$7$F$*$j(B
-$B$^$?(B OpenBSD $B$N<gMW$J3+H/%Q%9$+$i$N%V%i%s%A$G$9!#(B
-$B$H$F$b=EMW$J(Bfix$B$,(B <i>-current</i> $B$K$J$5$l$?$H$-!"$=$l$i$NJQ99$O(B
-<i>-stable</i> $B%V%i%s%A$K(B "$B%P%C%/%]!<%H(B" $B!JE}9g!K$5$l$^$9!#(B
-$B$J$<$J$i!"(B<i>-stable</i> $B$O$^$?(B
-"<i>patch branch</i>" $B$H$7$FCN$i$l$F$$$k$+$i$G$9!#(B
-$B>e$N%$%i%9%H$G$O!"?bD>$NE@@~$,%P%0(B
-$B%U%#%C%/%9$,(B<i>-stable</i>$B%V%i%s%A$K@9$j9~$^$l$?$3$H$r<($7$F$$$^$9!#$=$7$F(B
-$B>e$NNc$G$O!"(B<i>4.5-stable</i> $B%V%i%s%A$,(B<i>4.7-release</i>$B$H$H$b$K=*$o$j$r7^$($?(B
-$B$3$H!"$=$7$F(B <i>4.6-stable</i>$B%V%i%s%A$O(B<i>4.8-release</i>$B$H$H$b$K=*$o$j$r$`$+$($?(B
-$B$3$H$K5$IU$/$G$7$g$&(B -- $B8E$$%j%j!<%9$O!"DL>o(B
-$B#2$D(B
-$BA0$N%j%j!<%9$^$G%5%]!<%H$5$l$^$9!#8E$$%P!<%8%g%s$r%5%]!<%H$9$k;v$O;q8;$H;~4V$r;H$$$^$9!"(B
-$B8E$$%j%j!<%9$N%5%]!<%H$r7QB3$7$FDs6!$7$F$b$h$$$G$7$g$&$1$l$I$b!"2f!9$O(B
-$B?7$7$$5!G=$K>GE@$rEv$F$?$$$N$G$9!#(B<i>-stable</i> $B%V%i%s%A$O!"$H$F$b4JC1$K(B
-$BF1$8%P!<%8%g%s$N(B<i>-release</i>$B%V%i%s%A$+$i9=C[$9$k$3$H$,$G$-$k$h$&$K%G%6%$%s$5$l$F$$$^$9(B
-($B$?$H$($P!"(B<i>4.8-release</i>$B$+$i(B<i>4.8-stable</i>$B$X0\9T$9$k$J$I$G$9(B)$B!#(B
+<i>-Stable</i> は <i>-release</i> をベースにしており
+また OpenBSD の主要な開発パスからのブランチです。
+とても重要なfixが <i>-current</i> になされたとき、それらの変更は
+<i>-stable</i> ブランチに "バックポート" （統合）されます。
+なぜなら、<i>-stable</i> はまた
+"<i>patch branch</i>" として知られているからです。
+上のイラストでは、垂直の点線がバグ
+フィックスが<i>-stable</i>ブランチに盛り込まれたことを示しています。そして
+上の例では、<i>4.5-stable</i> ブランチが<i>4.7-release</i>とともに終わりを迎えた
+こと、そして <i>4.6-stable</i>ブランチは<i>4.8-release</i>とともに終わりをむかえた
+ことに気付くでしょう -- 古いリリースは、通常
+２つ
+前のリリースまでサポートされます。古いバージョンをサポートする事は資源と時間を使います、
+古いリリースのサポートを継続して提供してもよいでしょうけれども、我々は
+新しい機能に焦点を当てたいのです。<i>-stable</i> ブランチは、とても簡単に
+同じバージョンの<i>-release</i>ブランチから構築することができるようにデザインされています
+(たとえば、<i>4.8-release</i>から<i>4.8-stable</i>へ移行するなどです)。
 
 <p>
-<i>-stable</i>$B%V%i%s%A$O(B<i>-release</i>$B$H(B
-<a href="../../errata.html">errata $B%Z!<%8(B</a>$B$K$"$k%Q%C%A$rB-$7$?$b$N$G$9!#(B
-<i>-stable</i>$B$NA`:n$O!"85$K$J$C$?(B<i>-release</i>$B$HF1$8$G$9!#(B
-$B$b$7(B<a href="http://www.openbsd.org/cgi-bin/man.cgi">$B%^%K%e%"%k%Z!<%8(B</a>$B$,(B
-$BJQ99$K$J$C$F$b!"$*$=$i$/$=$NJQ99$,(B<i>-stable</i>$B%V%i%s%A$KH?1G$5$l$k;v$O$J$$$G$7$g$&!#(B
-$B8@$$49$($l$P!"?7$7$$%G%P%$%9$N%5%]!<%H$d?7$7$$5!G=$O7h$7$F(B
-<i>-stable</i>$B$KDI2C$5$l$k$3$H$O$"$j$^$;$s!#(B
+<i>-stable</i>ブランチは<i>-release</i>と
+<a href="../../errata.html">errata ページ</a>にあるパッチを足したものです。
+<i>-stable</i>の操作は、元になった<i>-release</i>と同じです。
+もし<a href="http://www.openbsd.org/cgi-bin/man.cgi">マニュアルページ</a>が
+変更になっても、おそらくその変更が<i>-stable</i>ブランチに反映される事はないでしょう。
+言い換えれば、新しいデバイスのサポートや新しい機能は決して
+<i>-stable</i>に追加されることはありません。
 
 <p>
-"<i>-stable</i>" $B$H$$$&L>A0$,;X$7<($9$b$N$O(B <i>-current</i> $B$,?.Mj@-$N$J$$$b$N(B
-$B$"$k$$$O!"$3$l$,$h$j7xO4$J@=IJ$G$"$k$3$H$r0UL#$9$k$b$N$G$O$"$j$^$;$s!#(B
-<i>-current</i>$B$N(BAPI($B%W%m%0%i%`$,$I$&$d$C$F(BOS$B$HBPOC$9$k$+(B ) $B$d5!G=(B
-$B$OJQ99$5$l?J2=$7$F$$$k$N$K$?$$$7$F!"(B
-<i>-stable</i> $B$NA`:n$d(B API $B$O$=$l$,%Y!<%9$K$7$F$$$k%j%j!<%9$HF1$8$G$9$N$G(B
-$B%7%9%F%`$r3X$S$J$*$7$?$j@_Dj%U%!%$%k$rJQ99$7$?$j!"%7%9%F%`$KDI2C%"%W%j%1!<%7%g%s$rDI2C$9$k:]$N(B
-$BLdBj$,A}$($?$j$O$7$^$;$s!#(B
+"<i>-stable</i>" という名前が指し示すものは <i>-current</i> が信頼性のないもの
+あるいは、これがより堅牢な製品であることを意味するものではありません。
+<i>-current</i>のAPI(プログラムがどうやってOSと対話するか ) や機能
+は変更され進化しているのにたいして、
+<i>-stable</i> の操作や API はそれがベースにしているリリースと同じですので
+システムを学びなおしたり設定ファイルを変更したり、システムに追加アプリケーションを追加する際の
+問題が増えたりはしません。
 
 <p>
-$B<B:]!"2f!9$N4j$$$O!"(BOpenBSD $B$N7QB3E*$JH/E8$G$9!"L\I8$O(B
-<i>-current</i> $B$,$h$j?.Mj$G$-$k$b$N$K$J$j!"$=$7$F$b$A$m$s(B
-$B$$$^$h$jAG@2$i$7$$5!G=$,(B<i>-stable</i>$B$KF~$k$3$H$G$9!#(B
-$BMpK=$J8@$$J}$r$9$l$P!"(BOpenBSD$B$N(B"$B:GNI(B"$B$N%P!<%8%g%s$O(B <i>-current</i>$B$G$9!#(B
+実際、我々の願いは、OpenBSD の継続的な発展です、目標は
+<i>-current</i> がより信頼できるものになり、そしてもちろん
+いまより素晴らしい機能が<i>-stable</i>に入ることです。
+乱暴な言い方をすれば、OpenBSDの"最良"のバージョンは <i>-current</i>です。
 
 <p>
-$BB?$/$N%f!<%6!<$O(B <i>-stable</i> $B$+(B <i>-release</i>$B$rF0$+$7$F$$$k$G$7$g$&!#(B
+多くのユーザーは <i>-stable</i> か <i>-release</i>を動かしているでしょう。
 That being said, many people do run <i>-current</i> on production
 systems, and it is important that people do so to identify bugs and
 test new features.  However, if you don't know how to properly describe,
@@ -189,174 +189,174 @@ choice may be either <i>-current</i> or not using the device, and
 <i>-current</i> may be the lesser evil.  However, one should not expect
 hand-holding from the developers.
 
-<h3>$B%9%J%C%W%7%g%C%H(B</h3>
-OpenBSD $B8x<0%j%j!<%9$N4V!"(B<i>$B%9%J%C%W%7%g%C%H(B</i> $B$,:n$i$l(B
-<a href="../ftp.html">FTP $B%5%$%H(B</a> $B$h$jF~<j=PMh$^$9!#L>A0$,<($9DL$j!"(B
-$B$3$l$i$O:n@.<T$,DO$s$@8D!9$N%W%i%C%H%U%)!<%`8~$1$N%3!<%I$N%=!<%9%D%j!<$N=V4V$N%3%T!<(B
-$B$r9=C[$7$?$b$N$G$9!#(B
-$B$$$/$D$+$N%W%i%C%H%U%)!<%`$K$*$$$F$O!"0JA0$K%9%J%C%W%7%g%C%H(B
-$B$N9=C[$,40N;$7$FG[I[$N$?$a$KCV$+$l$?$3$H$r3P$($F$*$$$F$/$@$5$$!#%9%J%C%W%7%g%C%H$,(B
-$B40A4$KF0:n$9$k!"$^$?$O%$%s%9%H!<%k=PMh$k$3$H$rJ]>Z$9$k$b$N$G$O$"$j$^$;$s!#$?$$$F$$$O(B
-$B%F%9%H$,I,MW$JJQ99$,7@5!$K$J$C$F%9%J%C%W%7%g%C%H$N:n@.$,9T$o$l$k$G$7$g$&!#$$$/$D$+$N(B
-$B%W%i%C%H%U%)!<%`$G$O!"%9%J%C%W%7%g%C%H$N9=C[$O$[$H$s$IKhF|9T$o$l!"B>$N$b$N$K4X$7$F$O(B
-$B$=$l$[$?$S$?$S$G$O$"$j$^$;$s!#$b$7!"(B<i>-current</i>$B$rF0$+$7$?$$$HK>$`$N$G$"$l$P!":G?7$N(B
-$B%9%J%C%W%7%g%C%H$,BgDq$O$9$Y$F$N>l9g$KI,MW$J$b$N$G$9!"$=$7$F%9%J%C%W%7%g%C%H$K%"%C%W%0%l!<%I$9$k$3$H$O!"(B
-<i>-current</i>$B$r%=!<%9$+$i9=C[$9$k:]$KI,MW$J3+;OCOE@$H(B
-$B$J$j$^$9!#(B
+<h3>スナップショット</h3>
+OpenBSD 公式リリースの間、<i>スナップショット</i> が作られ
+<a href="../ftp.html">FTP サイト</a> より入手出来ます。名前が示す通り、
+これらは作成者が掴んだ個々のプラットフォーム向けのコードのソースツリーの瞬間のコピー
+を構築したものです。
+いくつかのプラットフォームにおいては、以前にスナップショット
+の構築が完了して配布のために置かれたことを覚えておいてください。スナップショットが
+完全に動作する、またはインストール出来ることを保証するものではありません。たいていは
+テストが必要な変更が契機になってスナップショットの作成が行われるでしょう。いくつかの
+プラットフォームでは、スナップショットの構築はほとんど毎日行われ、他のものに関しては
+それほたびたびではありません。もし、<i>-current</i>を動かしたいと望むのであれば、最新の
+スナップショットが大抵はすべての場合に必要なものです、そしてスナップショットにアップグレードすることは、
+<i>-current</i>をソースから構築する際に必要な開始地点と
+なります。
 
 <p>
-$B%9%J%C%W%7%g%C%H$r9=C[$7$?$^$5$K$=$N%=!<%9%3!<%I$rF~<j$9$kJ}K!$O$J$$$+$H(B
-$B$H$-$I$-J9$+$l$^$9!#$=$N$h$&$JJ}K!$O$"$j$^$;$s!#Bh0l$K!"$=$&$9$k$3$H$K(B
-$BBg$-$JMx1W$O$"$j$^$;$s!#BhFs$K!"%9%J%C%W%7%g%C%H$,:n$i$l$k$N$O(B
-$BMWK>$,$"$C$?$+!";~4V$,5vMF$7$?$+!"$"$k$$$O%j%=!<%9$,MxMQ2DG=$K$J$C$?$+$G$9!#B.$$(B
-$B%W%i%C%H%U%)!<%`$G$O!"$$$/$D$+$N%9%J%C%W%7%g%C%H$r0lF|$G%j%j!<%9$9$k;v$,$G$-$^$9!#(B
-$B$*$=$$%W%i%C%H%U%)!<%`$G$O!"%9%J%C%W%7%g%C%H$N:n@.$K!"0l=54V$+$=$l0J>e$+$+$k$G$7$g$&!#(B
-$B%=!<%9%D%j!<Fb$K$=$l$>$l$N%9%J%C%W%7%g%C%H$N%?%0$+%^!<%+!<$r$D$1$k$3$H$O(B
-$B$^$C$?$/<B:]E*$G$O$"$j$^$;$s!#(B
-$BBh;0$K!"%9%J%C%W%7%g%C%H$O$7$P$7$P$^$@%=!<%9%D%j!<$K%3%_%C%H$5$l$F$$$J$$(B
-$B<B83E*$J%3!<%I$,4^$^$l$F$$$^$9!#(B
+スナップショットを構築したまさにそのソースコードを入手する方法はないかと
+ときどき聞かれます。そのような方法はありません。第一に、そうすることに
+大きな利益はありません。第二に、スナップショットが作られるのは
+要望があったか、時間が許容したか、あるいはリソースが利用可能になったかです。速い
+プラットフォームでは、いくつかのスナップショットを一日でリリースする事ができます。
+おそいプラットフォームでは、スナップショットの作成に、一週間かそれ以上かかるでしょう。
+ソースツリー内にそれぞれのスナップショットのタグかマーカーをつけることは
+まったく実際的ではありません。
+第三に、スナップショットはしばしばまだソースツリーにコミットされていない
+実験的なコードが含まれています。
 
 <h3>Upgrade vs. Update</h3>
-<h3>$B%"%C%W%0%l!<%I$H%"%C%W%G!<%H(B</h3>
-$B$7$P$7$P(B OpenBSD $B$N%$%s%9%H!<%k$N:]$K(B "upgrading" $B$H(B "updating" $B$X$N8@5Z(B
-$B$r$_$k$3$H$,$"$k$G$7$g$&!#(B
-$B$3$l$i$NC18l$O$I$A$i$b;w$?$h$&$J0UL#$K$b$+$+$o$i$:!"(B OpenBSD $B$G$O>/$7(B
-$B0c$&;H$$J}$r$7$^$9!#(B
+<h3>アップグレードとアップデート</h3>
+しばしば OpenBSD のインストールの際に "upgrading" と "updating" への言及
+をみることがあるでしょう。
+これらの単語はどちらも似たような意味にもかかわらず、 OpenBSD では少し
+違う使い方をします。
 
 <p>
-<b>Upgrading</b> $B$O?75!G=$r4^$`(B OpenBSD $B$N?7$7$$%P!<%8%g%s$r(B
-$B%$%s%9%H!<%k$9$k%W%m%;%9$K$J$j$^$9!#(B
-$B$?$H$($P!"(Bv4.7 $B$+$i(B v4.8 $B$K$7$?$j!"(B 6$B7n(B12$BF|HG$N(B
-$B%9%J%C%W%7%g%C%H$r(B 6$B7n(B20$BF|HG$K$9$k$3$H$G$9!#(B
-$B%"%C%W%0%l!<%I$9$k$H$-$K$O!"Nc$K$h$C$F(B
-<a href="../current.html">Following -current</a> $B$"$k$$$O(B
-<a href="../upgrade48.html">Upgrade guide</a> ($B%j%j!<%9$,JQ$o$C$?$H$-(B)
-$B$NN>J}$r%"%C%W%0%l!<%I$5$l$?%P!<%8%g%s$N(B OpenBSD $B$KI,MW$JJQ99$N;29M$K$9$k$G$7$g$&!#(B
+<b>Upgrading</b> は新機能を含む OpenBSD の新しいバージョンを
+インストールするプロセスになります。
+たとえば、v4.7 から v4.8 にしたり、 6月12日版の
+スナップショットを 6月20日版にすることです。
+アップグレードするときには、例によって
+<a href="../current.html">Following -current</a> あるいは
+<a href="../upgrade48.html">Upgrade guide</a> (リリースが変わったとき)
+の両方をアップグレードされたバージョンの OpenBSD に必要な変更の参考にするでしょう。
 
 <br>
-<b>Updating</b> $B$O4pK\E*$J5!G=$d%P%$%J%j8_49@-$rJQ$($k$3$H!V$J$/!W%Q%C%A$rE,MQ$7$F(B
-$B%7%9%F%`$r2~A1$9$k%W%m%;%9(B
-$B$K$J$j$^$9!#(B
-$B$3$l$ODL>o(B
-<a href="../faq10.html#Patches">source patching process</a> $B$K$J$i$&$+!"$"$k$$$O(B
-the <a href="../../stable.html">stable process</a>$B$K$J$i$&$3$H$G40N;$7$^$9!#(B
-$B%7%9%F%`$r(B "update" $B$9$k$H$-$O!"(B<i>-release</i>$B$+$i(B
-$BF1$8%j%j!<%9%P!<%8%g%s$N(B<i>-stable</i> ($B$"$k$$$O%Q%C%AE,MQ:Q$_(B<i>-release</i>)$B$K$7$^$9!#(B
-$B$?$H$($P!"(B4.8-release $B$r(B 4.8-stable $B$K$9$k$h$&$K$G$9!#(B
+<b>Updating</b> は基本的な機能やバイナリ互換性を変えること「なく」パッチを適用して
+システムを改善するプロセス
+になります。
+これは通常
+<a href="../faq10.html#Patches">source patching process</a> にならうか、あるいは
+the <a href="../../stable.html">stable process</a>にならうことで完了します。
+システムを "update" するときは、<i>-release</i>から
+同じリリースバージョンの<i>-stable</i> (あるいはパッチ適用済み<i>-release</i>)にします。
+たとえば、4.8-release を 4.8-stable にするようにです。
 You may then later update it to a newer <i>-stable</i> of the same
 release version.
-$B$=$l$G!"(B $BF1$8%j%j!<%9%P!<%8%g%s$N$h$j?7$7$$(B <i>-stable</i> 
-$B$K$9$k(B
-$B%"%C%W%G!<%H%W%m%;%9$O$?$$$F$$$H$F$b:$Fq$G$O$"$j$^$;$s!#(B <tt>/etc</tt> 
-$B%U%!%$%k$d$=$NB>$N%7%9%F%`@_Dj$K$OJQ99$r2C$($kI,MW$O$"$j$^$;$s!#(B
+それで、 同じリリースバージョンのより新しい <i>-stable</i> 
+にする
+アップデートプロセスはたいていとても困難ではありません。 <tt>/etc</tt> 
+ファイルやその他のシステム設定には変更を加える必要はありません。
 
 <p>
-$B$=$l$G!"(BCD$B$+$i%7%9%F%`$r%$%s%9%H!<%k$7$?(B($B$?$H$($P!"(B 4.6-release) $B$H$7$?$i!"(B
-4.6-stable $B$K%"%C%W%G!<%H$9$k$N$O>/$7$N;~4V$G$9$_$^$9!#(B $B$=$l$+$i(B CD $B$G(B 4.7-release $B$K(B
-$B%"%C%W%0%l!<%I$7!"$=$7$F(B 4.8-release$B$K:F$S%"%C%W%0%l!<%I$9$k$N$O>/$7$N;~4V$G(B
-$B:Q$_$^$9!#(B
+それで、CDからシステムをインストールした(たとえば、 4.6-release) としたら、
+4.6-stable にアップデートするのは少しの時間ですみます。 それから CD で 4.7-release に
+アップグレードし、そして 4.8-releaseに再びアップグレードするのは少しの時間で
+済みます。
 
-<h3>$BF14|$r0];}$7$^$7$g$&(B</h3>
-OpenBSD$B$,!"%+!<%M%k$H0lB+$N%f!<%F%#%j%F%#$H$7$F$G$O$J$/!"(B
-$BA4BN$H$7$F07$o$l$k$3$H$r0U?^$7$?%*%Z%l!<%F%#%s%0%7%9%F%`$@$H(B
-$BM}2r$9$k$N$O=EMW$G$9!#$"$J$?$O3N<B$K!"%+!<%M%k!"!V%f!<%6!<%i%s%I!W!J%5%]!<%H$7$F$$$k(B
-$B%f!<%F%#%j%F%#$H%U%!%$%k!K(B $B$=$7$F(B <a href="faq15.html#Ports"><tt>ports</tt></a> $B%D%j!<(B
-$B$NA4$F$rF14|$7$F$*$+$J$1$l$P$J$j$^$;$s!#$=$&$7$J$$$H!"ITL{2w$J$3$H$,$*$-$k$G$7$g$&!#JL$N8@$$J}$r$9$l$P(B
-($B$J$<$J$i?M!9$OC1$K4V0c$$$r$7B3$1$k$N$G(B)$B!"0l%v7nA0$N%7%9%F%`$G:G?7$N(B
-<tt>ports</tt> $B$rF0$+$9$3$H$O=PMh$^$;$s$7!"$"$k$$$O(B <i>-current</i> $B$N%=!<%9$N%+!<%M%k$r:F9=C[(B
-$B$7$F(B <i>-release</i> $B%f!<%6!<%i%s%I$GF0$/$3$H$O$-$?$$$G$-$^$;$s!#$=$&$G$9!"(B
-$B$3$l$O!"$b$7$"$J$?$,:#F|(Bports $B%D%j!<$KDI2C$5$l$??7$7$$%W%m%0%i%`$r(B
-$BF0$+$7$?$$$N$G$"$l$P!"(B
-$B%7%9%F%`$r%"%C%W%0%l!<%I$9$kI,MW$,$"$k$3$H$r0UL#$7$F$$$^$9!#$9$$$^$;$s$,(B
-$B$b$&0lEY$$$$$^$9!#(BOpenBSD$B$K$O8B$i$l$?%j%=!<%9$7$+$J$$$N$G$9!#(B
+<h3>同期を維持しましょう</h3>
+OpenBSDが、カーネルと一束のユーティリティとしてではなく、
+全体として扱われることを意図したオペレーティングシステムだと
+理解するのは重要です。あなたは確実に、カーネル、「ユーザーランド」（サポートしている
+ユーティリティとファイル） そして <a href="faq15.html#Ports"><tt>ports</tt></a> ツリー
+の全てを同期しておかなければなりません。そうしないと、不愉快なことがおきるでしょう。別の言い方をすれば
+(なぜなら人々は単に間違いをし続けるので)、一ヶ月前のシステムで最新の
+<tt>ports</tt> を動かすことは出来ませんし、あるいは <i>-current</i> のソースのカーネルを再構築
+して <i>-release</i> ユーザーランドで動くことはきたいできません。そうです、
+これは、もしあなたが今日ports ツリーに追加された新しいプログラムを
+動かしたいのであれば、
+システムをアップグレードする必要があることを意味しています。すいませんが
+もう一度いいます。OpenBSDには限られたリソースしかないのです。
 
 <p>
-$B$R$H$DM}2r$7$F$*$+$J$1$l$P$$$1$J$$$3$H$O%"%C%W%0%l!<%I(B
-$B%W%m%;%9$,%5%]!<%H$7$F$$$k$N$O(B <b>$B0lJ}8~$N$_$G$9!'(B $B0JA0$N%P!<%8%g%s$+$i$=$l0J9_$K(B</b>
+ひとつ理解しておかなければいけないことはアップグレード
+プロセスがサポートしているのは <b>一方向のみです： 以前のバージョンからそれ以降に</b>
 and from <i>-stable</i> to <i>-current</i>.  You can not run
-$B$=$7$F(B <i> -stable</i> $B$+$i(B <i>-current</i> $B$K!#$"$J$?$O(B
-<i>4.8-current</i> $B!J$"$k$$$O%9%J%C%W%7%g%C%H!K$rF0$+$;$:!"$H$F$b4m81$J$3$H$K(B
-$B5$$E$$$F!"(B<i>4.8-stable</i> $B$KLa$m$&$H$7$F$b!#(B $B$"$J$?$N>l9g$"$J$?$N(B
-$BA*$V$I$s$JJ}K!$h$j$b!":G=i$+$i%7%9%F%`$r:FFI$_9~$_$9$kJ}$,(B
-$B$$$$$G$7$g$&!#7h$7$F(BOpenBSD $B3+H/%A!<%`$N1g=u$r(B
-$B4|BT$7$J$$$G$/$@$5$$!#(B
+そして <i> -stable</i> から <i>-current</i> に。あなたは
+<i>4.8-current</i> （あるいはスナップショット）を動かせず、とても危険なことに
+気づいて、<i>4.8-stable</i> に戻ろうとしても。 あなたの場合あなたの
+選ぶどんな方法よりも、最初からシステムを再読み込みする方が
+いいでしょう。決してOpenBSD 開発チームの援助を
+期待しないでください。
 
 <p>
-$B$=$&$G$9!"$3$l$O(B<i>-current</i>$B$r;HMQ$9$kA0$KD9$$4V??7u$K9M$($kI,MW$,$"$k$H$$$&(B
-$B0UL#$G$9!#(B
+そうです、これは<i>-current</i>を使用する前に長い間真剣に考える必要があるという
+意味です。
 
 <a name="WhySrc"></a>
-<h2>5.2 - $B$I$&$7$F%=!<%9$+$i%7%9%F%`$r%3%s%Q%$%k$9$kI,MW$,$"$k$N$G$7$g$&$+(B</h2>
-$B<B:]$K$O!"2DG=@-$O$J$$$G$7$g$&!#(B
+<h2>5.2 - どうしてソースからシステムをコンパイルする必要があるのでしょうか</h2>
+実際には、可能性はないでしょう。
 
 <p>
-$B%=!<%9$+$i%S%k%I$9$kI,MW$,$J$$$$$/$D$+$NM}M3!'(B
+ソースからビルドする必要がないいくつかの理由：
 <ul>
-<li>$B%"%C%W%0%l!<%I$N$?$a$K$"$J$?$N%7%9%F%`$r%3%s%Q%$%k$9$kJ}K!$O%5%]!<%H$5$l$F$$$^$;$s!#(B
-<li>$B%7%9%F%`$r%3%s%Q%$%k$9$k$3$H$G$h$jNI$$%Q%U%)!<%^%s%9$rF@$i$l(B*$B$J$/(B*$B$J$j$^$9(B
-$B%3%s%Q%$%k%*%W%7%g%s$rJQ99$9$k$3$H$O2~A1$h$j$b%7%9%F%`$r2u$7$F$7$^$&$N$K(B
-$B6a$$$G$9(B
+<li>アップグレードのためにあなたのシステムをコンパイルする方法はサポートされていません。
+<li>システムをコンパイルすることでより良いパフォーマンスを得られ*なく*なります
+コンパイルオプションを変更することは改善よりもシステムを壊してしまうのに
+近いです
 </ul>
 
-$B$"$J$?$,K>$`$+$b$7$l$J$$!"$^$?$O%=!<%9$+$i%S%k%I$9$kI,MW$,$"$k$$$/$D$+$NM}M3!'(B
+あなたが望むかもしれない、またはソースからビルドする必要があるいくつかの理由：
 <ul>
-<li>$B?75!G=$N%F%9%H$"$k$$$O3+H/$N$?$a(B
-<li>$B%7%9%F%`$r%3%s%Q%$%k$9$k$3$H$OB?$/$N%9%H%l%9$r%3%s%T%e!<%?$KM?$($^$9!#$=$l$O3N$+$K(B
-$B$"$J$?$@$1$N$^$H$a!"$"$k$$$OHs>o$KNI9%$J1?E>>uBV$N<B:]$N(B
-$B%7%9%F%`$r:n$k$?$a$N<jCJ$G$9!#(B
-<li><a href="../../stable.html">stable $B%V%i%s%A(B</a>$B$KDI?o$7$?$$(B
-<li>$B$"$kFCJL$J%"%W%j%1!<%7%g%s$N$?$a$K9bEY$K%+%9%?%^%$%:$7$?%P!<%8%g%s$N(BOpenBSD
-$B$r:n$j$?$/$J$C$?(B
+<li>新機能のテストあるいは開発のため
+<li>システムをコンパイルすることは多くのストレスをコンピュータに与えます。それは確かに
+あなただけのまとめ、あるいは非常に良好な運転状態の実際の
+システムを作るための手段です。
+<li><a href="../../stable.html">stable ブランチ</a>に追随したい
+<li>ある特別なアプリケーションのために高度にカスタマイズしたバージョンのOpenBSD
+を作りたくなった
 </ul>
 
 <p>
-OpenBSD$B%A!<%`$O(B <i>-current</i>$B$N%3!<%I$K4p$E$$$??7$7$$%9%J%C%W%7%g%C%H$r(B
-$BHs>o$KDj4|E*$KA4$F$N%W%i%C%H%U%)!<%`8~$1$K=P$7$F$$$^$9!#(B
-$B$3$l$O(B<i>-current</i>$B$rF0$+$9$N$KI,MW$JA4$F$N2DG=@-$,$"$j$^$9!#(B
+OpenBSDチームは <i>-current</i>のコードに基づいた新しいスナップショットを
+非常に定期的に全てのプラットフォーム向けに出しています。
+これは<i>-current</i>を動かすのに必要な全ての可能性があります。
 <p>
-$B%=!<%9$+$i9=C[$9$k$b$C$H$b$h$/$"$kM}M3$O!"(B
-$B%=!<%9$+$i9=C[$9$k;v$,M#0l%5%]!<%H$5$l$F$$$k%*%W%7%g%s$G$"$k(B<i>-stable</i> $B%V%i%s%A$K(B
-$BDI?o$9$k$3$H$G$9!#(B
+ソースから構築するもっともよくある理由は、
+ソースから構築する事が唯一サポートされているオプションである<i>-stable</i> ブランチに
+追随することです。
 
 <p>
-$B$b$7%=!<%9$+$i(B<i>-current</i>$B$r%3%s%Q%$%k$7$F$$$k$N$G$"$l$P!"(B
-$B40A4$J%3%s%=!<%k%"%/%;%9$N=PMh$k%^%7%s$G$N$_9T$&$3$H$r(B
-$B6/$/?d>)$7$^$9!#(B
-$B3+H/2aDx$K$"$k$N$G!"(B
-$B?7$7$$%+!<%M%k$H8E$$%f!<%6!<%i%s%I$H$N4V$KIT0lCW$,(B
-$B%7%9%F%`$r%M%C%H%o!<%/7PM3$G%"%/%;%9$G$-$J$/$J$k$+$b$7$l$^$;$s!#(B
-$B$3$l$O(B <i>-stable</i> $B$N9=C[$G$OH/@8$9$kLdBj$G$O$J$$$G$7$g$&!#(B
+もしソースから<i>-current</i>をコンパイルしているのであれば、
+完全なコンソールアクセスの出来るマシンでのみ行うことを
+強く推奨します。
+開発過程にあるので、
+新しいカーネルと古いユーザーランドとの間に不一致が
+システムをネットワーク経由でアクセスできなくなるかもしれません。
+これは <i>-stable</i> の構築では発生する問題ではないでしょう。
 
 <a name="Bld"></a>
-<h2>5.3 - $B%=!<%9$+$i$N(B OpenBSD $B$N9=C[(B</h2>
+<h2>5.3 - ソースからの OpenBSD の構築</h2>
 
 <a name="BldOverview"></a>
-<h3>5.3.1 - $B9=C[%W%m%;%9$N35MW(B</h3>
+<h3>5.3.1 - 構築プロセスの概要</h3>
 
-$B%=!<%9%3!<%I$+$i(B OpenBSD $B$r9=C[$9$k$N$O$$$/$D$+$N%9%F%C%W$rMW7o$H$7$^$9!#(B
+ソースコードから OpenBSD を構築するのはいくつかのステップを要件とします。
 <ul>
-<li><a href="#BldBinary">$BD>6a$NF~<j$G$-$k%P%$%J%j$K%"%C%W%0%l!<%I$9$k(B</a>
-<li><a href="#BldGetSrc">$BE,@Z$J%=!<%9%3!<%I$rF~<j$9$k(B</a>
-<li><a href="#BldKernel">$B?7$7$$%+!<%M%k$r9=C[$7!"$=$l$G5/F0$9$k!#(B</a>
-<li><a href="#BldUserland">"$B%f!<%6!<%i%s%I(B" $B$r9=C[$9$k(B("make build").</a>
+<li><a href="#BldBinary">直近の入手できるバイナリにアップグレードする</a>
+<li><a href="#BldGetSrc">適切なソースコードを入手する</a>
+<li><a href="#BldKernel">新しいカーネルを構築し、それで起動する。</a>
+<li><a href="#BldUserland">"ユーザーランド" を構築する("make build").</a>
 </ul>
 
-$B$b$7(BX$B$,%$%s%9%H!<%k$5$l$F$?$j!"9=C[$NL\E*$K1~$8$F(B
-$B0lIt$N%f!<%6!<$,<B9T$7$?$$$+$b$7$l$J$$$$$/$D$+$N<j=g$,$"$j$^$9!#(B
+もしXがインストールされてたり、構築の目的に応じて
+一部のユーザーが実行したいかもしれないいくつかの手順があります。
 <ul>
-<li><a href="#Release"> "release" $B$N9=C[(B</a>
-<li><a href="#Xbld">X$B$N9=C[(B</a>
+<li><a href="#Release"> "release" の構築</a>
+<li><a href="#Xbld">Xの構築</a>
 </ul>
 
 
 <a name="BldBinary"></a>
-<h3>5.3.2 - $BD>6a$N;HMQ$G$-$k%P%$%J%j$X$N%$%s%9%H!<%k$b$7$/$O%"%C%W%0%l!<%I(B</h3>
+<h3>5.3.2 - 直近の使用できるバイナリへのインストールもしくはアップグレード</h3>
 
-$B%=!<%9$+$i9=C[$9$k:G=i$N<j=g$O!"%$%s%9%H!<%k$5$l$F$$$k$b$N$KBP$7$F;HMQ$G$-$kD>6a$N(B
-$B%P%$%J%j$r;}$C$F$$$k$3$H$r3NG'$7$^$9!#(B
+ソースから構築する最初の手順は、インストールされているものに対して使用できる直近の
+バイナリを持っていることを確認します。
 
-$B$3$N%F!<%V%k$rMQ$$$F8=:_$I$3$K$$$k$N$+!":G8e$K9T$-Ce$/@h$O$I$3$+!"$=$7$F$I$N%P%$%J%j(B
-$B$r;H$C$F$O$8$a$k$N$,$h$$$N$+C5$7$F$/$@$5$$!#(B
+このテーブルを用いて現在どこにいるのか、最後に行き着く先はどこか、そしてどのバイナリ
+を使ってはじめるのがよいのか探してください。
 
 <p>
 <table border="1" style="empty-cells: show;">
@@ -387,8 +387,8 @@ OpenBSD$B%A!<%`$O(B <i>-current</i>$B$N%3!<%I$K4p$E$$$??7$7$$%9%J%C%W%7%g%C%H
 </table>
 
 <p>
-$B%P%$%J%j$N%$%s%9%H!<%k$K$O(B
-$B%$%s%9%H!<%k%a%G%#%"$N(B "Upgrade" $B%*%W%7%g%s$r;H$&$3$H$,$*4+$a$G$9!#(B
+バイナリのインストールには
+インストールメディアの "Upgrade" オプションを使うことがお勧めです。
 If that is not possible, you can also unpack the binaries as described
 <a href="upgrade48.html">here</a>.
 Regardless, you must do the entire upgrade process, including creating 

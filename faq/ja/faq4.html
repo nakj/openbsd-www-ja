@@ -3,7 +3,7 @@
 <head>
 <title>4 - OpenBSD 4.8 Installation Guide</title>
 <link rev= "made" href= "mailto:www@openbsd.org">
-<meta http-equiv="Content-Type" content="text/html; charset=iso-2022-jp">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name= "resource-type" content= "document">
 <meta name= "description"   content= "the OpenBSD FAQ page">
 <meta name= "keywords"      content= "openbsd,faq">
@@ -21,60 +21,60 @@
 <p>
 
 <font color= "#0000e0">
-<a href= "index.html">[FAQ $B$NL\<!(B]</a>
-<a href= "faq3.html">[3 $B>O(B - OpenBSD $B$N$O$8$a$+$?(B]</a>
-<a href= "faq5.html">[5 $B>O(B - $B%=!<%9%3!<%I$+$i%7%9%F%`$r9=C[$9$k<j=g(B]</a>
+<a href= "index.html">[FAQ の目次]</a>
+<a href= "faq3.html">[3 章 - OpenBSD のはじめかた]</a>
+<a href= "faq5.html">[5 章 - ソースコードからシステムを構築する手順]</a>
 </font>
 
-<h1><font color="#e00000">4 - OpenBSD 4.8 $B%$%s%9%H!<%k%,%$%I(B</font></h1>
+<h1><font color="#e00000">4 - OpenBSD 4.8 インストールガイド</font></h1>
 <hr>
 
 <p>
 <h3>Table of Contents</h3>
 <ul>
-<li><a href= "#Overview"    >4.1 - OpenBSD $B%$%s%9%H!<%k<j=g$N(B
-                                     $B35MW(B</a>
-<li><a href= "#Checklist"   >4.2 - $B%$%s%9%H!<%kA0$N%A%'%C%/%j%9%H(B</a>
+<li><a href= "#Overview"    >4.1 - OpenBSD インストール手順の
+                                     概要</a>
+<li><a href= "#Checklist"   >4.2 - インストール前のチェックリスト</a>
 
-<li><a href="#MkInsMedia"   >4.3 - $B5/F02DG=$J(BOpenBSD $B%$%s%9%H!<%k%a%G%#%"$N(B
-                                     $B:n@.(B</a>
+<li><a href="#MkInsMedia"   >4.3 - 起動可能なOpenBSD インストールメディアの
+                                     作成</a>
     <ul>
-    <li><a href="#MkCD-ROM" >4.3.1 - $B5/F0(B CD $B$N:n@.(B</a>
-    <li><a href="#UnixFlop" >4.3.2 - Unix $B>e$G$N5/F0%U%m%C%T!<:n@.(B</a>
-    <li><a href="#DosFlop"  >4.3.3 - Windows $B>e$G$N5/F0%U%m%C%T!<:n@.(B</a>
+    <li><a href="#MkCD-ROM" >4.3.1 - 起動 CD の作成</a>
+    <li><a href="#UnixFlop" >4.3.2 - Unix 上での起動フロッピー作成</a>
+    <li><a href="#DosFlop"  >4.3.3 - Windows 上での起動フロッピー作成</a>
     </ul>
-<li><a href="#Boot"         >4.4 - OpenBSD $B%$%s%9%H!<%k%a%G%#%"$+$i$N5/F0(B</a>
-<li><a href="#Install"      >4.5 - simple install $B$N<B9T(B</a>
+<li><a href="#Boot"         >4.4 - OpenBSD インストールメディアからの起動</a>
+<li><a href="#Install"      >4.5 - simple install の実行</a>
   <ul>
-  <li><a href="#InstStart"    >4.5.1 - $B%$%s%9%H!<%k$N3+;O(B</a>
-  <li><a href="#InstQuestions">4.5.2 - $B%$%s%9%H!<%k$K4X$9$k<ALd(B</a>
-  <li><a href="#InstDisks"    >4.5.3 - $B%G%#%9%/$N@_Dj(B</a>
-  <li><a href="#InstMedia"    >4.5.4 - $B%$%s%9%H!<%k%a%G%#%"$H(B
-    $B%U%!%$%k%;%C%H$NA*Br(B</a>
-  <li><a href="#Inst1stBoot"  >4.5.5 - $B:G=i$N5/F0(B!</a>
+  <li><a href="#InstStart"    >4.5.1 - インストールの開始</a>
+  <li><a href="#InstQuestions">4.5.2 - インストールに関する質問</a>
+  <li><a href="#InstDisks"    >4.5.3 - ディスクの設定</a>
+  <li><a href="#InstMedia"    >4.5.4 - インストールメディアと
+    ファイルセットの選択</a>
+  <li><a href="#Inst1stBoot"  >4.5.5 - 最初の起動!</a>
   <li><a href="#InstFinish"   >4.5.6 - One Last Thing...</a>
   </ul>
 
-<li><a href="#More"         >4.6 - $B$h$jJ#;($J%$%s%9%H!<%k$N>\:Y(B</a>
+<li><a href="#More"         >4.6 - より複雑なインストールの詳細</a>
   <ul>
-  <li><a href="#MoreNetwork"  >4.6.1 - $B%M%C%H%o!<%/@_Dj(B</a>
-  <li><a href="#MoreTimeZone" >4.6.2 - $B;~9o$N@_Dj(B</a>
-  <li><a href="#Morefdisk"    >4.6.3 - fdisk(8) $B%l%$%"%&%H$N%+%9%?%^%$%:(B</a>
-  <li><a href="#Moredisklabel">4.6.4 - disklabel $B%l%$%"%&%H$N%+%9%?%^%$%:(B</a>
+  <li><a href="#MoreNetwork"  >4.6.1 - ネットワーク設定</a>
+  <li><a href="#MoreTimeZone" >4.6.2 - 時刻の設定</a>
+  <li><a href="#Morefdisk"    >4.6.3 - fdisk(8) レイアウトのカスタマイズ</a>
+  <li><a href="#Moredisklabel">4.6.4 - disklabel レイアウトのカスタマイズ</a>
   </ul>
-<li><a href= "#FilesNeeded" >4.7 - $B%$%s%9%H!<%k$KI,MW$J%U%!%$%k$O$J$s$G$7$g$&(B</a>
-<li><a href= "#Partitioning">4.8 - $B$I$&%Q!<%F%#%7%g%s$r@Z$l$P$h$$$G$7$g$&$+(B</a>
-<li><a href= "#Multibooting">4.9 - OpenBSD/i386 $B$N%^%k%A%V!<%H(B</a>
-<li><a href= "#SendDmesg"   >4.10 - $B%$%s%9%H!<%k8e$K(B $B$"$J$?$N(Bdmsg $B=PNO$r(B 
-                                     dmesg@openbsd.org $B$KAw$j$^$7$g$&(B</a>
-<li><a href= "#AddFileSet"  >4.11 - $B%$%s%9%H!<%k8e$K%U%!%$%k%;%C%H$rDI2C$9$k(B</a>
-<li><a href= "#bsd.rd"      >4.12 - 'bsd.rd' $B$H$O2?$G$9$+(B ?</a>
-<li><a href= "#InstProb"    >4.13 - $B0lHLE*$J%$%s%9%H!<%k$NLdBj(B</a>
+<li><a href= "#FilesNeeded" >4.7 - インストールに必要なファイルはなんでしょう</a>
+<li><a href= "#Partitioning">4.8 - どうパーティションを切ればよいでしょうか</a>
+<li><a href= "#Multibooting">4.9 - OpenBSD/i386 のマルチブート</a>
+<li><a href= "#SendDmesg"   >4.10 - インストール後に あなたのdmsg 出力を 
+                                     dmesg@openbsd.org に送りましょう</a>
+<li><a href= "#AddFileSet"  >4.11 - インストール後にファイルセットを追加する</a>
+<li><a href= "#bsd.rd"      >4.12 - 'bsd.rd' とは何ですか ?</a>
+<li><a href= "#InstProb"    >4.13 - 一般的なインストールの問題</a>
   <ul>
-  <li><a href="#cpq16m"     >4.13.1 - $B;d$N(B Compaq $B$O(B 16M $B$7$+(B RAM$B$rG'<1$7$^$;$s(B</a>
-  <li><a href="#noboot"     >4.13.2 - $B;d$N(B i386 $B%^%7%s$O%$%s%9%H!<%k8e$K5/F0$7$^$;$s(B</a>
-  <li><a href="#sshhang"    >4.13.3 - $B;d$N%^%7%s$O5/F0$7$^$7$?$,!"(B
-     ssh-keygen $B%W%m%;%9$G%O%s%0$7$^$9(B</a>
+  <li><a href="#cpq16m"     >4.13.1 - 私の Compaq は 16M しか RAMを認識しません</a>
+  <li><a href="#noboot"     >4.13.2 - 私の i386 マシンはインストール後に起動しません</a>
+  <li><a href="#sshhang"    >4.13.3 - 私のマシンは起動しましたが、
+     ssh-keygen プロセスでハングします</a>
   <li><a href="#noftplist"  >4.13.4 - I got the message "Failed to change
      directory" when doing an install</a>
   <li><a href="#blankfdisk" >4.13.5 - My fdisk partition table is trashed
@@ -93,73 +93,73 @@
 
 <p>
 <a name= "Overview"></a>
-<h2>4.1 - OpenBSD$B%$%s%9%H!<%k<j=g$N35MW(B</h2>
+<h2>4.1 - OpenBSDインストール手順の概要</h2>
 
 <p>
-OpenBSD $B$N!"D9$$4VA4$F$N%W%i%C%H%U%)!<%`$G<sHx0l4S$7$?%7%s%W%k$G0lK\F;$N(B
-$B%$%s%9%H!<%k<j=g$OB:=E$5$l$F$-$^$7$?!#(B
+OpenBSD の、長い間全てのプラットフォームで首尾一貫したシンプルで一本道の
+インストール手順は尊重されてきました。
 
 <p>
-$B$9$Y$F$N%W%i%C%H%U%)!<%`$GHs>o$KN`;w$7$?%$%s%9%H!<%k<j=g$rMQ$$$k;v$,$G$-$^$9$,!"(B
-$B$$$/$D$+%W%i%C%H%U%)!<%`$G$O!">\:Y$,0[$J$C$F$$$^$9!#(B
-$B$9$Y$F$N>l9g!"(B CD-ROM $B$+(B FTP $B%5%$%H$N(B <i>platform</i> $B%G%#%l%/%H%j0J2<$K$"$k(B
-$B%W%i%C%H%U%)!<%`8GM-$N(B INSTALL $BJ8=q$rFI$`$h$&$K6/$/Gw$i$l$^$9!#(B
-($B$?$H$($P!"(B <tt>i386/INSTALL.i386</tt> $B$d(B <tt>macppc/INSTALL.macppc</tt>
-$B$"$k$$$O(B <tt>sparc/INSTALL.sparc</tt> $B$G$9(B)$B!#(B
+すべてのプラットフォームで非常に類似したインストール手順を用いる事ができますが、
+いくつかプラットフォームでは、詳細が異なっています。
+すべての場合、 CD-ROM か FTP サイトの <i>platform</i> ディレクトリ以下にある
+プラットフォーム固有の INSTALL 文書を読むように強く迫られます。
+(たとえば、 <tt>i386/INSTALL.i386</tt> や <tt>macppc/INSTALL.macppc</tt>
+あるいは <tt>sparc/INSTALL.sparc</tt> です)。
 
 <p>
-OpenBSD $B$N%$%s%9%H!<%i$O(B 
-$BB?$/$N%f!<%F%#%j%F%#$H%$%s%9%H!<%k%9%/%j%W%H$r(B
-$B%W%j%m!<%I$N(B RAM $B%G%#%9%/$KAH$_9~$s$@(B<a href="#bsd.rd">$BFCJL$J(B</a> $B%+!<%M%k$G$9!#(B
-$B$3$N%+!<%M%k$,5/F08e!"%*%Z%l!<%F%#%s%0%7%9%F%`$r(B
-$BB?$/$N05=L$5$l$?(B
+OpenBSD のインストーラは 
+多くのユーティリティとインストールスクリプトを
+プリロードの RAM ディスクに組み込んだ<a href="#bsd.rd">特別な</a> カーネルです。
+このカーネルが起動後、オペレーティングシステムを
+多くの圧縮された
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=tar&amp;sektion=1">tar(1)</a>
-(<tt>.tgz</tt>) $B%U%!%$%k$r%W%j%m!<%I$5$l$?(B RAM $B%G%#%9%/0J30$N%=!<%9$+$iCj=P$7$^$9!#(B
-$B$3$N%$%s%9%H!<%k%+!<%M%k$r5/F0$9$k$K$O$$$/$D$+$NJ}K!$,$"$j$^$9!#(B
+(<tt>.tgz</tt>) ファイルをプリロードされた RAM ディスク以外のソースから抽出します。
+このインストールカーネルを起動するにはいくつかの方法があります。
 
 <ul>
-<li><b>$B%U%m%C%T!<%G%#%9%/(B</b>
-OpenBSD $B$OB?$/$N%W%i%C%H%U%)!<%`$G(B $B0lKg$N%U%m%C%T!<%G%#%9%/$+$i5/F0$7$?%$%s%9%H!<%i$G(B
-$B%$%s%9%H!<%k$9$k$3$H$,$G$-$^$9!#(B
-$B$7$+$7$J$,$i!"%9%Z!<%9$N@)Ls$,860x$G!"$$$/$D$+$NBg$-$J%W%i%C%H%U%)!<%`(B ( sparc64
-amd64, alpha) $B$G$O!"%M%C%H%o!<%/$N@_Dj$r$9$k(B DHCP $B%/%i%$%"%s%H$N$h$&$J$$$/$D$+$N(B
-$B$"$J$?$K$H$C$F=EMW$+$b$7$l$J$$%f!<%F%#%j%F%#$,$"$j$^$;$s(B
-$B$3$l$i$N%W%i%C%H%U%)!<%`8~$1$K$O!"(B CD $B$+$i$N%$%s%9%H!<%k$,$h$$$G$7$g$&!#(B
-$B$7$+$7$J$,$i!"(Bi386 $B$d(B sparc $B$N$h$&$J%W%i%C%H%U%)!<%`8~$1$K$O!"$H$F$b40`z$J(B
-$B%V!<%H%U%m%C%T!<$r8+$D$1$k;v$,$G$-$k$G$7$g$&!#(B
+<li><b>フロッピーディスク</b>
+OpenBSD は多くのプラットフォームで 一枚のフロッピーディスクから起動したインストーラで
+インストールすることができます。
+しかしながら、スペースの制約が原因で、いくつかの大きなプラットフォーム ( sparc64
+amd64, alpha) では、ネットワークの設定をする DHCP クライアントのようないくつかの
+あなたにとって重要かもしれないユーティリティがありません
+これらのプラットフォーム向けには、 CD からのインストールがよいでしょう。
+しかしながら、i386 や sparc のようなプラットフォーム向けには、とても完璧な
+ブートフロッピーを見つける事ができるでしょう。
 
 <p>
-$B%$%s%9%H!<%k%U%m%C%T!<$r:n@.$9$k$?$a$N(B
-$B%U%m%C%T!<%G%#%9%/%$%a!<%8$O(B
-<a href="#UnixFlop">Unix-like</a> $B%7%9%F%`!"$"$k$$$O(B
-<a href="#DosFlop">Windows</a> $B%7%9%F%`$G:n$k$3$H$,$G$-$^$9!#(B
-$BE57?E*$J%U%!%$%kL>$O(B <tt>floppy48.fs</tt>$B$G$9!"$@$1$l$I$b$$$/$D$+$N%W%i%C%H%U%)!<%`$G$O(B
-$BJ#?t$N%U%m%C%T!<%$%a!<%8$,$"$j$^$9!#(B
+インストールフロッピーを作成するための
+フロッピーディスクイメージは
+<a href="#UnixFlop">Unix-like</a> システム、あるいは
+<a href="#DosFlop">Windows</a> システムで作ることができます。
+典型的なファイル名は <tt>floppy48.fs</tt>です、だけれどもいくつかのプラットフォームでは
+複数のフロッピーイメージがあります。
 
-<li><b>CD-ROM:</b> $B$$$/$D$+$N%W%i%C%H%U%)!<%`$K$O(B
-$B5/F02DG=$J(B CD-ROM $B$r:n@.2DG=$J(BCD-ROM $B%$%a!<%8(B($B5/F0MQ$N(B<tt>cd48.iso</tt> $B!"(B
-$B$"$k$$$OA4BN%$%s%9%H!<%kMQ$N(B<tt>install48.iso</tt> ) $B$,MQ0U$5$l$F$$$^$9(B
+<li><b>CD-ROM:</b> いくつかのプラットフォームには
+起動可能な CD-ROM を作成可能なCD-ROM イメージ(起動用の<tt>cd48.iso</tt> 、
+あるいは全体インストール用の<tt>install48.iso</tt> ) が用意されています
 
-<li><b>$BB8:_$9$k%Q!<%F%#%7%g%s(B</b> <a href="#bsd.rd">RAM $B%G%#%9%/(B</a> $B%+!<%M%k(B
-$B$O!"%"%C%W%0%l!<%I$+:F%$%s%9%H!<%k$N$?$a$K4{$KB8:_$9$k%Q!<%F%#%7%g%s$+$i5/F0$9$k(B
-$B$3$H$,$G$-$^$9!#(B
+<li><b>存在するパーティション</b> <a href="#bsd.rd">RAM ディスク</a> カーネル
+は、アップグレードか再インストールのために既に存在するパーティションから起動する
+ことができます。
 
-<li><b>$B%M%C%H%o!<%/(B</b> $B$$$/$D$+$N%W%i%C%H%U%)!<%`$O%M%C%H%o!<%/7PM3$N5/F0(B
-$B$r%5%]!<%H$7$F$$$^$9(B ($BNc$($P!"(B<a href="faq6.html#PXE">PXE</a> $B$dB>$N(B
-<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=diskless&amp;sektion=8">$B%M%C%H%o!<%/(B
-$B%V!<%H(B</a> $B$G$9(B)$B!#(B
+<li><b>ネットワーク</b> いくつかのプラットフォームはネットワーク経由の起動
+をサポートしています (例えば、<a href="faq6.html#PXE">PXE</a> や他の
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=diskless&amp;sektion=8">ネットワーク
+ブート</a> です)。
 
-<li><b> $B%U%!%$%k%7%9%F%`%$%a!<%8$N%G%#%9%/$X$N=q$-9~$_(B($B%_%K%k!<%H(B)</b> $B%U%!%$%k%7%9%F%`(B
-$B%$%a!<%8$O4{B8$N%Q!<%F%#%7%g%s$K=q$-9~$`;v$,$G$-$^$9!"$=$7$F5/F0$9$k$3$H$,(B
-$B$G$-$^$9!#(B
+<li><b> ファイルシステムイメージのディスクへの書き込み(ミニルート)</b> ファイルシステム
+イメージは既存のパーティションに書き込む事ができます、そして起動することが
+できます。
 
-<li><b>$B5/F02DG=$J%F!<%W(B</b> $B$$$/$D$+$N%W%i%C%H%U%)!<%`$G$O%F!<%W$+$i$N5/F0$r%5%]!<%H$7$F$$$^$9!#(B
-$B$3$l$i$N%F!<%W$O(B INSTALL.<i>platform</i>$B$NDL$j$K9T$&$3$H$G:n@.$9$k$3$H$,(B
-$B$G$-$^$9!#(B
+<li><b>起動可能なテープ</b> いくつかのプラットフォームではテープからの起動をサポートしています。
+これらのテープは INSTALL.<i>platform</i>の通りに行うことで作成することが
+できます。
 
 </ul>
 
-$BA4$F(B<a href="../../plat.html">$B%W%i%C%H%U%)!<%`(B</a> $B$,$9$Y$F$N5/F0%*%W%7%g%s$r%5%]!<%H$7$F$O$$$^$;$s!#(B
+全て<a href="../../plat.html">プラットフォーム</a> がすべての起動オプションをサポートしてはいません。
 
 <ul>
 <li><a href="../../alpha.html"><b>alpha:</b></a> Floppy, CD-ROM, network,
@@ -202,53 +202,53 @@ for details.
 
 </ul>
 
-$B$9$Y$F$N%W%i%C%H%U%)!<%`$GF1MM$K(B
-<a href="#bsd.rd">bsd.rd</a> $B$r;H$C$F:F%$%s%9%H!<%k$d%"%C%W%0%l!<%I$,=PMh$^$9!#(B
+すべてのプラットフォームで同様に
+<a href="#bsd.rd">bsd.rd</a> を使って再インストールやアップグレードが出来ます。
 
 <p>
-$B0lEY%$%s%9%H!<%k%+!<%M%k$,5/F0$9$k$H!"(B<a href="#FilesNeeded">$B%$%s%9%H!<%k%U%!%$%k%;%C%H(B</a>$B$r(B
-$B$I$3$+$iF~<j$9$k$N$+$$$/$D$+$N%*%W%7%g%s$,$"$j$^$9!#(B
+一度インストールカーネルが起動すると、<a href="#FilesNeeded">インストールファイルセット</a>を
+どこから入手するのかいくつかのオプションがあります。
 
 <ul>
-<li><b>CD-ROM</b> $B$b$A$m$s!"(B
-<a href="../../orders.html">$B8x<0(B CD-ROM</a>$B$r;H$&J}$,$h$$$G$9!"$G$9$,F1MM$K(B
-<tt>install48.iso</tt>$B$d!"<+?H$G:n@.$7$?$b$N$r;H$&$3$H$,$G$-$^$9!#(B
+<li><b>CD-ROM</b> もちろん、
+<a href="../../orders.html">公式 CD-ROM</a>を使う方がよいです、ですが同様に
+<tt>install48.iso</tt>や、自身で作成したものを使うことができます。
 
 <li><b>FTP</b>
-$B$I$l$+$R$H$D$N(B OpenBSD
-<a href="../../ftp.html">FTP $B%_%i!<%5%$%H(B</a>
-$B$+%U%!%$%k%;%C%H$rCV$$$F$"$k%m!<%+%k$N(BFTP$B%5!<%P!<!#(B
+どれかひとつの OpenBSD
+<a href="../../ftp.html">FTP ミラーサイト</a>
+かファイルセットを置いてあるローカルのFTPサーバー。
 
 <li><b>HTTP</b>
-$B$I$l$+$R$H$D$N(B OpenBSD
-<a href="../../ftp.html#http">HTTP $B%_%i!<%5%$%H(B</a>
-$B$+%U%!%$%k%;%C%H$rCV$$$F$"$k%m!<%+%k$N%&%'%V%5!<%P!#(B
+どれかひとつの OpenBSD
+<a href="../../ftp.html#http">HTTP ミラーサイト</a>
+かファイルセットを置いてあるローカルのウェブサーバ。
 
-<li><b>$B%m!<%+%k%O!<%I%G%#%9%/(B</b>
-$BB?$/$N>l9g!"%m!<%+%k%O!<%I%G%#%9%/$NB>$N%Q!<%F%#%7%g%s$+$i%U%!%$%k%;%C%H$N(B
-$B%$%s%9%H!<%k$r9T$&;v$,$G$-$^$9!#(B
-$B$?$H$($P!"(B<a href="../../i386.html">i386</a>$B$G$O!"(B
-FAT $B%Q!<%F%#%7%g%s$+(B ISO9660$B!"(BRock Ridge $B$b$7$/$O(B Joliet $B%U%)!<%^%C%H$5$l$?(B
-CD-ROM$B$+$i%$%s%9%H!<%k$9$k$3$H$,$G$-$^$9!#(B
-$B$$$/$D$+$N>l9g!";H$&A0$K%U%!%$%k%7%9%F%`$r<jF0$G%^%&%s%H$9$kI,MW$,$"$k$+$b$7$l$^$;$s!#(B
+<li><b>ローカルハードディスク</b>
+多くの場合、ローカルハードディスクの他のパーティションからファイルセットの
+インストールを行う事ができます。
+たとえば、<a href="../../i386.html">i386</a>では、
+FAT パーティションか ISO9660、Rock Ridge もしくは Joliet フォーマットされた
+CD-ROMからインストールすることができます。
+いくつかの場合、使う前にファイルシステムを手動でマウントする必要があるかもしれません。
 
 <li><b>NFS:</b>
-$B$$$/$D$+$N%W%i%C%H%U%)!<%`$G$O%U%!%$%k%;%C%H$N$?$a$K(B NFS$B%^%&%s%H$rMQ$$$k$3$H$,$G$-$^$9!#(B
+いくつかのプラットフォームではファイルセットのために NFSマウントを用いることができます。
 
 <li><b>Tape:</b>
-$B%U%!%$%k%;%C%H$O%5%]!<%H$5$l$F$$$k%F!<%W$+$iFI$_=P$9$3$H$b$G$-$^$9!#(B
-$B%F!<%W$N:n@.J}K!$N>\:Y$O(B <tt>INSTALL.</tt><i>platform</i>
-$B%I%-%e%a%s%H$K$"$j$^$9!#(B
+ファイルセットはサポートされているテープから読み出すこともできます。
+テープの作成方法の詳細は <tt>INSTALL.</tt><i>platform</i>
+ドキュメントにあります。
 </ul>
 
 <a name="Checklist"></a>
-<h2>4.2 - $B%$%s%9%H!<%kA0$N%A%'%C%/%j%9%H(B</h2>
+<h2>4.2 - インストール前のチェックリスト</h2>
 
 <p>
-$B%$%s%9%H!<%k$r3+;O$9$kA0$K!"$"$J$?$O2?$r$7$F=*N;$9$k$$$/$D$+$N%"%$%G%"$r(B
-$B;}$C$F$$$kI,MW$,$"$j$^$9!#(B
+インストールを開始する前に、あなたは何をして終了するいくつかのアイデアを
+持っている必要があります。
 
-$B$9$/$J$/$H$b0J2<$N9`L\$K$D$$$FCN$j$?$$$G$7$g$&!#(B
+すくなくとも以下の項目について知りたいでしょう。
 <ul>
 <li>Machine name
 <li>Hardware installed and available
@@ -292,7 +292,7 @@ CD-ROM$B$+$i%$%s%9%H!<%k$9$k$3$H$,$G$-$^$9!#(B
 
 
 <a name="MkInsMedia"></a>
-<h2>4.3 - $B5/F02DG=$J(B OpenBSD $B%$%s%9%H!<%k%a%G%#%"$N:n@.(B</h2>
+<h2>4.3 - 起動可能な OpenBSD インストールメディアの作成</h2>
 
 <p>
 As examples, we will look at the installation images available for the
@@ -302,99 +302,99 @@ and <a href="../sparc.html">sparc</a> platforms.
 <p>
 The <a href="../i386.html">i386</a> platform has six separate
 installation disk images to choose from:
-<a href="../../i386.html">i386</a> $B%W%i%C%H%U%)!<%`8~$1$K$O(B6$B$D$NFHN)$7$?(B
-$B%$%s%9%H!<%k%G%#%9%/%$%a!<%8$rA*$S$^$9!#(B
+<a href="../../i386.html">i386</a> プラットフォーム向けには6つの独立した
+インストールディスクイメージを選びます。
 
 <ul>
-<li><b><tt>cd48.iso</tt></b> $B$O$[$H$s$I$N%W%i%C%H%U%)!<%`$GM-L>$J(B
-  CD-ROM$B:n@.%=%U%H%&%'%"$G5/F02DG=$J(B CD $B$r:n@.$9$k$3$H$,$G$-$k(B
-  $B$3$N%$%a!<%8$OK-IY$J%I%i%$%P$,F~$C$F$$$F!"$b$7%O!<%I%&%'%"$,(BCDROM$B$+$i5/F02DG=(B
-  $B$G$"$l$P$?$$$F$$$O$*4+$a$JA*Br$G$9!#(B
-<li><b><tt>cdemu48.iso</tt></b> $B$O(B 2.88M$B$N%U%m%C%T!<%$%a!<%8$rMQ$$$?(B
-  "floppy emulation" $B5/F0$r;H$C$F$$$k(B ISO9660 $B%$%a!<%8$G$9!#(B
-  $B>/?t$N?M!9$,$3$N%$%a!<%8$rI,MW$@$H4j$C$F(B -- 
-  $BB?$/$N?M!9$O(B <tt>cd48.iso</tt> $B$r;H$&$G$7$g$&!"$b$7(B<tt>cd48.iso</tt>$B$,(B
-  $B;H$($J$$>l9g$N$_(B <tt>cdemu48.iso</tt> $B$r;H$$$^$7$g$&!#(B
-<li><b><tt>install48.iso</tt></b> $B$O!"(B
-  $BA4$F$NI8=`E*$J%$%s%9%H!<%k%U%!%$%k$r4^$s$@(BISO9660 $B%$%a!<%8$G$9!#(B
-  $B$3$N%U%!%$%k$+$i:n@.$7$?(B CD $B$O%9%?%s%I%"%m!<%s$N(B
-  OpenBSD $B%$%s%9%H!<%k$r9T$&;v$,$G$-$^$9!#(B
-<li><b><tt>floppy48.fs</tt></b> ($B%G%9%/%H%C%W(B PC) $BB?$/$N(B
-  PCI $B$H(B ISA $B%M%C%H%o!<%/%+!<%I!"(BIDE $B$H%7%s%W%k(BSCSI $B%"%@%W%?$H$$$/$D$+$N(B PCMCIA
-  $B$r%5%]!<%H$7$F$$$^$9!#$[$H$s$I$N%f!<%6!<$O%U%m%C%T!<$+$i5/F0$9$k;~$K$3$A$i$N(B
-  $B%$%a!<%8$r;HMQ$9$k$G$7$g$&!#(B
-<li><b><tt>floppyB48.fs</tt></b> ($B%5!<%P(B) $B$O!"B?$/$N(B RAID $B%3%s%H%m!<%i$H(B
-  $B$=$7$F$9$3$7$N0lHLE*$J(B SCSI$B%"%@%W%?$r%5%]!<%H$7$F$$$^$9!#$7$+$7!"(B
-  $BB?$/$NI8=`E*$J(B SCSI $B%"%@%W%?$HB?$/$N(B EISA $B$H(B ISA $B$N(B
-  $B%M%C%H%o!<%/%+!<%I$N%5%]!<%H$O=|30$5$l$F$$$^$9!#(B
-<li><b><tt>floppyC48.fs</tt></b>($B%N!<%H%Q%=%3%s(B) $BB?$/$N%N!<%H%Q%=%3%s$G8+$D$+$k(B
-  CardBus $B$H(B PCMCIA $B%G%P%$%9$r%5%]!<%H$7$F$$$^$9!#(B
+<li><b><tt>cd48.iso</tt></b> はほとんどのプラットフォームで有名な
+  CD-ROM作成ソフトウェアで起動可能な CD を作成することができる
+  このイメージは豊富なドライバが入っていて、もしハードウェアがCDROMから起動可能
+  であればたいていはお勧めな選択です。
+<li><b><tt>cdemu48.iso</tt></b> は 2.88Mのフロッピーイメージを用いた
+  "floppy emulation" 起動を使っている ISO9660 イメージです。
+  少数の人々がこのイメージを必要だと願って -- 
+  多くの人々は <tt>cd48.iso</tt> を使うでしょう、もし<tt>cd48.iso</tt>が
+  使えない場合のみ <tt>cdemu48.iso</tt> を使いましょう。
+<li><b><tt>install48.iso</tt></b> は、
+  全ての標準的なインストールファイルを含んだISO9660 イメージです。
+  このファイルから作成した CD はスタンドアローンの
+  OpenBSD インストールを行う事ができます。
+<li><b><tt>floppy48.fs</tt></b> (デスクトップ PC) 多くの
+  PCI と ISA ネットワークカード、IDE とシンプルSCSI アダプタといくつかの PCMCIA
+  をサポートしています。ほとんどのユーザーはフロッピーから起動する時にこちらの
+  イメージを使用するでしょう。
+<li><b><tt>floppyB48.fs</tt></b> (サーバ) は、多くの RAID コントローラと
+  そしてすこしの一般的な SCSIアダプタをサポートしています。しかし、
+  多くの標準的な SCSI アダプタと多くの EISA と ISA の
+  ネットワークカードのサポートは除外されています。
+<li><b><tt>floppyC48.fs</tt></b>(ノートパソコン) 多くのノートパソコンで見つかる
+  CardBus と PCMCIA デバイスをサポートしています。
 </ul>
 
 <p>
-<a href="../../sparc.html">sparc</a> $B%W%i%C%H%U%)!<%`$O;M$D$N(B
-$B%$%s%9%H!<%k%G%#%9%/%$%a!<%8$,A*Br$G$-$^$9!#(B
+<a href="../../sparc.html">sparc</a> プラットフォームは四つの
+インストールディスクイメージが選択できます。
 <ul>
-<li><b><tt>floppy48.fs:</tt></b> $B%U%m%C%T!<%G%#%9%/$r%5%]!<%H$7$F$$$k%7%9%F%`!#(B
-<li><b><tt>cd48.iso</tt></b> CD-ROM $B$G5/F0$9$k(B SPARC $B%7%9%F%`(B $B8~$1$N(B
-  CD $B$r:n@.=PMh$k(B ISO $B%$%a!<%8!#(B
-<li><b><tt>miniroot48.fs</tt></b> swap $B%Q!<%F%#%7%g%s$K=q$-9~$a$F(B
-  $B5/F0$9$k$3$H$,$G$-$^$9!#(B
-<li><b><tt>install48.iso</tt></b> $B$O!"(B 
-  $BA4$F$NI8=`E*$J%$%s%9%H!<%k%U%!%$%k$r4^$`(B ISO9660 $B%$%a!<%8(B $B$G$9!#(B
-  $B$3$N%U%!%$%k$O(B $B%9%?%s%I%"%m%s$N(B 
-  OpenBSD $B%$%s%9%H!<%k$r9T$($k(B CD $B$r:n@.$9$k$3$H$,$G$-$^$9!#(B
+<li><b><tt>floppy48.fs:</tt></b> フロッピーディスクをサポートしているシステム。
+<li><b><tt>cd48.iso</tt></b> CD-ROM で起動する SPARC システム 向けの
+  CD を作成出来る ISO イメージ。
+<li><b><tt>miniroot48.fs</tt></b> swap パーティションに書き込めて
+  起動することができます。
+<li><b><tt>install48.iso</tt></b> は、 
+  全ての標準的なインストールファイルを含む ISO9660 イメージ です。
+  このファイルは スタンドアロンの 
+  OpenBSD インストールを行える CD を作成することができます。
 </ul>
 
-$B6aBeE*$J%W%i%C%H%U%)!<%`$G$O!"(BCDROM 
-$B5/F0%$%a!<%8$r;H$&$3$H$,:GNI$NCi9p$G$9!"$$$/$D$+$N(B "$B5pBg$J(B" $B%W%i%C%H%U%)!<%`(B (amd64 
-$B$d(B sparc64$B$N$h$&$J(B)$B$G$O!"%U%m%C%T!<%$%a!<%8$O!"B?$/$N%I%i%$%P!<$H(B
-$B%f!<%F%#%j%F%#$O:o=|$5$l$F$$$k$?$a!"%$%s%9%H!<%k:n6H$,$h$jFq$7$/$J$C$F$$$^$9!#(B
-i386 $B$d(B sparc $B$N$h$&$J8E$$%W%i%C%H%U%)!<%`$G$O!"$$$^$@$K$+$J$j%U%m%C%T!<$+$i(B
-$B%$%s%9%H!<%k2DG=$G$9!#(B
+近代的なプラットフォームでは、CDROM 
+起動イメージを使うことが最良の忠告です、いくつかの "巨大な" プラットフォーム (amd64 
+や sparc64のような)では、フロッピーイメージは、多くのドライバーと
+ユーティリティは削除されているため、インストール作業がより難しくなっています。
+i386 や sparc のような古いプラットフォームでは、いまだにかなりフロッピーから
+インストール可能です。
 
 <a name="MkCD-ROM"></a>
-<h3>4.3.1 - CD-ROM$B$N:n@.(B</h3>
+<h3>4.3.1 - CD-ROMの作成</h3>
 
 <p>
-<tt>cd48.iso</tt> $B$+(B 
-<tt>install48.iso</tt>$B$rMQ$$$F(B CD-ROM $B$r:n@.$9$k$3$H$,$G$-$^$9!#(B
+<tt>cd48.iso</tt> か 
+<tt>install48.iso</tt>を用いて CD-ROM を作成することができます。
 The exact details here are left to the reader to determine with
 the tools they have at their disposal.
 
 <p>
 In OpenBSD, you can create a CD from an ISO image using
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=cdio&amp;sektion=1">cdio(1)</a>:
-OpenBSD $B$G$O!"(BISO $B%$%a!<%8$+$i(B CD $B$r:n@.$9$k$N$K(B
-<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=cdio&amp;sektion=1">cdio(1)</a>$B$r;H$$$^$9!#(B
+OpenBSD では、ISO イメージから CD を作成するのに
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=cdio&amp;sektion=1">cdio(1)</a>を使います。
 
 <table border=0 width="90%"><tr><td nowrap bgcolor="#EEEEEE"><pre>
   # <b>cdio tao cd48.iso</b>
 </pre></td></tr></table>
 
 <p>
-Windows $B$H(B Macintosh $B%7%9%F%`8~$1$N%=%U%H%&%'%"$H$7$FGd$i$l$F$$$k(B
-$B$[$H$s$I$N(B CD $B%l%3!<%@!<$O(B $BGr;f$N%a%G%#%"$K(B ISO $B%$%a!<%8$r=q$-9~$`$3$H$,$G$-$^$9!#(B
-$B$b$7!"$b$C$F$$$J$/$F$bB?$/$N(B $BL5NA$N%"%W%j%1!<%7%g%s(B $B$G(B
-$B<B8==PMh$^$9!#(B
+Windows と Macintosh システム向けのソフトウェアとして売られている
+ほとんどの CD レコーダーは 白紙のメディアに ISO イメージを書き込むことができます。
+もし、もっていなくても多くの 無料のアプリケーション で
+実現出来ます。
 
 <p>
-$BB>$N(B Unix $B7O%7%9%F%`$G$O(B 
-<a href="http://www.cdrkit.org/">cdrkit</a>$B$N$h$&$J%"%W%j%1!<%7%g%s$r;H$$$^$9!#(B
+他の Unix 系システムでは 
+<a href="http://www.cdrkit.org/">cdrkit</a>のようなアプリケーションを使います。
 
 <a name="MkFlop"></a>
 <a name="UnixFlop"></a>
 <h3>4.3.2 - Creating floppies on Unix</h3>
-<h3>4.3.2 - Unix $B>e$G$N%U%m%C%T!<$N:n@.(B</h3>
+<h3>4.3.2 - Unix 上でのフロッピーの作成</h3>
 
 <p>
-$B@53N$J>\:Y$H%G%P%$%9L>$O!"(B Unix $B$NJQ<o$+$i(B Unix
-$B$NJQ<o$^$GB?MM$G$9!#$"$J$?$N%7%9%F%`$KE,@Z$JJ}K!$r;H$C$F$/$@$5$$!#(B
+正確な詳細とデバイス名は、 Unix の変種から Unix
+の変種まで多様です。あなたのシステムに適切な方法を使ってください。
 
 <p>
-$B%U%)!<%^%C%H:Q$_%U%m%C%T!<$r:n@.$9$k$K$O!"(B
+フォーマット済みフロッピーを作成するには、
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=fdformat&amp;sektion=1&amp;arch=i386">fdformat(1)</a>
-$B%3%^%s%I$r;HMQ$7$^$9!#%U%)!<%^%C%H$HITNI%;%/%?$N%A%'%C%/$NN>J}$,9T$($^$9!#(B
+コマンドを使用します。フォーマットと不良セクタのチェックの両方が行えます。
 
 <p>
 <table border=0 width="90%"><tr><td nowrap bgcolor="#EEEEEE"><pre>
@@ -404,14 +404,14 @@ Windows $B$H(B Macintosh $B%7%9%F%`8~$1$N%=%U%H%&%'%"$H$7$FGd$i$l$F$$$k(B
 </pre></td></tr></table>
 
 <p>
-$B$b$7!"=PNO$,>e$NNc$N$h$&$G$"$l$P!"%G%#%9%/$O(B OK $B$G$9!#(B
-$B$7$+$7$J$,$i!"$b$7!"A4$F(B "V" $B$,=P$J$$%G%#%9%/$G$"$l$P!"$[$H$s$I(B
-$B$N>l9g$=$N%G%#%9%/$O0-$$>uBV$G$9$N$G!"JL$N$b$N$r;n$9$Y$-$G$7$g$&!#(B
+もし、出力が上の例のようであれば、ディスクは OK です。
+しかしながら、もし、全て "V" が出ないディスクであれば、ほとんど
+の場合そのディスクは悪い状態ですので、別のものを試すべきでしょう。
 
 <p>
-$B%G%#%9%/$K%$%a!<%8%U%!%$%k$r=q$-9~$`$K$O!"(B
-<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=dd&amp;sektion=0">dd(1)</a>$B$r;H$$$^$9!#(B
-<tt>dd(1)</tt>$B$N;HMQJ}K!$NNc$O0J2<$G$9!#(B
+ディスクにイメージファイルを書き込むには、
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=dd&amp;sektion=0">dd(1)</a>を使います。
+<tt>dd(1)</tt>の使用方法の例は以下です。
 
 <p>
 <table border=0 width="90%"><tr><td nowrap bgcolor="#EEEEEE"><pre>
@@ -419,11 +419,11 @@ Windows $B$H(B Macintosh $B%7%9%F%`8~$1$N%=%U%H%&%'%"$H$7$FGd$i$l$F$$$k(B
 </pre></td></tr></table>
 
 <p>
-$B0lEY%$%a!<%8$r=q$-$*$o$l$P!"%3%T!<$7$?%$%a!<%8$,(B
-$B%*%j%8%J%k$HF10l$+$I$&$+(B
+一度イメージを書きおわれば、コピーしたイメージが
+オリジナルと同一かどうか
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=cmp&amp;sektion=1">cmp(1)</a>
-$B%3%^%s%I$GG0$N$?$a3NG'$7$^$7$g$&!#(B
-$B$b$7%G%#%9%/$,%$%a!<%8$HF10l$J$i!"0c$&%W%m%s%W%H$,=P$k$G$7$g$&!#(B
+コマンドで念のため確認しましょう。
+もしディスクがイメージと同一なら、違うプロンプトが出るでしょう。
 
 <p>
 <table border=0 width="90%"><tr><td nowrap bgcolor="#EEEEEE"><pre>
@@ -431,20 +431,20 @@ Windows $B$H(B Macintosh $B%7%9%F%`8~$1$N%=%U%H%&%'%"$H$7$FGd$i$l$F$$$k(B
 </pre></td></tr></table>
 
 <a name="DosFlop"></a>
-<h3>4.3.3 - Windows $B$G$N%U%m%C%T!<$N:n@.(B</h3>
+<h3>4.3.3 - Windows でのフロッピーの作成</h3>
 <p>
-Windows $B$G%U%m%C%T!<$rMQ0U$9$k$K$O!":G=i$K%M%$%F%#%V(B
-$B%U%)!<%^%C%H%D!<%k$r!"%G%#%9%/$r%U%)!<%^%C%H$7$F!"%G%#%9%/$K(B
-$BITNI%;%/%?$,$J$$$3$H$r3NG'$9$k$?$a$K;HMQ$7$^$9!#(B
+Windows でフロッピーを用意するには、最初にネイティブ
+フォーマットツールを、ディスクをフォーマットして、ディスクに
+不良セクタがないことを確認するために使用します。
 
 <p>
-$BMQ0U$7$?%U%m%C%T!<$K%$%s%9%H!<%k%$%a!<%8$r=q$-9~$`$K$O(B
-<tt>ntrw.exe</tt>$B$r;H$$$^$9!"$3$l$O$I$l$+(BFTP$B%_%i!<$N(B
+用意したフロッピーにインストールイメージを書き込むには
+<tt>ntrw.exe</tt>を使います、これはどれかFTPミラーの
 <a href="ftp://ftp.openbsd.org/pub/OpenBSD/4.8/tools/">tools</a>
-$B%G%#%l%/%H%j$+$i%@%&%s%m!<%I2DG=$G$9!#(B
+ディレクトリからダウンロード可能です。
 
 <p>
-<i>ntrw</i>$B$N;HMQNc$G$9!#(B
+<i>ntrw</i>の使用例です。
 <table border=0 width="90%"><tr><td nowrap bgcolor="#EEEEEE"><pre>
   C:\> <strong>ntrw floppy48.fs a:</strong>
   3.5&quot;, 1.44MB, 512 bytes/sector
@@ -455,31 +455,31 @@ Windows $B$G%U%m%C%T!<$rMQ0U$9$k$K$O!":G=i$K%M%$%F%#%V(B
 
 <a name="Boot"></a>
 <h2>4.4 - Booting OpenBSD install media</h2>
-<h2>4.4 - OpenBSD $B%$%s%9%H!<%k%a%G%#%"$N5/F0(B</h2>
+<h2>4.4 - OpenBSD インストールメディアの起動</h2>
 
-<h3>i386/amd64 $B$N5/F0(B</h3>
+<h3>i386/amd64 の起動</h3>
 
-i386 $B$H(B amd64 $B$N(B PC $B%W%i%C%H%U%)!<%`>e$G%$%s%9%H!<%k%a%G%#%"$+$i5/F0$9$k$3$H$O(B
-$B$[$H$s$I$N?M!9$K$H$C$F$O2?$b?7$7$$$3$H$O$"$j$^$;$s!#(B
-$B$"$J$?$N%7%9%F%`$K!"$"$J$?$,A*$s$@%a%G%#%"$+$i5/F0$9$k$h$&$K;X<($9$k!"(B
-$B$?$$$F$$$O(B BIOS $B$N@_Dj%*%W%7%g%s$K$"$j$^$9!#(B
-$B$b$7(B CD $B$+$i5/F0$7$?$$$N$G$"$l$P!"%7%9%F%`$N(B BIOS $B$r(B
-CD $B$+$i5/F0$G$-$k$J$i!"(B CD $B$+$i5/F0$9$k$h$&$K@_Dj$7$^$9!#(B
-$B$$$/$D$+$N8E$$%7%9%F%`$O$3$N%*%W%7%g%s$,$"$j$^$;$s$N$G!"%U%m%C%T!<$rMQ$$$F(B
-$B%$%s%9%H!<%k%$%a!<%8$r5/F0$7$^$9!#(B
-$B62$l$J$$$G$/$@$5$$!"%U%m%C%T!<$+$i5/F0$7$?$H$7$F$b!"$b$7(B OpenBSD $B$,(B CD $B$r%5%]!<%H$7$F$$$k(B
-$B$J$i$P(B ($B$[$H$s$IA4It$N(BIDE$B%I%i%$%V$N$h$&$K(B)$B!"(B CD $B$+$i%$%s%9%H!<%k$rB39T$9$k;v$,$G$-$^$9!#(B
+i386 と amd64 の PC プラットフォーム上でインストールメディアから起動することは
+ほとんどの人々にとっては何も新しいことはありません。
+あなたのシステムに、あなたが選んだメディアから起動するように指示する、
+たいていは BIOS の設定オプションにあります。
+もし CD から起動したいのであれば、システムの BIOS を
+CD から起動できるなら、 CD から起動するように設定します。
+いくつかの古いシステムはこのオプションがありませんので、フロッピーを用いて
+インストールイメージを起動します。
+恐れないでください、フロッピーから起動したとしても、もし OpenBSD が CD をサポートしている
+ならば (ほとんど全部のIDEドライブのように)、 CD からインストールを続行する事ができます。
 
 <p>
-$B4{B8$N(B OpenBSD $B%Q!<%F%#%7%g%s$+!"$"$k$$$O%M%C%H%o!<%/1[$7$K(B
-<a href="faq6.html#PXE">PXE boot process</a> $B$rMQ$$$F5/F0$7$?(B 
-<a href="#bsd.rd">bsd.rd</a> $B$G$b!"%$%s%9%H!<%k$r9T$&$3$H$,$G$-$^$9!#(B
+既存の OpenBSD パーティションか、あるいはネットワーク越しに
+<a href="faq6.html#PXE">PXE boot process</a> を用いて起動した 
+<a href="#bsd.rd">bsd.rd</a> でも、インストールを行うことができます。
 
-<h3>sparc/sparc64 $B$N5/F0(B</h3>
+<h3>sparc/sparc64 の起動</h3>
 
 <b>NOTE:</b>
-<a href="../../sparc64.html">sparc64</a> $B%W%i%C%H%U%)!<%`$G$O!"(B SBus
-$B%^%7%s(B (Ultra 1, Ultra2) $B$@$1$,%U%m%C%T!<$+$i5/F0$9$k$3$H$,$G$-$^$9!#(B
+<a href="../../sparc64.html">sparc64</a> プラットフォームでは、 SBus
+マシン (Ultra 1, Ultra2) だけがフロッピーから起動することができます。
 
 <p>
 You will need the system to be at a monitor ROM prompt, which

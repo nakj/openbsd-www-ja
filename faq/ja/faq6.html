@@ -3,7 +3,7 @@
 <head>
 <title>6 - Networking</title>
 <link rev= "made" href= "mailto:www@openbsd.org">
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-2022-JP">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name= "resource-type" content= "document">
 <meta name= "description"   content= "the OpenBSD FAQ page">
 <meta name= "keywords"      content= "openbsd,faq">
@@ -19,43 +19,43 @@
 </a>
 <p>
 <font color="#0000e0">
-<a href="index.html">[FAQ $B$NL\<!(B]</a>
-<a href="faq5.html">[To Section 5 - $B%=!<%9%3!<%I$+$i%7%9%F%`$r9=C[$9$k<j=g(B]</a>
-<a href="faq7.html">[To Section 7 - $B%-!<%\!<%I$H%G%#%9%W%l%$$N@)8f(B]</a>
+<a href="index.html">[FAQ の目次]</a>
+<a href="faq5.html">[To Section 5 - ソースコードからシステムを構築する手順]</a>
+<a href="faq7.html">[To Section 7 - キーボードとディスプレイの制御]</a>
 </font>
 
-<h1><font color="#e00000">6 - $B%M%C%H%o!<%/(B</font></h1>
+<h1><font color="#e00000">6 - ネットワーク</font></h1>
 <hr>
 
 <p>
-<h3>$BL\<!(B</h3>
+<h3>目次</h3>
 <ul>
-<li><a href= "#Intro" >6.1 - $B$I$3$+1s$/$X9T$/A0$K(B</a>
-<li><a href= "#Setup" >6.2 - $B%M%C%H%o!<%/$N@_Dj(B</a>
+<li><a href= "#Intro" >6.1 - どこか遠くへ行く前に</a>
+<li><a href= "#Setup" >6.2 - ネットワークの設定</a>
 <ul>
-  <li><a href="#Setup.if"      >6.2.1 - $B%M%C%H%o!<%/%$%s%?!<%U%'!<%9$N(B
-    $B3NG'$H@_Dj(B</a>
-  <li><a href="#Setup.gateway" >6.2.2 - $B%G%U%)%k%H%2!<%H%&%'%$(B</a>
-  <li><a href="#Setup.resolver">6.2.3 - DNS $BL>A02r7h(B</a>
-  <li><a href="#Setup.myname"  >6.2.4 - $B%[%9%HL>(B</a>
-  <li><a href="#Setup.activate">6.2.5 - $BJQ99$NH?1GJ}K!(B</a>
-  <li><a href="#Setup.chkroute">6.2.6 - route $B$N3NG'(B</a>
-  <li><a href="#Setup.forward" >6.2.7 - OpenBSD $B$r%2!<%H%&%'%$$K$9$k@_Dj(B</a>
-  <li><a href="#Setup.aliases" >6.2.8 - $B%$%s%?!<%U%'!<%9$N%(%$%j%"%9$r@_Dj$9$k(B</a>
+  <li><a href="#Setup.if"      >6.2.1 - ネットワークインターフェースの
+    確認と設定</a>
+  <li><a href="#Setup.gateway" >6.2.2 - デフォルトゲートウェイ</a>
+  <li><a href="#Setup.resolver">6.2.3 - DNS 名前解決</a>
+  <li><a href="#Setup.myname"  >6.2.4 - ホスト名</a>
+  <li><a href="#Setup.activate">6.2.5 - 変更の反映方法</a>
+  <li><a href="#Setup.chkroute">6.2.6 - route の確認</a>
+  <li><a href="#Setup.forward" >6.2.7 - OpenBSD をゲートウェイにする設定</a>
+  <li><a href="#Setup.aliases" >6.2.8 - インターフェースのエイリアスを設定する</a>
 </ul>
-<li><a href= "#PF"    >6.3 - OpenBSD $B$G%Q%1%C%H%U%#%k%?$d%U%!%$%"%&%)!<%k$r9T$&$N$O$I$&$7$?$i$$$$$G$9$+(B</a>
-<li><a href= "#DHCP"  >6.4 - $BF0E*%[%9%H@_Dj%W%m%H%3%k(B (DHCP)</a>
+<li><a href= "#PF"    >6.3 - OpenBSD でパケットフィルタやファイアウォールを行うのはどうしたらいいですか</a>
+<li><a href= "#DHCP"  >6.4 - 動的ホスト設定プロトコル (DHCP)</a>
 <ul>
-  <li><a href="#DHCPclient">6.4.1 - DHCP $B%/%i%$%"%s%H(B</a>
-  <li><a href="#DHCPserver">6.4.2 - DHCP $B%5!<%P(B</a>
+  <li><a href="#DHCPclient">6.4.1 - DHCP クライアント</a>
+  <li><a href="#DHCPserver">6.4.2 - DHCP サーバ</a>
 </ul>
-<li><a href= "#PPP"   >6.5 - Point to Point $B%W%m%H%3%k(B</a>
-<li><a href= "#Tuning">6.6 - $B%M%C%H%o!<%/%Q%i%a!<%?$ND4@0(B</a>
-<li><a href= "#NFS"   >6.7 - NFS$B$N;H$$J}(B</a>
-<li><a href= "#Bridge">6.9 - OpenBSD$B$G$N%V%j%C%8$N@_Dj(B</a>
-<li><a href= "#PXE"   >6.10 - PXE $B5/F0$r$*$3$J$&$K$O(B</a>
+<li><a href= "#PPP"   >6.5 - Point to Point プロトコル</a>
+<li><a href= "#Tuning">6.6 - ネットワークパラメータの調整</a>
+<li><a href= "#NFS"   >6.7 - NFSの使い方</a>
+<li><a href= "#Bridge">6.9 - OpenBSDでのブリッジの設定</a>
+<li><a href= "#PXE"   >6.10 - PXE 起動をおこなうには</a>
 <li><a href= "#CARP">6.11 - The Common Address Redundancy Protocol (CARP)</a>
-<li><a href="#OpenNTPD">6.12 - OpenNTPD $B$N;H$$J}(B</a>
+<li><a href="#OpenNTPD">6.12 - OpenNTPD の使い方</a>
 <li><a href="#Wireless">6.13 - What are my wireless networking options?</a>
 <li><a href="#Multipath">6.14 - How can I do equal-cost multipath
 	routing?</a>
@@ -65,67 +65,67 @@
 
 <p>
 <a name="Intro"></a>
-<h2>6.1 - $B$I$3$+1s$/$X9T$/A0$K(B</h2>
+<h2>6.1 - どこか遠くへ行く前に</h2>
 
 <p>
-$B$3$N%I%-%e%a%s%H$NNL$N$?$a$K!"(B
-FAQ$B$N(B <a href="faq5.html">$B%+!<%M%k(B
-$B@_Dj$H%;%C%H%"%C%W(B</a> $B%;%/%7%g%s!"$=$7$F(B
+このドキュメントの量のために、
+FAQの <a href="faq5.html">カーネル
+設定とセットアップ</a> セクション、そして
 <a href= "http://www.openbsd.org/cgi-bin/man.cgi?query=ifconfig&amp;sektion=8">
-ifconfig(8)</a> $B$H(B
+ifconfig(8)</a> と
 <a href= "http://www.openbsd.org/cgi-bin/man.cgi?query=netstat&amp;sektion=1">
-netstat(1)</a> $B$N%^%K%e%"%k%Z!<%8$rFI$s$G$=$7$F>/$J$/$H$bItJ,E*$KM}2r$7$F$*$1$P=u$1$K$J$k$G$7$g$&!#(B
+netstat(1)</a> のマニュアルページを読んでそして少なくとも部分的に理解しておけば助けになるでしょう。
 
 <p>
-$B$"$J$?$,%M%C%H%o!<%/4IM}<T$G!"%k!<%F%#%s%0(B
-$B%W%m%H%3%k$N@_Dj$r9T$C$F$$$F!"(BOpenBSD $B$r%k!<%?$H$7$F;H$C$F$$$F!"(B
-IP $B%M%C%H%o!<%-%s%0$N?<It$K9T$/I,MW$,$"$k$J$i!"K\Ev$K(B
+あなたがネットワーク管理者で、ルーティング
+プロトコルの設定を行っていて、OpenBSD をルータとして使っていて、
+IP ネットワーキングの深部に行く必要があるなら、本当に
 <a href="http://www.3com.com/other/pdfs/infra/corpinfo/en_US/501302.pdf">Understanding
-IP Addressing</a>$B$rFI$`I,MW$,$"$k$G$7$g$&!#(B
+IP Addressing</a>を読む必要があるでしょう。
 This is an excellent document.  "Understanding IP Addressing" contains
 fundamental knowledge to build upon when working with IP networks,
 especially when you deal with or are responsible for more than one
 network.
-$B$3$l$OAG@2$i$7$$J8=q$G$9!#(B "Understanding IP Addressing" $B$O4^$_$^$9(B
-IP $B%M%C%H%o!<%/$N:n6H$N4pK\E*$JCN<1$r9=C[$7!"(B
-$BFC$K!"NL(B
+これは素晴らしい文書です。 "Understanding IP Addressing" は含みます
+IP ネットワークの作業の基本的な知識を構築し、
+特に、量
 
 <p>
-$B$b$7!"$"$J$?$,%&%'%V%5!<%P!"(BFTP$B%5!<%P!"%a!<%k%5!<%P$N$h$&$J(B
-$B%"%W%j%1!<%7%g%s$r07$C$F$$$k$J$i!"(B
-<a href="http://www.rfc-editor.org/rfc.html">RFC $B$rFI$`$3$H(B</a>$B$OBg$-$JMx1W$K$J$k$G$7$g$&!#(B
-$B$[$H$s$I$N>l9g!"$=$l$i$rA4$F$rFI$`$3$H$O$G$-$J$$$G$7$g$&!#(B $B$"$J$?$,6=L#$N$"$k$3$H!"$"$k$$$O(B
-$B$"$J$?$N%M%C%H%o!<%/4D6-$G;H$C$F$$$k$3$H$+$i$$$/$D$+$N%F!<%^$r<h$j>e$2$^$7$g$&!#$=$l$i$r(B
-$B$_$F!"F0:n$9$k$h$&$K0U?^$5$l$F$$$k$+D4$Y$^$7$g$&!#(BRFC $B$OB?$/$N(B 
-($B?t@i$N(B) $B%$%s%?!<%M%C%H>e$N%W%m%H%3%kI8=`$H$I$N$h$&$KF0:n$9$k$h$&$K$J$C$F$$$k$N$+$r(B
-$BDj5A$7$F$$$^$9!#(B
+もし、あなたがウェブサーバ、FTPサーバ、メールサーバのような
+アプリケーションを扱っているなら、
+<a href="http://www.rfc-editor.org/rfc.html">RFC を読むこと</a>は大きな利益になるでしょう。
+ほとんどの場合、それらを全てを読むことはできないでしょう。 あなたが興味のあること、あるいは
+あなたのネットワーク環境で使っていることからいくつかのテーマを取り上げましょう。それらを
+みて、動作するように意図されているか調べましょう。RFC は多くの 
+(数千の) インターネット上のプロトコル標準とどのように動作するようになっているのかを
+定義しています。
 
 <p>
 <a name="Setup"></a>
-<h2>6.2 - $B%M%C%H%o!<%/@_Dj(B</h2>
+<h2>6.2 - ネットワーク設定</h2>
 
-$BDL>o!"(BOpenBSD $B$O(B
-<a href="faq4.html">$B%$%s%9%H!<%k(B</a> $B2aDx$G=i4|@_Dj$,$J$5$l$^$9!#(B
-$B$7$+$7$J$,$i!"$3$N2aDx$G2?$,5/$-$F$$$k$N$+!"$I$N$h$&$KF0:n$9$k$N$+(B
-$BM}2r$9$k$K$O$h$$$3$H$G$9!#(B
-$BA4$F$N%M%C%H%o!<%/@_Dj$O(B
-<i>/etc</i> $B%G%#%l%/%H%j$NC1=c$J%F%-%9%H%U%!%$%k$rMQ$$$F9T$o$l$^$9!#(B
+通常、OpenBSD は
+<a href="faq4.html">インストール</a> 過程で初期設定がなされます。
+しかしながら、この過程で何が起きているのか、どのように動作するのか
+理解するにはよいことです。
+全てのネットワーク設定は
+<i>/etc</i> ディレクトリの単純なテキストファイルを用いて行われます。
 
 <p>
 <a name="Setup.if"></a>
-<h3>6.2.1 - $B%M%C%H%o!<%/%$%s%?!<%U%'!<%9$N3NG'$H@_Dj(B</h3>
+<h3>6.2.1 - ネットワークインターフェースの確認と設定</h3>
 
 <p>
-OpenBSD $B$G$O!"(B
-$B%$%s%?!<%U%'!<%9$O@\B3$N7?$G$O$J$/%+!<%I$N7?$K$h$C$F(B
-$BL>IU$1$i$l$^$9!#%M%C%H%o!<%/%+!<%I$,=i4|2=$5$l$kMM$r5/F0;~$K3NG'(B
-$B$9$k$3$H$,$G$-$^$9!"$"$k$$5/F0%W%m%;%9$,=*$o$C$?$"$H$G(B
+OpenBSD では、
+インターフェースは接続の型ではなくカードの型によって
+名付けられます。ネットワークカードが初期化される様を起動時に確認
+することができます、あるい起動プロセスが終わったあとで
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=dmesg&amp;sektion=8">dmesg(8)</a>
-$B%3%^%s%I$G3NG'$G$-$^$9!#$5$i$K(B
-<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ifconfig&amp;sektion=8">ifconfig(8)</a> $B%3%^%s%I$r(B
-$B;H$C$F(B $B%M%C%H%o!<%/%$%s%?!<%U%'!<%9$r8+$k(B $B$3$H$b$G$-$^$9!#(B
-$B$?$H$($P!"$3$l$O%G%P%$%9L>(B fxp $B$r;H$&(B Intel Fast Ethernet
-$B%M%C%H%o!<%/%+!<%I(B $B$N(Bdmsg $B=PNO$G$9!#(B
+コマンドで確認できます。さらに
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ifconfig&amp;sektion=8">ifconfig(8)</a> コマンドを
+使って ネットワークインターフェースを見る こともできます。
+たとえば、これはデバイス名 fxp を使う Intel Fast Ethernet
+ネットワークカード のdmsg 出力です。
 
 <blockquote><pre>
 fxp0 at pci0 dev 10 function 0 "Intel 82557" rev 0x0c: irq 5, address 00:02:b3:2b:10:f7
@@ -133,23 +133,23 @@ inphy0 at fxp0 phy 1: i82555 10/100 media interface, rev. 4
 </pre></blockquote>
 
 <p>
-$B$b$7%G%P%$%9L>$,J,$+$i$J$$$N$G$"$l$P!"$"$J$?$N%W%i%C%H%U%)!<%`$N(B
-<a href="../../plat.html">$B%5%]!<%H$5$l$F$$$k%O!<%I%&%'%"%j%9%H(B</a> $B$r8+$F$/$@$5$$!#(B
-$B$=$3$K$OB?$/$N0lHLE*$J%+!<%I$NL>A0$H$=$l$i$N(B OpenBSD $B$G$N%G%P%$%9L>$,%j%9%H$5$l$F$$$k$N$r(B
-$B8+$D$1$k$G$7$g$&!#7k9g$5$l$?C;$$%"%k%U%!%Y%C%H$N%G%P%$%9L>(B(fxp $B$N$h$&$J(B)
-$B%+!<%M%k$K$h$C$F3d$jEv$F$i$l$?HV9f$H!"%$%s%?!<%U%'!<%9L>(B 
-(fxp0 $B$N$h$&$J(B) $B$,F@$i$l$^$9!#(B
-$BHV9f$OMM!9$J4p=`$G3d$jEv$F$i$l$^$9!"(B
-$B%+!<%I$H%7%9%F%`$NB>$N>\:Y$K0MB8$7$F$$$^$9!#(B
-$B$$$/$D$+$N%+!<%I$O%P%9$NAv::$r9T$C$?:]$K8!=P$5$l$?=g$K(B $B3d$jEv$F$i$l$^$9!#(B
-$B$=$l0J30$O%O!<%I%&%'%"%j%=!<%9$N@_Dj$+(B MAC $B%"%I%l%9$K$h$j$^$9!#(B
+もしデバイス名が分からないのであれば、あなたのプラットフォームの
+<a href="../../plat.html">サポートされているハードウェアリスト</a> を見てください。
+そこには多くの一般的なカードの名前とそれらの OpenBSD でのデバイス名がリストされているのを
+見つけるでしょう。結合された短いアルファベットのデバイス名(fxp のような)
+カーネルによって割り当てられた番号と、インターフェース名 
+(fxp0 のような) が得られます。
+番号は様々な基準で割り当てられます、
+カードとシステムの他の詳細に依存しています。
+いくつかのカードはバスの走査を行った際に検出された順に 割り当てられます。
+それ以外はハードウェアリソースの設定か MAC アドレスによります。
 
 <p>
-$B$I$N$h$&$J%M%C%H%o!<%/%$%s%?!<%U%'!<%9$,<1JL$5$l$F$$$k$+(B
+どのようなネットワークインターフェースが識別されているか
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ifconfig&amp;sektion=8">ifconfig(8)</a>
-$B%f!<%F%#%j%F%#$GD4$Y$k;v$,$G$-$^$9!#0J2<$N%3%^%s%I$O%7%9%F%`$NA4$F$N%M%C%H%o!<%/%$%s%?!<%U%'!<%9(B
-$B$rI=<($7$^$9!#$3$N%5%s%W%k=PNO$O!"$?$C$?0l$D$NJ*M}%$!<%5%M%C%H%$%s%?!<%U%'!<%9$,$"$k$3$H$,$o$+$j$^$9!"$=$l$O(B
-<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=fxp&amp;sektion=4">fxp(4)</a> $B$G$9!#(B
+ユーティリティで調べる事ができます。以下のコマンドはシステムの全てのネットワークインターフェース
+を表示します。このサンプル出力は、たった一つの物理イーサネットインターフェースがあることがわかります、それは
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=fxp&amp;sektion=4">fxp(4)</a> です。
 
 <blockquote><pre>
 $ <b>ifconfig</b>
@@ -189,19 +189,19 @@ gif3: flags=8010&lt;POINTOPOINT,MULTICAST&gt; mtu 1280
 </pre></blockquote>
 
 <p>
-$B$4Mw$N$h$&$K!"(B
+ご覧のように、
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ifconfig&amp;sektion=8">ifconfig(8)</a> 
-$B$O!"$3$N;~E@$GM_$7$$$h$j$b$?$/$5$s$N>pJs$r=PNO$7$^$9!#$7$+$7!"$=$l$O(B
-$B$^$@%$%s%?!<%U%'!<%9$rI=<($9$k$3$H$,$G$-$^$9!#>e5-$NNc$G$O!"(B
-$B%$%s%?!<%U%'!<%9%+!<%I$O$9$G$K@_Dj:Q$_$G$9!#(B fxp0 $B>e$K(B IP $B%M%C%H%o!<%/$,$9$G$K@_Dj:Q$_(B
-$B$J$3$H$O!"CM$,(B &quot;inet
-10.0.0.38 netmask 0xffffff00 broadcast 10.0.0.255&quot; $B$G!"$5$i$K(B
-<b>UP</b>$B$H(B<b>RUNNING</b> $B%U%i%0$,@_Dj$5$l$F$$$k$3$H$+$iL@$i$+$G$9!#(B
+は、この時点で欲しいよりもたくさんの情報を出力します。しかし、それは
+まだインターフェースを表示することができます。上記の例では、
+インターフェースカードはすでに設定済みです。 fxp0 上に IP ネットワークがすでに設定済み
+なことは、値が &quot;inet
+10.0.0.38 netmask 0xffffff00 broadcast 10.0.0.255&quot; で、さらに
+<b>UP</b>と<b>RUNNING</b> フラグが設定されていることから明らかです。
 
 <p>
-$B:G8e$K!"$$$/$D$+$NB>$N%$%s%?!<%U%'!<%9$,=i4|@_Dj$GM-8z$K$J$C$F$$$k$3$H$K(B
-$B5$IU$/$G$7$g$&!#$3$l$i$OMM!9$J5!G=$K;H$o$l$k2>A[%$%s%?!<%U%'!<%9$G$9!#(B
-$B0J2<$N%^%K%e%"%k%Z!<%8$O$3$l$i$r5-=R$7$F$$$^$9!#(B
+最後に、いくつかの他のインターフェースが初期設定で有効になっていることに
+気付くでしょう。これらは様々な機能に使われる仮想インターフェースです。
+以下のマニュアルページはこれらを記述しています。
 
 <ul>
 <!-- XXXrelease -->
@@ -232,26 +232,26 @@ gif3: flags=8010&lt;POINTOPOINT,MULTICAST&gt; mtu 1280
 </ul>
 
 <p>
-$B%$%s%?!<%U%'!<%9$O5/F0;~$K(B
+インターフェースは起動時に
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=hostname.if&amp;sektion=5">/etc/hostname.<i>if</i>(5)</a>
-$B%U%!%$%k$rMQ$$$F@_Dj$5$l$^$9!#(B <i>if</i> $B$O!"%$%s%?!<%U%'!<%9$N40A4$JL>A0$GCV$-49$($^$9!#(B
-$B>e$NNc$G$O!"(B<i>/etc/hostname.fxp0</i>$B$G$9!#(B
+ファイルを用いて設定されます。 <i>if</i> は、インターフェースの完全な名前で置き換えます。
+上の例では、<i>/etc/hostname.fxp0</i>です。
 
 <p>
-$B$3$N%U%!%$%k$N%l%$%"%&%H$OC1=c$G$9!#(B
+このファイルのレイアウトは単純です。
 
 <blockquote><pre>
 address_family address netmask broadcast [other options]
 </pre></blockquote>
 
-$B$3$N%U%!%$%k$N%U%)!<%^%C%H$K4X$9$k$h$j>\:Y$J>pJs$O!"(B
+このファイルのフォーマットに関するより詳細な情報は、
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=hostname.if&amp;sektion=5">hostname.if(5)</a>
-$B%^%K%e%"%k%Z!<%8$G3NG'=PMh$^$9!#(B
-$B:3:Y$J@_Dj$r9T$&$?$a$K$O$3$l$rFI$`I,MW$,$"$j$^$9!#(B
+マニュアルページで確認出来ます。
+些細な設定を行うためにはこれを読む必要があります。
 
 <p>
-IPv4 $B%"%I%l%9$NE57?E*$J%$%s%?!<%U%'!<%9$N@_Dj%U%!%$%k$O(B
-$B0J2<$N$h$&$J$b$N$G$9!#(B
+IPv4 アドレスの典型的なインターフェースの設定ファイルは
+以下のようなものです。
 
 <blockquote><pre>
 $ <b>cat /etc/hostname.fxp0</b>
@@ -259,28 +259,28 @@ inet 10.0.0.38 255.255.255.0 NONE
 </pre></blockquote>
 
 <p>
-$B$3$N>l9g!"(BIP$B%"%I%l%9(B 10.0.0.38 $B%5%V%M%C%H%^%9%/(B 255.255.255.0 $B$G(B
-$BFCDj$N%V%m!<%I%-%c%9%H%"%I%l%9$r@_Dj$7$J$$(B($B$3$N>l9g(B 10.0.0.255 $B$,%G%U%)%k%H$G$9(B)
- IPv4 (inet) $B%"%I%l%9$rDj5A$7$F$$$^$9!#(B
+この場合、IPアドレス 10.0.0.38 サブネットマスク 255.255.255.0 で
+特定のブロードキャストアドレスを設定しない(この場合 10.0.0.255 がデフォルトです)
+ IPv4 (inet) アドレスを定義しています。
 
 <p>
-$B%$!<%5%M%C%H$N%a%G%#%"%?%$%W$r;XDj$9$k$3$H$b$G$-$^$9!#$b$7(B
-$B6/@)E*$K(B 100baseTX $BA4Fs=E%b!<%I$K$7$?$$$N$G$"$l$P0J2<$N$h$&$K$7$^$9!#(B
+イーサネットのメディアタイプを指定することもできます。もし
+強制的に 100baseTX 全二重モードにしたいのであれば以下のようにします。
 
 <blockquote><pre>
 inet 10.0.0.38 255.255.255.0 NONE media 100baseTX mediaopt full-duplex
 </pre></blockquote>
 
 <p>
-($BEvA3!"@\B3$NN>C<$rA4Fs=E%b!<%I$K@_Dj$9$k$^$($K(B
-$B6/@)A4Fs=E%b!<%I$7$F$O$$$1$^$;$s!*FCJL$NM}M3$,$J$$8B$j!"(B
-$B%a%G%#%"$N@_Dj$OGSB>E*$@$+$i$G$9!#(B
-$B$h$j9%$^$7$$Nc$O!"%$%s%U%i$,I,MW$H$9$k$H$-$K!"(B 10base-T $B$+(B 
-$BH>Fs=E$K6/@)$9$k$3$H$G$9!#(B)
+(当然、接続の両端を全二重モードに設定するまえに
+強制全二重モードしてはいけません！特別の理由がない限り、
+メディアの設定は排他的だからです。
+より好ましい例は、インフラが必要とするときに、 10base-T か 
+半二重に強制することです。)
 
 <p>
-$B$"$k$$$O!"?.Mj=PMh$k%$%s%?!<%U%'!<%9$KFCJL$J%U%i%0$r;XDj$9$7$?$1$l$P(B
-hostname $B%U%!%$%k$N%U%)!<%^%C%H$OBg$-$/JQ$o$C$?$j$7$^$;$s!#(B
+あるいは、信頼出来るインターフェースに特別なフラグを指定すしたければ
+hostname ファイルのフォーマットは大きく変わったりしません。
 
 <blockquote><pre>
 $ <b>cat /etc/hostname.vlan0</b>
@@ -288,31 +288,31 @@ inet 172.21.0.31 255.255.255.0 NONE vlan 2 vlandev fxp1
 </pre></blockquote>
 
 <a name="Setup.gateway"></a>
-<h3>6.2.2 - $B%G%U%)%k%H%2!<%H%&%'%$(B</h3>
+<h3>6.2.2 - デフォルトゲートウェイ</h3>
 Put the IP of your gateway in the file <i>
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=mygate&amp;sektion=5">/etc/mygate</a></i>.
-$B%2!<%H%&%'%$$N(B IP $B$O(B
-<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=mygate&amp;sektion=5">/etc/mygate</a></i>$B%U%!%$%k$K5-=R$7$^$9!#(B
-$B$3$l$O5/F0;~$K%2!<%H%&%'%$$r@_Dj$7$^$9!#(B
-$B$3$N%U%!%$%k$O$3$N%^%7%s$N%2!<%H%&%'%$$N%"%I%l%9$=$N$b$N$N0l9T$G(B
-$B9=@.$5$l$F$$$^$9!#(B
+ゲートウェイの IP は
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=mygate&amp;sektion=5">/etc/mygate</a></i>ファイルに記述します。
+これは起動時にゲートウェイを設定します。
+このファイルはこのマシンのゲートウェイのアドレスそのものの一行で
+構成されています。
 
 <blockquote><pre>
 10.0.0.1
 </pre></blockquote>
 
-$B$3$3$K$O%7%s%\%j%C%/L>$r;H$&;v$b$G$-$^$9$,!"5$$r$D$1$F$/$@$5$$(B
-resolver $B$,40A4$K@_Dj$5$l$F$$$k$+$"$k$$$O(B
-$B%G%U%)%k%H%2!<%H%&%'%$$r@_Dj$7$?(B *$B8e$G(B* $BF1$8$h$&$KFO$/$H7h$a$D$1$k;v$O=PMh$^$;$s!#(B
-$B8@$$49$($l$P!"(B IP $B%"%I%l%9$+$J$K$+$r(B
-<i>/etc/hosts</i>$B%U%!%$%k$KDj5A$7$F$*$1$P$h$jNI$$$G$7$g$&!#(B
+ここにはシンボリック名を使う事もできますが、気をつけてください
+resolver が完全に設定されているかあるいは
+デフォルトゲートウェイを設定した *後で* 同じように届くと決めつける事は出来ません。
+言い換えれば、 IP アドレスかなにかを
+<i>/etc/hosts</i>ファイルに定義しておけばより良いでしょう。
 
 <a name="Setup.resolver"></a>
-<h3>6.2.3 - DNS $BL>A02r7h(B</h3>
+<h3>6.2.3 - DNS 名前解決</h3>
 Here is an example of a <i>/etc/resolv.conf</i> file:
-DNS $BL>A02r7h$O(B
-<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=resolv.conf&amp;sektion=5"><i>/etc/resolv.conf</i></a>$B%U%!%$%k$G@)8f$5$l$F$$$^$9!#(B
-$B$3$3$K$"$k$N$O(B <i>/etc/resolv.conf</i>$B%U%!%$%k$NNc$G$9!#(B
+DNS 名前解決は
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=resolv.conf&amp;sektion=5"><i>/etc/resolv.conf</i></a>ファイルで制御されています。
+ここにあるのは <i>/etc/resolv.conf</i>ファイルの例です。
 
 <blockquote><pre>
 search example.com
@@ -321,42 +321,42 @@ nameserver 125.2.3.5
 lookup file bind
 </pre></blockquote>
 
-$B$3$N>l9g!"%G%U%)%k%H%I%a%$%sL>$O(B <tt>example.com</tt>$B$G!"(B
-$BFs$D$N(BDNS $B%5!<%P!"(B<tt>125.2.3.4</tt>$B$H(B<tt>125.2.3.5</tt>
-$B$,;XDj$5$l$F$$$^$9!"$=$7$F(B <i>/etc/hosts</i> $B%U%!%$%k$,(B
-DNS $BL>A02r7h$NA0$K;2>H$5$l$^$9!#(B
+この場合、デフォルトドメイン名は <tt>example.com</tt>で、
+二つのDNS サーバ、<tt>125.2.3.4</tt>と<tt>125.2.3.5</tt>
+が指定されています、そして <i>/etc/hosts</i> ファイルが
+DNS 名前解決の前に参照されます。
 
 <p>
-$B$[$H$s$IA4It$N(B Unix ($B$HB?$/$N(B Unix $B$G$J$$(B) $B%7%9%F%`$G$O!"(B $B$=$N(B
+ほとんど全部の Unix (と多くの Unix でない) システムでは、 その
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=hosts&amp;sektion=5"><i>/etc/hosts</i></a>
-$B%U%!%$%k$O8x<0$N(BDNS$B%7%9%F%`$KF~$C$F$$$k%7%9%F%`(B ($B$"$k$$$O(B
-$B$b$7>e5-$N(B "lookup" $BM%@hEY$r;H$&$+!"$D$+$$$?$/$J$$(B)$B$r;XDj$9$k$?$a$K(B
-$B;HMQ$9$k$3$H$,$G$-$^$9!#(B
+ファイルは公式のDNSシステムに入っているシステム (あるいは
+もし上記の "lookup" 優先度を使うか、つかいたくない)を指定するために
+使用することができます。
 
 <p>
-DHCP$B$r;H$C$F$$$k$N$J$i!"(B<a href="#DHCP">6.4 - DHCP</a> 
-$B$N(B
-<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=resolv.conf.tail&amp;sektion=5">resolv.conf.tail(5)</a>$B$K$D$$$FCm0U$7$F$$$k8D=j$rFI$`$Y$-$G$7$g$&!#(B
+DHCPを使っているのなら、<a href="#DHCP">6.4 - DHCP</a> 
+の
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=resolv.conf.tail&amp;sektion=5">resolv.conf.tail(5)</a>について注意している個所を読むべきでしょう。
 
 <a name="Setup.myname"></a>
-<h3>6.2.4 - $B%[%9%HL>(B</h3>
-$BA4$F$N(B Unix $B%^%7%s$OL>A0$r;}$C$F$$$^$9!#(B
-OpenBSD $B$G$O!"L>A0$O(B "Fully Qualified Domain Name" (FQDN) $B$G(B
-$B0l9T$G!"(B
-<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=myname&amp;sektion=5"><i>/etc/myname</i></a> $B%U%!%$%k$K;XDj$5$l$^$9!#(B
+<h3>6.2.4 - ホスト名</h3>
+全ての Unix マシンは名前を持っています。
+OpenBSD では、名前は "Fully Qualified Domain Name" (FQDN) で
+一行で、
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=myname&amp;sektion=5"><i>/etc/myname</i></a> ファイルに指定されます。
 
-$B$3$N%^%7%s$NL>A0$,(B "puffy" $B$G!"%I%a%$%s$,(B "example.com"$B$J$i$P!"(B
-$B%U%!%$%k$K$O0J2<$N0l9T$,$*$5$a$i$l$k$G$7$g$&!#(B
+このマシンの名前が "puffy" で、ドメインが "example.com"ならば、
+ファイルには以下の一行がおさめられるでしょう。
 
 <blockquote><pre>
 puffy.example.com
 </pre></blockquote>
 
 <a name="Setup.activate"></a>
-<h3>6.2.5 - $BJQ99$NH?1GJ}K!(B</h3>
-$B$3$3$+$i!":F5/F0$9$k$+$"$k$$$O(B
-<b>/etc/netstart</b> $B%9%/%j%W%H$rAv$i$;$k$3$H$G=PMh$^$9!#$3$l$rC1=c$K%?%$%W$9$k$@$1$G$9(B
-(root $B%f!<%6!<$G(B)
+<h3>6.2.5 - 変更の反映方法</h3>
+ここから、再起動するかあるいは
+<b>/etc/netstart</b> スクリプトを走らせることで出来ます。これを単純にタイプするだけです
+(root ユーザーで)
 
 <blockquote><pre>
 # <b>sh /etc/netstart</b>
@@ -367,35 +367,35 @@ add net 224.0.0.0: gateway 127.0.0.1: File exists
 </pre></blockquote>
 
 <p>
-$B$$$/$D$+$N%(%i!<$,=P$k$3$H$KCm0U$7$F$/$@$5$$!#$3$N%9%/%j%W%H$rF0$+$7$F!"(B
-$B$9$G$K@_Dj$5$l$?9`L\$N:F@_Dj$r9T$$$^$9!#(B
-$B$9$G$KB8:_$7$F$$$k%+!<%M%k%k!<%F%#%s%0%F!<%V%k$J$I$G$9!#$3$3$+$i%7%9%F%`$O(B
-$B%"%C%W$7F0$-;O$a$^$9!#$b$&0lEY$$$$$^$9$,!"%$%s%?!<%U%'!<%9$,(B
-$B@5$7$/%;%C%H%"%C%W$5$l$F$$$k$+!"(B
-<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ifconfig&amp;sektion=8">ifconfig(8)</a>$B$G3NG'$G$-$^$9!#(B
+いくつかのエラーが出ることに注意してください。このスクリプトを動かして、
+すでに設定された項目の再設定を行います。
+すでに存在しているカーネルルーティングテーブルなどです。ここからシステムは
+アップし動き始めます。もう一度いいますが、インターフェースが
+正しくセットアップされているか、
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ifconfig&amp;sektion=8">ifconfig(8)</a>で確認できます。
 
 <p>
-$B%M%C%H%o!<%/$N40A4$J:F9=@.$r(BOpenBSD
-$B%7%9%F%`$N:F5/F0$J$7$K9T$&$3$H$,$G$-$^$9$,!"=EMW$J:F9=@.$N8e$K$O(B
-$B:F5/F0$O:G9b$K?d>)$5$l$^$9!#(B
-$BNc$($P!"$I$3$+$N%U%!%$%k$K(BDNS$BL>A02r7h$r(B $B%7%s%\%j%C%/L>(B
-$B$K;XDj$7$?$H$7$?$i!":F9=@.$N$"$H$K$O$*$=$i$/F0$/$G$7$g$&!#(B
-$B$7$+$7:G=i$N5/F0$G$O!"30It$N(Bresolver $B$O(B
-$B$_$"$?$i$J$$$G$7$g$&!"$=$l$G@_Dj$,<:GT$7$F$$$^$9!#(B
+ネットワークの完全な再構成をOpenBSD
+システムの再起動なしに行うことができますが、重要な再構成の後には
+再起動は最高に推奨されます。
+例えば、どこかのファイルにDNS名前解決を シンボリック名
+に指定したとしたら、再構成のあとにはおそらく動くでしょう。
+しかし最初の起動では、外部のresolver は
+みあたらないでしょう、それで設定が失敗しています。
 
 <a name="Setup.chkroute"></a>
-<h3>6.2.6 - route$B$N3NG'(B</h3>
-route$B$O(B
+<h3>6.2.6 - routeの確認</h3>
+routeは
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=netstat&amp;sektion=1">netstat(1)</a>
-$B$+(B <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=route&amp;sektion=8">route(8)</a> $B$G3NG'$9$k$3$H$,$G$-$^$9!#(B
+か <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=route&amp;sektion=8">route(8)</a> で確認することができます。
 If you are having routing problems, you may want to use the -n flag to
 route(8) which prints the IP addresses rather than doing a DNS lookup
 and displaying the hostname.  Here is an example of viewing your routing
 tables using both programs.
-$B$b$7%k!<%F%#%s%0$NLdBj$rJz$($F$$$k$N$G$"$l$P!"(B route(8)$B$K(B -n $B%U%i%0$r;H$$!"(B
-IP $B%"%I%l%9$rI=<((B $B$G$J$J$/(B DNS $BL>A02r7h$7$F(B
-$B%[%9%HL>$rI=<($7$^$9!#$3$l$O!"N>J}$N%W%m%0%i%`$G(B
-$B%k!<%F%#%s%0%F!<%V%k$rI=<($9$kNc$G$9!#(B
+もしルーティングの問題を抱えているのであれば、 route(8)に -n フラグを使い、
+IP アドレスを表示 でななく DNS 名前解決して
+ホスト名を表示します。これは、両方のプログラムで
+ルーティングテーブルを表示する例です。
 
 <blockquote><pre>
 $ <b>netstat -rn</b>
@@ -430,7 +430,7 @@ BASE-ADDRESS.MCA LOCALHOST          U
 
 <p>
 <a name="Setup.forward"></a>
-<h3>6.2.7 - OpenBSD $B$r%2!<%H%&%'%$$K$9$k@_Dj(B</h3>
+<h3>6.2.7 - OpenBSD をゲートウェイにする設定</h3>
 
 <p>
 This is the basic information you need to set up your OpenBSD box as a
@@ -442,34 +442,34 @@ the low availability of
 addresses from network service providers and regional registries, you
 may want to look at Network Address Translation for information on
 conserving your IP address space.
-$B$3$l$O(B OpenBSD $B$r(B($B0lHLE*$K(B $B%k!<%?$H8F$P$l$F$$$k(B)$B%2!<%H%&%'%$$K$9$k$?$a$N(B
-$B4pK\E*$J>pJs$G$9!#$b$7(B OpenBSD $B$r%$%s%?!<%M%C%H>e$G%k!<%?$K(B
-$B$9$k$N$G$"$l$P!"0-0U$N$"$k2DG=@-$N$"$k%H%i%U%#%C%/$r%V%m%C%/$9$k$?$a$K(B
-$B0J2<$N%Q%1%C%H%U%#%k%?@_Dj$N65<($rFI$`$h$&$K!"2f!9$ODs0F$7$^$9!#$`$m$s!"(B
-$B%W%m%P%$%@(B $B$dCO0h%l%8%9%H%i$N3d$jEv$F$k(B
+これは OpenBSD を(一般的に ルータと呼ばれている)ゲートウェイにするための
+基本的な情報です。もし OpenBSD をインターネット上でルータに
+するのであれば、悪意のある可能性のあるトラフィックをブロックするために
+以下のパケットフィルタ設定の教示を読むように、我々は提案します。むろん、
+プロバイダ や地域レジストラの割り当てる
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ip&amp;sektion=4">IPv4</a>
-$B%"%I%l%9$NDc$$2DMQ@-$N$?$a$K!"(B
-$B%M%C%H%o!<%/%"%I%l%9JQ49$N$?$a$N>pJs$rC5$7$F$$$k(B
-IP $B%"%I%l%96u4V$r@aLs$9$k(B
+アドレスの低い可用性のために、
+ネットワークアドレス変換のための情報を探している
+IP アドレス空間を節約する
 
 <p>
-GENERIC $B%+!<%M%k$O$9$G$K(B IP $B%U%)%o!<%I$r5v2D$9$kG=NO$r$b$C$F$$$^$9$,!"(B
-$BM-8z$K$9$kI,MW$,$"$j$^$9!#$3$l$O(B
+GENERIC カーネルはすでに IP フォワードを許可する能力をもっていますが、
+有効にする必要があります。これは
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=sysctl&amp;sektion=8">sysctl(8)</a>
-$B%f!<%F%#%j%F%#$r;H$C$F9T$$$^$9!#JQ99$r915WE*$K$7$?$$$N$G$"$l$P!"(B
+ユーティリティを使って行います。変更を恒久的にしたいのであれば、
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=sysctl.conf&amp;sektion=5">/etc/sysctl.conf</a>
-$B%U%!%$%k$r!"(BIP $B%U%)%o!<%I$r5v2D$9$k$h$&$KJT=8$7$^$9!#0J2<$N9T$r@_Dj(B
-$B%U%!%$%k$KDI2C$7$^$9!#(B
+ファイルを、IP フォワードを許可するように編集します。以下の行を設定
+ファイルに追加します。
 
 <blockquote><pre>
 net.inet.ip.forwarding=1
 </pre></blockquote>
 
 <p>
-$B$3$NJQ99$r:F5/F0$;$:$K9T$&$K$O!"(B
+この変更を再起動せずに行うには、
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=sysctl&amp;sektion=8">sysctl(8)</a>
-$B%f!<%F%#%j%F%#$rD>@\;H$$$^$9!#:F5/F08e$K$3$NJQ99$,<:$o$l$k$3$H$H!"(B
-root$B$G<B9T$9$kI,MW$,$"$k$3$H$rK:$l$J$$$G$/$@$5$$(B
+ユーティリティを直接使います。再起動後にこの変更が失われることと、
+rootで実行する必要があることを忘れないでください
 
 <blockquote><pre>
 # <b>sysctl net.inet.ip.forwarding=1</b>

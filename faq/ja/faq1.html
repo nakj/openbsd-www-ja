@@ -3,7 +3,7 @@
 <head>
 <title>1 - Introduction to OpenBSD</title>
 <link rev="made" href="mailto:www@openbsd.org">
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-2022-JP">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="resource-type" content="document">
 <meta name="description"   content="the OpenBSD FAQ page">
 <meta name="keywords"      content="openbsd,faq">
@@ -12,514 +12,514 @@
 </head>
 
 <body bgcolor="#ffffff" text="#000000">
-<!-- validator.w3.org $B$r%Q%9$7$F$$$^$9!#$3$NJ}K!$r<i$C$F$/$@$5$$!#(B
-1 $B9TEv$?$j:GBg(B 72 $BJ8;z$^$G$K$7$F$/$@$5$$!#(B -->
+<!-- validator.w3.org をパスしています。この方法を守ってください。
+1 行当たり最大 72 文字までにしてください。 -->
 
 <a href="../../index.html">
 <img alt="[OpenBSD]" height=30 width=141 src="../../images/smalltitle.gif" border="0">
 </a>
 <p>
 <font color="#0000e0">
-<a href= "index.html">[FAQ $B$NL\<!(B]</a>
-<a href= "faq2.html">[2 $B>O(B- $BB>$N(BOpenBSD $B>pJs8;(B]</a>
+<a href= "index.html">[FAQ の目次]</a>
+<a href= "faq2.html">[2 章- 他のOpenBSD 情報源]</a>
 </font>
 
-<h1><font color="#e00000">1 - OpenBSD $BF~Lg(B</font></h1>
+<h1><font color="#e00000">1 - OpenBSD 入門</font></h1>
 <hr>
 
 <p>
-<h3>$BL\<!(B</h3>
+<h3>目次</h3>
 <ul>
-<li><a href="#WhatIs">1.1 - OpenBSD $B$C$F2?$G$7$g$&(B ?</a>
-<li><a href="#Platforms">1.2 - OpenBSD $B$O$I$N$h$&$J%7%9%F%`>e$GF0$/$N$G$7$g$&(B ?</a>
-<li><a href="#ReallyFree">1.3 - OpenBSD $B$C$FK\Ev$K%U%j!<$J$N$G$7$g$&$+(B ?</a>
-<li><a href="#WhyUse">1.4 - $B$J$<;d$O(B OpenBSD $B$r;H$o$J$1$l$P$J$i$J$$$N$G$7$g$&(B ?</a>
-<li><a href="#Support">1.5 - OpenBSD $B$r%5%]!<%H$9$k$K$O$I$&$9$l$PNI$$$G$7$g$&(B ?</a>
-<li><a href="#WhoMaintains">1.6 - OpenBSD $B$OC/$,%a%s%F%J%s%9$7$F$$$k$N$G$7$g$&(B ?</a>
-<li><a href="#Next">1.7 - OpenBSD $B$N<!$N%j%j!<%9$O$$$D$G$7$g$&$+(B ?</a>
-<li><a href="#Included">1.8 - OpenBSD $B$K$O2?$,4^$^$l$F$$$k$N$G$7$g$&(B ?</a>
-<li><a href="#WhatsNew">1.9 - OpenBSD 4.8 $B$G$O2?$,?7$7$/$J$C$?$N$G$7$g$&$+(B ?</a>
-<li><a href="#Desktop">1.10 - OpenBSD $B%G%9%/%H%C%W$H$7$F;HMQ$G$-$^$9$+(B ?</a>
-<li><a href="#HowAbout">1.11 - $B$I$&$7$F(B<i>$B$"$N%=%U%H%&%'%"(B</i>$B$,F~$C$F$$$k(B/$B$$$J$$$N$G$7$g$&$+(B ?</a>
+<li><a href="#WhatIs">1.1 - OpenBSD って何でしょう ?</a>
+<li><a href="#Platforms">1.2 - OpenBSD はどのようなシステム上で動くのでしょう ?</a>
+<li><a href="#ReallyFree">1.3 - OpenBSD って本当にフリーなのでしょうか ?</a>
+<li><a href="#WhyUse">1.4 - なぜ私は OpenBSD を使わなければならないのでしょう ?</a>
+<li><a href="#Support">1.5 - OpenBSD をサポートするにはどうすれば良いでしょう ?</a>
+<li><a href="#WhoMaintains">1.6 - OpenBSD は誰がメンテナンスしているのでしょう ?</a>
+<li><a href="#Next">1.7 - OpenBSD の次のリリースはいつでしょうか ?</a>
+<li><a href="#Included">1.8 - OpenBSD には何が含まれているのでしょう ?</a>
+<li><a href="#WhatsNew">1.9 - OpenBSD 4.8 では何が新しくなったのでしょうか ?</a>
+<li><a href="#Desktop">1.10 - OpenBSD デスクトップとして使用できますか ?</a>
+<li><a href="#HowAbout">1.11 - どうして<i>あのソフトウェア</i>が入っている/いないのでしょうか ?</a>
 </ul>
 
 <hr>
 
 <p>
 <a name="WhatIs"></a>
-<h2>1.1 - OpenBSD $B$C$F2?$G$7$g$&(B ?</h2>
+<h2>1.1 - OpenBSD って何でしょう ?</h2>
 
 <p>
-<a href="../../ja/index.html">OpenBSD</a> $B%W%m%8%'%/%H$O!"%U%j!<$GF~<j2DG=$J%^%k%A%W%i%C%H%[!<%`$N(B
-4.4BSD $B%Y!<%9$N(B UNIX $B7O%*%Z%l!<%F%#%s%0%7%9%F%`$G$9!#(B
-<a href="../../ja/goals.html">$B;d$?$A$,6/D4$9$k(B</a>$B$N$O(B
-<a href="../../ja/plat.html">$B0\?"@-(B</a>$B!"I8=`2=!"@5$7$5!"(B
-<a href="../../ja/security.html">$B%;%-%e%j%F%#(B</a>$B$G$9!#(B
+<a href="../../ja/index.html">OpenBSD</a> プロジェクトは、フリーで入手可能なマルチプラットホームの
+4.4BSD ベースの UNIX 系オペレーティングシステムです。
+<a href="../../ja/goals.html">私たちが強調する</a>のは
+<a href="../../ja/plat.html">移植性</a>、標準化、正しさ、
+<a href="../../ja/security.html">セキュリティ</a>です。
 
 <!-- XXXrelease -->
 <p>
-$B$3$N(B FAQ $B$O!"FC$K:G$b:G6a$N(B OpenBSD $B$N%j%j!<%9$G$"$k%P!<%8%g%s(B
-4.8 $B$@$1$rLVMe$7$F$$$^$9!#(B
+この FAQ は、特に最も最近の OpenBSD のリリースであるバージョン
+4.8 だけを網羅しています。
 
 <p>
 <a name="Platforms"></a>
-<h2>1.2 - OpenBSD $B$O$I$N$h$&$J%7%9%F%`>e$GF0$/$N$G$7$g$&(B ?</h2>
+<h2>1.2 - OpenBSD はどのようなシステム上で動くのでしょう ?</h2>
 <!-- XXXrelease -->
 <p>
-OpenBSD 4.8 $B$O0J2<$N%W%i%C%H%[!<%`>e$GF0$-$^$9!#(B
+OpenBSD 4.8 は以下のプラットホーム上で動きます。
 <ul>
-    <li><a href="../../alpha.html">alpha</a> - FTP $B$N$_(B
-    <li><a href="../../amd64.html">amd64</a> - CD $B$K<}O?(B
-    <li><a href="../../armish.html">armish</a> - FTP $B$N$_(B
-    <li><a href="../../hp300.html">hp300</a> - FTP $B$N$_(B
-    <li><a href="../../hppa.html">hppa</a> - FTP $B$N$_(B
-    <li><a href="../../i386.html">i386</a> - CD $B$K<}O?(B
-    <li><a href="../../landisk.html">landisk</a> - FTP $B$N$_(B
-    <li><a href="../../loongson.html">loongson</a> - FTP $B$N$_(B
-    <li><a href="../../macppc.html">macppc</a> - CD $B$K<}O?(B
-    <li><a href="../../mvme68k.html">mvme68k</a> - FTP $B$N$_(B
-    <li><a href="../../mvme88k.html">mvme88k</a> - FTP $B$N$_(B
-    <li><a href="../../sgi.html">sgi</a> - FTP $B$N$_(B
-    <li><a href="../../socppc.html">socppc</a> - FTP $B$N$_(B
-    <li><a href="../../sparc.html">sparc</a> - FTP $B$N$_(B
-    <li><a href="../../sparc64.html">sparc64</a> - CD $B$K<}O?(B
-    <li><a href="../../vax.html">vax</a> - FTP $B$N$_(B
-    <li><a href="../../zaurus.html">zaurus</a> - FTP $B$N$_(B
+    <li><a href="../../alpha.html">alpha</a> - FTP のみ
+    <li><a href="../../amd64.html">amd64</a> - CD に収録
+    <li><a href="../../armish.html">armish</a> - FTP のみ
+    <li><a href="../../hp300.html">hp300</a> - FTP のみ
+    <li><a href="../../hppa.html">hppa</a> - FTP のみ
+    <li><a href="../../i386.html">i386</a> - CD に収録
+    <li><a href="../../landisk.html">landisk</a> - FTP のみ
+    <li><a href="../../loongson.html">loongson</a> - FTP のみ
+    <li><a href="../../macppc.html">macppc</a> - CD に収録
+    <li><a href="../../mvme68k.html">mvme68k</a> - FTP のみ
+    <li><a href="../../mvme88k.html">mvme88k</a> - FTP のみ
+    <li><a href="../../sgi.html">sgi</a> - FTP のみ
+    <li><a href="../../socppc.html">socppc</a> - FTP のみ
+    <li><a href="../../sparc.html">sparc</a> - FTP のみ
+    <li><a href="../../sparc64.html">sparc64</a> - CD に収録
+    <li><a href="../../vax.html">vax</a> - FTP のみ
+    <li><a href="../../zaurus.html">zaurus</a> - FTP のみ
 </ul>
 
 <p>
-<i>CD $B$K<}O?(B</i> $B$H$$$&$N$O$=$N%W%i%C%H%U%)!<%`$,(B <a href="../orders.html">
-$B8x<0(B CD $B%;%C%H(B</a>  $B$KB?$/$N(B<a href="faq15.html">$B%Q%C%1!<%8(B</a>$B$H(B
-$B$H$b$K<}O?$5$l$F$$$k$H$$$&$3$H$G$9!#(B
-$B$$$/$D$+$N%W%i%C%H%U%)!<%`8~$1%Y!<%9%7%9%F%`(BCD ISO$B%$%a!<%8$b$^$?(B
-$B%@%&%s%m!<%I2DG=$G$9!#(B
+<i>CD に収録</i> というのはそのプラットフォームが <a href="../orders.html">
+公式 CD セット</a>  に多くの<a href="faq15.html">パッケージ</a>と
+ともに収録されているということです。
+いくつかのプラットフォーム向けベースシステムCD ISOイメージもまた
+ダウンロード可能です。
 
 <p>
-OpenBSD $B%W%i%C%H%U%)!<%`$K4X$9$k99$J$k>pJs$O!"(B
-<a href="../plat.html">$B%W%i%C%H%U%)!<%`(B</a> $B$N%Z!<%8$r$4;2>H$/$@$5$$!#(B
+OpenBSD プラットフォームに関する更なる情報は、
+<a href="../plat.html">プラットフォーム</a> のページをご参照ください。
 
 <p>
-$B$I$&$7$F$=$s$J$K$?$/$5$s$N(B "$B4qL/$J(B"$B%^%7%s$r%5%]!<%H$9$k$N$G$9$+!"$H;~!9J9$+$l$^$9!#(B
-$B!V2f!9$,M_$9$k$+$i$G$9!W$,Ez$($G$9!#(B
-$B$b$7!"==J,$J%9%-%k$r;}$C$??M$,!J;~$K$O!V==J,!W$,K\Ev$K%9%-%k$r;}$C$?(B
-$B0l?M$G$b!*!K$=$N%W%i%C%H%U%)!<%`$r%5%]!<%H$9$k;v$rK>$`$J$i!"(B
-$B$=$N%W%i%C%H%U%)!<%`$r%5%]!<%H$7$^$9!#(B
-$B?7$7$$%W%i%C%H%U%)!<%`$,8=$l$?;~!"%3!<%I%D%j!<$O0\?"@-$rGK2u$9$k%P%0$d(B
-$B%G%6%$%s$N7g4Y$+$iAjBPE*$K<+M3$G$$$i$l$k$3$H$,!"(B
-OpenBSD$B$,%^%k%A%W%i%C%H%U%)!<%`$rB3$1$k;v$K$h$k<BMQE*$JMx1W$G$9!#(B
-OpenBSD$B%W%i%C%H%U%)!<%`$O(B32$B%S%C%H5Z$S(B64$B%S%C%H%W%m%;%C%5!<!"%j%H%k%(%s%G%#%"%s$H(B
-$B%S%C%0%(%s%G%#%"%s$N%^%7%s!"$=$7$F$?$/$5$s$N0c$C$?%G%6%$%s$r4^$s$G$$$^$9!#(B
-$B$=$7$F$b$A$m$s!"$h$j!VIaDL$N!W%W%i%C%H%U%)!<%`8~$1$N<A$N9b$$%3!<%I%Y!<%9$,(B
-$B!VJQ$J!W%W%i%C%H%U%)!<%`$r%5%]!<%H$9$k=u$1$K$J$j$^$9!#(B
+どうしてそんなにたくさんの "奇妙な"マシンをサポートするのですか、と時々聞かれます。
+「我々が欲するからです」が答えです。
+もし、十分なスキルを持った人が（時には「十分」が本当にスキルを持った
+一人でも！）そのプラットフォームをサポートする事を望むなら、
+そのプラットフォームをサポートします。
+新しいプラットフォームが現れた時、コードツリーは移植性を破壊するバグや
+デザインの欠陥から相対的に自由でいられることが、
+OpenBSDがマルチプラットフォームを続ける事による実用的な利益です。
+OpenBSDプラットフォームは32ビット及び64ビットプロセッサー、リトルエンディアンと
+ビッグエンディアンのマシン、そしてたくさんの違ったデザインを含んでいます。
+そしてもちろん、より「普通の」プラットフォーム向けの質の高いコードベースが
+「変な」プラットフォームをサポートする助けになります。
 
 <p>
 <a name="WhyUse"></a>
-<h2>1.3 - $B$J$<;d$O(BOpenBSD$B$r;H$o$J$1$l$P$$$1$J$$$N$G$7$g$&$+(B?</h2>
+<h2>1.3 - なぜ私はOpenBSDを使わなければいけないのでしょうか?</h2>
 
 <p>
-$B?7$7$$%f!<%6$O!"(BOpenBSD $B$,B>$N%U%j!<$J(B UNIX $B7O(B OS $B$KHf$Y$FM%$l$F$$$k(B
-$B$N$+$I$&$+!"IQHK$KCN$j$?$,$k$b$N$G$9!#$7$+$7!"$3$N<ALd$O!"$*$*$`$M(B
-$B2sEzITG=$G$9$7!"L5?t$N(B ($B$=$7$FL51W$J(B) $B=!65O@Ah$N%M%?$K$J$C$F$-$?$b$N$G$9!#(B
-$B$$$+$J$k>u67$K$*$$$F$b!"$3$N$h$&$J<ALd$O(B OpenBSD $B$N%a!<%j%s%0%j%9%H$K(B
-$BEj$2$?$j$7$J$$$h$&$K$7$F$/$@$5$$!#(B
+新しいユーザは、OpenBSD が他のフリーな UNIX 系 OS に比べて優れている
+のかどうか、頻繁に知りたがるものです。しかし、この質問は、おおむね
+回答不能ですし、無数の (そして無益な) 宗教論争のネタになってきたものです。
+いかなる状況においても、このような質問は OpenBSD のメーリングリストに
+投げたりしないようにしてください。
 
 <p>
-$B0J2<$K!"$J$<;d$?$A$,(B OpenBSD $B$rM-MQ$J(B OS $B$@$H;W$&$N$+!"(B
-$B$$$/$D$+M}M3$r$"$2$F$_$^$7$?!#$7$+$7!"(BOpenBSD $B$,$"$J$?$K(B
-$B$H$C$FE,@Z$+$I$&$+$O!"$"$J$?<+?H$,H=CG$9$k$7$+$"$j$^$;$s!#(B
+以下に、なぜ私たちが OpenBSD を有用な OS だと思うのか、
+いくつか理由をあげてみました。しかし、OpenBSD があなたに
+とって適切かどうかは、あなた自身が判断するしかありません。
 
 <p>
 <ul>
-  <li>OpenBSD $B$O(B<a href="../../plat.html">$B$$$m$$$m$J(B
-   $B%O!<%I%&%'%"%W%i%C%H%[!<%`>e$GF0$-$^$9!#(B</a>
-   <li>OpenBSD $B$O!"7h$7$F=*$k$3$H$N$J$$E0DlE*$J(B
-   $B%=!<%9%3!<%I$N%;%-%e%j%F%#4F::$N$*$+$2$G!"B?$/$N%;%-%e%j%F%#@lLg2H(B
-   $B$K$h$C$F!":G$b(B<a href="../../security.html">$B9b$$%;%-%e%j%F%#(B</a>
-   $B$r8X$k(B UNIX $B7O(B OS $B$HH=CG$5$l$F$$$^$9!#(B
-   <li>OpenBSD $B$O!"%=!<%9%3!<%I$N7A$GDs6!$5$l$F$$$k!"(B
-   $B40A4$J(B UNIX $B7O(B OS $B$G!"L5NA$G$9!#(B
-   <li>OpenBSD $B$K$O!":G@hC<$N%;%-%e%j%F%#5;=Q$,E}9g$5$l$F$$$^$9$N$G!"(B
-   $B%U%!%$%"%&%)!<%k$d(B<a href="../../crypto.html#hardware">$B%W%i%$%Y!<%H(B
-   $B%M%C%H%o!<%/%5!<%S%9(B</a>$B$rJ,;64D6-$G9=C[$9$k$N$KE,$7$F$$$^$9!#(B
-   <li>OpenBSD $B$O!"$$$m$$$m$JJ,Ln$G$N6/NO$J7QB3E*3+H/$N@.2L$NDs6!$r<u$1$F!"(B
-   $B$G$-$?$F$N5;=Q$r9q:]E*$J%W%m%0%i%^$d%(%s%I%f!<%6$N%3%_%e%K%F%#$H$H$b$K(B
-   $B3hMQ$9$k5!2q$rDs6!$7$F$$$^$9!#(B
-   <li>OpenBSD$B$O%+%9%?%^%$%:$dHyD4@0$NI,MW@-$r(B
-   $B:G>.2=$7$h$&$H$7$^$9!#(B
-   $BBgB??t$N%f!<%6!<$K$H$C$F$O!"(B OpenBSD $B$OH`$i$N%O!<%I%&%'%">e$G!"%=%U%H%&%'%"$,(B
-   "$B$9$0$KF0:n$7$^$9(B"$B!#HyD4@0$d%+%9%?%^%$%:$O$[$H$s$II,MW$"$j$^$;$s!#(B
-   $B$=$l$OBgJQ(B
-   <a href="../faq5.html#Why">$B$d$k5$$r<:$o$;(B</a>$B$F$7$^$$$^$9!#(B
+  <li>OpenBSD は<a href="../../plat.html">いろいろな
+   ハードウェアプラットホーム上で動きます。</a>
+   <li>OpenBSD は、決して終ることのない徹底的な
+   ソースコードのセキュリティ監査のおかげで、多くのセキュリティ専門家
+   によって、最も<a href="../../security.html">高いセキュリティ</a>
+   を誇る UNIX 系 OS と判断されています。
+   <li>OpenBSD は、ソースコードの形で提供されている、
+   完全な UNIX 系 OS で、無料です。
+   <li>OpenBSD には、最先端のセキュリティ技術が統合されていますので、
+   ファイアウォールや<a href="../../crypto.html#hardware">プライベート
+   ネットワークサービス</a>を分散環境で構築するのに適しています。
+   <li>OpenBSD は、いろいろな分野での強力な継続的開発の成果の提供を受けて、
+   できたての技術を国際的なプログラマやエンドユーザのコミュニティとともに
+   活用する機会を提供しています。
+   <li>OpenBSDはカスタマイズや微調整の必要性を
+   最小化しようとします。
+   大多数のユーザーにとっては、 OpenBSD は彼らのハードウェア上で、ソフトウェアが
+   "すぐに動作します"。微調整やカスタマイズはほとんど必要ありません。
+   それは大変
+   <a href="../faq5.html#Why">やる気を失わせ</a>てしまいます。
 </ul>
 
 <a name="ReallyFree"></a>
-<h2>1.4 - OpenBSD $B$C$FK\Ev$K%U%j!<$J$N$G$7$g$&$+(B ?</h2>
+<h2>1.4 - OpenBSD って本当にフリーなのでしょうか ?</h2>
 
 <p>
-OpenBSD $B$O$9$Y$F%U%j!<$G$9!#%P%$%J%j$O%U%j!<$G$9$7!"%=!<%9$b(B
-$B%U%j!<$G$9!#(BOpenBSD $B$N$9$Y$F$NItJ,$O!"%U%j!<$NG[I[$rG'$a$k!"(B
-$B$^$C$H$&$J%3%T!<%i%$%H>r7o$r;}$C$F$$$^$9!#$3$l$O!"8D?ME*$K(B
-$B$G$"$C$F$b>&6HE*$JL\E*$G$"$C$F$b!"(BOpenBSD $B$N$[$H$s$I$NItJ,$r(B
-$B:FMxMQ$G$-$k$H$$$&$3$H$G$9!#(BOpenBSD $B$O!"$b$H$b$H$N(B BSD
-$B%i%$%;%s%9$G4^0U$5$l$F$$$k$b$N0J>e$N@)8B$r0l@Z2C$($F$$$^$;$s!#(B
-$B$b$C$H87$7$$%i%$%;%s%9>r7o$N$b$H$G=q$+$l$?%=%U%H$O!"(B
-OpenBSD $B$N@55,%G%#%9%H%j%S%e!<%7%g%s$K$O4^$a$i$l$^$;$s!#(B
-$B$3$l$O!"(BOpenBSD $B$N%U%j!<$JMxMQ$r<i$k$?$a$N$b$N$G$9!#(B
-$B$?$H$($P!"(BOpenBSD $B$O8D?MMxMQ$G$b!"%"%+%G%_%C%/$JMxMQ$G$b!"(B
-$B@/I\5!4X$G$bHs1DMxAH?%$G$b!">&6HAH?%$G$b<+M3$K;H$&$3$H$,$G$-$^$9!#(B
-OpenBSD $B$d$=$N9=@.ItIJ$O$^$?!"<+M3$K(B
-<a href="../../products.html">$B>&MQ@=IJ(B</a>$B$KMxMQ$G$-$^$9!#(B
+OpenBSD はすべてフリーです。バイナリはフリーですし、ソースも
+フリーです。OpenBSD のすべての部分は、フリーの配布を認める、
+まっとうなコピーライト条件を持っています。これは、個人的に
+であっても商業的な目的であっても、OpenBSD のほとんどの部分を
+再利用できるということです。OpenBSD は、もともとの BSD
+ライセンスで含意されているもの以上の制限を一切加えていません。
+もっと厳しいライセンス条件のもとで書かれたソフトは、
+OpenBSD の正規ディストリビューションには含められません。
+これは、OpenBSD のフリーな利用を守るためのものです。
+たとえば、OpenBSD は個人利用でも、アカデミックな利用でも、
+政府機関でも非営利組織でも、商業組織でも自由に使うことができます。
+OpenBSD やその構成部品はまた、自由に
+<a href="../../products.html">商用製品</a>に利用できます。
 
 <p>
-$B2f!9$N%U%j!<$J;E;v$,>&MQ@=IJ(B
-$B$KAH$_9~$^$l$?$i:$$j$^$;$s$+$H;~!9J9$+$l$^$9!#(B
-$BEz$($O!">&MQ@=IJ%Y%s%@!<$,!":F<BAu$7!"0-$$%3!<%I$r:n$j$@$7!"(B
-$B4{$K2r7h:Q$_$NLdBj$KBP$9$k8_49@-$N$J$$2r7h$r$9$k$h$j$b!"(B
-$B2f!9$N$h$$%3!<%I$,(B <i>$B9-$/;H$o$l$k(B</i>$B$[$&$,$$$$$G$9!#(B
-$BNc$($P!"(BSSH$B$O$3$N<+M3$N(B
-$B$?$a$K9-$/;H$o$l$k%W%m%H%3%k$G$9$,!"(BOpenSSH $B$N%3!<%I$K@)8B$,2C$($i$l$F$$$?$i(B
-$B$3$l$@$19-$/;H$o$l$k;v$O$J$+$C$?$G$7$g$&!#$b$7%Y%s%@!<$,<+M3$K;H$($k(BSSH$B%=%j%e!<%7%g%s$,(B
-$B$J$+$C$?$i!JH`$i$NAa5^$K3+H/$5$l$?@=IJ$K(B)$B!"(B $BH`$i$O=q$/$+(B
-$B$9$0$K<j$KF~$k8+:u$i$7$$$b$N$r(B
-$BGc$&$+$9$k$G$7$g$&!#(B
+我々のフリーな仕事が商用製品
+に組み込まれたら困りませんかと時々聞かれます。
+答えは、商用製品ベンダーが、再実装し、悪いコードを作りだし、
+既に解決済みの問題に対する互換性のない解決をするよりも、
+我々のよいコードが <i>広く使われる</i>ほうがいいです。
+例えば、SSHはこの自由の
+ために広く使われるプロトコルですが、OpenSSH のコードに制限が加えられていたら
+これだけ広く使われる事はなかったでしょう。もしベンダーが自由に使えるSSHソリューションが
+なかったら（彼らの早急に開発された製品に)、 彼らは書くか
+すぐに手に入る見窄らしいものを
+買うかするでしょう。
 
 <p>
-$B$3$l$O!"2f!9$,(B<a href="../../donations.html">$B6bA,E*$"$k$$$O%O!<%I%&%'%"%5%]!<%H(B</a>
-$B$KBP$9$k46<U$KH?BP$9$k$H8@$C$F$$$k$N$G$O$"$j$^$;$s!#(B 
-$B<B:]!"JrA3$H$7$^$9!#(BOpenBSD($B$b$7$/$O(BOpenSSH)$B$K0MB8$7$?@=IJ$r(B
-$B:n$C$F$$$k2q<R$+$i$N$I$s$J$H$F$b>/$7$N%5%]!<%H$G$bAG@2$i$7$$$H;W$$$^$9!#(B
-$B$G$9$,!"Js=7$OI,?\$G$O$"$j$^$;$s!#(B
+これは、我々が<a href="../../donations.html">金銭的あるいはハードウェアサポート</a>
+に対する感謝に反対すると言っているのではありません。 
+実際、呆然とします。OpenBSD(もしくはOpenSSH)に依存した製品を
+作っている会社からのどんなとても少しのサポートでも素晴らしいと思います。
+ですが、報酬は必須ではありません。
 
 <p>
-$BB>$N0lHLE*$J%i%$%;%s%9$K$D$$$F$N$h$j>\$7$$$3$H$O!"(B
-<a href="../policy.html">OpenBSD $B$NCx:n8"$N%]%j%7!<(B</a>$B$r;2>H$7$F$/$@$5$$!#(B
+他の一般的なライセンスについてのより詳しいことは、
+<a href="../policy.html">OpenBSD の著作権のポリシー</a>を参照してください。
 
 <p>
-OpenBSD $B$N%a%s%F%J$?$A$O!"%W%m%8%'%/%H$r$b$C$Q$i<+J,$N;}$A=P$7$G(B
-$B%5%]!<%H$7$F$$$^$9!#$3$l$O%W%m%8%'%/%H$N$?$a$N%W%m%0%i%_%s%0$K$+$1$?;~4V!"(B
-$B3F<o$N0\?"$r%5%]!<%H$9$k$?$a$N5!4o!"(BOpenBSD $B$r$"$J$?$KFO$1$k$?$a$K;H$o$l$?(B
-$B%M%C%H%o!<%/;q8;!"$=$7$F%f!<%6$+$i$N<ALd$KEz$($?$j!"%P%0Js9p$rD4$Y$?$j(B
-$B$9$k$N$K;H$&;~4V$J$s$+$b4^$s$G$$$^$9!#$7$+$7!"(BOpenBSD $B3+H/<T$?$A8D?M$O(B
-$B$*6b;}$A$G$O$"$j$^$;$s$+$i!"$[$s$N>/$7$G$b;~4V$d5!4o$d%j%=!<%9$G9W8%$7$F(B
-$B$$$?$@$1$l$P!"Bg$-$J0c$$$H$J$C$FI=$o$l$F$-$^$9!#(B
+OpenBSD のメンテナたちは、プロジェクトをもっぱら自分の持ち出しで
+サポートしています。これはプロジェクトのためのプログラミングにかけた時間、
+各種の移植をサポートするための機器、OpenBSD をあなたに届けるために使われた
+ネットワーク資源、そしてユーザからの質問に答えたり、バグ報告を調べたり
+するのに使う時間なんかも含んでいます。しかし、OpenBSD 開発者たち個人は
+お金持ちではありませんから、ほんの少しでも時間や機器やリソースで貢献して
+いただければ、大きな違いとなって表われてきます。
 
 
 <p>
 <a name="Support"></a>
-<h2>1.5 - OpenBSD $B$r%5%]!<%H$9$k$K$O$I$&$9$l$PNI$$$G$7$g$&(B ?</h2>
+<h2>1.5 - OpenBSD をサポートするにはどうすれば良いでしょう ?</h2>
 
 <p>
-$B;d$?$A$O!"(BOpenBSD $B%W%m%8%'%/%H$K9W8%$7$F$-$??M!9$dAH?%$KBg$$$J$k(B
-$B28$,$"$j$^$9!#H`$i$N$*L>A0$r(B
-<a href="../../ja/donations.html">$B4sIU$N%Z!<%8(B</a>$B$K7G:\$7$F$$$^$9!#(B
+私たちは、OpenBSD プロジェクトに貢献してきた人々や組織に大いなる
+恩があります。彼らのお名前を
+<a href="../../ja/donations.html">寄付のページ</a>に掲載しています。
 
 <p>
-OpenBSD $B$O!"%f!<%6%3%_%e%K%F%#$+$i$N!">o$K2?DL$j$+$N%5%]!<%H$rI,MW$H$7$F$$$^$9!#(B 
-$B$b$7(B OpenBSD $B$,;H$($k$H;W$C$?$J$i!"$<$R$H$b%W%m%8%'%/%H$K9W8%$7$F$/$@$5$$!#(B 
-$B$b$70J2<$NDs0F$,$I$l$b$"$J$?$K$H$C$FE,@Z$G$J$$$N$G$7$?$i!"(B
-$B%a!<%k$GJL$NJ}K!$rDs0F$7$F$$$?$@$1$l$P9,$$$G$9!#Aw$j@h$O(B
-<a href= "mailto:donations@openbsd.org">donations@openbsd.org</a> $B$G$9!#(B
+OpenBSD は、ユーザコミュニティからの、常に何通りかのサポートを必要としています。 
+もし OpenBSD が使えると思ったなら、ぜひともプロジェクトに貢献してください。 
+もし以下の提案がどれもあなたにとって適切でないのでしたら、
+メールで別の方法を提案していただければ幸いです。送り先は
+<a href= "mailto:donations@openbsd.org">donations@openbsd.org</a> です。
 
 <p>
 <ul>
-    <li><a href="../../orders.html">OpenBSD CD $B%;%C%H$N9XF~(B</a>$B!#:#$N(B OpenBSD
-    $B$N%U%k%j%j!<%9$,F~$C$F$$$^$9$7!"B?$/$N%W%i%C%H%[!<%`$G$O5/F0(B CD $B$H$7$F;H$($^$9!#(B
-    $B$=$l$K!"(BOpenBSD $B$r;Y$($k<}F~$r@8$_=P$7$F$/$l$^$9$7!"%G%#%9%H%j%S%e!<%7%g%s$r(B
-    $B%$%s%?!<%M%C%H7PM3$GG[I[$9$k$?$a$N!"%M%C%H%o!<%/;q8;$r@aLs$7$F$/$l$^$9!#(B
-    $B$3$N!"Nw2A$J(B 3 $BKgAH$N(B CD $B%;%C%H$K$O!"$9$Y$F$N%=!<%9%3!<%I$b4^$^$l$F$$$^$9!#(B
-    $B$=$&$=$&!"$*M'$@$A$N$?$a$K$b(B CD $B$rGc$C$F$*$$$F$"$2$^$7$g$&(B !
-    <li><a href="../../donations.html">$B$*6b$N4sIU(B</a>$B!#%W%m%8%'%/%H$O!"(B
-    $B5!4o$d%M%C%H%o!<%/@\B3!"(BCD $B$rH/9T$9$k$?$a$NHqMQ$J$I!"$$$D$b8=6b$r(B
-    $BI,MW$H$7$F$$$k$N$G$9!#(BCD $B$N%W%l%9$O!"(BOpenBSD $B3+H/<T$K$H$C$FA0J'$$$N(B
-    $B;}$A=P$7Ej;q$rI,MW$H$9$k$b$N$G!"$7$+$b$=$l$,5"$C$F$/$kJ]>Z$O$"$j$^$;$s!#(B
-    $B4sIU$NJ}K!$K$D$$$F$N>\$7$$$3$H$O!"(B
+    <li><a href="../../orders.html">OpenBSD CD セットの購入</a>。今の OpenBSD
+    のフルリリースが入っていますし、多くのプラットホームでは起動 CD として使えます。
+    それに、OpenBSD を支える収入を生み出してくれますし、ディストリビューションを
+    インターネット経由で配布するための、ネットワーク資源を節約してくれます。
+    この、廉価な 3 枚組の CD セットには、すべてのソースコードも含まれています。
+    そうそう、お友だちのためにも CD を買っておいてあげましょう !
+    <li><a href="../../donations.html">お金の寄付</a>。プロジェクトは、
+    機器やネットワーク接続、CD を発行するための費用など、いつも現金を
+    必要としているのです。CD のプレスは、OpenBSD 開発者にとって前払いの
+    持ち出し投資を必要とするもので、しかもそれが帰ってくる保証はありません。
+    寄付の方法についての詳しいことは、
     <a href="mailto:donations@openbsd.org">donations@openbsd.org</a>
-    $B$^$G%a!<%k$r$*Aw$j$/$@$5$$!#(B
-    $B$[$s$N>/$7$N$*6b$G$b!"Bg$-$J:9$,=P$k$b$N$J$N$G$9!#(B
-    <li><a href="../../ja/want.html">$B5!4o$d%Q!<%D$N4sIU(B</a>$B!#%W%m%8%'%/%H$O@d$($:(B
-   $B0lHLE*$J%O!<%I$d!"FCDj$N%O!<%I$rM_$7$$$H;W$C$F$$$^$9!#(BIDE $B$d(B SCSI $B%G%#%9%/!"(B
-    $B3F<o(B RAM $B$O$$$D$G$bBg4?7^$7$F$$$^$9!#$=$NB>!"3F<o%3%s%T%e!<%?%7%9%F%`$d(B
-    $B%^%6!<%\!<%I$N>l9g!"$$$^2?$,I,MW$H$5$l$F$$$k$+$K$D$$$F$O!"(B
-    $B$^$:$*Ld$$9g$o$;$/$@$5$$!#H/Aw$N$?$a$N<jB3$-Ey$K$D$$$F$O!"(B
+    までメールをお送りください。
+    ほんの少しのお金でも、大きな差が出るものなのです。
+    <li><a href="../../ja/want.html">機器やパーツの寄付</a>。プロジェクトは絶えず
+   一般的なハードや、特定のハードを欲しいと思っています。IDE や SCSI ディスク、
+    各種 RAM はいつでも大歓迎しています。その他、各種コンピュータシステムや
+    マザーボードの場合、いま何が必要とされているかについては、
+    まずお問い合わせください。発送のための手続き等については、
     <a href="mailto:donations@openbsd.org">donations@openbsd.org</a>
-    $B$^$G8fO"Mm$/$@$5$$!#(B
-    <li>$B;~4V$d5;G=$G9W8%!#%*%Z%l!<%F%#%s%0%7%9%F%`$r=q$/$N$,(B
-    $BBg9%$-$J%W%m%0%i%^$O$b$A$m$sBg4?7^$G$9$,!"(B
-    $BLr$K$?$DJ}K!$O$=$l0J30$K$b2?==$H$"$j$^$9!#(B
-    <a href="../ja/mail.html">$B%a!<%j%s%0%j%9%H(B</a>$B$rFI$s$G!"(B
-    $B?7$7$$%f!<%6$N<ALd$KEz$($F$"$2$F$/$@$5$$!#(B
-   <li>FAQ $B$N%M%?$rAw$C$F!"%I%-%e%a%s%F!<%7%g%s$N=<<B$K9W8%$7$F$/$@$5$$(B
-   ($BAw$j@h$O(B <a href="mailto:faq@openbsd.org">faq@openbsd.org</a> $B$G$9(B)$B!#(B
-   $BCO0h$N(B<a href="../../groups.html">$B%f!<%6%0%k!<%W(B</a>$B$rAH?%$7$F!"M'$@$A$r(B
-   OpenBSD $B$NN:$K$7$F$7$^$$$^$7$g$&!#8[MQ<T$K!";E;v$G(B OpenBSD $B$r;H$&$h$&(B
-   $B@bF@$7$^$7$g$&!#3X@8$J$i!"%3%s%T%e!<%?2J3X$d%(%s%8%K%"%j%s%0$N9V5A$G(B
-   OpenBSD $B$r;H$$$^$;$s$+!"$H65<x$KOC$7$F$_$^$7$g$&!#(B
-   $B$^$?!"(BOpenBSD $B%W%m%8%'%/%H$r=u$1$h$&$H$7$F!"%*%Z%l!<%F%#%s%0%7%9%F%`$N(B
-   $B%U%l!<%`9g@o$K2C$o$C$F;~4V$rL5BL$K$7$?$j$7$J$$$3$H$,!":G$b=EMW$J$3$H$N(B
-   $B$R$H$D$G$"$k$H0U<1$9$k$3$H$b!"2ACM$N$"$k$3$H$G$9!#(B
-   $B%W%m%8%'%/%H$N?7$7$$%f!<%6C5$7$K$bLr$KN)$A$^$;$s$7!"(B
-   $B3+H/<TF1;N$N4X78$K$bHs>o$KM-32$J1F6A$rM?$($k>l9g$5$($"$k$N$G$9!#(B
+    まで御連絡ください。
+    <li>時間や技能で貢献。オペレーティングシステムを書くのが
+    大好きなプログラマはもちろん大歓迎ですが、
+    役にたつ方法はそれ以外にも何十とあります。
+    <a href="../ja/mail.html">メーリングリスト</a>を読んで、
+    新しいユーザの質問に答えてあげてください。
+   <li>FAQ のネタを送って、ドキュメンテーションの充実に貢献してください
+   (送り先は <a href="mailto:faq@openbsd.org">faq@openbsd.org</a> です)。
+   地域の<a href="../../groups.html">ユーザグループ</a>を組織して、友だちを
+   OpenBSD の虜にしてしまいましょう。雇用者に、仕事で OpenBSD を使うよう
+   説得しましょう。学生なら、コンピュータ科学やエンジニアリングの講義で
+   OpenBSD を使いませんか、と教授に話してみましょう。
+   また、OpenBSD プロジェクトを助けようとして、オペレーティングシステムの
+   フレーム合戦に加わって時間を無駄にしたりしないことが、最も重要なことの
+   ひとつであると意識することも、価値のあることです。
+   プロジェクトの新しいユーザ探しにも役に立ちませんし、
+   開発者同士の関係にも非常に有害な影響を与える場合さえあるのです。
 </ul>
 
 
 <p>
 <a name="WhoMaintains"></a>
-<h2>1.6 - OpenBSD $B$OC/$,%a%s%F%J%s%9$7$F$$$k$N$G$7$g$&(B ?</h2>
+<h2>1.6 - OpenBSD は誰がメンテナンスしているのでしょう ?</h2>
 
 <p>
-OpenBSD $B$O!"(B<a href="../../images/map.jpg">$B@$3&3F9q(B</a>$B$KJ,;6$7$?3+H/%A!<%`(B
-$B$K$h$C$F0];}$5$l$F$$$^$9!#$^$?!"%W%m%8%'%/%H$r$H$j$^$H$a$F$$$k$N$O!"(B
-$B%+%J%@:_=;$N(B Theo de Raadt $B$G$9!#(B
+OpenBSD は、<a href="../../images/map.jpg">世界各国</a>に分散した開発チーム
+によって維持されています。また、プロジェクトをとりまとめているのは、
+カナダ在住の Theo de Raadt です。
 
 <p>
 <a name="Next"></a>
-<h2>1.7 - OpenBSD $B$N<!$N%j%j!<%9$O$$$D$G$7$g$&$+(B ?</h2>
+<h2>1.7 - OpenBSD の次のリリースはいつでしょうか ?</h2>
 
-OpenBSD $B%A!<%`$G$O!"(B5 $B7n(B 1 $BF|$H(B 11 $B7n(B 1 $BF|$N%j%j!<%9$rL\I8$K!"?7$7$$(B
-$B%j%j!<%9$r(B 6 $B%v7n$4$H$K9T$C$F$$$^$9!#3+H/%5%$%/%k$K4X$9$k$h$j>\$7$$>pJs$O!"(B
-<a href="../faq5.html#Flavors">here</a> $B$r;2>H$7$F$/$@$5$$!#(B
+OpenBSD チームでは、5 月 1 日と 11 月 1 日のリリースを目標に、新しい
+リリースを 6 ヶ月ごとに行っています。開発サイクルに関するより詳しい情報は、
+<a href="../faq5.html#Flavors">here</a> を参照してください。
 
 <a name="Included"></a>
-<h2>1.8 - OpenBSD $B$K$O2?$,4^$^$l$F$$$k$N$G$7$g$&(B ?</h2>
-OpenBSD $B$O!"0J2<$N$b$N$r4^$`!"B??t$N%5!<%I%Q!<%F%#%=%U%H%&%'%"@=IJ$H$H$b$K(B
-$B=P2Y$5$l$F$$$^$9!#(B
+<h2>1.8 - OpenBSD には何が含まれているのでしょう ?</h2>
+OpenBSD は、以下のものを含む、多数のサードパーティソフトウェア製品とともに
+出荷されています。
 <!-- XXXrelease -->
 
 <ul>
 <li><a href="http://www.x.org">X.org 7.5</a>,
-X Window $B4D6-!#%m!<%+%k%Q%C%AE,MQ:Q$_!#(B
-<a href="faq4.html#FilesNeeded">$B%$%s%9%H!<%kMQ%U%!%$%k%;%C%H(B</a>.
-<tt>x*.tgz</tt> $B$,%$%s%9%H!<%k$5$l$F$$$^$9!#(B
+X Window 環境。ローカルパッチ適用済み。
+<a href="faq4.html#FilesNeeded">インストール用ファイルセット</a>.
+<tt>x*.tgz</tt> がインストールされています。
 
-<li>GNU C $B%3%s%Q%$%i(B<a href="http://gcc.gnu.org/">GCC</a> $B%P!<%8%g%s(B 2.95.3 $B$H(B 3.3.5.
-$B$=$7$F(B4.2.1 ($B%W%i%C%H%U%)!<%`$K0MB8(B)
-  OpenBSD $B%A!<%`$O%9%?%C%/J]8n5;=Q(B
+<li>GNU C コンパイラ<a href="http://gcc.gnu.org/">GCC</a> バージョン 2.95.3 と 3.3.5.
+そして4.2.1 (プラットフォームに依存)
+  OpenBSD チームはスタック保護技術
 <a href="http://www.trl.ibm.com/projects/security/ssp">Propolice</a>
-$B$rDI2C$7!"%G%U%)%k%H$GM-8z$K$7$F$$$^$9!#(B OpenBSD $B%f!<%6!<%i%s%I$N$9$Y$F$H(B OpenBSD $B$G(B
-$B%3%s%Q%$%k$5$l$?%"%W%j%1!<%7%g%s$O!"%G%U%)%k%H$G$3$l$,;HMQ$5$l$F$$$^$9!#(B
-$B%$%s%9%H!<%kMQ(B<a href="faq4.html#FilesNeeded">$B%U%!%$%k%;%C%H(B</a> 
-<tt>comp48.tgz</tt> $B$N0lIt$H$7$F%$%s%9%H!<%k$5$l$F$$$^$9!#(B
+を追加し、デフォルトで有効にしています。 OpenBSD ユーザーランドのすべてと OpenBSD で
+コンパイルされたアプリケーションは、デフォルトでこれが使用されています。
+インストール用<a href="faq4.html#FilesNeeded">ファイルセット</a> 
+<tt>comp48.tgz</tt> の一部としてインストールされています。
 
-<li><a href="http://www.perl.com/">Perl 5.10.1</a> $B!J!\%Q%C%A!K(B
-$B$*$h$S(B OpenBSD $B%A!<%`$K$h$k2~NI!#(B
+<li><a href="http://www.perl.com/">Perl 5.10.1</a> （＋パッチ）
+および OpenBSD チームによる改良。
 
-<li>$B2f!9$N2~NI$H%;%-%e%"2=$,$J$5$l$?(B Apache 1.3 web $B%5!<%P!#(B 
-OpenBSD $B%A!<%`$O!"(B<a href="faq10.html#httpdchroot">$B%G%U%)%k%H$G$N(B
-chroot</a>$B!"FC8"J,N%!"$*$h$S$=$NB>$N%;%-%e%j%F%#4XO"$N2~NI$r(B
-$BDI2C$7$F$$$^$9!#$^$?!"(Bmod_ssl 2.8 $B$H(B DSO $B$N%5%]!<%H$bAH$_9~$^$l$F$$$^$9!#(B
+<li>我々の改良とセキュア化がなされた Apache 1.3 web サーバ。 
+OpenBSD チームは、<a href="faq10.html#httpdchroot">デフォルトでの
+chroot</a>、特権分離、およびその他のセキュリティ関連の改良を
+追加しています。また、mod_ssl 2.8 と DSO のサポートも組み込まれています。
 
-<li><a href="http://www.openssl.org">OpenSSL 0.9.8k</a>$B!J!\%Q%C%A!K$*$h$S(B 
-OpenBSD $B%A!<%`$K$h$k2~NI!#(B
+<li><a href="http://www.openssl.org">OpenSSL 0.9.8k</a>（＋パッチ）および 
+OpenBSD チームによる改良。
 
 <li><a href="http://www.gnu.org/software/groff/groff.html">Groff 1.15</a>
-$B%F%-%9%H%W%m%;%C%5!#(B
+テキストプロセッサ。
 
-<li><a href="http://www.sendmail.org/">Sendmail 8.14.3</a> $B%a!<%k%5!<%P(B
-$B$H(B libmilter $B%a!<%k%U%#%k%?%i%$%V%i%j!#(B
+<li><a href="http://www.sendmail.org/">Sendmail 8.14.3</a> メールサーバ
+と libmilter メールフィルタライブラリ。
 
-<li><a href="http://www.isc.org/products/BIND/">BIND 9.4.2-P2</a> DNS $B%5!<%P(B
-$B!J!\%Q%C%A!K!#(B
-OpenBSD $B$G$O!"(Bchroot $B$K$h$k1?MQ$dB>$N%;%-%e%j%F%#4XO"$NLdBjEy$KBP$9$k(B
-$BB??t$N2~NI$r<BAu$7$F$$$^$9!#(B
+<li><a href="http://www.isc.org/products/BIND/">BIND 9.4.2-P2</a> DNS サーバ
+（＋パッチ）。
+OpenBSD では、chroot による運用や他のセキュリティ関連の問題等に対する
+多数の改良を実装しています。
 
-<li>$B%F%-%9%H%Y!<%9(B web $B%V%i%&%6(B <a href="http://lynx.isc.org/">Lynx 2.8.6rel.5</a>$B!#(B
-$B$^$?!"(BOpenBSD $B%A!<%`$K$h$k%Q%C%A$H(B HTTPS $B%5%]!<%H$H(BIPv6$B%5%]!<%H$,DI2C$5$l$F$$$^$9!#(B
+<li>テキストベース web ブラウザ <a href="http://lynx.isc.org/">Lynx 2.8.6rel.5</a>。
+また、OpenBSD チームによるパッチと HTTPS サポートとIPv6サポートが追加されています。
 
-<li><a href="http://www.courtesan.com/sudo/">Sudo v1.7.2</a>$B!#$3$l$O!"%f!<%6$,(B
-$B8D!9$N%3%^%s%I$r(B root $B$H$7$F<B9T$9$k$3$H$r5v2D$G$-$k$h$&$K$9$k$?$a$N$b$N$G$9!#(B
+<li><a href="http://www.courtesan.com/sudo/">Sudo v1.7.2</a>。これは、ユーザが
+個々のコマンドを root として実行することを許可できるようにするためのものです。
 
 <li><a href="http://www.gnu.org/software/ncurses/ncurses.html">Ncurses
 5.7</a>
 
 <li><a href="http://www.kame.net/">KAME</a> IPv6
 
-<li><a href="http://www.pdc.kth.se/heimdal/">Heimdal 0.7.2</a> $B!J!\%Q%C%A!K(B
+<li><a href="http://www.pdc.kth.se/heimdal/">Heimdal 0.7.2</a> （＋パッチ）
 
 <li><a href="http://www.stacken.kth.se/projekt/arla/">Arla 0.35.7</a>
 
 <li><a href="http://www.gnu.org/software/binutils/">Binutils 2.15</a> 
-($B!\%Q%C%A(B)
+(＋パッチ)
 
 <li><a href="http://www.gnu.org/software/gdb/gdb.html">gdb 6.3</a> 
-($B!\%Q%C%A(B)
+(＋パッチ)
 
 <li><a href="http://www.openssh.com">OpenSSH 5.6</a>
 
-<li><a href="http://www.openntpd.org">OpenNTPD</a> OpenNTPD$B!#%;%-%e%"$G(B
-$B%7%s%W%k$J%M%C%H%o!<%/%?%$%`%W%m%H%3%k<BAu!#(B
+<li><a href="http://www.openntpd.org">OpenNTPD</a> OpenNTPD。セキュアで
+シンプルなネットワークタイムプロトコル実装。
 
 <li><a href="http://www.openbgpd.org/">OpenBGPD and OpenOSPFD</a>
-$B%k!<%F%#%s%0%"%W%j%1!<%7%g%s(B
+ルーティングアプリケーション
 
 </ul>
 
-$B>e5-$N$h$&$K!"(BOpenBSD $B%A!<%`$G$O!"(B($BDL>o$O(B) $B%;%-%e%j%F%#$d%3!<%I$NIJ<A$N2~NI$N$?$a!"(B
-$B%5!<%I%Q!<%F%#$N@=IJ$K$7$P$7$P%Q%C%A$rEv$F$k$3$H$,$"$j$^$9!#$$$/$D$+$N%1!<%9$G$O!"(B
-$B%f!<%6$K$H$C$F!"A`:n@-$N0c$$$r46$:$k$3$H$O$"$j$^$;$s$,!"B>$N>l9g$G$O!"(B
-$BA`:n@-$N0c$$$,0lIt$N%f!<%6$KBP$7$F1F6A$r5Z$\$9$3$H$,$"$k$+$bCN$l$^$;$s!#(B
-$BF1$8%=%U%H%&%'%"$N0[$J$k%P!<%8%g%s$r$rLUL\E*$KDI2C$9$kA0$K!"$3$l$i$N3HD%$N0];}$r(B
-$B?4$,$1$F$/$@$5$$!#(B
-$B?7$7$$%P!<%8%g%s$N$b$N$rF~<j$9$k$3$H$O$G$-$^$9$,!"%;%-%e%j%F%#$NDc$$%7%9%F%`(B
-$B$K$J$C$F$7$^$&$+$b$7$l$^$;$s!#(B
+上記のように、OpenBSD チームでは、(通常は) セキュリティやコードの品質の改良のため、
+サードパーティの製品にしばしばパッチを当てることがあります。いくつかのケースでは、
+ユーザにとって、操作性の違いを感ずることはありませんが、他の場合では、
+操作性の違いが一部のユーザに対して影響を及ぼすことがあるかも知れません。
+同じソフトウェアの異なるバージョンをを盲目的に追加する前に、これらの拡張の維持を
+心がけてください。
+新しいバージョンのものを入手することはできますが、セキュリティの低いシステム
+になってしまうかもしれません。
 
 <p>
-$B$b$A$m$s!"(BOpenBSD $B$G$O!"$5$i$J$k%"%W%j%1!<%7%g%s$r(B
-<a href="../faq15.html">packages $B$d(B ports</a> $B%7%9%F%`$r;HMQ$7$FDI2C$9$k$3$H$,$G$-$^$9!#(B
+もちろん、OpenBSD では、さらなるアプリケーションを
+<a href="../faq15.html">packages や ports</a> システムを使用して追加することができます。
 <p>
 
 <a name="WhatsNew"></a>
-<h2>1.9 - OpenBSD 4.8 $B$G$O2?$,?7$7$/$J$C$?$N$G$7$g$&$+(B ?</h2>
+<h2>1.9 - OpenBSD 4.8 では何が新しくなったのでしょうか ?</h2>
 <!-- XXXrelease -->
 
-4.7$B$+$i(B4.8 $B$X$NJQ99E@$N40A4$J%j%9%H(B
-$B$O(B<a href="../../plus48.html">plus48.html</a>$B$K!"$^$?%O%$%i%$%H$O(B
-<a href="../../48.html">OpenBSD 4.8 $B>pJs(B</a>$B$K$"$j$^$9$,!"(B 
-$B$3$3$G$O0JA0$N%P!<%8%g%s$r=OCN$7(BOpenBSD4.8$B$K%"%C%W%0%l!<%I$^$?$O(B
-$B$3$l$r%$%s%9%H!<%k$7$h$&$H$9$k?M$?$A$KBP$7!"(BOpenBSD$B%A!<%`$,M=A[$9$k$$$/$D$+$NJQ99$O!"(B
-$B0J2<$N$h$&$KFCJL$NCm0U$,I,MW$H$J$C$F$$$^$9!#(B
+4.7から4.8 への変更点の完全なリスト
+は<a href="../../plus48.html">plus48.html</a>に、またハイライトは
+<a href="../../48.html">OpenBSD 4.8 情報</a>にありますが、 
+ここでは以前のバージョンを熟知しOpenBSD4.8にアップグレードまたは
+これをインストールしようとする人たちに対し、OpenBSDチームが予想するいくつかの変更は、
+以下のように特別の注意が必要となっています。
 
 <ul>
 
 <li><b>GCC4</b><br>
-$B:#$G$O(Bamd64, hppa, i386, mapcppc, sparc64 $B$H(B socppc $B%W%i%C%H%U%)!<%`$O(B
-gcc4 $B$rMQ$$$F9=C[$5$l$F$$$^$9!#(B
+今ではamd64, hppa, i386, mapcppc, sparc64 と socppc プラットフォームは
+gcc4 を用いて構築されています。
 
 <li><b>Suspend/resume</b><br>
-ACPI$B%Y!<%9$N%5%9%Z%s%I(B/$B%l%8%e!<%`$,$[$H$s$I$N(B Intel $B$+(BATI $B%S%G%*$r(B
-$B;H$&%^%7%s$GF0$-$^$9!*(B
+ACPIベースのサスペンド/レジュームがほとんどの Intel かATI ビデオを
+使うマシンで動きます！
 
 <li><b><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=diskmap&amp;sektion=4">diskmap(4)</a>
-$B%$%s%?!<%U%'!<%9(B</b><br>
-$B$h$/;H$o$l$k(BUSB$B@\B3$N%9%H%l!<%8$d(Bsoftraid(4) $B9=@.$O(B
-$BB?$/$N>l9g!"5/F0$9$k$?$S$KJQ$o$k%I%i%$%V<1JL;R$d(B
-$B%O!<%I%&%'%"9=@.$N0c$$$K$h$C$FLdBj$rJz$($F$$$^$9!#(B
-diskmap(4) $B$O!"$=$l$i$,@\B3$5$l$F$$$kJ}K!$G$O$J$/!"0l0U$N%i%Y%k$N(B UID $B$G(B
-$B%I%i%$%V$r%^%&%s%H$9$k$3$H$,$G$-$^$9$N$G!":#$G$O(B sd0,sd1,sd2 $B$N$h$&$K=P8=$9$k$+(B
-$B?4G[$9$k$3$H$J$/(B $B$*;H$$$N(BUSB $B%U%i%C%7%e%G%#%9%/$KF1$8(B <tt>etc/fstab</tt> $B$rMQ$$$k(B
-$B$3$H$,$G$-$^$9!#(B
+インターフェース</b><br>
+よく使われるUSB接続のストレージやsoftraid(4) 構成は
+多くの場合、起動するたびに変わるドライブ識別子や
+ハードウェア構成の違いによって問題を抱えています。
+diskmap(4) は、それらが接続されている方法ではなく、一意のラベルの UID で
+ドライブをマウントすることができますので、今では sd0,sd1,sd2 のように出現するか
+心配することなく お使いのUSB フラッシュディスクに同じ <tt>etc/fstab</tt> を用いる
+ことができます。
 
-<li><b>$B%G%U%)%k%H$N%$%s%9%H!<%k%a%=%C%I$,(BFTP$B$+$i(BHTTP$B$KJQ$o$j$^$7$?(B</b><br>
-$B$b$A$m$s!"(BFTP $B$H(B HTTP $B$NN>J}$,%$%s%9%H!<%k$N:]$K%5%]!<%H$5$l$^$9!"(B
-$B%G%U%)%k%H$N$_JQ99$5$l$^$7$?!#(B
+<li><b>デフォルトのインストールメソッドがFTPからHTTPに変わりました</b><br>
+もちろん、FTP と HTTP の両方がインストールの際にサポートされます、
+デフォルトのみ変更されました。
 
 <li><b><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=mandoc&amp;sektion=1">mandoc(1)</a></b><br>
-$B%Y!<%9%7%9%F%`$G$O(B mandoc $B$,A4$F$N%^%K%e%"%k$r9=C[$9$k$N$K;H$o$l$^$9!#(B
+ベースシステムでは mandoc が全てのマニュアルを構築するのに使われます。
 
 </ul>
 
 
 <a name="Desktop"></a>
-<h2>1.10 - OpenBSD$B$r%G%9%/%H%C%W$H$7$F;HMQ$G$-$^$9$+!)(B</h2>
-$B$3$l$O!"!V%G%9%/%H%C%W!W$H$$$&8@MU$N0UL#$r$-$A$s$H@bL@$;$:$K(B
-$B?R$M$i$l$k$3$H$,B?$$<ALd$G$9!#(B
-$B$3$N<ALd$O!V2?$,I,MW$J$N$+!W$K0M$k$?$a!"(B
-$BEz$($k$3$H$,$G$-$k$N$O<ALd$7$??M$@$1$G$9!#(B
+<h2>1.10 - OpenBSDをデスクトップとして使用できますか？</h2>
+これは、「デスクトップ」という言葉の意味をきちんと説明せずに
+尋ねられることが多い質問です。
+この質問は「何が必要なのか」に依るため、
+答えることができるのは質問した人だけです。
 
 <p>
-OpenBSD$B$O!V%5!<%PMQES$N!W%*%Z%l!<%F%#%s%0%7%9%F%`$H$7$F9b$$I>2A$rF@$F$$$^$9$,!"%G%9%/(B
-$B%H%C%WMQES$K;H$&$3$H$b2DG=$G$9!#(B
-$BB?$/$N(B" $B%G%9%/%H%C%W(B" $B%"%W%j%1!<%7%g%s$,(B 
-<a href="../faq15.html">packages $B$H(B ports</a>$B$K$"$j$^$9!#(B
-$B$=$7$F!"%*%Z%l!<%F%#%s%0%7%9%F%`$rA*$V$H$-$K9M$($?$3$H!"$D$^$j(B
-$B!V$=$l$O<+J,$N$d$j$?$$FbMF$r!"<+J,$NK>$`$h$&$K$d$C$F$/$l$k$@$m$&$+!W(B
-$B$H$$$&<ALd$r9M$($F$/$@$5$$!#$3$N<ALd$K$O!"$"$J$?$,<+J,<+?H$GEz$($r=P$5$J$1$l$P$J$j$^$;$s!#(B
+OpenBSDは「サーバ用途の」オペレーティングシステムとして高い評価を得ていますが、デスク
+トップ用途に使うことも可能です。
+多くの" デスクトップ" アプリケーションが 
+<a href="../faq15.html">packages と ports</a>にあります。
+そして、オペレーティングシステムを選ぶときに考えたこと、つまり
+「それは自分のやりたい内容を、自分の望むようにやってくれるだろうか」
+という質問を考えてください。この質問には、あなたが自分自身で答えを出さなければなりません。
 
 <p>
-OpenBSD$B$N3+H/$NBg$-$JItJ,$O%i%C%W%H%C%W>e$G9T$o$l$F$$$k$3$H$+$i!"(B
-$B$=$N<ALd$K$O0UL#$,$J$$$+$b$7$l$^$;$s!#(B
+OpenBSDの開発の大きな部分はラップトップ上で行われていることから、
+その質問には意味がないかもしれません。
 
 
 <a name="HowAbout"></a>
-<h2>1.11 - $B$I$&$7$F(B <i>$B$"$N%=%U%H%&%'%"(B</i> $B$,F~$C$F$$$k(B/$B$$$J$$$N$G$7$g$&$+!)(B</h2>
+<h2>1.11 - どうして <i>あのソフトウェア</i> が入っている/いないのでしょうか？</h2>
 
-$B2?8NFCDj$N@=IJ$,(BOpenBSD$B$KF~$C$F$$$k$N$+!"$"$k$$$OF~$C$F$J$$$N$+$H(B
-$B$h$/J9$+$l$^$9!#(B
-$B3+H/<T$N4uK>$H!"2f!9$N%W%m%8%'%/%H$N(B
-<a href="../../goals.html">$BL\I8(B</a>$B$H9gCW$9$k$+!"(B
-$B$NFs$D$K4p$E$$$F$$$k!"$H$$$&$N$,2sEz$G$9!#(B
-$BC1$K@-G=$,$h$$$H$$$&$@$1$NM}M3$G!"$=$N@=IJ$,(BOpenBSD$B$K4^$^$l$k;v$O$"$j$^$;$s!#!<!<$=$N@=IJ$,(B
-$B<+M3$KMxMQ2DG=$G$"$j!"2f!9$NI8=`$K9gCW$9$k$h$&2~NI$7:FG[I[2DG=$G$J$1$l$P$J$j$^$;$s!#(B
-$B$^$?!"$=$N%=%U%H%&%'%"$,0BDj$7$F$$$F%;%-%e%"$G$"$k$3$H$bI,MW$G$9!<!<%P!<%8%g%sHV9f$,Bg$-$$(B
-$B$+$i$H$$$C$F0JA0$h$j2~NI$5$l$F$$$k$H$O8B$i$J$$$N$G$9!#(B
-
-<p>
-$B$h$/!"Bg$-$JLdBj$K$J$k$N$O%i%$%;%s%9$G$9!#$o$?$7$?$A$O(BOpenBSD$B$r@$3&Cf$NC/$b$,!"(B
-$B$I$s$JL\E*$K$b;H$($k$h$&$K$7$?$$$H9M$($F$$$^$9!#(B
+何故特定の製品がOpenBSDに入っているのか、あるいは入ってないのかと
+よく聞かれます。
+開発者の希望と、我々のプロジェクトの
+<a href="../../goals.html">目標</a>と合致するか、
+の二つに基づいている、というのが回答です。
+単に性能がよいというだけの理由で、その製品がOpenBSDに含まれる事はありません。ーーその製品が
+自由に利用可能であり、我々の標準に合致するよう改良し再配布可能でなければなりません。
+また、そのソフトウェアが安定していてセキュアであることも必要ですーーバージョン番号が大きい
+からといって以前より改良されているとは限らないのです。
 
 <p>
-$BB>$K9MN8$7$J$/$F$O$$$1$J$$;v$O!"3+H/<T$N4uK>$G$9!#(B
- OpenBSD $B3+H/<T$O!"2?$r%W%m%8%'%/%H$KDI2C$7!"DI2C$7$J$$$+!"(B
-$B5f6K$NH=CG$r$7$^$9!#(B
-$BC1$K%"%W%j%1!<%7%g%s$,$h$$$+$i!"$H$$$&$N$O(B
-OpenBSD$B%W%m%8%'%/%H$,%a%s%F%J%s%9$N$?$a$N%j%=!<%9$rJ{$2$k;v$rK>$s$@$j!"(B OpenBSD$B$K(B
-$BCV$-$D$E$1$kB>$N?M$NG.0U$rJ,$1M?$($k$3$H$r0UL#$7$^$;$s!#(B
+よく、大きな問題になるのはライセンスです。わたしたちはOpenBSDを世界中の誰もが、
+どんな目的にも使えるようにしたいと考えています。
 
 <p>
-$B0J2<$O!"$$$/$D$+$N%5!<%I%Q!<%F%#@=%=%U%H%&%'%"$K4X$7$F$h$/?R$M$i$l$k<ALd$G$9!#(B<ul>
+他に考慮しなくてはいけない事は、開発者の希望です。
+ OpenBSD 開発者は、何をプロジェクトに追加し、追加しないか、
+究極の判断をします。
+単にアプリケーションがよいから、というのは
+OpenBSDプロジェクトがメンテナンスのためのリソースを捧げる事を望んだり、 OpenBSDに
+置きつづける他の人の熱意を分け与えることを意味しません。
+
+<p>
+以下は、いくつかのサードパーティ製ソフトウェアに関してよく尋ねられる質問です。<ul>
 <ul>
-<li><i>$B$I$&$7$F(B Sendmail$B$,4^$^$l$F$$$k$N$G$7$g$&$+!)$"$l$O%;%-%e%"$G$J$$;v$G$OM-L>$G$O$J$$$G$9$+!)(B</i><br>
-$B$$$^$^$G(BSendmail $B$O!"(B
-$B%;%-%e%j%F%#$K4X$7$F$h$/$J$$7PNr$r;}$C$F$$$^$7$?$,!"(BSendmail $B$N:n<T$H(B
-$B%a%s%F%J$O%3!<%I$r$h$j%;%-%e%"$K$9$k$?$a$N:n6H$KHs>o$K9b$$M}2r$r(B
-$B<($7$F$/$l$F$$$^$9!J$3$l$OLGB?$K$J$$$3$H$G$9!K!#(B
-$B:G6a$N(BSendmail $B$N%;%-%e%j%F%#$K4X$9$k7PNr$O!"B>$N!V$h$j%;%-%e%"$G$"$k!W$H$5$l$F$$$k%=%U%H(B
-$B%&%'%"$H!"$[$H$s$IJQ$o$j$^$;$s!#(B
+<li><i>どうして Sendmailが含まれているのでしょうか？あれはセキュアでない事では有名ではないですか？</i><br>
+いままでSendmail は、
+セキュリティに関してよくない経歴を持っていましたが、Sendmail の作者と
+メンテナはコードをよりセキュアにするための作業に非常に高い理解を
+示してくれています（これは滅多にないことです）。
+最近のSendmail のセキュリティに関する経歴は、他の「よりセキュアである」とされているソフト
+ウェアと、ほとんど変わりません。
 
-<li><i>$B$I$&$7$F(BPostfix$B$,4^$^$l$F$$$J$$$N$G$7$g$&$+!)(B</i><br>
-$B%i%$%;%s%9$,%U%j!<$G$O$"$j$^$;$s$N$G!"(B
-$B8!F$$5$l$k;v$O$"$j$^$;$s!#(B
+<li><i>どうしてPostfixが含まれていないのでしょうか？</i><br>
+ライセンスがフリーではありませんので、
+検討される事はありません。
 
-<li><i>$B$I$&$7$F(Bqmail $B$d(Bdjbdns$B$,4^$^$l$F$J$$$N$G$9$+!)(B</i><br>
-$B$=$l$i$N%W%m%0%i%`$O$J$s$HB?$/$N(BUnix$B%f!<%6!<$+$i>C$($F$[$7$$$H4j$o$l$F$$$k$G$7$g$&$+!#(B
+<li><i>どうしてqmail やdjbdnsが含まれてないのですか？</i><br>
+それらのプログラムはなんと多くのUnixユーザーから消えてほしいと願われているでしょうか。
 
-<li><i>$B$I$&$7$F(B Apache $B2f4^$^$l$F$$$k$N$G$9$+!)$[$H$s$I$N?M$K$OI,MW$J$$$8$c$J$$$G(B
-$B$9$+!*(B</i><br>
-$B3+H/<T$,4^$a$k$3$H$rK>$s$G$$$k$+$i$G$9!#(B
+<li><i>どうして Apache 我含まれているのですか？ほとんどの人には必要ないじゃないで
+すか！</i><br>
+開発者が含めることを望んでいるからです。
 
-<li><i>$B$I$&$7$F?7$7$$%P!<%8%g%s$N(BApache$B$O4^$^$l$F$$$J$$$N$G$9$+!)(B</i><br>
-$B?7$7$$%P!<%8%g%s$N%i%$%;%s%9$O!"(B
-$B<u$1F~$l$k$3$H$,$G$-$J$$$+$i$G$9!#(B
+<li><i>どうして新しいバージョンのApacheは含まれていないのですか？</i><br>
+新しいバージョンのライセンスは、
+受け入れることができないからです。
 
-<li><i>$B$I$&$7$F(Bgzip$B$NBe$o$j$K(Bbzip2 $B$,4^$^$l$F$$$J$$$N$G$9$+!)(B</i><br>
-$B%Q%U%)!<%^%s%9$,Ha;4$G!"Mx$,>/$J$$$+$i$G$9!#(B
-hp300 $B$d(B VAX $B$N$h$&$JCY$$%W%i%C%H%U%)!<%`$K$O<u$1F~$l$i$l$^$;$s!#(B
+<li><i>どうしてgzipの代わりにbzip2 が含まれていないのですか？</i><br>
+パフォーマンスが悲惨で、利が少ないからです。
+hp300 や VAX のような遅いプラットフォームには受け入れられません。
 
-<li><i>$B$I$&$7$F%0%i%U%#%+%k$J!"$"$k$$$O(B 
+<li><i>どうしてグラフィカルな、あるいは 
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=curses&amp;sektion=3">curses(3)</a> 
-$B%Y!<%9$N%$%s%9%H!<%i$,$J$$$N$G$9$+!)(B</i><br>
-$B$$$/$D$+$NM}M3$K$h$j!"%$%s%9%H!<%k%a%G%#%"$r(B
-$B0lKg$N%U%m%C%T!<$KG<$a$kL\I8(B
-$B<B:]!"0l$D$N%$%s%9%H!<%i$O$9$Y$F$N9=@.!"$9$Y$F$N%W%i%C%H%U%)!<%`$G;H$&$3$H$,$G$-$^$9!#(B 
-$B;v<B$H$7$F!"<B:]$K$[$H$s$I$N%f!<%6!<$O(B2$B2sL\$+#32sL\$K(BOpenBSD$B$r%$%s%9%H!<%k$7$?8e(B
-OpenBSD$B$N%$%s%9%H!<%i$O$b$C$H$b4JC1$G$b$b$C$H$bB.$$;v$,$o$+$k$G$7$g$&!#(B
-$B$[$H$s$I$N3+H/<T$H%f!<%6!<$O!"%9%T!<%I$H%Q%o!<$H4JC1$K;H$($k(B
-$B:#$N%$%s%9%H!<%i$,!"(B
-$BB>$N$h$j%+%i%U%k$G$+$o$$$$%$%s%9%H!<%i$h$j$bBg9%$-$G$9!#(B
+ベースのインストーラがないのですか？</i><br>
+いくつかの理由により、インストールメディアを
+一枚のフロッピーに納める目標
+実際、一つのインストーラはすべての構成、すべてのプラットフォームで使うことができます。 
+事実として、実際にほとんどのユーザーは2回目か３回目にOpenBSDをインストールした後
+OpenBSDのインストーラはもっとも簡単でももっとも速い事がわかるでしょう。
+ほとんどの開発者とユーザーは、スピードとパワーと簡単に使える
+今のインストーラが、
+他のよりカラフルでかわいいインストーラよりも大好きです。
 
-<li><i>ZFS$B$O(BOpenBSD$B$KDI2C$5$l$^$9$+!)(B</i><br>
-$BC/$+$,(BOracle $B$K(BOpenBSD $B$N(B <a href="../../policy.html">$B%]%j%7!<(B</a>
-$B$H8_49@-$N$"$k%i%$%;%s%9$KJQ99$5$;$k;v$rG<F@$5$;$J$$8B$j!J$J$$$G$7$g$&!K!#(B
+<li><i>ZFSはOpenBSDに追加されますか？</i><br>
+誰かがOracle にOpenBSD の <a href="../../policy.html">ポリシー</a>
+と互換性のあるライセンスに変更させる事を納得させない限り（ないでしょう）。
 
 </ul>
 
-$B$3$l$i$NOCBj$NB?$/$O!"(B <a href="faq2.html#MailLists">$B%a!<%j%s%0%j%9%H(B</a>$B$G(B
-$B7y$K$J$k$[$I5DO@$5$l$?$b$N$G$9!#$b$7>pJs$,I,MW$J$i$P!"$3$l$i$N%"!<%+%$%V$r$4Mw$/(B
-$B$@$5$$!#(B
+これらの話題の多くは、 <a href="faq2.html#MailLists">メーリングリスト</a>で
+嫌になるほど議論されたものです。もし情報が必要ならば、これらのアーカイブをご覧く
+ださい。
 <p>
-$B$b$A$m$s!"$3$N$h$&$J%Q%C%1!<%8$r;H$$$?$$$HK>$s$G$*$j!"%i%$%;%s%9$K0cH?$7$J$$(B
-$B;H$$J}$r$7$F$$$k8B$j!"C/$b$"$J$?$,$=$l$r;H$&$N$rK8$2$k$b$N$O$"$j$^$;$s(B
-$B!J;d$?$A$,$=$&$7$F$7$^$&$H!"??$K%U%j!<$G$O$J$/$J$C$F$7$^$&$N$G$9!K!#$?$@$7!"$"$J$?(B
-$B$,I,MW$H$7$F$$$k$b$N$OJQ$o$k$+$b$7$l$^$;$s!#$D$^$j$"$J$?$O%U%j!<$G$J$$%=%U%H%&%'(B
-$B%"$rAH$_9~$`$3$H$K$h$C$F!"HNGd$d:FG[I[!"Mx1W$rF@$k$3$H$r6X$8$k$h$&$J!V%-%i!<%"%W(B
-$B%j%1!<%7%g%s!W$r3+H/$7$F$7$^$&2=$b$7$l$J$$$o$1$G$9!#$=$&$$$&$N$O$d$a$?J}$,$$$$$G(B
-$B$7$g$&!#(B
+もちろん、このようなパッケージを使いたいと望んでおり、ライセンスに違反しない
+使い方をしている限り、誰もあなたがそれを使うのを妨げるものはありません
+（私たちがそうしてしまうと、真にフリーではなくなってしまうのです）。ただし、あなた
+が必要としているものは変わるかもしれません。つまりあなたはフリーでないソフトウェ
+アを組み込むことによって、販売や再配布、利益を得ることを禁じるような「キラーアプ
+リケーション」を開発してしまう化もしれないわけです。そういうのはやめた方がいいで
+しょう。
 
 
 <p>
 
 <font color="#0000e0">
-<a href= "index.html">[FAQ $B$NL\<!(B]</a>
-<a href= "faq2.html">[2 $B>O(B - $BB>$N(BOpenBSD $B4XO">pJs(B]</a>
+<a href= "index.html">[FAQ の目次]</a>
+<a href= "faq2.html">[2 章 - 他のOpenBSD 関連情報]</a>
 </font>
 
 <p>
