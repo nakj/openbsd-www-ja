@@ -389,32 +389,31 @@ OpenBSDチームは <i>-current</i>のコードに基づいた新しいスナッ
 <p>
 バイナリのインストールには
 インストールメディアの "Upgrade" オプションを使うことがお勧めです。
-If that is not possible, you can also unpack the binaries as described
-<a href="upgrade48.html">here</a>.
-Regardless, you must do the entire upgrade process, including creating 
-any users or other <tt>/etc</tt> directory changes needed.
+それが不可能であれば、<a href="../upgrade48.html">ここ</a>で説明されている
+バイナリを解凍することもできます。
+それとは関係なく、ユーザーの作成や必要な <tt>/etc</tt>ディレクトリの変更を含む
+全体のアップグレードプロセスを実行する必要があります。
 
 
 <a name="BldGetSrc"></a>
-<h3>5.3.3 - Fetching the appropriate source code</h3>
-OpenBSD source is managed using the
+<h3>5.3.3 - 適切なソースコードを取ってくる</h3>
+OpenBSD のソースは
 <a href="http://ximbiot.com/cvs/cvshome/">CVS</a>
-version control system, and
+バージョン管理システムを使って管理されています、そして
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=cvs&amp;sektion=1">cvs(1)</a>
-is used to pull a copy of the desired source to your local machine
-for compilation. 
-This can be done by using an <a href="../anoncvs.html">AnonCVS</a>
-server (a machine holding a publicly accessible copy of the entire CVS
-repository used by the OpenBSD project) or from a local CVS repository
-you maintain using the
-<a href="../cvsup.html">CVSup</a>, or 
-<a href="../cvsync.html">CVSync</a> programs available as
-<a href="faq15.html#PkgMgmt">packages</a>.
-CVSup can also be used in a "checkout" mode, but that will not be
-covered here.
-If you have multiple machines you wish to maintain source code trees on,
-you may find it worth having a local CVS repository, created and maintained
-using CVSup or CVSync.
+はコンパイルのために欲しいソースのコピーをローカルマシンに
+持ってくるために使います。
+これは<a href="../anoncvs.html">AnonCVS</a> 
+サーバ( OpenBSD プロジェクトの使っているCVSリポジトリ全体の
+公衆アクセス可能なコピーを保持したマシン )を用いるか、
+あなたが
+<a href="../../cvsup.html">CVSup</a>, あるいは
+<a href="../faq15.html#PkgMgmt">パッケージ</a>にある
+<a href="../../cvsync.html">CVSync</a> プログラム
+を用いて管理しているローカルリポジトリから行うことができます。
+もし複数のマシンを持っていて、それらのソースコードツリーを管理したいのであれば、
+作成し、 CVSup または CVSyncを使用して維持するローカルリポジトリを有する価値を
+見つけることが出来るでしょう。
 
 <p>
 After deciding which <a href="../anoncvs.html">AnonCVS server</a> you
