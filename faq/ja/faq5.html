@@ -416,31 +416,31 @@ OpenBSD のソースは
 見つけることが出来るでしょう。
 
 <p>
-After deciding which <a href="../anoncvs.html">AnonCVS server</a> you
-wish to use, you must "checkout" the source tree, after that, you then
-maintain the tree by running "updates", to pull updated files to your
-local tree.
+どの <a href="../../anonvs.html"> AnonCVS サーバ</a>を使いたいか
+決めた後、ソースツリーを「checkout」しないといけません。チェックアウトの後では
+ツリーを維持するために 「updates」を動かして、ローカルツリーにアップデートされた
+ファイルを取り込みます。
 
 <p>
-The
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=cvs&amp;sektion=1">CVS(1)</a>
-command has many options, some of them are <i><b>required</b></i> to
-checkout and update a useful tree.
-Other commands can cause a broken tree.
-Following and understanding directions here is important.
+コマンドは多くのオプションがあります。いくつかのオプションは
+チェックアウトや役立つツリーを更新するのに必要です。
+それ以外のコマンドはツリーを壊してしまうかもしれません。
+ここの指示に従い理解することは重要です。
 
 <p>
-<b>Following <i>-current</i></b><br>
+<b><i>-current</i>に追随する</b><br>
+
 <blockquote>
-In this case, we will assume we are using a public AnonCVS 
-server, <b>anoncvs@anoncvs.example.org:/cvs</b>.
-We will also assume you are using 
+この場合、我々は公衆 AnonCVS サーバ <b>anoncvs@anoncvs.example.org:/cvs</b>
+を使っていると仮定します。
+同様に、あなたは
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=sh&amp;sektion=1">sh(1)</a>
-as your command shell, if you are using a different shell, you will have to
-adjust some of these commands.
+をコマンドシェルに使っていると仮定します。もし違うシェルを使っているのなら、
+これらのコマンドのいくつかを調節しなければいけないでしょう。
 
 <p>
-To checkout a <i>-current</i> CVS src tree, you can use the following:
+<i>-current</i> CVSソースツリーをチェックアウトするためには、以下のようにします：
 
 <pre>
     # <b>cd /usr</b>
@@ -449,7 +449,7 @@ To checkout a <i>-current</i> CVS src tree, you can use the following:
 </pre>
 
 <p>
-Once you have a tree, you can update it at a later time:
+一度ソースツリーを入手すれば、後でツリーをアップデートすることが出来ます：
 <pre>
     # <b>cd /usr/src</b>
     # <b>export CVSROOT=anoncvs@anoncvs.example.org:/cvs</b>
@@ -460,18 +460,18 @@ Once you have a tree, you can update it at a later time:
 <!-- XXXrelease -->
 <b>Following <i>-Stable</i></b><br>
 <blockquote>
-If you wish to check out an alternative "branch" of the tree, such as
-the <i>-stable</i> branch, you will use the "<tt>-r</tt>" modifier to
-your checkout:
+もし別の「ブランチ」、たとえば
+<i>-stable</i> ブランチのツリーチェックアウトしたいのであれば、 <tt>-r</tt> 修飾子を使って
+チェックアウトします：
 <pre>
     # <b>cd /usr</b>
     # <b>export CVSROOT=anoncvs@anoncvs.example.org:/cvs</b>
     # <b>cvs -d$CVSROOT checkout -rOPENBSD_4_8 -P src</b>
 </pre>
 
-This will pull the src files from the OPENBSD_4_8 branch, which is also
-known as the "Patch branch" or "<a href="../stable.html">-stable</a>".
-You would update the code similarly:
+これは、「パッチブランチ」や 「<a href="../../stable.html">-stable</a>」の名で知られている
+OPENBSD_4_8 ブランチのソースファイルを取ってきます。
+コードをアップデートするには同様に：
 <pre>
     # <b>cd /usr/src</b>
     # <b>export CVSROOT=anoncvs@anoncvs.example.org:/cvs</b>
@@ -483,6 +483,7 @@ system, so you don't have to remember the "<tt>-rOPENBSD_4_8</tt>" part
 of the command line, it will remember this until you explicitly clear
 them or set a new tag by using the "<tt>-A</tt>" option to
 "<tt>update</tt>".
+
 However, it is probably better to provide too much info in your CVS
 command lines than too little.
 </blockquote>
