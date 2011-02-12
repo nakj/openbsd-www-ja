@@ -208,6 +208,7 @@ for details.
 <p>
 一度インストールカーネルが起動すると、<a href="#FilesNeeded">インストールファイルセット</a>を
 どこから入手するのかいくつかのオプションがあります。
+Again, not every platform supports every option.
 
 <ul>
 <li><b>CD-ROM</b> もちろん、
@@ -300,14 +301,13 @@ As examples, we will look at the installation images available for the
 and <a href="../sparc.html">sparc</a> platforms.
 
 <p>
-The <a href="../i386.html">i386</a> platform has six separate
-installation disk images to choose from:
-<a href="../../i386.html">i386</a> プラットフォーム向けには6つの独立した
+<a href="../../i386.html">i386</a> プラットフォーム向けには6つに分割された
 インストールディスクイメージを選びます。
 
 <ul>
 <li><b><tt>cd48.iso</tt></b> はほとんどのプラットフォームで有名な
-  CD-ROM作成ソフトウェアで起動可能な CD を作成することができる
+  CD-ROM作成ソフトウェアで起動可能な CD を
+  作成することができます。
   このイメージは豊富なドライバが入っていて、もしハードウェアがCDROMから起動可能
   であればたいていはお勧めな選択です。
 <li><b><tt>cdemu48.iso</tt></b> は 2.88Mのフロッピーイメージを用いた
@@ -334,6 +334,7 @@ installation disk images to choose from:
 <p>
 <a href="../../sparc.html">sparc</a> プラットフォームは四つの
 インストールディスクイメージが選択できます。
+
 <ul>
 <li><b><tt>floppy48.fs:</tt></b> フロッピーディスクをサポートしているシステム。
 <li><b><tt>cd48.iso</tt></b> CD-ROM で起動する SPARC システム 向けの
@@ -363,8 +364,6 @@ The exact details here are left to the reader to determine with
 the tools they have at their disposal.
 
 <p>
-In OpenBSD, you can create a CD from an ISO image using
-<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=cdio&amp;sektion=1">cdio(1)</a>:
 OpenBSD では、ISO イメージから CD を作成するのに
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=cdio&amp;sektion=1">cdio(1)</a>を使います。
 
@@ -382,9 +381,9 @@ Windows と Macintosh システム向けのソフトウェアとして売られ�
 他の Unix 系システムでは 
 <a href="http://www.cdrkit.org/">cdrkit</a>のようなアプリケーションを使います。
 
+
 <a name="MkFlop"></a>
 <a name="UnixFlop"></a>
-<h3>4.3.2 - Creating floppies on Unix</h3>
 <h3>4.3.2 - Unix 上でのフロッピーの作成</h3>
 
 <p>
@@ -432,6 +431,7 @@ Windows と Macintosh システム向けのソフトウェアとして売られ�
 
 <a name="DosFlop"></a>
 <h3>4.3.3 - Windows でのフロッピーの作成</h3>
+
 <p>
 Windows でフロッピーを用意するには、最初にネイティブ
 フォーマットツールを、ディスクをフォーマットして、ディスクに
@@ -442,6 +442,7 @@ Windows でフロッピーを用意するには、最初にネイティブ
 <tt>ntrw.exe</tt>を使います、これはどれかFTPミラーの
 <a href="ftp://ftp.openbsd.org/pub/OpenBSD/4.8/tools/">tools</a>
 ディレクトリからダウンロード可能です。
+
 
 <p>
 <i>ntrw</i>の使用例です。
@@ -797,7 +798,8 @@ utilities to run do NOT need this sysctl to be set.
   Do you want the X Window System to be started by xdm(1)? [no] <b>y</b>
 </pre></td></tr></table>
 
-<p>+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=xdm&amp;sektion=1">xdm(1)</a>
+<p>
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=xdm&amp;sektion=1">xdm(1)</a>
 starts the X environment at system boot.
 We'd recommend doing this at install only if you are very confident
 that X will work on your system by default.
@@ -809,6 +811,7 @@ xdm(1).
   Change the default console to com0? [no] <b><i>Enter</i></b>
 </pre></td></tr></table>
 
+<p>
 If you wish to configure a serial console rather than your system's
 default (usually a keyboard and monitor), this is your chance.
 If you change the default to "y", you will be prompted to set the
