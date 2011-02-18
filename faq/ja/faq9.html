@@ -54,55 +54,55 @@ Linux ユーザのためのより詳しい情報は、<a href="http://sites.inka
 OpenBSDは大変伝統的なUnixライクなオペレーティングシステムで、
 他のUnixライクシステムを使ったことがある人には親しみやすいですが、
 重要な違いがあります。
-New users to OpenBSD must look at their own experience:
-if your only knowledge of Unix is some experience with one variant
-of Linux, you may find OpenBSD "strange".
-Rest assured, Linux looks pretty strange to anyone who starts from
-OpenBSD.
-You must recognize the difference between "standard" and your
-experience.
+OpenBSDの新しいユーザーは、彼ら自身の経験を見なければなりません：
+もし、あなたの Unix の知識が、一種類の Linux を少し使った経験があるだけ
+であれば、OpenBSDは 「奇妙」に見えるでしょう。
+安心してください。OpenBSD ではじめた誰にとっても、Linux は
+かなり奇妙に見えます
+あなたは 「標準」とあなたの経験の違いを
+認めなければいけません。
 
 <p>
-If you learned Unix from any of the <a href="../books.html">good
-books</a> on general Unix, understanding the "Unix philosophy"  and then
-extended your knowledge to a particular platform, you will find OpenBSD
-to be a very "true" and familiar Unix.
+もしあなたが <a href="../../books.html">良書</a> で
+一般的なUnixを学び、「Unix 哲学」を理解し、そして
+特定のプラットフォームにあなたの知識を拡大適用するならば、OpenBSD は
+とても「正確な」 おなじみのUnix だと分かるでしょう
 If you learned Unix using a "type this to do that" process or a book
 such as "Learn PinkBeenie v8.3 in 31.4 Hours", and told yourself you
 "know Unix", you will most likely find OpenBSD very different.
 
 <p>
-One important difference between OpenBSD and many other operating systems
-is the documentation.  OpenBSD developers take great pride in the system
-<a href="http://www.openbsd.org/cgi-bin/man.cgi">man pages</a>.
-The man pages are <i>the</i> authoritative source of OpenBSD
-documentation -- not this FAQ, not third-party independently maintained
-pages, not "HOWTO"s, etc.
-When a developer makes a change to the system, they are expected to
-update the man pages along with their change to the system code, not
-"later" or "when they get around to it" or "when someone complains".
-A manual page exists for virtually every program, utility, driver, 
-configuration file, and so on on the stock system.
-It is expected that a user will check the man pages before asking for
-help on the <a href="../mail.html">mail lists</a>.
+OpenBSDと多くの他のオペレーティングシステムのひとつの重要な違いは
+ドキュメンテーションです。 OpenBSD 開発者はシステム
+<a href="http://www.openbsd.org/cgi-bin/man.cgi">マニュアルページ</a> をすごく自慢します。
+マニュアルページは OpenBSDドキュメンテーションの、
+このFAQでない、第三者の独立して維持されていない、「ハウツー」でない
+確かな情報源です
+開発者がシステムを変更するとき、彼らは
+システムコードの変更とともにマニュアルページを変更することになっています、
+「後で」ではなく、「手が回るとき」でもなく、「誰かが不満を言ったとき」でもありません。
+マニュアルページは実質的にあらゆるプログラムのために存在します。ユーティリティ、ドライバ、
+設定ファイルなど、システム全体にわたります。
+これは、ユーザーが<a href="../../mail.html">メーリングリスト</a> に助けを求める前に
+マニュアルページを見るすることを見込めます。
 
 <p>
-Here are some of the commonly encountered differences between OpenBSD
-and other Unix variants.
+以下は一般的に遭遇する OpenBSD とその他の
+Unixバリエーションの違いです。
 
 <ul>
-<li>OpenBSD is a fairly pure "BSD-Style" Unix, following the 4.4BSD
-design closely.
-Linux and SCO Unix are "System V" style systems.
-Some Unix-like operating systems (including some Linux distributions)
-mix many SysV and BSD characteristics.
-A common place where this causes confusion is the 
-<a href="faq10.html#rc">startup scripts</a>, OpenBSD uses the
-traditional BSD4.4-style 
+<li>OpenBSD はきわめて純粋な 「BSD スタイル」のUnixです。4.4BSDの
+設計に厳密に追随しています。
+Linux と SCO Unix は 「システムV」スタイルのシステムです。
+いくつかの(Linuxディストリビューションを含む) Unix ライクのオペレーティングシステムは
+多くの SysV と BSD の特徴を混ぜ合わせています。
+これが引き起こす混乱がよくある場所は
+<a href="../faq10.html#rc">スタートアップスクリプト</a>です。OpenBSD は
+伝統的な BSD4.4 流の
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=rc&amp;sektion=8">rc(8)</a>
-style.
+を用いています。
 
-<li>OpenBSD is a complete <i>system</i>, intended to be kept in sync.  
+<li>OpenBSD は完全な<i>システム</i>で、一致させておくことを意図しています。
 It is not a "Kernel plus utilities" that can be upgraded separately
 from each other.
 Failure to keep your system (kernel, user utilities, and applications)
