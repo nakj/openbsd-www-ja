@@ -1,14 +1,14 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>OpenBSD Upgrade Guide 4.7</title>
+<title>OpenBSD Upgrade Guide 4.8</title>
 <link rev="made" href="mailto:www@openbsd.org">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <meta name="resource-type" content="document">
-<meta name="description"   content="OpenBSD Upgrade Process for 4.6 -> 4.7">
-<meta name="keywords"      content="openbsd,faq,upgrade,4.7">
+<meta name="description"   content="OpenBSD Upgrade Process for 4.7 -> 4.8">
+<meta name="keywords"      content="openbsd,faq,upgrade,4.8">
 <meta name="distribution"  content="global">
-<meta name="copyright"     content="This document copyright 2009 by OpenBSD">
+<meta name="copyright"     content="This document copyright 2010 by OpenBSD">
 </head>
 
 <body bgcolor="#ffffff" text="#000000">
@@ -31,15 +31,12 @@
 <a href="upgrade45.html">[4.4 -> 4.5]</a> |
 <a href="upgrade46.html">[4.5 -> 4.6]</a> |
 <br>
-<a href="upgrade48.html">[4.7 -> 4.8]</a> |
+<a href="upgrade47.html">[4.6 -> 4.7]</a> |
 <a href="index.html">[FAQ Index]</a>
 </font>
 
 <h1><font color="#e00000">
-Upgrade Guide: 4.6 to 4.7
-<!--
-Work In Progress, don't even try it (yet)!
--->
+Upgrade Guide: 4.7 to 4.8
 </font></h1>
 <hr>
 
@@ -71,13 +68,8 @@ Table of Contents:
 <ul>
 <li><a href="#before">Before upgrading</a>
   <ul>
-  <li><a href="#hmac-sha2">IPsec HMAC-SHA2 incompatibility</a>
-  <li><a href="#newPFnat">pf(4) NAT syntax change</a>
-  <li><a href="#newPFrouteto">pf(4) route-to/reply-to syntax change</a>
-  <li><a href="#bridge">brconfig(8)/bridgename.if(5) replaced by ifconfig(8)/hostname.if(5)</a>
-  <li><a href="#softraid">Advance warning: Softraid metadata change (for 4.8)</a>
-  <li><a href="#newInstReboot">New install/reboot sequence</a>
-  <li><a href="#rc.conf">rc.conf</a>
+  <li><a href="#softraid">Softraid metadata change</a>
+  <li><a href="#ahci-raid">ahci(4) no longer attaches to RAID mode disks</a>
   <li><a href="#kern">Modified kernel</a>
   </ul>
 <li><a href="#upgrade">The upgrade process</a>
@@ -87,6 +79,7 @@ Table of Contents:
   <li><a href="#etcUpgrade">Upgrading <tt>/etc</tt></a>
   <li><a href="#patchfile">Merging locally changed files via patch file</a>
   <li><a href="#sysmerge">Merging locally changed files via sysmerge(8)</a>
+  <li><a href="#RmFiles">Files to delete</a>
   <li><a href="#Kernchk">Checking the kernel</a>
   <li><a href="#Pkgup">Upgrading packages</a>
   </ul> 
@@ -97,135 +90,32 @@ Table of Contents:
 <a name="before"></a>
 <h2>Before upgrading: things to think about and be aware of</h2>
 This is <i>not</i> a complete list of the changes that took place
-between 4.6 and 4.7, but rather some of the important things that will
+between 4.7 and 4.8, but rather some of the important things that will
 impact a large number of users in the upgrade process.
 For a more complete list of changes, see
-<a href="../plus47.html">plus47.html</a> and the CVS change logs.
+<a href="../plus48.html">plus48.html</a> and the CVS change logs.
 
 <ul>
-<li><a name="hmac-sha2"></a>
-<b>IPsec HMAC-SHA2 incompatibility:</b><br>
-Two bugs in IPsec/HMAC-SHA2 were fixed, resulting in an incompatibility
-with the HMAC-SHA-256/384/512 hash algorithms with previous versions of
-OpenBSD and other IPsec implementations sharing the bugs. 
-In particular the default authentication algorithm HMAC-SHA-256 is
-affected.
-Upgrade both sides together, or switch to another authentication
-algorithm during the transition.
-
-<p>
-<li><a name="newPFnat"></a>
-<b>pf(4) NAT syntax change</b><br>
-As described in more detail in
-<a href="http://marc.info/?l=openbsd-misc&amp;m=125181847818600&amp;w=2">this
-mailing list post</a>, PF's separate nat/rdr/binat (translation) rules
-have been replaced with actions on regular match/filter rules.
-Simple rulesets may be converted like this:<p>
-
-<pre>   nat on $ext_if from 10/8 -&gt; ($ext_if)
-   rdr on $ext_if to ($ext_if) -&gt; 1.2.3.4</pre>
-becomes<br>
-<pre>   match out on $ext_if from 10/8 nat-to ($ext_if)
-   match in on $ext_if to ($ext_if) rdr-to 1.2.3.4</pre><p>
-
-and...
-
-<pre>   binat on $ext_if from $web_serv_int to any -&gt; $web_serv_ext</pre>
-becomes<br>
-<pre>   match on $ext_if from $web_serv_int to any binat-to $web_serv_ext</pre>
-
-nat-anchor and/or rdr-anchor lines, e.g. for
-<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=relayd">relayd(8)</a>,
-<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ftp-proxy">ftp-proxy(8)</a>
-and <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=tftp-proxy">tftp-proxy(8)</a>,
-are no longer used and should be removed from
-<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=pf.conf">pf.conf(5)</a>,
-leaving only the anchor lines. Translation rules relating to these and
-<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=spamd">spamd(8)</a>  
-will need to be adjusted as appropriate.<p>
-
-N.B.: Previously, translation rules had "stop at first match" behaviour,
-with binat being evaluated first, followed by nat/rdr depending on direction
-of the packet. Now the filter rules are subject to the usual "last match"
-behaviour, so care must be taken with rule ordering when converting.
-
-<p>
-<li><a name="newPFrouteto"></a>
-<b>pf(4) route-to/reply-to syntax change</b>
-The route-to, reply-to, dup-to and fastroute options in pf.conf
-move to filteropts;
-<pre>
-   pass in on $ext_if route-to (em1 192.168.1.1) from 10.1.1.1
-   pass in on $ext_if reply-to (em1 192.168.1.1) to 10.1.1.1
-</pre>
-becomes<br>
-<pre>
-   pass in on $ext_if from 10.1.1.1 route-to (em1 192.168.1.1)
-   pass in on $ext_if to 10.1.1.1 reply-to (em1 192.168.1.1)
-</pre>
-
-<p>
-<li><a name="bridge"></a>
-<b>brconfig(8)/bridgename.if(5) replaced by ifconfig(8)/hostname.if(5)</b><br>
-The functionality of
-<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=brconfig">brconfig(8)</a>
-has been integrated into
-<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ifconfig">ifconfig(8)</a>.
-Since the <tt>priority</tt> argument to set the spanning tree priority     
-on a bridge conflicts with the existing ifconfig(8) interface priority,
-it has been renamed to <tt>spanpriority</tt>.
-<p>
-Existing /etc/bridgename.bridge* files should be replaced with
-/etc/hostname.bridge* files; if you use <tt>priority</tt>, replace
-it with <tt>spanpriority</tt>.
-
-<p>
 <li><a name="softraid"></a>
-<b>(Advance warning) Softraid metadata change:</b><br>
+<b>Softraid metadata change:</b><br>
 The metadata format used by
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=softraid&amp;sektion=4">softraid(4)</a>
-has changed AFTER 4.7.
-<del>
-This WILL NOT impact your 4.6->4.7 upgrade, but will require a rebuild of
-softraid(4) volumes for the 4.7 to 4.8 upgrade.
-If you are doing a new softraid install, using a snapshot now is highly
-recommended.
-If you are upgrading an existing softraid install, start planning how
-to rebuild those volumes when you later do the 4.7 to 4.8 upgrade.
-</del><br>
-This is no longer relevant because a transparent metadata upgrade is
-performed automatically when moving to <i>-current</i>.
-In the future certain softraid features might not be enabled because of
-this however this will be documented.
+has changed since 4.7.
+We had initially warned that this would require a rebuild of softraid(4)
+volumes for the 4.7 to 4.8 upgrade, but this is no longer true.
+Later improvements enabled backwards compatability, but at the cost of
+being unable to use some of the upcoming future features of softraid(4).
+Rebuilding your RAID sets is recommended, but not required.
 
 <p>
-<li><a name="newInstReboot"></a>
-<b>New file install/reboot sequence (non-install kernel
-process)</b><br>
-Previous upgrade processes used a process of install kernel,
-reboot, install userland.
-We now suggest a different process -- install
-everything, THEN reboot.
-This must be done very carefully, otherwise one could end up with a
-system where the
-<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=reboot&amp;sektion=1">reboot(1)</a>
-command is inoperable.
-Understand and follow the directions below before doing your upgrade
-remotely
-
-<p>
-<a name="rc.conf"></a>
-<li><b>rc.conf:</b><br>
-It is assumed that
-<tt>/etc/rc.conf</tt> is not a user-altered file.
-If you have made changes to your <tt>/etc/rc.conf</tt> file, merge those
-changes into <tt>/etc/rc.conf.local</tt>.
-If you have NO <tt>/etc/rc.conf.local</tt>, simply copy your existing
-<tt>/etc/rc.conf</tt> file to <tt>/etc/rc.conf.local</tt> and
-<i>delete the last line of the script!</i>
-Otherwise, pull your existing <tt>rc.conf</tt> into the top of your
-existing <tt>rc.conf.local</tt> file <i>and remove the last line</i>
-before doing the rest of this process.
+<a name="ahci-raid"></a>
+<li><b>ahci(4) no longer attaches to RAID-mode disks:</b><br>
+To avoid risk of corrupting metadata on certain Intel RAID devices,
+ahci(4) no longer attaches to the PCI device IDs used by these
+controllers when set to RAID mode.
+If your SATA disk is attached to a ahci(4) contoller in RAID mode, it
+will "vanish" as part of the upgrade and require resetting the BIOS
+controller type to AHCI to get it back.
 
 <p>
 <a name="kern"></a>
@@ -233,7 +123,7 @@ before doing the rest of this process.
 Check whether you have made any modifications to your kernel.
 For example, you might have modified your network device to use a
 non-default setting using config(8).
-Note your changes, so you can repeat them for the new 4.7 kernel.
+Note your changes, so you can repeat them for the new 4.8 kernel.
 
 </ul>
 
@@ -253,7 +143,7 @@ Afterwards, complete the upgrade by following the <a href="#final">final
 steps</a> as detailed below.
 
 <p>
-One easy way to boot from the install kernel is to place the 4.7 version
+One easy way to boot from the install kernel is to place the 4.8 version
 of <i>bsd.rd</i> in the root of your boot drive, then instruct the boot loader
 to boot using this new <i>bsd.rd</i> file.
 On amd64 and i386, you do this by entering "<tt>boot bsd.rd</tt>" at the
@@ -286,11 +176,11 @@ immediately after the upgrade, stop and disable them as well.
 <p>
 <li><b>Check the kernel:</b>
 Although <b>most people can skip this step</b>, if you had a modified kernel
-in 4.6, it is likely you will need to modify the stock kernel of 4.7.
+in 4.7, it is likely you will need to modify the stock kernel of 4.8.
 Especially when you are performing the upgrade process remotely, now is
 the time to make sure the new kernel will work upon rebooting the machine.
 If any changes must be made to the kernel, the safest thing to do is to
-make those changes on a local 4.7 system.
+make those changes on a local 4.8 system.
 This can be as simple as modifying a specific device using config(8),
 or it can involve a recompilation if the option you need is not included
 in the GENERIC kernel.
@@ -308,6 +198,9 @@ before deciding to recompile your kernel.
 <b>rm /obsd ; ln /bsd /obsd && cp bsd /nbsd && mv /nbsd /bsd</b>
 <b>cp bsd.rd bsd.mp /</b>
 </pre></blockquote>
+(note: you will get a harmless error message if your platform doesn't
+have a bsd.mp):
+<p>
 
 <li>If you are using the multiprocessor kernel:
 <blockquote><pre>
@@ -336,23 +229,23 @@ command will not run on the old kernel.
 
 <p>
 <li><b>Install new userland applications.</b>
-<i>Do NOT install <tt>etc47.tgz</tt> and <tt>xetc47.tgz</tt> now, because
+<i>Do NOT install <tt>etc48.tgz</tt> and <tt>xetc48.tgz</tt> now, because
 that will overwrite your current configuration files!</i>
-Note that we are installing base47.tgz LAST, because it will include a new
+Note that we are installing base48.tgz LAST, because it will include a new
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=tar&amp;sektion=1">tar(1)</a>
 utility, which may or may not run on the old kernel.
 We reboot immediately, as the system is probably barely runnable now.
 
 <blockquote><pre>
-<b>tar -C / -xzphf xserv47.tgz</b>
-<b>tar -C / -xzphf xfont47.tgz</b>
-<b>tar -C / -xzphf xshare47.tgz</b>
-<b>tar -C / -xzphf xbase47.tgz</b>
-<b>tar -C / -xzphf game47.tgz</b>
-<b>tar -C / -xzphf misc47.tgz</b>
-<b>tar -C / -xzphf comp47.tgz</b>
-<b>tar -C / -xzphf man47.tgz</b>
-<b>tar -C / -xzphf base47.tgz</b> # Install last!
+<b>tar -C / -xzphf xserv48.tgz</b>
+<b>tar -C / -xzphf xfont48.tgz</b>
+<b>tar -C / -xzphf xshare48.tgz</b>
+<b>tar -C / -xzphf xbase48.tgz</b>
+<b>tar -C / -xzphf game48.tgz</b>
+<b>tar -C / -xzphf misc48.tgz</b>
+<b>tar -C / -xzphf comp48.tgz</b>
+<b>tar -C / -xzphf man48.tgz</b>
+<b>tar -C / -xzphf base48.tgz</b> # Install last!
 <b>/sbin/oreboot</b>
 </pre></blockquote>
 
@@ -362,14 +255,14 @@ upgrade it with the new file set now.
 
 <p>
 Again, the files in <tt>/etc</tt> are handled separately below, so
-<tt>etc47.tgz</tt> and <tt>xetc47.tgz</tt> are NOT unpacked here.
+<tt>etc48.tgz</tt> and <tt>xetc48.tgz</tt> are NOT unpacked here.
 
 <p>
 <li><b>After reboot completes, upgrade <tt>/dev</tt>.</b>
 The new 
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=MAKEDEV&amp;sektion=8&amp;arch=i386">MAKEDEV</a>
 file was copied to /dev by the installation of
-<tt>base47.tgz</tt>, so you simply need to do the following:
+<tt>base48.tgz</tt>, so you simply need to do the following:
 <blockquote><pre>
 <b>cd /dev</b>
 <b>./MAKEDEV all</b>
@@ -387,59 +280,58 @@ manual steps that have to be performed.
   
 <a name="UsersGroups"></a>
 <h3>1. New Users and Groups</h3>
-The following users need to be created for 4.7:
+The following users need to be created for 4.8:
 
 <blockquote><pre>
-<b>useradd -u 97 -g =uid -c "NSD Daemon" -d /var/empty -s /sbin/nologin _nsd</b>
-<b>useradd -u 98 -g =uid -c "LDP Daemon" -d /var/empty -s /sbin/nologin _ldpd</b>
+<b>useradd -u 99 -g =uid -c "sndio privsep" -d /var/empty -s /sbin/nologin _sndio
+useradd -u 100 -g =uid -c "LDAP Daemon" -d /var/empty -s /sbin/nologin _ldapd
+useradd -u 101 -g =uid -c "IKEv2 Daemon" -d /var/empty -s /sbin/nologin _iked</b>
 </pre></blockquote>
 
 <a name="etcUpgrade"></a>
 <h3>2. Upgrading <tt>/etc</tt></h3>
 <p>
-You will want to extract the <tt>etc47.tgz</tt> files to a temporary
+You will want to extract the <tt>etc48.tgz</tt> files to a temporary
 location:
 <blockquote><pre>
 <b>export RELEASEPATH=/usr/rel</b>
-<b>tar -C /tmp -xzphf ${RELEASEPATH}/etc47.tgz</b>
+<b>tar -C /tmp -xzphf ${RELEASEPATH}/etc48.tgz</b>
 </pre></blockquote>
 
 
-Files that can probably be copied from <tt>etc47.tgz</tt> "as is":
+Files that can probably be copied from <tt>etc48.tgz</tt> "as is":
 
 <blockquote><pre>
-etc/ldpd.conf
-etc/moduli
+etc/daily
+etc/disktab
+etc/iked.conf
+etc/ksh.kshrc
+etc/ldapd.conf
 etc/netstart
-etc/pf.os
 etc/rc
 etc/rc.conf
-etc/mtree/4.4BSD.dist
-etc/mtree/BSD.x11.dist
-etc/mtree/special
+etc/ldap/*
+etc/systrace/usr_sbin_named
+var/named/etc/root.hint
 </pre></blockquote>
 
-Note that it IS possible to locally modify these files, if this has been
-done, do NOT copy over those files, and use the
+Note that it IS possible to locally modify these files; if this has been
+done, do NOT simply copy over those files, and consider using the
 <a href="#sysmerge">sysmerge(8) process</a> instead.
 <!-- Pay special attention to <tt>mail/*</tt> if you are using something
 other than the default Sendmail(8) configuration. -->
 Here are copy/paste lines for copying these files, assuming you unpacked 
-<tt>etc47.tgz</tt> in the above recommended place:
+<tt>etc48.tgz</tt> in the above recommended place:
 
 <blockquote><pre>
 <b>cd /tmp/etc </b>
-<b>cp ldpd.conf moduli netstart pf.os rc rc.conf /etc</b>
-<b>cp mtree/4.4BSD.dist mtree/BSD.x11.dist mtree/special /etc/mtree</b>
+<b>mkdir -p /etc/ldap/certs</b>
+<b>cp daily disktab iked.conf ksh.kshrc ldapd.conf netstart rc rc.conf /etc</b>
+<b>cp systrace/usr_sbin_named /etc/systrace</b>
+<b>cp ldap/* /etc/ldap</b>
+<b>cp ../var/named/etc/root.hint /var/named/etc</b>
 </pre></blockquote>
-
 <p>
-(YP servers only) <b>yp Makefile upgrade:</b>
-Manually merge the changes of <tt>/var/yp/Makefile.yp</tt> (installed as
-part of base47.tgz) into the Makefiles for any domains,
-<tt>/var/yp/*/Makefile</tt>.
-Practically speaking, this means copying <tt>/var/yp/Makefile.yp</tt> to each
-domain Makefile and re-applying domain options within that file.
 
 
 <a name="patchfile"></a>
@@ -447,43 +339,48 @@ domain Makefile and re-applying domain options within that file.
 
 <p>
 These files likely have local changes, but should be updated for
-4.7.  IF you have not altered these files, you can copy over the
+4.8.  IF you have not altered these files, you can copy over the
 new version, otherwise the changes should be merged with your files:
 
 <blockquote><pre>
 etc/changelist
 etc/ftpusers
-etc/ksh.kshrc
 etc/mail/aliases
-etc/mail/smtpd.conf
+etc/man.conf
 etc/newsyslog.conf
-etc/protocols
+etc/remote
 etc/services
-etc/sudoers
+etc/ssl/x509v3.cnf
 etc/sysctl.conf
-var/named/etc/named-dual.conf
-var/named/etc/named-simple.conf
-var/named/etc/named.conf
-var/named/standard/loopback6.arpa
-var/www/conf/mime.types
 </pre></blockquote>
 
-The changes to these files are in <a href="upgrade47.patch">this
+The changes to these files are in <a href="upgrade48.patch">this
 patch file</a>.
+Please test this process before relying on it for a machine you can not
+easily get to.
 You can attempt to use this by executing the following as root:
 <blockquote><pre>
 <b>cd /</b>
-<b>patch -C -p0 &lt; upgrade47.patch</b>
+<b>patch -C -p0 &lt; upgrade48.patch</b>
 </pre></blockquote>
 
 This will test the patch to see how well it will apply to YOUR system;
 to actually apply it, leave off the "<tt>-C</tt>" option.
 Note that it is likely that if you have customized files or not kept
-them closely updated, or are upgrading from a snapshot of 4.6, they may
+them closely updated, or are upgrading from a snapshot of 4.7, they may
 not accept the patch cleanly.
-In those cases, you will need to manually apply the changes.
-Please test this process before relying on it for a machine you can not
-easily get to.
+Make sure all file changes are attempted; patch(1) may quit prematurely
+if it gets too confused in one file, which may happen if your machine
+was originally installed from a snapshot or otherwise has some interim
+changes.
+<!-- XXX changes release to release -->
+The last file to be changed here should be <tt>sysctl.conf</tt>.
+Deleting the file sections that fail from the patch file may permit the
+rest to be applied.
+You will need to manually apply the changes that are skipped.
+
+
+
 
 <p>
 The following files have had changes which should be looked at, but it
@@ -492,11 +389,7 @@ using pf.conf, look at the suggested change of strategy, and decide if
 it is appropriate for your use).
 
 <blockquote><pre>
-etc/bgpd.conf
-etc/ospf6d.conf
-etc/pf.conf
-etc/ssh/ssh_config
-etc/ssh/sshd_config
+etc/ldpd.conf
 </pre></blockquote>
 
 <p>
@@ -512,6 +405,9 @@ create any new directories:
 <b>mtree -qdef /etc/mtree/4.4BSD.dist -p / -u</b>
 </pre></blockquote>
 
+<!-- XXX remove for 4.9 -->
+(note that the /etc/mtree files are now part of <tt>base48.tgz</tt>, and
+no longer need to be copied from <tt>etc48.tgz</tt> as they did before.)
 
 <a name="sysmerge"></a>
 <h3>3b. Merging locally changed files via sysmerge(8)</h3>
@@ -526,7 +422,7 @@ Note that unlike the patch file, there are no assumptions made about
 what is actually on your system, so you can use sysmerge(8) to move
 between more arbitrary <a href="faq5.html#Flavors">points in the
 development process</a>, such as from an earlier <i>-current</i> to
-<i>4.7-release</i> or from one <i>-current</i> to a later one.
+<i>4.8-release</i> or from one <i>-current</i> to a later one.
 Sysmerge(8) compares the current files on your system with the files
 that would have been installed with a new install, and gives you the
 option of keeping the old file, installing the new file, or assisting
@@ -549,9 +445,8 @@ and will involve you in it more closely.
 
 <p>
 <b>Who may wish to NOT use sysmerge(8):</b><br>
-People who have a lot of machines to upgrade that were kept fairly
-simple and at the previous release/stable point will probably find the
-old patch file system much faster.
+With recent improvements in sysmerge, we hope that relatively few
+people have reason not to use sysmerge(8)!
 
 <p>
 Please read the 
@@ -565,11 +460,11 @@ and even review
 manual pages before continuing.
 
 <p>
-Assuming the <tt>etc47.tgz</tt> and <tt>xetc47.tgz</tt> files exists in
+Assuming the <tt>etc48.tgz</tt> and <tt>xetc48.tgz</tt> files exists in
 your $RELEASEPATH, run it with:
 
 <blockquote><pre>
-<b>sysmerge -s $RELEASEPATH/etc47.tgz -x $RELEASEPATH/xetc47.tgz</b>
+<b>sysmerge -s $RELEASEPATH/etc48.tgz -x $RELEASEPATH/xetc48.tgz</b>
 </pre></blockquote>
 
 Sysmerge(8) will show you a unified
@@ -596,14 +491,6 @@ where you can manually merge the file.
 The default is to come back and deal with the file later, manually.
 
 <p>
-While it can work, we do not recommend you use sysmerge to integrate new
-users into the system, but rather use the useradd(8) line
-<a href="#UsersGroups">above</a>.
-We believe it is much less error prone.
-(hint: do <i>not</i> <b>i</b>nstall the temporary master.passwd file
-over your existing one!).
-
-<p>
 Sysmerge(8) saves all your replaced files into a temporary directory,
 similar to <tt>/var/tmp/sysmerge.24959/backups</tt>, so if you accidentally
 clobber something that was probably not such a good idea, you have a chance
@@ -611,14 +498,42 @@ to recover it. Note that
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=daily&amp;sektion=8">daily(8)</a>
 cleans old files from this directory.
 
+<a name="RmFiles"></a>
+<h3>4. Files to delete</h3>
+A number of files should be deleted from your system.
+Note that some of these may not exist on all systems; that's ok.
+Copy and paste the following lines:
+<blockquote><pre><b>
+rm /usr/include/evdns.h
+rm /usr/libdata/perl5/site_perl/*-openbsd/evdns.ph
+rm -f /usr/bin/f77 /usr/bin/g77 /usr/include/f2c.h /usr/include/g2c.h \
+  /usr/lib/gcc-lib/*-unknown-openbsd*/3.3.5/f771 /usr/lib/libfrtbegin.a \
+  /usr/lib/libfrtbegin_p.a /usr/lib/libfrtbegin_pic.a /usr/lib/libg2c.a \
+  /usr/lib/libg2c_p.a /usr/lib/libg2c_pic.a /usr/share/info/g77.info \
+  /usr/share/man/cat1/f77.0 /usr/share/man/cat1/g77.0
+cd /usr/X11R6/include/X11
+rm Xaw/Print.h Xaw/PrintSP.h
+rm -r XprintAppUtil XprintUtil
+cd extensions
+rm Print.h Printstr.h XEVIstr.h Xagstr.h Xcupstr.h Xdbeproto.h Xevie.h \
+   Xeviestr.h dpmsstr.h lbxdeltastr.h lbxopts.h lbxstr.h lbxzlib.h \
+   mitmiscstr.h multibufst.h securstr.h shapestr.h shmstr.h syncstr.h \
+   xteststr.h xtrapbits.h xtrapddmi.h xtrapdi.h xtrapemacros.h \
+   xtraplib.h xtraplibp.h xtrapproto.h
+cd /usr/X11R6/lib/pkgconfig
+rm evieproto.pc lbxutil.pc printproto.pc trapproto.pc xaw8.pc \
+   xevie.pc xp.pc xprintapputil.pc xprintutil.pc xtrap.pc
+rm /usr/X11R6/share/aclocal/xaw.m4
+</b></pre></blockquote>
+
 <a name="Kernchk"></a>
-<h3>4. Checking the kernel</h3>
+<h3>5. Checking the kernel</h3>
 Note: <b>most people can skip this step!</b>
 <p>
 If you followed the instructions for the upgrade process without install
 kernel, you have already completed this step.
 However, if you used the install kernel, and if you had a modified kernel
-in 4.6, it is likely you will need to modify the stock kernel of 4.7.
+in 4.7, it is likely you will need to modify the stock kernel of 4.8.
 This can be as simple as modifying a specific device using config(8),
 or it can involve a recompilation if the option you need is not included
 in the GENERIC kernel.
@@ -626,7 +541,7 @@ Please consult <a href="faq5.html">FAQ 5 - Building the system from source</a>
 before considering to recompile your kernel.
 
 <a name="Pkgup"></a>
-<h3>5. Upgrading packages</h3>
+<h3>6. Upgrading packages</h3>
 If you installed any packages on your system, you should upgrade them
 after completing the upgrade of the base system.
 Be aware, however, many packages will require further setup before
@@ -641,51 +556,57 @@ trivial upgrade.
 You must do some homework on the applications YOU use.
 
 <ul>
-<li><b>postgresql:</b> You must dump your databases before upgrading and
-reload them after.
-
 <li><b>kqemu:</b> Must be kept in sync with the kernel. pkg_delete prior
 to the upgrade, then pkg_add the new package once the upgrade has been
 completed.
 
-<li><b>bacula:</b> has a new catalog format which requires a database
-schema change on the director.
-The
-<a href="http://permalink.gmane.org/gmane.os.openbsd.ports.cvs/39031">commit
-log entry</a> and
-<a href="http://sourceforge.net/project/shownotes.php?release_id=674473">release
-notes</a> have more details.
+<li><b>Dovecot:</b>
+Dovecot has been updated from 1.1.20 to 1.2.11. The configuration file changed 
+and the old cmusieve plugin has been removed in favor of the new Dovecot sieve 
+implementation. The 
+<a href="http://permalink.gmane.org/gmane.os.openbsd.ports.cvs/42080">commit 
+log entry</a> has more details.
 
-<li><b>asterisk:</b> You may need to make some configuration changes;
-please see /usr/local/share/doc/asterisk/UPGRADE-16.txt.
-The old app_conference plugin is incompatible with the new version, you
-must use appkonference instead.
+<li><b>Samba:</b>
+The default user database backend for the Samba port has changed.
+If you currently use smbpasswd, you must either adjust your configuration,
+or convert your database.
+See <a href="http://www.openbsd.org/cgi-bin/cvsweb/ports/net/samba/files/README.OpenBSD?rev=1.12">README.OpenBSD</a>
+for more information.
+
+<li><b>Firefox:</b>
+The main mozilla-firefox package was updated
+from 3.0 to 3.6.
+Although most people will have no problem with the update, some have
+seen problems with Firefox not functioning correctly.
+In this case it may be necessary to create a new profile:
+see /usr/local/mozilla-firefox/README.OpenBSD for more details.
+Also note that the Java plugins do not yet support Firefox 3.6;
+in this case you should instead use the 3.5 package:
+<tt>pkg_add firefox35</tt>.
+Both versions of Firefox may be installed in parallel.
+
+
+
 
 </ul>
 
 <p>
 The package tools support in-place updating using <tt>pkg_add -u</tt>.
 For instance, to update all your packages, make sure <tt>PKG_PATH</tt> is
-pointing to the 4.7 packages directory on your CD or nearest FTP mirror,
+pointing to the 4.8 packages directory on your CD or nearest FTP mirror,
 and use something like
  
 <blockquote><pre>
-<b>pkg_add -ui -D update -D updatedepends</b>
+<b>pkg_add -ui</b>
 </pre></blockquote>
 
 where the <tt>-u</tt> indicates update mode, and <tt>-i</tt> specifies
 interactive mode, so pkg_add will prompt you for input when it encounters
 some ambiguity. Read the
-<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=pkg_add&amp;sektion=1&amp;manpath=OpenBSD+4.7">pkg_add(1)</a>
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=pkg_add&amp;sektion=1&amp;manpath=OpenBSD+4.8">pkg_add(1)</a>
 manual page and the <a href="faq15.html#PkgMgmt">package management</a>
 chapter of the FAQ for more information.
-
-<p>
-Two packages now come with perl 5.10.1 in base.
-If you have installed these packages, delete them now:
-<blockquote><pre>
-<b>pkg_delete p5-parent p5-Parse-CPAN-Meta</b>
-</pre></blockquote>
 
 
 
@@ -705,7 +626,9 @@ If you have installed these packages, delete them now:
 <a href="upgrade45.html">[4.4 -> 4.5]</a> |
 <a href="upgrade46.html">[4.5 -> 4.6]</a> |
 <br>
-<a href="upgrade48.html">[4.7 -> 4.8]</a> |
+<a href="upgrade47.html">[4.6 -> 4.7]</a> |
+<a href="index.html">[FAQ Index]</a>
+
 <a href="index.html">[FAQ Index]</a>
 </font>
 
@@ -714,7 +637,7 @@ If you have installed these packages, delete them now:
 <a href="index.html"><img height="24" width="24" src="../images/back.gif" border="0" alt="[back]"></a>
 <a href="mailto:www@openbsd.org">www@openbsd.org</a>
 <br>
-<small>$OpenBSD: upgrade47.html,v 1.13 2010/11/07 18:19:43 nick Exp $</small>
+<small>$OpenBSD: upgrade48.html,v 1.16 2010/11/07 03:36:20 nick Exp $</small>
 
 </body>
 </html>

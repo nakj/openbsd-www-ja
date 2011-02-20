@@ -22,15 +22,14 @@
 	<a href="cs/index.html">cs</a>
 	&nbsp;<a href="fr/index.html">fr</a>
 	&nbsp;<a href="nl/index.html">nl</a>
-	&nbsp;<a href="pl/index.html">pl</a>
 	<br>
 	<hr>
 	<p>
 	<big><b>Other Documents</b></big><br>
-	&nbsp;<a href="upgrade47.html">Upgrade Guide</a><br>
+	&nbsp;<a href="upgrade48.html">Upgrade Guide</a><br>
 	&nbsp;<a href="current.html">Following -current</a><br>
 	&nbsp;<a href="../stable.html">Following -stable</a><br>
-	&nbsp;<a href="../porttest.html">Port Testing Guide</a><br>
+	&nbsp;<a href="ports/testing.html">Port Testing Guide</a><br>
 	&nbsp;<a href="../anoncvs.html">Using AnonCVS</a><br>
 	&nbsp;<a href="../cvsup.html">Using CVSup</a><br>
 	&nbsp;<a href="http://www.openbsd.org/cgi-bin/man.cgi">Manual 
@@ -76,7 +75,7 @@ This FAQ is supplemental documentation to the man pages, available both
 in the installed system and 
 <a href="http://www.openbsd.org/cgi-bin/man.cgi">online</a>.  The FAQ
 covers the active release of OpenBSD, currently
-<a href="../47.html">v4.7</a>.
+<a href="../48.html">v4.8</a>.
 There are likely features and changes to features in the 
 <a href="faq5.html#Flavors">development version (<i>-current</i>)</a>
 of OpenBSD that are not covered in this FAQ.
@@ -109,7 +108,7 @@ The FAQ in PDF and plain text form is available in the
 <li><a href="faq1.html#Next"        >1.7 - When is the next release 
     of OpenBSD?</a>
 <li><a href="faq1.html#Included"    >1.8 - What is included with OpenBSD?</a>
-<li><a href="faq1.html#WhatsNew"    >1.9 - What is new in OpenBSD 4.7?</a>
+<li><a href="faq1.html#WhatsNew"    >1.9 - What is new in OpenBSD 4.8?</a>
 <li><a href="faq1.html#Desktop"     >1.10 - Can I use OpenBSD as a desktop
     system?</a>
 <li><a href="faq1.html#HowAbout"    >1.11 - Why is/isn't ProductX included?</a>
@@ -134,23 +133,22 @@ The FAQ in PDF and plain text form is available in the
    to learn OpenBSD on?</a>
 </ul>
 
-<h3><a href="faq4.html">4 - OpenBSD 4.7 Installation Guide</a></h3>
+<h3><a href="faq4.html">4 - OpenBSD 4.8 Installation Guide</a></h3>
 <ul>
 <li><a href="faq4.html#Overview"    >4.1 - Overview of the OpenBSD
-    installation procedure.</a>
+    installation procedure</a>
 <li><a href="faq4.html#Checklist"   >4.2 - Pre-installation checklist</a>
 <li><a href="faq4.html#MkInsMedia"  >4.3 - Creating bootable OpenBSD
     install media</a>
 <li><a href="faq4.html#Boot"        >4.4 - Booting OpenBSD install
     media</a>
-<li><a href="faq4.html#Install"     >4.5 - Performing an install</a>
+<li><a href="faq4.html#Install"     >4.5 - Performing a simple install</a>
 <li><a href="faq4.html#More"        >4.6 - Details for a more complex
     install</a>
 <li><a href="faq4.html#FilesNeeded" >4.7 - What files are needed for
-    Installation?</a>
-<li><a href="faq4.html#Partitioning">4.8 - How much space do I need for
-    an OpenBSD installation?</a>
-<li><a href="faq4.html#Multibooting">4.9 - Multibooting OpenBSD</a>
+    installation?</a>
+<li><a href="faq4.html#Partitioning">4.8 - How should I partition my disk?</a>
+<li><a href="faq4.html#Multibooting">4.9 - Multibooting OpenBSD/i386</a>
 <li><a href="faq4.html#SendDmesg"   >4.10 - Sending your dmesg to
     dmesg@openbsd.org after the install</a>
 <li><a href="faq4.html#AddFileSet"  >4.11 - Adding a file set after 
@@ -338,7 +336,6 @@ The FAQ in PDF and plain text form is available in the
 <li><a href="faq12.html#i386">12.7 - i386</a>
 <li><a href="faq12.html#landisk">12.8 - Landisk</a>
 <li><a href="faq12.html#luna88k">12.9 - Luna88k</a>
-<li><a href="faq12.html#mac68k">12.10 - Mac68k</a>
 <li><a href="faq12.html#macppc">12.11 - MacPPC</a>
 <li><a href="faq12.html#mvme68k">12.12 - MVME68k</a>
 <li><a href="faq12.html#mvme88k">12.13 - MVME88k</a>
@@ -389,7 +386,8 @@ The FAQ in PDF and plain text form is available in the
 <li><a href="faq14.html#NewDisk"    >14.4 - Adding extra disks in OpenBSD</a>
 <li><a href="faq14.html#Swap"       >14.5 - How is swap handled?</a>
 <li><a href="faq14.html#SoftUpdates">14.6 - Soft Updates</a>
-<li><a href="faq14.html#Boot386"    >14.7 - How does OpenBSD/i386 boot?</a>
+<li><a href="faq14.html#Boot386"    >14.7 - How do OpenBSD/i386 and
+    OpenBSD/amd64 boot?</a>
 <li><a href="faq14.html#LargeDrive" >14.8 - What are the issues regarding 
     large drives with OpenBSD?</a>
 <li><a href="faq14.html#InstBoot"   >14.9 - Installing Bootblocks - i386/amd64
@@ -468,7 +466,7 @@ Gateways</a>
 <h3>Commonly Encountered Issues</h3>
 <ul>
 <li><a href="faq4.html#InstProb">Common Installation Problems</a>
-<li><a href="upgrade47.html">How do I upgrade my system?</a>
+<li><a href="upgrade48.html">How do I upgrade my system?</a>
 <li><a href="pf/index.html">Packet Filter</a>
 <li><a href="faq15.html#PkgVsPorts">Should I use Ports or Packages?</a>
 <li><a href="faq4.html#Multibooting">How do I set up a multi-boot system?</a>
@@ -480,7 +478,7 @@ Gateways</a>
 <!-- Let's keep this at about 7 lines (newest at top). -->
 <h3>Recent Updates</h3>
 <ul>
-<li>FAQ updated for 4.7
+<li>FAQ updated for 4.8
 <li><a href="faq14.html#flashmemLive">Setting up a "live" USB media</a>
    -- new
 <li><a href="faq13.html#audioserver">Setting up an audio server</a> -- new
@@ -492,7 +490,7 @@ Gateways</a>
 </ul>
 <hr>
 
-The FAQ maintainer is Nick Holland<br>
+The FAQ maintainers are Nick Holland and Stuart Henderson<br>
 Additional contributors to the FAQ include
 Steven Mestdagh, Joel Knight,
 Eric Jackson, Wim Vandeputte and Chris Cappuccio.
@@ -517,7 +515,7 @@ questions about OpenBSD should be directed to the appropriate
  
 <small>
 <em>OpenBSD FAQ Copyright &copy; 1998-2009 OpenBSD</em><br>
-$OpenBSD: index.html,v 1.325 2010/05/19 12:56:17 nick Exp $
+$OpenBSD: index.html,v 1.333 2011/01/29 03:39:14 nick Exp $
 <br>
 "If you don't find it in the index, look very carefully through the 
     entire catalogue."<br>
