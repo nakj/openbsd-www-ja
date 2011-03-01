@@ -388,10 +388,6 @@ add net 224.0.0.0: gateway 127.0.0.1: File exists
 routeは
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=netstat&amp;sektion=1">netstat(1)</a>
 か <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=route&amp;sektion=8">route(8)</a> で確認することができます。
-If you are having routing problems, you may want to use the -n flag to
-route(8) which prints the IP addresses rather than doing a DNS lookup
-and displaying the hostname.  Here is an example of viewing your routing
-tables using both programs.
 もしルーティングの問題を抱えているのであれば、 route(8)に -n フラグを使い、
 IP アドレスを表示 でななく DNS 名前解決して
 ホスト名を表示します。これは、両方のプログラムで
@@ -433,24 +429,15 @@ BASE-ADDRESS.MCA LOCALHOST          U
 <h3>6.2.7 - OpenBSD をゲートウェイにする設定</h3>
 
 <p>
-This is the basic information you need to set up your OpenBSD box as a
-gateway (also called a router). If you are using OpenBSD as a router on
-the Internet, we suggest that you also read the Packet Filter setup
-instructions below to block potentially malicious traffic. Also, due to
-the low availability of
-<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ip&amp;sektion=4">IPv4</a>
-addresses from network service providers and regional registries, you
-may want to look at Network Address Translation for information on
-conserving your IP address space.
 これは OpenBSD を(一般的に ルータと呼ばれている)ゲートウェイにするための
 基本的な情報です。もし OpenBSD をインターネット上でルータに
 するのであれば、悪意のある可能性のあるトラフィックをブロックするために
-以下のパケットフィルタ設定の教示を読むように、我々は提案します。むろん、
+以下のパケットフィルタ設定の教示を読むように、我々は提案します。もちろん
 プロバイダ や地域レジストラの割り当てる
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ip&amp;sektion=4">IPv4</a>
-アドレスの低い可用性のために、
-ネットワークアドレス変換のための情報を探している
-IP アドレス空間を節約する
+アドレスの低い可用性のせいで、
+IP アドレス空間を節約するために
+ネットワークアドレス変換のための情報を探している場合も同様です。
 
 <p>
 GENERIC カーネルはすでに IP フォワードを許可する能力をもっていますが、
@@ -469,7 +456,7 @@ net.inet.ip.forwarding=1
 この変更を再起動せずに行うには、
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=sysctl&amp;sektion=8">sysctl(8)</a>
 ユーティリティを直接使います。再起動後にこの変更が失われることと、
-rootで実行する必要があることを忘れないでください
+rootで実行する必要があることを忘れないでください。
 
 <blockquote><pre>
 # <b>sysctl net.inet.ip.forwarding=1</b>
@@ -477,21 +464,21 @@ net.inet.ip.forwarding: 0 -&gt; 1
 </pre></blockquote>
 
 <p>
-Now modify the routes on the other hosts on both sides.  There are many
-possible uses of OpenBSD as a router by using software such as
-OpenBSD's own <a href="http://www.openbgpd.org/">OpenBGPD</a>,
+すぐに両端のホストでroute を修正してください。
+ソフトウェアを使ってOpenBSD をルーターにするには多くの選択肢があります。
+OpenBSD の <a href="http://www.openbgpd.org/">OpenBGPD</a>,
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=routed&amp;sektion=8">routed(8)</a>,
 <a href="http://sourceforge.net/projects/mrt">mrtd</a>,
-<a href="http://www.zebra.org">zebra</a>, and 
-<a href="http://www.quagga.net">quagga</a>. 
-OpenBSD has support in the ports collection for zebra, quagga, and mrtd.
-OpenBGPD and routed are installed as part of the base system.
-OpenBSD supports
-several T1, HSSI, ATM, FDDI, Ethernet, and serial (PPP/SLIP) interfaces.
+<a href="http://www.zebra.org">zebra</a>, そして
+<a href="http://www.quagga.net">quagga</a> です。
+OpenBSD では ports コレクションで zebraや quagga、mrtd をサポートしています。
+OpenBGPD と routed はベースシステムの一部としてインストールされています。
+OpenBSD は
+いくつかの T1、HSSI、ATM、FDDI,イーサネット、そして シリアル (PPP/SLIP) インターフェースをサポートしています。
 
 <p>
 <a name="Setup.aliases"></a>
-<h3>6.2.8 - Setting up aliases on an interface</h3>
+<h3>6.2.8 - インターフェースのエイリアスを設定する</h3>
 
 <p>
 OpenBSD has a simple mechanism for setting up IP aliases on an
