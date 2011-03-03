@@ -481,15 +481,15 @@ OpenBSD は
 <h3>6.2.8 - インターフェースのエイリアスを設定する</h3>
 
 <p>
-OpenBSD has a simple mechanism for setting up IP aliases on an
-interface. To do this simply edit the file
-<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=hostname.if&amp;sektion=5"><i>/etc/hostname.&lt;if&gt;</i></a>.
-This file is read upon boot by the
+OpenBSD には インターフェースで IPエイリアスを構成するための単純な仕組みが
+あります。これを行うには
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=hostname.if&amp;sektion=5"><i>/etc/hostname.&lt;if&gt;</i></a>ファイルを編集します。
+このファイルは起動時に
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=netstart&amp;sektion=8">/etc/netstart(8)</a>
-script, which is part of the <a href="faq10.html#rc">rc startup
-hierarchy</a>.  For the example, we assume that the user has an
-interface <b>dc0</b> and is on the network 192.168.0.0. Other important
-information:
+スクリプトによって読まれます。これは <a href="faq10.html#rc">rc 起動
+階層</a>の一部です。たとえば、ユーザーが
+インターフェース<b>dc0</b>を持っていて、ネットワーク192.168.0.0 上にいると仮定します。他の重要な
+情報は以下のとおりです。
 
 <ul>
 <li>IP for dc0 is 192.168.0.2
@@ -497,21 +497,21 @@ information:
 </ul>
 
 <p>
-A few side notes about aliases. In OpenBSD you use the interface name
-only. There is no difference between the first alias and the second
-alias. Unlike some other operating systems, OpenBSD doesn't refer to
-them as dc0:0, dc0:1.  If you are referring to a specific aliased IP
-address with ifconfig, or adding an alias, be sure to say "<tt>ifconfig
-int alias</tt>" instead of just "<tt>ifconfig int</tt>" at the command
-line.  You can delete aliases with "<tt>ifconfig int delete</tt>".
+エイリアスについてのいくつかの傍注。OpenBSDではインターフェース名のみ
+使用します。最初のエイリアスと二番目のエイリアスの間に違いは
+ありません。他のオペレーティングシステムとは違って、OpenBSD では
+これらを dc0:0 、 dc0:1 とは呼びません。もしあなたがifocnfig で特定のエイリアスIP
+に言及しているか、エイリアスを追加しようとしているのならば、必ずコマンドラインで
+「<tt>ifconfig int</tt>」の代わりに「<tt>ifconfig int alias</tt>」を使うように
+してください。「<tt>ifconfig int delete</tt>」では、エイリアスを削除することはできません。
 
 <p>
-Assuming you are using multiple IP addresses which are in the same IP
-subnet with aliases, your netmask setting for each alias becomes
-255.255.255.255.  They do not need to follow the netmask of the first IP
-bound to the interface.  In this example, <i>/etc/hostname.dc0</i>, two
-aliases are added to the device dc0, which, by the way, was configured
-as 192.168.0.2 netmask 255.255.255.0.
+仮に複数の IP アドレスを同じ IP サブネットで
+エイリアスを用いて使う場合は、それぞれのエイリアスのネットマスクを
+255.255.255.255 にしてください。これらはインターフェースに結び付けられる最初の IP
+に追随する必要はありません。この、<i>/etc/hostname.dc0</i> ファイルの例では、二つの
+エイリアスを、既に192.168.0.2 ネットマスク 255.255.255.0 に設定された
+デバイス dc0 に追加しています。
 
 <blockquote><pre>
 # <b>cat /etc/hostname.dc0</b>
@@ -521,20 +521,20 @@ inet alias 192.168.0.4 255.255.255.255
 </pre></blockquote>
 
 <p>
-Once you've made this file, it just takes a reboot for it to take
-effect. You can, however, bring up the aliases by hand using the
+一度このファイルを作ったら、有効にするために再起動が必要です。
+しかしながら、エイリアスを手動で
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ifconfig&amp;sektion=8">ifconfig(8)</a>
-utility. To bring up the first alias you would use the command:
+ユーティリティを用いて設定することもできます。一つ目のエイリアスを設定するには以下のコマンドを使います。
 
 <blockquote><pre>
 # <b>ifconfig dc0 inet alias 192.168.0.3 netmask 255.255.255.255</b>
 </pre></blockquote>
 
-(but again, a reboot is recommended to make sure you entered everything
-as you expected it to be!)
+( しかしもう一度いいますが、すべてがあなたの思ったとおりになっているか
+確認するために再起動を推奨します )
 
 <p>
-To view these aliases you must use the command:
+これらのエイリアスを見るためには、以下のコマンドを使います。
 
 <blockquote><pre>
 $ <b>ifconfig -A</b>
