@@ -547,56 +547,56 @@ dc0: flags=8863&lt;UP,BROADCAST,NOTRAILERS,RUNNING,SIMPLEX,MULTICAST&gt;
 
 <p>
 <a name="PF"></a>
-<h2>6.3 - How do I filter and firewall with OpenBSD?</h2>
-Packet Filter (from here on referred to as PF) is OpenBSD's system for
-filtering IP traffic and doing Network Address Translation. PF is
-also capable of normalizing and conditioning IP traffic and
-providing bandwidth control and packet prioritization, and can be used
-to create powerful and flexible firewalls.
-It is described in the <a href="pf/index.html"><b>PF User's
-Guide</b></a>.
+<h2>6.3 -  OpenBSD でパケットフィルタやファイアウォールを行うのはどうしたらいいですか</h2>
+パケットフィルタ(以下 PF) は OpenBSD の
+IP トラフィックをフィルタリングし、ネットワークアドレス変換を行うシステムです。PF は
+IP トラフィックを正常化し、状態を整え、
+帯域制御を行い、パケット優先順位化を行い
+強力で柔軟なファイアウォールを構築することができます。
+これは <a href="pf/index.html"><b>PF ユーザーズ
+ガイド</b></a>に記載されています。
 
 
 <p> 
 <a name= "DHCP"></a>
-<h2>6.4 - Dynamic Host Configuration Protocol (DHCP)</h2> 
+<h2>6.4 - 動的ホスト設定プロトコル (DHCP)</h2> 
 
-Dynamic Host Configuration Protocol is a way to configure network
-interfaces "automatically".
-OpenBSD can be a DHCP server (configuring other machines), a DHCP client
-(configured by another machine), and in some cases, can be both.
+動的ホスト設定プロトコルとは、ネットワーク
+インターフェースを「自動的に」設定する方法です。
+OpenBSD は DHCPサーバになり(他のマシンを設定する)ことが出来ますし、DHCPクライアント
+になり(他のマシンにより設定される)こともできますし、場合によっては両方を行うことができます。
 
 <p>
 <a name="DHCPclient"></a>
-<h3>6.4.1 - DHCP Client</h3>
+<h3>6.4.1 - クライアント</h3>
 
 <p>
-To use the DHCP client
+DHCP クライアントを使用するには
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=dhclient&amp;sektion=8">dhclient(8)</a>
-included with OpenBSD, edit <tt>/etc/hostname.xl0</tt> (this is assuming
-your main Ethernet interface is xl0.
-Yours might be ep0 or fxp0 or something else.)
-All you need to put in this hostname file is '<tt>dhcp</tt>':
+がOpenBSDには含まれています。<tt>/etc/hostname.xl0</tt> (ここでは
+主に使うイーサネットインターフェースを xl0 と仮定します。
+もしかしたら ep0 や fxp0 か、それ以外かもしれません)
+このホスト名ファイルに 「<tt>dhcp</tt>」と書き込むだけです。
 
 <blockquote><pre>
 # <b>echo dhcp &gt; /etc/hostname.xl0</b>
 </pre></blockquote>
 
 <p>
-This will cause OpenBSD to automatically start the DHCP client on boot.
-OpenBSD will gather its IP address, default gateway, and DNS servers
-from the DHCP server.
+これで OpenBSD の起動時に自動的に DHCPクライアントが起動するようになります。
+OpenBSD は自身のIP アドレス、デフォルトゲートウェイ、そして DNSサーバを
+DHCPサーバから取得します。
 
 <p>
-If you want to start a DHCP client from the command line, make sure
-<tt>/etc/dhclient.conf</tt> exists, then try:
+もし DHCPクライアントをコマンドラインから起動するのであれば、
+<tt>/etc/dhclient.conf</tt> ファイルが存在することを確認して、以下を試します。
 
 <blockquote><pre>
 # <b>dhclient fxp0</b>
 </pre></blockquote>
 
 <p>
-Where <tt>fxp0</tt> is the interface on which you want to receive DHCP.
+<tt>fxp0</tt> はDHCPを受け取りたいインターフェースです。
 
 <p>
 No matter how you start the DHCP client, you can edit the
