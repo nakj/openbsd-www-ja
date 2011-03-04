@@ -21,15 +21,15 @@ please, use a max of 72 chars per line -->
 </a>
 <p>
 <font color= "#0000e0">
-<a href= "index.html">[FAQ Index]</a>
+<a href= "index.html">[FAQ の目次]</a>
 <a href= "faq6.html">[To Section 6 - Networking]</a>
 <a href= "faq8.html">[To Section 8 - General Questions]</a>
 </font>
 
-<h1><font color="#e00000">7 - Keyboard and Display Controls</font></h1>
+<h1><font color="#e00000">7 - キーボードとディスプレイの制御</font></h1>
 <hr>
 <p>
-<h3>Table of Contents</h3>
+<h3>目次</h3>
 <ul>
 <li><a href= "#Keyboard"     >7.1 - How do I remap the keyboard? (wscons)</a>
 <li><a href= "#ConsoleMouse" >7.2 - Is there console mouse support in OpenBSD?</a>
@@ -50,36 +50,36 @@ please, use a max of 72 chars per line -->
 <br>
 <p>
 <a name= "Keyboard"></a>
-<h2>7.1 - How do I remap the keyboard? <i>(wscons)</i></h2>
+<h2>7.1 - キーボードの再マップをするにはどうしたらいいでしょうか？ <i>(wscons)</i></h2>
 
 <p>
-The ports that use the
+コンソールドライバ
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=wscons&amp;sektion=4">wscons(4)</a>
-console driver: <a href="../alpha.html">alpha</a>, 
-<a href="../amd64.html">amd64</a>,
-<a href="../hppa.html">hppa</a>,
-<a href="../i386.html">i386</a>,
-<a href="../mac68k.html">mac68k</a>,
-<a href="../macppc.html">macppc</a>,
-<a href="../sparc.html">sparc</a>,
-<a href="../sparc64.html">sparc64</a>,
-<a href="../vax.html">vax</a>,
-and <a href="../zaurus.html">zaurus</a>.
+を使っている移植は：<a href="../../alpha.html">alpha</a>, 
+<a href="../../amd64.html">amd64</a>,
+<a href="../../hppa.html">hppa</a>,
+<a href="../../i386.html">i386</a>,
+<a href="../../mac68k.html">mac68k</a>,
+<a href="../../macppc.html">macppc</a>,
+<a href="../../sparc.html">sparc</a>,
+<a href="../../sparc64.html">sparc64</a>,
+<a href="../../vax.html">vax</a>,
+そして <a href="../../zaurus.html">zaurus</a>です。
 
 <p>
-With wscons(4) consoles, most options can be controlled using the 
+wscons(4) コンソールでは、ほとんどのオプションは
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=wsconsctl&amp;sektion=8">wsconsctl(8)</a>
-utility. For example, to change keymappings with
+ユーティリティで制御します。たとえば、キーマップを変更するには
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=wsconsctl&amp;sektion=8">wsconsctl(8)</a> 
-one would execute the following:
+を以下のように起動します。
 
 <blockquote><pre>
 # <strong>wsconsctl keyboard.encoding=uk</strong>
 </pre></blockquote>
 
 <p>
-In the next example, we will remap &quot;Caps Lock&quot; to be
-&quot;Control L&quot;:
+次の例では、&quot;Caps Lock&quot; を
+&quot;Control L&quot; に入れ替えます。
 
 <blockquote><pre>
 # <strong>wsconsctl keyboard.map+="keysym Caps_Lock = Control_L"</strong>
@@ -87,17 +87,17 @@ In the next example, we will remap &quot;Caps Lock&quot; to be
 
 
 <a name= "ConsoleMouse"></a>
-<h2>7.2 - Is there console mouse support in OpenBSD?</h2>
+<h2>7.2 - OpenBSDではコンソールマウスサポートがありますか？</h2>
 
 <p>
-For the <a href="../alpha.html">alpha</a>,
+<a href="../alpha.html">alpha</a>
 <a href="../amd64.html">amd64</a>
- and <a href="../i386.html">i386</a> 
-platforms, OpenBSD provides 
-<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=wsmoused&amp;sektion=8&amp;arch=i386">wsmoused(8)</a>,
-a port of FreeBSD's moused(8).  It can be enabled automatically 
-at startup by copying and editing the appropriate line from rc.conf to
-<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=rc.conf.local&amp;sektion=8">rc.conf.local(8)</a>. 
+ と <a href="../i386.html">i386</a> 
+プラットフォームでは、OpenBSD は FreeBSD の moused(8)を移植した
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=wsmoused&amp;sektion=8&amp;arch=i386">wsmoused(8)</a>
+を提供しています。起動時に自動的に有効にするためには
+rc.conf の適切な行を
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=rc.conf.local&amp;sektion=8">rc.conf.local(8)</a>にコピーして編集します。
 
 <p>
 <a name= "Scrollback"></a>
