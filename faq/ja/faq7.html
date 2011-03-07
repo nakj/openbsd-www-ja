@@ -101,60 +101,60 @@ rc.conf の適切な行を
 
 <p>
 <a name= "Scrollback"></a>
-<h2>7.3 - Accessing the Console Scrollback Buffer 
+<h2>7.3 - コンソールのスクロールバックバッファにアクセスする
   <i>(amd64, i386, some Alpha)</i></h2>
 
 <p>
-On some platforms,
-OpenBSD provides a console scrollback buffer. This allows you 
-to see information that has already scrolled past your screen. 
-To move up and down in the buffer, simply use the key combinations
-<tt>[SHIFT]+[PGUP]</tt> and <tt>[SHIFT]+[PGDN]</tt>.
+いくつかのプラットフォームでは、
+OpenBSD はコンソールスクロールバックバッファを提供しています。これは
+スクリーンからすでにスクロールしてしまった情報を見られるようになります。
+バッファ内で上下に移動するには、単純なキーの組み合わせ
+<tt>[SHIFT]+[PGUP]</tt> と <tt>[SHIFT]+[PGDN]</tt> を用います。
 
 <p>
-The default scrollback buffer, or the number of pages that you can 
-move up and view, is 8.
-This is a feature of the
+デフォルトのスクロールバックバッファ、あるいはさかのぼれる
+ページ数は、8ページです。
+これは
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=vga&amp;sektion=4">vga(4)</a>
-driver, so it will not work without a VGA card on any platform (many
-Alpha systems have TGA video).
+ドライバの機能なので、VGAカードのないプラットフォームでは動きません(多くの
+Alpha システムではTGA ビデオがあります)。
 
 <p>
-Due to space limitations, the install kernels do not provide the 
-scrollback function.
-<a href="#SwitchConsole">Switching consoles</a> will clear the 
-scrollback buffer.
+スペースの制限に起因して、インストールしているカーネルは
+スクロールバック機能を提供していません。
+<a href="#SwitchConsole">コンソールの切り替え</a> は
+スクロールバッファをクリアしてしまいます。
 
 <p>
 <a name= "SwitchConsole"></a>
-<h2>7.4 - How do I switch consoles? <i>(amd64, i386, Zaurus,
+<h2>7.4 - コンソールの切り替えを行うには <i>(amd64, i386, Zaurus,
 some Alpha)</i></h2>
 
-On amd64, i386 and Alpha systems with 
+amd64、i386 そしてAlpha の
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=vga&amp;sektion=4">vga(4)</a>
-cards, OpenBSD provides six virtual terminals by default,
-/dev/ttyC0 through /dev/ttyC5.
-ttyC4 is reserved for use by the X Window system, leaving five
-text consoles.
-You can switch between them using
+カードがあるシステムでは、OpenBSD はデフォルトで6つの仮想ターミナルを提供しています。
+/dec/ttyC0 から /dev/ttyC5 です。
+ttyC4 は X Window システムに予約されていますので、それ以外の5つ
+がテキストコンソールとして使えます。
+切り替えるには、
 <tt>[CTRL]+[ALT]+[F1]</tt>, <tt>[CTRL]+[ALT]+[F2]</tt>,
-<tt>[CTRL]+[ALT]+[F3]</tt>, <tt>[CTRL]+[ALT]+[F4]</tt> and
-<tt>[CTRL]+[ALT]+[F6]</tt>.
+<tt>[CTRL]+[ALT]+[F3]</tt>, <tt>[CTRL]+[ALT]+[F4]</tt> それに
+<tt>[CTRL]+[ALT]+[F6]</tt> のキーバインドを使います。
 
 <p>
-The X environment uses ttyC4, <tt>[CTRL]+[ALT]+[F5]</tt>.
-When using X,
-the <tt>[CTRL]+[ALT]+[F</tt><i>n</i><tt>]</tt> keys will take you to
-the text screens;
+X 環境は ttyC4 を使いますので、 <tt>[CTRL]+[ALT]+[F5]</tt> です。
+Xを使用しているときに、 
+<tt>[CTRL]+[ALT]+[F</tt><i>n</i><tt>]</tt> キーを押すと、
+テキストスクリーンに切り替わります。
 <tt>[CTRL]+[ALT]+[F5]</tt>
-will take you back to the graphical environment.
+を押すと、グラフィック環境に戻れます。
 
 <p>
-If you wish to have more than the default number of virtual consoles,
-use the
+デフォルトよりも多くの仮想コンソールが
+必要ならば、
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=wsconscfg&amp;sektion=8">wsconscfg(8)</a>
-command to create screens for ttyC6, ttyC7 and above.
-For example:
+コマンドを用いて ttyC6, ttyC7 あるいはそれ以上のスクリーンを作成する事ができます。
+使用例：
 
 <blockquote>
 <pre>
@@ -162,11 +162,11 @@ wsconscfg -t 80x25 6
 </pre>
 </blockquote>
 
-will create a virtual terminal for ttyC6,
-accessed by <tt>[CTRL]+[ALT]+[F7]</tt>.
-Don't forget to add this command to your
+これは、
+<tt>[CTRL]+[ALT]+[F7]</tt> でアクセス出来るttyC6 仮想ターミナルを作成します。
+もし、次にコンピュータを起動した際にも追加のスクリーンが欲しいのであれば、
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=rc.local&amp;sektion=8"><tt>rc.local(8)</tt></a>
-file if you want the extra screen the next time you boot the computer.
+ファイルにこのコマンドを追記することを忘れないでください。
 
 <p>
 Note that you will not get a "<tt>login:</tt>" prompt
@@ -178,39 +178,39 @@ a HUP signal using
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=kill&amp;sektion=1">kill(1)</a>.
 
 <p>
-On the Zaurus, two virtual terminals (/dev/ttyC0 and /dev/ttyC1)
-are available by default, accessible with <tt>[ALT]+[CALENDAR]</tt>
-and <tt>[ALT]+[ADDRESS]</tt> (The <tt>[ALT]</tt> key is the one
-right of the left <tt>[CTRL]</tt> key).
+Zaurus では、二つの仮想ターミナル (/dev/ttyC0 と /de/vttyC1)
+がデフォルトで用意されています。<tt>[ALT]+[CALENDAR]</tt>
+と <tt>[ALT]+[ADDRESS]</tt> キーでアクセスできます(<tt>[ALT]</tt>キーはひとつだけ
+左 <tt>[CTRL]</tt>キーの右にあります)。
 
 <a name="80x50"></a>
-<h2>7.5 - How do I use a console resolution of 80x50? <i>(amd64, i386,
-some Alpha)</i></h2>
+<h2>7.5 - コンソールの解像度を80x50にするにはどうするか<i>amd64, i386,
+いくつかの Alpha)</i></h2>
 
-amd64, i386, and VGA Alpha users normally get a console screen of 25
-lines of 80 characters.
-However, many VGA video cards are capable of displaying a higher
-text resolution of 50 lines of 80 characters.  
+amd64、i386 とVGA つきのAlphaユーザーは通常 25
+行で一行80文字のコンソール画面を用いることができます。
+しかしながら、多くの VGA ビデオカードは
+50行で一行80文字のより高いテキスト解像度を表示することができます。
 
 <p>
-First, a font that supports the desired resolution must be loaded using
-the
+はじめに、希望する解像度をサポートしているフォント
+を
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=wsfontload&amp;sektion=8">wsfontload(8)</a>
-command.  The standard 80x25 text screen uses 8x16 pixel fonts;
-to double the number of lines we will have to use 8x8 pixel fonts.
+コマンドを使ってロードします。標準的な 80x25 テキストスクリーンは 8x16 ピクセルのフォントを使っています。
+行を倍にするのであれば、 8x8 ピクセルのフォントを使います。
 
 <p>
-After that, we will have to delete and recreate a 
-<a href="#SwitchConsole">virtual console</a> at the desired screen 
-resolution, using the
+それが済めば、
+<a href="#SwitchConsole">virtual console</a> を
+お望みの解像度にするために
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=wsconscfg&amp;sektion=8">wsconscfg(8)</a>
-command.
+コマンドを用いて破壊し再作成します。
 
 <p>
-This can be done automatically at boot by adding the following lines to
-the end of your 
+これを起動時に自動的に実行させるには
+あなたの
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=rc.local&amp;sektion=8"><tt>rc.local(8)</tt></a>
-file:
+ファイルの末尾に以下を書き加えます
 <blockquote>
 <pre>
 wsfontload -h 8 -e ibm /usr/share/misc/pcvtfonts/vt220l.808
@@ -219,40 +219,40 @@ wsconscfg -t 80x50 5
 </pre>
 </blockquote>
 
-As with any modification to your system configuration, it is
-recommended you spend some time with the man pages to understand what
-these commands do.
+他のシステム設定への修正と同様に、
+これらのコマンドが何を行うものかマニュアルページで理解するために
+時間を費やすことを推奨します。
 
 <p>
-The first line above loads the 8x8 font.  The second line deletes screen
-5 (which would be accessed by <tt>[CTRL]+[ALT]+[F6]</tt>).  The third
-line creates a new screen 5 with 50 lines of 80
-characters each.  If you do this, you will see your primary screen, and
-the other three default virtual consoles, come up in the standard 80x25
-mode, but a new screen 5 at 80x50 accessible through <tt>[CTRL]+[ALT]+[F6]</tt>.
+上の例の最初の行は、 8x8 フォントをロードします。二行目ではスクリーン
+5 ( <tt>[CTRL]+[ALT]+[F6]</tt>でアクセスできます)を削除します。三
+行目で新しい スクリーン5 を50行で
+一行あたり80文字で作成します。もしこれを行えば、最初のスクリーンと
+他の三つのデフォルトの仮想コンソールが標準的な 80x25 モードで立ち上がってくる
+でしょう。しかし <tt>[CTRL]+[ALT]+[F6]</tt>でアクセスできる新しいスクリーン 5 が 80x50 で立ち上がっています。
 
 <p>
-Remember that <tt>[CTRL]+[ALT]+[F1]</tt> is screen 0 (ttyC0).
-If you wish to alter other screens,
-simply repeat the delete and add screen steps
-for whichever screens you want running at the 80x50 resolution.
+<tt>[CTRL]+[ALT]+[F1]</tt> がスクリーン 0 (ttyC0)であることを忘れないでください。
+もしあなたが他のスクリーンを変更したいのであれば、
+単純に80x50 の解像度で動作することを望むスクリーンの分だけ
+スクリーンの削除と追加の手順を繰り返します、
 
 <p>
-You should avoid changing screen 4 (ttyC4, <tt>[CTRL]+[ALT]+[F5]</tt>),
-which is used by X as a graphical screen.  It is also not possible to 
-change the resolution of the primary console device (i.e., ttyC0).
+スクリーン4(ttyC4、 <tt>[CTRL]+[ALT]+[F5]</tt>) には変更を加えないでください、
+これは X がグラフィカルスクリーンとして使用します。主要なコンソール装置
+(すなわち ttyC0) の解像度を変更することも出来ません。
 
 <p>
-As one might expect, all these commands can also be entered at the
-command prompt, as root, or (better) using
-<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=sudo&amp;sektion=8">sudo(8)</a>.
+誰かの推測のとおり、これらすべての
+コマンドプロンプトで入力されたコマンドは、root で、あるいは(こちらの方がよいですが)
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=sudo&amp;sektion=8">sudo(8)</a> コマンドを使用してください。
 
 <p>
-<b>Note: this will not work on all video cards.</b>  Unfortunately, not
-all video cards support the uploaded fonts that
+<b>重要： これは全てのビデオカードで動作するわけではありません</b> 残念ながら
+全てのビデオカードが
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=wscons&amp;sektion=4">wscons(4)</a>
-requires to achieve the 80x50 text mode.  In these cases, you might wish
-to consider running X.
+が、要求する 80x50 モードのためにアップロードされたフォントをサポートしてはいません。この場合、
+X を動かすことをご検討ください。
 
 
 <a name="SerCon"></a>
