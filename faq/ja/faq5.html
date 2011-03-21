@@ -31,10 +31,9 @@
 <h3>目次</h3>
 <ul>
 <li><a href="#Flavors">5.1 - OpenBSD's Flavors</a>
-<li><a href="#WhySrc">5.2 - Why should I build my system from source?</a>
 <li><a href="#WhySrc">5.2 - なぜソースコードからシステムを構築しなければいけないのでしょうか ?</a>
 <li><a href="#Bld">5.3 - OpenBSD をソースから構築する</a>
-n<ul>
+<ul>
   <li><a href="#BldOverview">5.3.1 - 概観</a>
   <li><a href="#BldBinary">5.3.2 - 存在するもっとも近いバイナリをインストール
     あるいはアップグレードする</a>
@@ -89,8 +88,8 @@ OpenBSD には3つの "フレーバー"があります。
 <li><b>-release:</b> 6ヶ月ごとにCD で出荷される OpenBSDのバージョン
 <li><b>-stable:</b>  リリースと、セキュリティと信頼性を考慮した
     重要なパッチ。
-<li><b>-current:</b> Where new development work is presently being done,
-    and eventually, it will turn into the next release.
+<li><-current:</b> 新しい開発の成果が現在完了した、
+    そしていつか、次のリリースに入る。
 </ul>
 
 絵にすると、これらフレーバーの開発は
@@ -149,16 +148,20 @@ OpenBSD には3つの "フレーバー"があります。
 もし<a href="http://www.openbsd.org/cgi-bin/man.cgi">マニュアルページ</a>が
 変更になっても、おそらくその変更が<i>-stable</i>ブランチに反映される事はないでしょう。
 言い換えれば、新しいデバイスのサポートや新しい機能は決して
-<i>-stable</i>に追加されることはありません。
+<i>-stable</i>に
+追加されることはありません。
 
 <p>
 "<i>-stable</i>" という名前が指し示すものは <i>-current</i> が信頼性のないもの
-あるいは、これがより堅牢な製品であることを意味するものではありません。
+あるいは、これがより堅牢な製品であることを意味するものでは
+ありません。
 <i>-current</i>のAPI(プログラムがどうやってOSと対話するか ) や機能
 は変更され進化しているのにたいして、
 <i>-stable</i> の操作や API はそれがベースにしているリリースと同じですので
 システムを学びなおしたり設定ファイルを変更したり、システムに追加アプリケーションを追加する際の
 問題が増えたりはしません。
+
+
 
 <p>
 実際、我々の願いは、OpenBSD の継続的な発展です、目標は
@@ -168,26 +171,25 @@ OpenBSD には3つの "フレーバー"があります。
 
 <p>
 多くのユーザーは <i>-stable</i> か <i>-release</i>を動かしているでしょう。
-That being said, many people do run <i>-current</i> on production
-systems, and it is important that people do so to identify bugs and
-test new features.  However, if you don't know how to properly describe,
-diagnose and deal with a problem, don't tell yourself (or anyone else)
-that you are "helping the project" by running <i>-current</i>.  "It
-didn't work!" is not a <a href="../report.html#bugtypes">useful bug
-report</a>.  "The recent changes to the pciide driver broke
-compatibility with my Slugchip-based IDE interface, dmesg of working and
-broken systems follow..." might be a useful report.
-
+これは、多くのユーザーが <i>-current</i> を商用
+システムで動かしている、そして人々がバグを特定したり
+新機能をテストする事は重要だという事を意味します。しかしながら、正確に記述する方法を知らなかったり、
+問題を診断して対処し、人に教えなかったりしても、
+<i>-current</i>を動かす事は「プロジェクトを助ける」ことになります。
+「動きません！」hあ<a href="../../report.html#bugtypes">有益なバグ
+レポート</a>ではありません。「 pciide ドライバの新しい変更が
+私のSlugthip ベースの IDE インターフェースとの互換性を壊してしまいました、動いている時
+と壊れたシステムの dmesg は以下の通りです...」が有益なバグレポートです。
 
 <p>
-There are times when "normal" users may wish to live on the cutting
-edge and run <i>-current</i>. The most common reason is that the user 
-has a device
-which is not supported by <i>-release</i> (and thus, not <i>-stable</i>),
-or wishes to use a new feature of the <i>-current</i>.  In this case, the
-choice may be either <i>-current</i> or not using the device, and
-<i>-current</i> may be the lesser evil.  However, one should not expect
-hand-holding from the developers.
+「普通の」ユーザーは、最先端に生きて
+<i>-current</i> を動かしたいと願うものです。最も一般的な理由はユーザーが
+<i>-release</i> では(同様に<i>-stable</i>でも)サポートされていない
+デバイスを持っているか、
+<i>-current</i> の新機能を使いたいというものです。この例では、
+選択肢は<i>-current</i>を使うかデバイスを使わないかのどちらかです、そして
+<i>-current</i> は少し悪いかもしれません。しかしながら、
+開発者からの手助けは期待出来ません。
 
 <h3>スナップショット</h3>
 OpenBSD 公式リリースの間、<i>スナップショット</i> が作られ
@@ -216,7 +218,6 @@ OpenBSD 公式リリースの間、<i>スナップショット</i> が作られ
 第三に、スナップショットはしばしばまだソースツリーにコミットされていない
 実験的なコードが含まれています。
 
-<h3>Upgrade vs. Update</h3>
 <h3>アップグレードとアップデート</h3>
 しばしば OpenBSD のインストールの際に "upgrading" と "updating" への言及
 をみることがあるでしょう。
@@ -489,37 +490,37 @@ command lines than too little.
 </blockquote>
 
 <p>
-While only the "<tt>src</tt>" tree has been shown so far, you will do the
-same steps for "<tt>xenocara</tt>" and "<tt>ports</tt>".
-As all parts of OpenBSD must be kept in sync, all trees you use should be
-checked out and updated at the same time.
-You can combine the checkouts into one line (<i>-stable</i> shown):
+これまでは"<tt>src</tt>" ツリーだけを紹介してきましたが、
+同じ手順を "<tt>xenocara</tt>" と "<tt>ports</tt>" についても行います。
+OpenBSDの全ての部分は同期させる必要がありますので、あなたが使う全てのツリーは
+同時にチェックアウトとアップデートを行うべきです。
+チェックアウトは一行に組み合わせる事ができます(以下は<i>-stable</i> の例です)：
 <pre>
     # <b>export CVSROOT=anoncvs@anoncvs.example.org:/cvs</b>
     # <b>cd /usr</b>
     # <b>cvs -d$CVSROOT checkout -rOPENBSD_4_8 -P src ports xenocara</b>
 </pre>
 
-However, updates must be done directory-by-directory.
+しかしながら、アップデートはディレクトリ毎に行われます。
 
 <p>
-At this point, whether you followed <i>-stable</i> or <i>-current</i>
-you should have a usable source tree.
-Be very careful which tree you grab -- it is easy to try to compile 
-<i>-current</i> when aiming for <i>-stable</i>.
+この時点で、あなたがフォローしているのが<i>-stable</i>か<i>-current</i>に依らず
+使えるソースツリーが入手出来ているでしょう。
+あなたが掴んでいるツリーにとても気をつけてください -- 
+<i>-stable</i>のつもりで<i>-current</i> をコンパイルするする事はとても簡単です。
 
-<h4>Pre-loading the tree: <tt>src.tar.gz, sys.tar.gz</tt></h4>
-While you can download the entire source tree from an AnonCVS server,
-you can often save a lot of time and bandwidth by "pre-loading" your
-source tree with the source files from either the OpenBSD CD or from an
-FTP server.
-This is particularly true if you are running
-<a href="../stable.html"><i>-stable</i></a>, as relatively few files change
-between this version and the <i>-release</i> it is based on.
+<h4>事前にローディングしたツリー： <tt>src.tar.gz 、 sys.tar.gz</tt></h4>
+AnonCVSサーバから全体のソースツリーをダウンロードする事もできますが、
+多くの場合 OpenBSD CD かFTPサーバから「事前にローディングした」ソースファイルと
+ソースツリーで多くの時間と帯域を
+節約する事ができます。
+これは特に
+<a href="../../stable.html"><i>-stable</i></a>を動かしている場合には真実です、
+このバージョンとそれを元にした <i>-release</i> の間には比較して少しのファイルの変更しかありません。
 
 <p>
-To extract the source tree from the CD to <i>/usr/src</i> (assuming the CD is
-mounted on /mnt):
+CD から <i>/usr/src</i> にソースツリーを展開するには (CDは 
+/mntに マウントされていると仮定します)：
 <pre>
     # <b>cd /usr/src; tar xzf /mnt/src.tar.gz</b>
     # <b>cd /usr; tar xzf /mnt/xenocara.tar.gz</b>
@@ -551,7 +552,7 @@ must be kept in sync, you will generally need to set up all parts of the tree.
 
 
 <a name="CVSTips"></a>
-<h4>Common CVS tips</h4>
+<h4>一般的な CVS の秘訣</h4>
 
 As indicated earlier, some options are mandatory to get a valid
 <tt>src</tt> tree in OpenBSD.

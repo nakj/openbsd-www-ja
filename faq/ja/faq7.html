@@ -169,13 +169,13 @@ wsconscfg -t 80x25 6
 ファイルにこのコマンドを追記することを忘れないでください。
 
 <p>
-Note that you will not get a "<tt>login:</tt>" prompt
-on the newly-created virtual console unless you set it to "on" in 
-<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ttys&amp;sektion=5"><tt>/etc/ttys(5)</tt></a>,
-and either reboot or send
+新たに作成したバーチャルコンソールでは<tt>login:</tt>プロンプトが、
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ttys&amp;sektion=5"><tt>/etc/ttys(5)</tt></a>
+に "on" を設定し、そして再起動するか、
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=init&amp;sektion=8">init(8)</a>
-a HUP signal using 
-<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=kill&amp;sektion=1">kill(1)</a>.
+に HUPシグナルを、
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=kill&amp;sektion=1">kill(1)</a>
+を用いて送信するまで出てこない事に注意が必要です。
 
 <p>
 Zaurus では、二つの仮想ターミナル (/dev/ttyC0 と /de/vttyC1)
@@ -256,10 +256,10 @@ X を動かすことをご検討ください。
 
 
 <a name="SerCon"></a>
-<h2>7.6 - How do I use a serial console?</h2>
+<h2>7.6 - シリアルコンソールを使用するにはどうしたらいいでしょうか？</h2>
 
-There are many reasons you may wish to use a serial console for your 
-OpenBSD system:
+あなたのOpenBSDシステムでシリアルコンソールを使いたいと望むのには多くの
+理由があるでしょう。
 <ul>
 <li>Recording console output (for documentation). 
 <li>Remote management.
