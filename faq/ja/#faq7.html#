@@ -21,15 +21,15 @@ please, use a max of 72 chars per line -->
 </a>
 <p>
 <font color= "#0000e0">
-<a href= "index.html">[FAQ ã®ç›®æ¬¡]</a>
+<a href= "index.html">[FAQ ’¤Î’ÌÜ’¼¡]</a>
 <a href= "faq6.html">[To Section 6 - Networking]</a>
 <a href= "faq8.html">[To Section 8 - General Questions]</a>
 </font>
 
-<h1><font color="#e00000">7 - ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰ã¨ãƒ‡ã‚£ã‚¹ãƒ—ãƒ¬ã‚¤ã®åˆ¶å¾¡</font></h1>
+<h1><font color="#e00000">7 - ’¥­’¡¼’¥Ü’¡¼’¥É’¤È’¥Ç’¥£’¥¹’¥×’¥ì’¥¤’¤Î’À©’¸æ</font></h1>
 <hr>
 <p>
-<h3>ç›®æ¬¡</h3>
+<h3>’ÌÜ’¼¡</h3>
 <ul>
 <li><a href= "#Keyboard"     >7.1 - How do I remap the keyboard? (wscons)</a>
 <li><a href= "#ConsoleMouse" >7.2 - Is there console mouse support in OpenBSD?</a>
@@ -50,12 +50,12 @@ please, use a max of 72 chars per line -->
 <br>
 <p>
 <a name= "Keyboard"></a>
-<h2>7.1 - ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰ã®å†ãƒžãƒƒãƒ—ã‚’ã™ã‚‹ã«ã¯ã©ã†ã—ãŸã‚‰ã„ã„ã§ã—ã‚‡ã†ã‹ï¼Ÿ <i>(wscons)</i></h2>
+<h2>7.1 - ’¥­’¡¼’¥Ü’¡¼’¥É’¤Î’ºÆ’¥Þ’¥Ã’¥×’¤ò’¤¹’¤ë’¤Ë’¤Ï’¤É’¤¦’¤·’¤¿’¤é’¤¤’¤¤’¤Ç’¤·’¤ç’¤¦’¤«’¡© <i>(wscons)</i></h2>
 
 <p>
-ã‚³ãƒ³ã‚½ãƒ¼ãƒ«ãƒ‰ãƒ©ã‚¤ãƒ
+’¥³’¥ó’¥½’¡¼’¥ë’¥É’¥é’¥¤’¥Ð
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=wscons&amp;sektion=4">wscons(4)</a>
-ã‚’ä½¿ã£ã¦ã„ã‚‹ç§»æ¤ã¯ï¼š<a href="../../alpha.html">alpha</a>, 
+’¤ò’»È’¤Ã’¤Æ’¤¤’¤ë’°Ü’¿¢’¤Ï’¡§<a href="../../alpha.html">alpha</a>, 
 <a href="../../amd64.html">amd64</a>,
 <a href="../../hppa.html">hppa</a>,
 <a href="../../i386.html">i386</a>,
@@ -64,22 +64,22 @@ please, use a max of 72 chars per line -->
 <a href="../../sparc.html">sparc</a>,
 <a href="../../sparc64.html">sparc64</a>,
 <a href="../../vax.html">vax</a>,
-ãã—ã¦ <a href="../../zaurus.html">zaurus</a>ã§ã™ã€‚
+’¤½’¤·’¤Æ <a href="../../zaurus.html">zaurus</a>’¤Ç’¤¹’¡£
 
 <p>
-wscons(4) ã‚³ãƒ³ã‚½ãƒ¼ãƒ«ã§ã¯ã€ã»ã¨ã‚“ã©ã®ã‚ªãƒ—ã‚·ãƒ§ãƒ³ã¯
+wscons(4) ’¥³’¥ó’¥½’¡¼’¥ë’¤Ç’¤Ï’¡¢’¤Û’¤È’¤ó’¤É’¤Î’¥ª’¥×’¥·’¥ç’¥ó’¤Ï
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=wsconsctl&amp;sektion=8">wsconsctl(8)</a>
-ãƒ¦ãƒ¼ãƒ†ã‚£ãƒªãƒ†ã‚£ã§åˆ¶å¾¡ã—ã¾ã™ã€‚ãŸã¨ãˆã°ã€ã‚­ãƒ¼ãƒžãƒƒãƒ—ã‚’å¤‰æ›´ã™ã‚‹ã«ã¯
+’¥æ’¡¼’¥Æ’¥£’¥ê’¥Æ’¥£’¤Ç’À©’¸æ’¤·’¤Þ’¤¹’¡£’¤¿’¤È’¤¨’¤Ð’¡¢’¥­’¡¼’¥Þ’¥Ã’¥×’¤ò’ÊÑ’¹¹’¤¹’¤ë’¤Ë’¤Ï
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=wsconsctl&amp;sektion=8">wsconsctl(8)</a> 
-ã‚’ä»¥ä¸‹ã®ã‚ˆã†ã«èµ·å‹•ã—ã¾ã™ã€‚
+’¤ò’°Ê’²¼’¤Î’¤è’¤¦’¤Ë’µ¯’Æ°’¤·’¤Þ’¤¹’¡£
 
 <blockquote><pre>
 # <strong>wsconsctl keyboard.encoding=uk</strong>
 </pre></blockquote>
 
 <p>
-æ¬¡ã®ä¾‹ã§ã¯ã€&quot;Caps Lock&quot; ã‚’
-&quot;Control L&quot; ã«å…¥ã‚Œæ›¿ãˆã¾ã™ã€‚
+’¼¡’¤Î’Îã’¤Ç’¤Ï’¡¢&quot;Caps Lock&quot; ’¤ò
+&quot;Control L&quot; ’¤Ë’Æþ’¤ì’ÂØ’¤¨’¤Þ’¤¹’¡£
 
 <blockquote><pre>
 # <strong>wsconsctl keyboard.map+="keysym Caps_Lock = Control_L"</strong>
@@ -87,74 +87,74 @@ wscons(4) ã‚³ãƒ³ã‚½ãƒ¼ãƒ«ã§ã¯ã€ã»ã¨ã‚“ã©ã®ã‚ªãƒ—ã‚·ãƒ§ãƒ³ã¯
 
 
 <a name= "ConsoleMouse"></a>
-<h2>7.2 - OpenBSDã§ã¯ã‚³ãƒ³ã‚½ãƒ¼ãƒ«ãƒžã‚¦ã‚¹ã‚µãƒãƒ¼ãƒˆãŒã‚ã‚Šã¾ã™ã‹ï¼Ÿ</h2>
+<h2>7.2 - OpenBSD’¤Ç’¤Ï’¥³’¥ó’¥½’¡¼’¥ë’¥Þ’¥¦’¥¹’¥µ’¥Ý’¡¼’¥È’¤¬’¤¢’¤ê’¤Þ’¤¹’¤«’¡©</h2>
 
 <p>
 <a href="../alpha.html">alpha</a>
 <a href="../amd64.html">amd64</a>
- ã¨ <a href="../i386.html">i386</a> 
-ãƒ—ãƒ©ãƒƒãƒˆãƒ•ã‚©ãƒ¼ãƒ ã§ã¯ã€OpenBSD ã¯ FreeBSD ã® moused(8)ã‚’ç§»æ¤ã—ãŸ
+ ’¤È <a href="../i386.html">i386</a> 
+’¥×’¥é’¥Ã’¥È’¥Õ’¥©’¡¼’¥à’¤Ç’¤Ï’¡¢OpenBSD ’¤Ï FreeBSD ’¤Î moused(8)’¤ò’°Ü’¿¢’¤·’¤¿
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=wsmoused&amp;sektion=8&amp;arch=i386">wsmoused(8)</a>
-ã‚’æä¾›ã—ã¦ã„ã¾ã™ã€‚èµ·å‹•æ™‚ã«è‡ªå‹•çš„ã«æœ‰åŠ¹ã«ã™ã‚‹ãŸã‚ã«ã¯
-rc.conf ã®é©åˆ‡ãªè¡Œã‚’
-<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=rc.conf.local&amp;sektion=8">rc.conf.local(8)</a>ã«ã‚³ãƒ”ãƒ¼ã—ã¦ç·¨é›†ã—ã¾ã™ã€‚
+’¤ò’Äó’¶¡’¤·’¤Æ’¤¤’¤Þ’¤¹’¡£’µ¯’Æ°’»þ’¤Ë’¼«’Æ°’Åª’¤Ë’Í­’¸ú’¤Ë’¤¹’¤ë’¤¿’¤á’¤Ë’¤Ï
+rc.conf ’¤Î’Å¬’ÀÚ’¤Ê’¹Ô’¤ò
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=rc.conf.local&amp;sektion=8">rc.conf.local(8)</a>’¤Ë’¥³’¥Ô’¡¼’¤·’¤Æ’ÊÔ’½¸’¤·’¤Þ’¤¹’¡£
 
 <p>
 <a name= "Scrollback"></a>
-<h2>7.3 - ã‚³ãƒ³ã‚½ãƒ¼ãƒ«ã®ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ãƒãƒƒã‚¯ãƒãƒƒãƒ•ã‚¡ã«ã‚¢ã‚¯ã‚»ã‚¹ã™ã‚‹
+<h2>7.3 - ’¥³’¥ó’¥½’¡¼’¥ë’¤Î’¥¹’¥¯’¥í’¡¼’¥ë’¥Ð’¥Ã’¥¯’¥Ð’¥Ã’¥Õ’¥¡’¤Ë’¥¢’¥¯’¥»’¥¹’¤¹’¤ë
   <i>(amd64, i386, some Alpha)</i></h2>
 
 <p>
-ã„ãã¤ã‹ã®ãƒ—ãƒ©ãƒƒãƒˆãƒ•ã‚©ãƒ¼ãƒ ã§ã¯ã€
-OpenBSD ã¯ã‚³ãƒ³ã‚½ãƒ¼ãƒ«ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ãƒãƒƒã‚¯ãƒãƒƒãƒ•ã‚¡ã‚’æä¾›ã—ã¦ã„ã¾ã™ã€‚ã“ã‚Œã¯
-ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã‹ã‚‰ã™ã§ã«ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ã—ã¦ã—ã¾ã£ãŸæƒ…å ±ã‚’è¦‹ã‚‰ã‚Œã‚‹ã‚ˆã†ã«ãªã‚Šã¾ã™ã€‚
-ãƒãƒƒãƒ•ã‚¡å†…ã§ä¸Šä¸‹ã«ç§»å‹•ã™ã‚‹ã«ã¯ã€å˜ç´”ãªã‚­ãƒ¼ã®çµ„ã¿åˆã‚ã›
-<tt>[SHIFT]+[PGUP]</tt> ã¨ <tt>[SHIFT]+[PGDN]</tt> ã‚’ç”¨ã„ã¾ã™ã€‚
+’¤¤’¤¯’¤Ä’¤«’¤Î’¥×’¥é’¥Ã’¥È’¥Õ’¥©’¡¼’¥à’¤Ç’¤Ï’¡¢
+OpenBSD ’¤Ï’¥³’¥ó’¥½’¡¼’¥ë’¥¹’¥¯’¥í’¡¼’¥ë’¥Ð’¥Ã’¥¯’¥Ð’¥Ã’¥Õ’¥¡’¤ò’Äó’¶¡’¤·’¤Æ’¤¤’¤Þ’¤¹’¡£’¤³’¤ì’¤Ï
+’¥¹’¥¯’¥ê’¡¼’¥ó’¤«’¤é’¤¹’¤Ç’¤Ë’¥¹’¥¯’¥í’¡¼’¥ë’¤·’¤Æ’¤·’¤Þ’¤Ã’¤¿’¾ð’Êó’¤ò’¸«’¤é’¤ì’¤ë’¤è’¤¦’¤Ë’¤Ê’¤ê’¤Þ’¤¹’¡£
+’¥Ð’¥Ã’¥Õ’¥¡’Æâ’¤Ç’¾å’²¼’¤Ë’°Ü’Æ°’¤¹’¤ë’¤Ë’¤Ï’¡¢’Ã±’½ã’¤Ê’¥­’¡¼’¤Î’ÁÈ’¤ß’¹ç’¤ï’¤»
+<tt>[SHIFT]+[PGUP]</tt> ’¤È <tt>[SHIFT]+[PGDN]</tt> ’¤ò’ÍÑ’¤¤’¤Þ’¤¹’¡£
 
 <p>
-ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã®ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ãƒãƒƒã‚¯ãƒãƒƒãƒ•ã‚¡ã€ã‚ã‚‹ã„ã¯ã•ã‹ã®ã¼ã‚Œã‚‹
-ãƒšãƒ¼ã‚¸æ•°ã¯ã€8ãƒšãƒ¼ã‚¸ã§ã™ã€‚
-ã“ã‚Œã¯
+’¥Ç’¥Õ’¥©’¥ë’¥È’¤Î’¥¹’¥¯’¥í’¡¼’¥ë’¥Ð’¥Ã’¥¯’¥Ð’¥Ã’¥Õ’¥¡’¡¢’¤¢’¤ë’¤¤’¤Ï’¤µ’¤«’¤Î’¤Ü’¤ì’¤ë
+’¥Ú’¡¼’¥¸’¿ô’¤Ï’¡¢8’¥Ú’¡¼’¥¸’¤Ç’¤¹’¡£
+’¤³’¤ì’¤Ï
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=vga&amp;sektion=4">vga(4)</a>
-ãƒ‰ãƒ©ã‚¤ãƒã®æ©Ÿèƒ½ãªã®ã§ã€VGAã‚«ãƒ¼ãƒ‰ã®ãªã„ãƒ—ãƒ©ãƒƒãƒˆãƒ•ã‚©ãƒ¼ãƒ ã§ã¯å‹•ãã¾ã›ã‚“(å¤šãã®
-Alpha ã‚·ã‚¹ãƒ†ãƒ ã§ã¯TGA ãƒ“ãƒ‡ã‚ªãŒã‚ã‚Šã¾ã™)ã€‚
+’¥É’¥é’¥¤’¥Ð’¤Î’µ¡’Ç½’¤Ê’¤Î’¤Ç’¡¢VGA’¥«’¡¼’¥É’¤Î’¤Ê’¤¤’¥×’¥é’¥Ã’¥È’¥Õ’¥©’¡¼’¥à’¤Ç’¤Ï’Æ°’¤­’¤Þ’¤»’¤ó(’Â¿’¤¯’¤Î
+Alpha ’¥·’¥¹’¥Æ’¥à’¤Ç’¤ÏTGA ’¥Ó’¥Ç’¥ª’¤¬’¤¢’¤ê’¤Þ’¤¹)’¡£
 
 <p>
-ã‚¹ãƒšãƒ¼ã‚¹ã®åˆ¶é™ã«èµ·å› ã—ã¦ã€ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã—ã¦ã„ã‚‹ã‚«ãƒ¼ãƒãƒ«ã¯
-ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ãƒãƒƒã‚¯æ©Ÿèƒ½ã‚’æä¾›ã—ã¦ã„ã¾ã›ã‚“ã€‚
-<a href="#SwitchConsole">ã‚³ãƒ³ã‚½ãƒ¼ãƒ«ã®åˆ‡ã‚Šæ›¿ãˆ</a> ã¯
-ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ãƒãƒƒãƒ•ã‚¡ã‚’ã‚¯ãƒªã‚¢ã—ã¦ã—ã¾ã„ã¾ã™ã€‚
+’¥¹’¥Ú’¡¼’¥¹’¤Î’À©’¸Â’¤Ë’µ¯’°ø’¤·’¤Æ’¡¢’¥¤’¥ó’¥¹’¥È’¡¼’¥ë’¤·’¤Æ’¤¤’¤ë’¥«’¡¼’¥Í’¥ë’¤Ï
+’¥¹’¥¯’¥í’¡¼’¥ë’¥Ð’¥Ã’¥¯’µ¡’Ç½’¤ò’Äó’¶¡’¤·’¤Æ’¤¤’¤Þ’¤»’¤ó’¡£
+<a href="#SwitchConsole">’¥³’¥ó’¥½’¡¼’¥ë’¤Î’ÀÚ’¤ê’ÂØ’¤¨</a> ’¤Ï
+’¥¹’¥¯’¥í’¡¼’¥ë’¥Ð’¥Ã’¥Õ’¥¡’¤ò’¥¯’¥ê’¥¢’¤·’¤Æ’¤·’¤Þ’¤¤’¤Þ’¤¹’¡£
 
 <p>
 <a name= "SwitchConsole"></a>
-<h2>7.4 - ã‚³ãƒ³ã‚½ãƒ¼ãƒ«ã®åˆ‡ã‚Šæ›¿ãˆã‚’è¡Œã†ã«ã¯ <i>(amd64, i386, Zaurus,
+<h2>7.4 - ’¥³’¥ó’¥½’¡¼’¥ë’¤Î’ÀÚ’¤ê’ÂØ’¤¨’¤ò’¹Ô’¤¦’¤Ë’¤Ï <i>(amd64, i386, Zaurus,
 some Alpha)</i></h2>
 
-amd64ã€i386 ãã—ã¦Alpha ã®
+amd64’¡¢i386 ’¤½’¤·’¤ÆAlpha ’¤Î
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=vga&amp;sektion=4">vga(4)</a>
-ã‚«ãƒ¼ãƒ‰ãŒã‚ã‚‹ã‚·ã‚¹ãƒ†ãƒ ã§ã¯ã€OpenBSD ã¯ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã§6ã¤ã®ä»®æƒ³ã‚¿ãƒ¼ãƒŸãƒŠãƒ«ã‚’æä¾›ã—ã¦ã„ã¾ã™ã€‚
-/dec/ttyC0 ã‹ã‚‰ /dev/ttyC5 ã§ã™ã€‚
-ttyC4 ã¯ X Window ã‚·ã‚¹ãƒ†ãƒ ã«äºˆç´„ã•ã‚Œã¦ã„ã¾ã™ã®ã§ã€ãã‚Œä»¥å¤–ã®5ã¤
-ãŒãƒ†ã‚­ã‚¹ãƒˆã‚³ãƒ³ã‚½ãƒ¼ãƒ«ã¨ã—ã¦ä½¿ãˆã¾ã™ã€‚
-åˆ‡ã‚Šæ›¿ãˆã‚‹ã«ã¯ã€
+’¥«’¡¼’¥É’¤¬’¤¢’¤ë’¥·’¥¹’¥Æ’¥à’¤Ç’¤Ï’¡¢OpenBSD ’¤Ï’¥Ç’¥Õ’¥©’¥ë’¥È’¤Ç6’¤Ä’¤Î’²¾’ÁÛ’¥¿’¡¼’¥ß’¥Ê’¥ë’¤ò’Äó’¶¡’¤·’¤Æ’¤¤’¤Þ’¤¹’¡£
+/dec/ttyC0 ’¤«’¤é /dev/ttyC5 ’¤Ç’¤¹’¡£
+ttyC4 ’¤Ï X Window ’¥·’¥¹’¥Æ’¥à’¤Ë’Í½’Ìó’¤µ’¤ì’¤Æ’¤¤’¤Þ’¤¹’¤Î’¤Ç’¡¢’¤½’¤ì’°Ê’³°’¤Î5’¤Ä
+’¤¬’¥Æ’¥­’¥¹’¥È’¥³’¥ó’¥½’¡¼’¥ë’¤È’¤·’¤Æ’»È’¤¨’¤Þ’¤¹’¡£
+’ÀÚ’¤ê’ÂØ’¤¨’¤ë’¤Ë’¤Ï’¡¢
 <tt>[CTRL]+[ALT]+[F1]</tt>, <tt>[CTRL]+[ALT]+[F2]</tt>,
-<tt>[CTRL]+[ALT]+[F3]</tt>, <tt>[CTRL]+[ALT]+[F4]</tt> ãã‚Œã«
-<tt>[CTRL]+[ALT]+[F6]</tt> ã®ã‚­ãƒ¼ãƒã‚¤ãƒ³ãƒ‰ã‚’ä½¿ã„ã¾ã™ã€‚
+<tt>[CTRL]+[ALT]+[F3]</tt>, <tt>[CTRL]+[ALT]+[F4]</tt> ’¤½’¤ì’¤Ë
+<tt>[CTRL]+[ALT]+[F6]</tt> ’¤Î’¥­’¡¼’¥Ð’¥¤’¥ó’¥É’¤ò’»È’¤¤’¤Þ’¤¹’¡£
 
 <p>
-X ç’°å¢ƒã¯ ttyC4 ã‚’ä½¿ã„ã¾ã™ã®ã§ã€ <tt>[CTRL]+[ALT]+[F5]</tt> ã§ã™ã€‚
-Xã‚’ä½¿ç”¨ã—ã¦ã„ã‚‹ã¨ãã«ã€ 
-<tt>[CTRL]+[ALT]+[F</tt><i>n</i><tt>]</tt> ã‚­ãƒ¼ã‚’æŠ¼ã™ã¨ã€
-ãƒ†ã‚­ã‚¹ãƒˆã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã«åˆ‡ã‚Šæ›¿ã‚ã‚Šã¾ã™ã€‚
+X ’´Ä’¶­’¤Ï ttyC4 ’¤ò’»È’¤¤’¤Þ’¤¹’¤Î’¤Ç’¡¢ <tt>[CTRL]+[ALT]+[F5]</tt> ’¤Ç’¤¹’¡£
+X’¤ò’»È’ÍÑ’¤·’¤Æ’¤¤’¤ë’¤È’¤­’¤Ë’¡¢ 
+<tt>[CTRL]+[ALT]+[F</tt><i>n</i><tt>]</tt> ’¥­’¡¼’¤ò’²¡’¤¹’¤È’¡¢
+’¥Æ’¥­’¥¹’¥È’¥¹’¥¯’¥ê’¡¼’¥ó’¤Ë’ÀÚ’¤ê’ÂØ’¤ï’¤ê’¤Þ’¤¹’¡£
 <tt>[CTRL]+[ALT]+[F5]</tt>
-ã‚’æŠ¼ã™ã¨ã€ã‚°ãƒ©ãƒ•ã‚£ãƒƒã‚¯ç’°å¢ƒã«æˆ»ã‚Œã¾ã™ã€‚
+’¤ò’²¡’¤¹’¤È’¡¢’¥°’¥é’¥Õ’¥£’¥Ã’¥¯’´Ä’¶­’¤Ë’Ìá’¤ì’¤Þ’¤¹’¡£
 
 <p>
-ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã‚ˆã‚Šã‚‚å¤šãã®ä»®æƒ³ã‚³ãƒ³ã‚½ãƒ¼ãƒ«ãŒ
-å¿…è¦ãªã‚‰ã°ã€
+’¥Ç’¥Õ’¥©’¥ë’¥È’¤è’¤ê’¤â’Â¿’¤¯’¤Î’²¾’ÁÛ’¥³’¥ó’¥½’¡¼’¥ë’¤¬
+’É¬’Í×’¤Ê’¤é’¤Ð’¡¢
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=wsconscfg&amp;sektion=8">wsconscfg(8)</a>
-ã‚³ãƒžãƒ³ãƒ‰ã‚’ç”¨ã„ã¦ ttyC6, ttyC7 ã‚ã‚‹ã„ã¯ãã‚Œä»¥ä¸Šã®ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã‚’ä½œæˆã™ã‚‹äº‹ãŒã§ãã¾ã™ã€‚
-ä½¿ç”¨ä¾‹ï¼š
+’¥³’¥Þ’¥ó’¥É’¤ò’ÍÑ’¤¤’¤Æ ttyC6, ttyC7 ’¤¢’¤ë’¤¤’¤Ï’¤½’¤ì’°Ê’¾å’¤Î’¥¹’¥¯’¥ê’¡¼’¥ó’¤ò’ºî’À®’¤¹’¤ë’»ö’¤¬’¤Ç’¤­’¤Þ’¤¹’¡£
+’»È’ÍÑ’Îã’¡§
 
 <blockquote>
 <pre>
@@ -162,55 +162,55 @@ wsconscfg -t 80x25 6
 </pre>
 </blockquote>
 
-ã“ã‚Œã¯ã€
-<tt>[CTRL]+[ALT]+[F7]</tt> ã§ã‚¢ã‚¯ã‚»ã‚¹å‡ºæ¥ã‚‹ttyC6 ä»®æƒ³ã‚¿ãƒ¼ãƒŸãƒŠãƒ«ã‚’ä½œæˆã—ã¾ã™ã€‚
-ã‚‚ã—ã€æ¬¡ã«ã‚³ãƒ³ãƒ”ãƒ¥ãƒ¼ã‚¿ã‚’èµ·å‹•ã—ãŸéš›ã«ã‚‚è¿½åŠ ã®ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ãŒæ¬²ã—ã„ã®ã§ã‚ã‚Œã°ã€
+’¤³’¤ì’¤Ï’¡¢
+<tt>[CTRL]+[ALT]+[F7]</tt> ’¤Ç’¥¢’¥¯’¥»’¥¹’½Ð’Íè’¤ëttyC6 ’²¾’ÁÛ’¥¿’¡¼’¥ß’¥Ê’¥ë’¤ò’ºî’À®’¤·’¤Þ’¤¹’¡£
+’¤â’¤·’¡¢’¼¡’¤Ë’¥³’¥ó’¥Ô’¥å’¡¼’¥¿’¤ò’µ¯’Æ°’¤·’¤¿’ºÝ’¤Ë’¤â’ÄÉ’²Ã’¤Î’¥¹’¥¯’¥ê’¡¼’¥ó’¤¬’Íß’¤·’¤¤’¤Î’¤Ç’¤¢’¤ì’¤Ð’¡¢
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=rc.local&amp;sektion=8"><tt>rc.local(8)</tt></a>
-ãƒ•ã‚¡ã‚¤ãƒ«ã«ã“ã®ã‚³ãƒžãƒ³ãƒ‰ã‚’è¿½è¨˜ã™ã‚‹ã“ã¨ã‚’å¿˜ã‚Œãªã„ã§ãã ã•ã„ã€‚
+’¥Õ’¥¡’¥¤’¥ë’¤Ë’¤³’¤Î’¥³’¥Þ’¥ó’¥É’¤ò’ÄÉ’µ­’¤¹’¤ë’¤³’¤È’¤ò’Ëº’¤ì’¤Ê’¤¤’¤Ç’¤¯’¤À’¤µ’¤¤’¡£
 
 <p>
-æ–°ãŸã«ä½œæˆã—ãŸãƒãƒ¼ãƒãƒ£ãƒ«ã‚³ãƒ³ã‚½ãƒ¼ãƒ«ã§ã¯<tt>login:</tt>ãƒ—ãƒ­ãƒ³ãƒ—ãƒˆãŒã€
+’¿·’¤¿’¤Ë’ºî’À®’¤·’¤¿’¥Ð’¡¼’¥Á’¥ã’¥ë’¥³’¥ó’¥½’¡¼’¥ë’¤Ç’¤Ï<tt>login:</tt>’¥×’¥í’¥ó’¥×’¥È’¤¬’¡¢
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ttys&amp;sektion=5"><tt>/etc/ttys(5)</tt></a>
-ã« "on" ã‚’è¨­å®šã—ã€ãã—ã¦å†èµ·å‹•ã™ã‚‹ã‹ã€
+’¤Ë "on" ’¤ò’Àß’Äê’¤·’¡¢’¤½’¤·’¤Æ’ºÆ’µ¯’Æ°’¤¹’¤ë’¤«’¡¢
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=init&amp;sektion=8">init(8)</a>
-ã« HUPã‚·ã‚°ãƒŠãƒ«ã‚’ã€
+’¤Ë HUP’¥·’¥°’¥Ê’¥ë’¤ò’¡¢
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=kill&amp;sektion=1">kill(1)</a>
-ã‚’ç”¨ã„ã¦é€ä¿¡ã™ã‚‹ã¾ã§å‡ºã¦ã“ãªã„äº‹ã«æ³¨æ„ãŒå¿…è¦ã§ã™ã€‚
+’¤ò’ÍÑ’¤¤’¤Æ’Á÷’¿®’¤¹’¤ë’¤Þ’¤Ç’½Ð’¤Æ’¤³’¤Ê’¤¤’»ö’¤Ë’Ãí’°Õ’¤¬’É¬’Í×’¤Ç’¤¹’¡£
 
 <p>
-Zaurus ã§ã¯ã€äºŒã¤ã®ä»®æƒ³ã‚¿ãƒ¼ãƒŸãƒŠãƒ« (/dev/ttyC0 ã¨ /de/vttyC1)
-ãŒãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã§ç”¨æ„ã•ã‚Œã¦ã„ã¾ã™ã€‚<tt>[ALT]+[CALENDAR]</tt>
-ã¨ <tt>[ALT]+[ADDRESS]</tt> ã‚­ãƒ¼ã§ã‚¢ã‚¯ã‚»ã‚¹ã§ãã¾ã™(<tt>[ALT]</tt>ã‚­ãƒ¼ã¯ã²ã¨ã¤ã ã‘
-å·¦ <tt>[CTRL]</tt>ã‚­ãƒ¼ã®å³ã«ã‚ã‚Šã¾ã™)ã€‚
+Zaurus ’¤Ç’¤Ï’¡¢’Æó’¤Ä’¤Î’²¾’ÁÛ’¥¿’¡¼’¥ß’¥Ê’¥ë (/dev/ttyC0 ’¤È /de/vttyC1)
+’¤¬’¥Ç’¥Õ’¥©’¥ë’¥È’¤Ç’ÍÑ’°Õ’¤µ’¤ì’¤Æ’¤¤’¤Þ’¤¹’¡£<tt>[ALT]+[CALENDAR]</tt>
+’¤È <tt>[ALT]+[ADDRESS]</tt> ’¥­’¡¼’¤Ç’¥¢’¥¯’¥»’¥¹’¤Ç’¤­’¤Þ’¤¹(<tt>[ALT]</tt>’¥­’¡¼’¤Ï’¤Ò’¤È’¤Ä’¤À’¤±
+’º¸ <tt>[CTRL]</tt>’¥­’¡¼’¤Î’±¦’¤Ë’¤¢’¤ê’¤Þ’¤¹)’¡£
 
 <a name="80x50"></a>
-<h2>7.5 - ã‚³ãƒ³ã‚½ãƒ¼ãƒ«ã®è§£åƒåº¦ã‚’80x50ã«ã™ã‚‹ã«ã¯ã©ã†ã™ã‚‹ã‹<i>amd64, i386,
-ã„ãã¤ã‹ã® Alpha)</i></h2>
+<h2>7.5 - ’¥³’¥ó’¥½’¡¼’¥ë’¤Î’²ò’Áü’ÅÙ’¤ò80x50’¤Ë’¤¹’¤ë’¤Ë’¤Ï’¤É’¤¦’¤¹’¤ë’¤«<i>amd64, i386,
+’¤¤’¤¯’¤Ä’¤«’¤Î Alpha)</i></h2>
 
-amd64ã€i386 ã¨VGA ã¤ãã®Alphaãƒ¦ãƒ¼ã‚¶ãƒ¼ã¯é€šå¸¸ 25
-è¡Œã§ä¸€è¡Œ80æ–‡å­—ã®ã‚³ãƒ³ã‚½ãƒ¼ãƒ«ç”»é¢ã‚’ç”¨ã„ã‚‹ã“ã¨ãŒã§ãã¾ã™ã€‚
-ã—ã‹ã—ãªãŒã‚‰ã€å¤šãã® VGA ãƒ“ãƒ‡ã‚ªã‚«ãƒ¼ãƒ‰ã¯
-50è¡Œã§ä¸€è¡Œ80æ–‡å­—ã®ã‚ˆã‚Šé«˜ã„ãƒ†ã‚­ã‚¹ãƒˆè§£åƒåº¦ã‚’è¡¨ç¤ºã™ã‚‹ã“ã¨ãŒã§ãã¾ã™ã€‚
+amd64’¡¢i386 ’¤ÈVGA ’¤Ä’¤­’¤ÎAlpha’¥æ’¡¼’¥¶’¡¼’¤Ï’ÄÌ’¾ï 25
+’¹Ô’¤Ç’°ì’¹Ô80’Ê¸’»ú’¤Î’¥³’¥ó’¥½’¡¼’¥ë’²è’ÌÌ’¤ò’ÍÑ’¤¤’¤ë’¤³’¤È’¤¬’¤Ç’¤­’¤Þ’¤¹’¡£
+’¤·’¤«’¤·’¤Ê’¤¬’¤é’¡¢’Â¿’¤¯’¤Î VGA ’¥Ó’¥Ç’¥ª’¥«’¡¼’¥É’¤Ï
+50’¹Ô’¤Ç’°ì’¹Ô80’Ê¸’»ú’¤Î’¤è’¤ê’¹â’¤¤’¥Æ’¥­’¥¹’¥È’²ò’Áü’ÅÙ’¤ò’É½’¼¨’¤¹’¤ë’¤³’¤È’¤¬’¤Ç’¤­’¤Þ’¤¹’¡£
 
 <p>
-ã¯ã˜ã‚ã«ã€å¸Œæœ›ã™ã‚‹è§£åƒåº¦ã‚’ã‚µãƒãƒ¼ãƒˆã—ã¦ã„ã‚‹ãƒ•ã‚©ãƒ³ãƒˆ
-ã‚’
+’¤Ï’¤¸’¤á’¤Ë’¡¢’´õ’Ë¾’¤¹’¤ë’²ò’Áü’ÅÙ’¤ò’¥µ’¥Ý’¡¼’¥È’¤·’¤Æ’¤¤’¤ë’¥Õ’¥©’¥ó’¥È
+’¤ò
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=wsfontload&amp;sektion=8">wsfontload(8)</a>
-ã‚³ãƒžãƒ³ãƒ‰ã‚’ä½¿ã£ã¦ãƒ­ãƒ¼ãƒ‰ã—ã¾ã™ã€‚æ¨™æº–çš„ãª 80x25 ãƒ†ã‚­ã‚¹ãƒˆã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã¯ 8x16 ãƒ”ã‚¯ã‚»ãƒ«ã®ãƒ•ã‚©ãƒ³ãƒˆã‚’ä½¿ã£ã¦ã„ã¾ã™ã€‚
-è¡Œã‚’å€ã«ã™ã‚‹ã®ã§ã‚ã‚Œã°ã€ 8x8 ãƒ”ã‚¯ã‚»ãƒ«ã®ãƒ•ã‚©ãƒ³ãƒˆã‚’ä½¿ã„ã¾ã™ã€‚
+’¥³’¥Þ’¥ó’¥É’¤ò’»È’¤Ã’¤Æ’¥í’¡¼’¥É’¤·’¤Þ’¤¹’¡£’É¸’½à’Åª’¤Ê 80x25 ’¥Æ’¥­’¥¹’¥È’¥¹’¥¯’¥ê’¡¼’¥ó’¤Ï 8x16 ’¥Ô’¥¯’¥»’¥ë’¤Î’¥Õ’¥©’¥ó’¥È’¤ò’»È’¤Ã’¤Æ’¤¤’¤Þ’¤¹’¡£
+’¹Ô’¤ò’ÇÜ’¤Ë’¤¹’¤ë’¤Î’¤Ç’¤¢’¤ì’¤Ð’¡¢ 8x8 ’¥Ô’¥¯’¥»’¥ë’¤Î’¥Õ’¥©’¥ó’¥È’¤ò’»È’¤¤’¤Þ’¤¹’¡£
 
 <p>
-ãã‚ŒãŒæ¸ˆã‚ã°ã€
-<a href="#SwitchConsole">virtual console</a> ã‚’
-ãŠæœ›ã¿ã®è§£åƒåº¦ã«ã™ã‚‹ãŸã‚ã«
+’¤½’¤ì’¤¬’ºÑ’¤á’¤Ð’¡¢
+<a href="#SwitchConsole">virtual console</a> ’¤ò
+’¤ª’Ë¾’¤ß’¤Î’²ò’Áü’ÅÙ’¤Ë’¤¹’¤ë’¤¿’¤á’¤Ë
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=wsconscfg&amp;sektion=8">wsconscfg(8)</a>
-ã‚³ãƒžãƒ³ãƒ‰ã‚’ç”¨ã„ã¦ç ´å£Šã—å†ä½œæˆã—ã¾ã™ã€‚
+’¥³’¥Þ’¥ó’¥É’¤ò’ÍÑ’¤¤’¤Æ’ÇË’²õ’¤·’ºÆ’ºî’À®’¤·’¤Þ’¤¹’¡£
 
 <p>
-ã“ã‚Œã‚’èµ·å‹•æ™‚ã«è‡ªå‹•çš„ã«å®Ÿè¡Œã•ã›ã‚‹ã«ã¯
-ã‚ãªãŸã®
+’¤³’¤ì’¤ò’µ¯’Æ°’»þ’¤Ë’¼«’Æ°’Åª’¤Ë’¼Â’¹Ô’¤µ’¤»’¤ë’¤Ë’¤Ï
+’¤¢’¤Ê’¤¿’¤Î
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=rc.local&amp;sektion=8"><tt>rc.local(8)</tt></a>
-ãƒ•ã‚¡ã‚¤ãƒ«ã®æœ«å°¾ã«ä»¥ä¸‹ã‚’æ›¸ãåŠ ãˆã¾ã™
+’¥Õ’¥¡’¥¤’¥ë’¤Î’Ëö’Èø’¤Ë’°Ê’²¼’¤ò’½ñ’¤­’²Ã’¤¨’¤Þ’¤¹
 <blockquote>
 <pre>
 wsfontload -h 8 -e ibm /usr/share/misc/pcvtfonts/vt220l.808
@@ -219,76 +219,76 @@ wsconscfg -t 80x50 5
 </pre>
 </blockquote>
 
-ä»–ã®ã‚·ã‚¹ãƒ†ãƒ è¨­å®šã¸ã®ä¿®æ­£ã¨åŒæ§˜ã«ã€
-ã“ã‚Œã‚‰ã®ã‚³ãƒžãƒ³ãƒ‰ãŒä½•ã‚’è¡Œã†ã‚‚ã®ã‹ãƒžãƒ‹ãƒ¥ã‚¢ãƒ«ãƒšãƒ¼ã‚¸ã§ç†è§£ã™ã‚‹ãŸã‚ã«
-æ™‚é–“ã‚’è²»ã‚„ã™ã“ã¨ã‚’æŽ¨å¥¨ã—ã¾ã™ã€‚
+’Â¾’¤Î’¥·’¥¹’¥Æ’¥à’Àß’Äê’¤Ø’¤Î’½¤’Àµ’¤È’Æ±’ÍÍ’¤Ë’¡¢
+’¤³’¤ì’¤é’¤Î’¥³’¥Þ’¥ó’¥É’¤¬’²¿’¤ò’¹Ô’¤¦’¤â’¤Î’¤«’¥Þ’¥Ë’¥å’¥¢’¥ë’¥Ú’¡¼’¥¸’¤Ç’Íý’²ò’¤¹’¤ë’¤¿’¤á’¤Ë
+’»þ’´Ö’¤ò’Èñ’¤ä’¤¹’¤³’¤È’¤ò’¿ä’¾©’¤·’¤Þ’¤¹’¡£
 
 <p>
-ä¸Šã®ä¾‹ã®æœ€åˆã®è¡Œã¯ã€ 8x8 ãƒ•ã‚©ãƒ³ãƒˆã‚’ãƒ­ãƒ¼ãƒ‰ã—ã¾ã™ã€‚äºŒè¡Œç›®ã§ã¯ã‚¹ã‚¯ãƒªãƒ¼ãƒ³
-5 ( <tt>[CTRL]+[ALT]+[F6]</tt>ã§ã‚¢ã‚¯ã‚»ã‚¹ã§ãã¾ã™)ã‚’å‰Šé™¤ã—ã¾ã™ã€‚ä¸‰
-è¡Œç›®ã§æ–°ã—ã„ ã‚¹ã‚¯ãƒªãƒ¼ãƒ³5 ã‚’50è¡Œã§
-ä¸€è¡Œã‚ãŸã‚Š80æ–‡å­—ã§ä½œæˆã—ã¾ã™ã€‚ã‚‚ã—ã“ã‚Œã‚’è¡Œãˆã°ã€æœ€åˆã®ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã¨
-ä»–ã®ä¸‰ã¤ã®ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆã®ä»®æƒ³ã‚³ãƒ³ã‚½ãƒ¼ãƒ«ãŒæ¨™æº–çš„ãª 80x25 ãƒ¢ãƒ¼ãƒ‰ã§ç«‹ã¡ä¸ŠãŒã£ã¦ãã‚‹
-ã§ã—ã‚‡ã†ã€‚ã—ã‹ã— <tt>[CTRL]+[ALT]+[F6]</tt>ã§ã‚¢ã‚¯ã‚»ã‚¹ã§ãã‚‹æ–°ã—ã„ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ 5 ãŒ 80x50 ã§ç«‹ã¡ä¸ŠãŒã£ã¦ã„ã¾ã™ã€‚
+’¾å’¤Î’Îã’¤Î’ºÇ’½é’¤Î’¹Ô’¤Ï’¡¢ 8x8 ’¥Õ’¥©’¥ó’¥È’¤ò’¥í’¡¼’¥É’¤·’¤Þ’¤¹’¡£’Æó’¹Ô’ÌÜ’¤Ç’¤Ï’¥¹’¥¯’¥ê’¡¼’¥ó
+5 ( <tt>[CTRL]+[ALT]+[F6]</tt>’¤Ç’¥¢’¥¯’¥»’¥¹’¤Ç’¤­’¤Þ’¤¹)’¤ò’ºï’½ü’¤·’¤Þ’¤¹’¡£’»°
+’¹Ô’ÌÜ’¤Ç’¿·’¤·’¤¤ ’¥¹’¥¯’¥ê’¡¼’¥ó5 ’¤ò50’¹Ô’¤Ç
+’°ì’¹Ô’¤¢’¤¿’¤ê80’Ê¸’»ú’¤Ç’ºî’À®’¤·’¤Þ’¤¹’¡£’¤â’¤·’¤³’¤ì’¤ò’¹Ô’¤¨’¤Ð’¡¢’ºÇ’½é’¤Î’¥¹’¥¯’¥ê’¡¼’¥ó’¤È
+’Â¾’¤Î’»°’¤Ä’¤Î’¥Ç’¥Õ’¥©’¥ë’¥È’¤Î’²¾’ÁÛ’¥³’¥ó’¥½’¡¼’¥ë’¤¬’É¸’½à’Åª’¤Ê 80x25 ’¥â’¡¼’¥É’¤Ç’Î©’¤Á’¾å’¤¬’¤Ã’¤Æ’¤¯’¤ë
+’¤Ç’¤·’¤ç’¤¦’¡£’¤·’¤«’¤· <tt>[CTRL]+[ALT]+[F6]</tt>’¤Ç’¥¢’¥¯’¥»’¥¹’¤Ç’¤­’¤ë’¿·’¤·’¤¤’¥¹’¥¯’¥ê’¡¼’¥ó 5 ’¤¬ 80x50 ’¤Ç’Î©’¤Á’¾å’¤¬’¤Ã’¤Æ’¤¤’¤Þ’¤¹’¡£
 
 <p>
-<tt>[CTRL]+[ALT]+[F1]</tt> ãŒã‚¹ã‚¯ãƒªãƒ¼ãƒ³ 0 (ttyC0)ã§ã‚ã‚‹ã“ã¨ã‚’å¿˜ã‚Œãªã„ã§ãã ã•ã„ã€‚
-ã‚‚ã—ã‚ãªãŸãŒä»–ã®ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã‚’å¤‰æ›´ã—ãŸã„ã®ã§ã‚ã‚Œã°ã€
-å˜ç´”ã«80x50 ã®è§£åƒåº¦ã§å‹•ä½œã™ã‚‹ã“ã¨ã‚’æœ›ã‚€ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã®åˆ†ã ã‘
-ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã®å‰Šé™¤ã¨è¿½åŠ ã®æ‰‹é †ã‚’ç¹°ã‚Šè¿”ã—ã¾ã™ã€
+<tt>[CTRL]+[ALT]+[F1]</tt> ’¤¬’¥¹’¥¯’¥ê’¡¼’¥ó 0 (ttyC0)’¤Ç’¤¢’¤ë’¤³’¤È’¤ò’Ëº’¤ì’¤Ê’¤¤’¤Ç’¤¯’¤À’¤µ’¤¤’¡£
+’¤â’¤·’¤¢’¤Ê’¤¿’¤¬’Â¾’¤Î’¥¹’¥¯’¥ê’¡¼’¥ó’¤ò’ÊÑ’¹¹’¤·’¤¿’¤¤’¤Î’¤Ç’¤¢’¤ì’¤Ð’¡¢
+’Ã±’½ã’¤Ë80x50 ’¤Î’²ò’Áü’ÅÙ’¤Ç’Æ°’ºî’¤¹’¤ë’¤³’¤È’¤ò’Ë¾’¤à’¥¹’¥¯’¥ê’¡¼’¥ó’¤Î’Ê¬’¤À’¤±
+’¥¹’¥¯’¥ê’¡¼’¥ó’¤Î’ºï’½ü’¤È’ÄÉ’²Ã’¤Î’¼ê’½ç’¤ò’·«’¤ê’ÊÖ’¤·’¤Þ’¤¹’¡¢
 
 <p>
-ã‚¹ã‚¯ãƒªãƒ¼ãƒ³4(ttyC4ã€ <tt>[CTRL]+[ALT]+[F5]</tt>) ã«ã¯å¤‰æ›´ã‚’åŠ ãˆãªã„ã§ãã ã•ã„ã€
-ã“ã‚Œã¯ X ãŒã‚°ãƒ©ãƒ•ã‚£ã‚«ãƒ«ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã¨ã—ã¦ä½¿ç”¨ã—ã¾ã™ã€‚ä¸»è¦ãªã‚³ãƒ³ã‚½ãƒ¼ãƒ«è£…ç½®
-(ã™ãªã‚ã¡ ttyC0) ã®è§£åƒåº¦ã‚’å¤‰æ›´ã™ã‚‹ã“ã¨ã‚‚å‡ºæ¥ã¾ã›ã‚“ã€‚
+’¥¹’¥¯’¥ê’¡¼’¥ó4(ttyC4’¡¢ <tt>[CTRL]+[ALT]+[F5]</tt>) ’¤Ë’¤Ï’ÊÑ’¹¹’¤ò’²Ã’¤¨’¤Ê’¤¤’¤Ç’¤¯’¤À’¤µ’¤¤’¡¢
+’¤³’¤ì’¤Ï X ’¤¬’¥°’¥é’¥Õ’¥£’¥«’¥ë’¥¹’¥¯’¥ê’¡¼’¥ó’¤È’¤·’¤Æ’»È’ÍÑ’¤·’¤Þ’¤¹’¡£’¼ç’Í×’¤Ê’¥³’¥ó’¥½’¡¼’¥ë’Áõ’ÃÖ
+(’¤¹’¤Ê’¤ï’¤Á ttyC0) ’¤Î’²ò’Áü’ÅÙ’¤ò’ÊÑ’¹¹’¤¹’¤ë’¤³’¤È’¤â’½Ð’Íè’¤Þ’¤»’¤ó’¡£
 
 <p>
-èª°ã‹ã®æŽ¨æ¸¬ã®ã¨ãŠã‚Šã€ã“ã‚Œã‚‰ã™ã¹ã¦ã®
-ã‚³ãƒžãƒ³ãƒ‰ãƒ—ãƒ­ãƒ³ãƒ—ãƒˆã§å…¥åŠ›ã•ã‚ŒãŸã‚³ãƒžãƒ³ãƒ‰ã¯ã€root ã§ã€ã‚ã‚‹ã„ã¯(ã“ã¡ã‚‰ã®æ–¹ãŒã‚ˆã„ã§ã™ãŒ)
-<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=sudo&amp;sektion=8">sudo(8)</a> ã‚³ãƒžãƒ³ãƒ‰ã‚’ä½¿ç”¨ã—ã¦ãã ã•ã„ã€‚
+’Ã¯’¤«’¤Î’¿ä’Â¬’¤Î’¤È’¤ª’¤ê’¡¢’¤³’¤ì’¤é’¤¹’¤Ù’¤Æ’¤Î
+’¥³’¥Þ’¥ó’¥É’¥×’¥í’¥ó’¥×’¥È’¤Ç’Æþ’ÎÏ’¤µ’¤ì’¤¿’¥³’¥Þ’¥ó’¥É’¤Ï’¡¢root ’¤Ç’¡¢’¤¢’¤ë’¤¤’¤Ï(’¤³’¤Á’¤é’¤Î’Êý’¤¬’¤è’¤¤’¤Ç’¤¹’¤¬)
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=sudo&amp;sektion=8">sudo(8)</a> ’¥³’¥Þ’¥ó’¥É’¤ò’»È’ÍÑ’¤·’¤Æ’¤¯’¤À’¤µ’¤¤’¡£
 
 <p>
-<b>é‡è¦ï¼š ã“ã‚Œã¯å…¨ã¦ã®ãƒ“ãƒ‡ã‚ªã‚«ãƒ¼ãƒ‰ã§å‹•ä½œã™ã‚‹ã‚ã‘ã§ã¯ã‚ã‚Šã¾ã›ã‚“</b> æ®‹å¿µãªãŒã‚‰
-å…¨ã¦ã®ãƒ“ãƒ‡ã‚ªã‚«ãƒ¼ãƒ‰ãŒ
+<b>’½Å’Í×’¡§ ’¤³’¤ì’¤Ï’Á´’¤Æ’¤Î’¥Ó’¥Ç’¥ª’¥«’¡¼’¥É’¤Ç’Æ°’ºî’¤¹’¤ë’¤ï’¤±’¤Ç’¤Ï’¤¢’¤ê’¤Þ’¤»’¤ó</b> ’»Ä’Ç°’¤Ê’¤¬’¤é
+’Á´’¤Æ’¤Î’¥Ó’¥Ç’¥ª’¥«’¡¼’¥É’¤¬
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=wscons&amp;sektion=4">wscons(4)</a>
-ãŒã€è¦æ±‚ã™ã‚‹ 80x50 ãƒ¢ãƒ¼ãƒ‰ã®ãŸã‚ã«ã‚¢ãƒƒãƒ—ãƒ­ãƒ¼ãƒ‰ã•ã‚ŒãŸãƒ•ã‚©ãƒ³ãƒˆã‚’ã‚µãƒãƒ¼ãƒˆã—ã¦ã¯ã„ã¾ã›ã‚“ã€‚ã“ã®å ´åˆã€
-X ã‚’å‹•ã‹ã™ã“ã¨ã‚’ã”æ¤œè¨Žãã ã•ã„ã€‚
+’¤¬’¡¢’Í×’µá’¤¹’¤ë 80x50 ’¥â’¡¼’¥É’¤Î’¤¿’¤á’¤Ë’¥¢’¥Ã’¥×’¥í’¡¼’¥É’¤µ’¤ì’¤¿’¥Õ’¥©’¥ó’¥È’¤ò’¥µ’¥Ý’¡¼’¥È’¤·’¤Æ’¤Ï’¤¤’¤Þ’¤»’¤ó’¡£’¤³’¤Î’¾ì’¹ç’¡¢
+X ’¤ò’Æ°’¤«’¤¹’¤³’¤È’¤ò’¤´’¸¡’Æ¤’¤¯’¤À’¤µ’¤¤’¡£
 
 
 <a name="SerCon"></a>
-<h2>7.6 - ã‚·ãƒªã‚¢ãƒ«ã‚³ãƒ³ã‚½ãƒ¼ãƒ«ã‚’ä½¿ç”¨ã™ã‚‹ã«ã¯ã©ã†ã—ãŸã‚‰ã„ã„ã§ã—ã‚‡ã†ã‹ï¼Ÿ</h2>
+<h2>7.6 - ’¥·’¥ê’¥¢’¥ë’¥³’¥ó’¥½’¡¼’¥ë’¤ò’»È’ÍÑ’¤¹’¤ë’¤Ë’¤Ï’¤É’¤¦’¤·’¤¿’¤é’¤¤’¤¤’¤Ç’¤·’¤ç’¤¦’¤«’¡©</h2>
 
-ã‚ãªãŸã®OpenBSDã‚·ã‚¹ãƒ†ãƒ ã§ã‚·ãƒªã‚¢ãƒ«ã‚³ãƒ³ã‚½ãƒ¼ãƒ«ã‚’ä½¿ã„ãŸã„ã¨æœ›ã‚€ã®ã«ã¯å¤šãã®
-ç†ç”±ãŒã‚ã‚‹ã§ã—ã‚‡ã†ã€‚
+’¤¢’¤Ê’¤¿’¤ÎOpenBSD’¥·’¥¹’¥Æ’¥à’¤Ç’¥·’¥ê’¥¢’¥ë’¥³’¥ó’¥½’¡¼’¥ë’¤ò’»È’¤¤’¤¿’¤¤’¤È’Ë¾’¤à’¤Î’¤Ë’¤Ï’Â¿’¤¯’¤Î
+’Íý’Í³’¤¬’¤¢’¤ë’¤Ç’¤·’¤ç’¤¦’¡£
 <ul>
-<li>(æ–‡æ›¸ã®ãŸã‚ã«)ã‚³ãƒ³ã‚½ãƒ¼ãƒ«å‡ºåŠ›ã‚’è¨˜éŒ²ã™ã‚‹ãŸã‚
-<li>é éš”ç®¡ç†
-<li>å¤§é‡ã®ãƒžã‚·ãƒ³ã®ãƒ¡ãƒ³ãƒ†ãƒŠãƒ³ã‚¹ã‚’å®¹æ˜“ã«ã™ã‚‹ãŸã‚
-<li> æœ‰ç”¨ãª dmsg ã‚’æä¾›ã™ã‚‹äº‹ãŒé›£ã—ã„ãƒžã‚·ãƒ³ã‹ã‚‰
-  ä»–æ–¹ã«é€ã‚‹ãŸã‚
-<li>ã‚·ã‚¹ãƒ†ãƒ ãŒã‚¯ãƒ©ãƒƒã‚·ãƒ¥ã—ãŸã¨ãã«æ­£ç¢ºãª "trace" ã¨ "ps" å‡ºåŠ›ã‚’
-  é–‹ç™ºè€…ãŒå•é¡Œã‚’ä¿®æ­£ã™ã‚‹æ©Ÿä¼šã‚’å¾—ã‚‹ãŸã‚ã«æä¾›ã™ã‚‹ãŸã‚
+<li>(’Ê¸’½ñ’¤Î’¤¿’¤á’¤Ë)’¥³’¥ó’¥½’¡¼’¥ë’½Ð’ÎÏ’¤ò’µ­’Ï¿’¤¹’¤ë’¤¿’¤á
+<li>’±ó’³Ö’´É’Íý
+<li>’Âç’ÎÌ’¤Î’¥Þ’¥·’¥ó’¤Î’¥á’¥ó’¥Æ’¥Ê’¥ó’¥¹’¤ò’ÍÆ’°×’¤Ë’¤¹’¤ë’¤¿’¤á
+<li> ’Í­’ÍÑ’¤Ê dmsg ’¤ò’Äó’¶¡’¤¹’¤ë’»ö’¤¬’Æñ’¤·’¤¤’¥Þ’¥·’¥ó’¤«’¤é
+  ’Â¾’Êý’¤Ë’Á÷’¤ë’¤¿’¤á
+<li>’¥·’¥¹’¥Æ’¥à’¤¬’¥¯’¥é’¥Ã’¥·’¥å’¤·’¤¿’¤È’¤­’¤Ë’Àµ’³Î’¤Ê "trace" ’¤È "ps" ’½Ð’ÎÏ’¤ò
+  ’³«’È¯’¼Ô’¤¬’Ìä’Âê’¤ò’½¤’Àµ’¤¹’¤ë’µ¡’²ñ’¤ò’ÆÀ’¤ë’¤¿’¤á’¤Ë’Äó’¶¡’¤¹’¤ë’¤¿’¤á
 </ul>
-OpenBSD ã¯ã»ã¨ã‚“ã©ã®ãƒ—ãƒ©ãƒƒãƒˆãƒ•ã‚©ãƒ¼ãƒ ã§ã‚·ãƒªã‚¢ãƒ«ã‚³ãƒ³ã‚½ãƒ¼ãƒ«ã‚’ã‚µãƒãƒ¼ãƒˆã—ã¦ã„ã¾ã™ãŒã€è©³ç´°ã¯
-ãƒ—ãƒ©ãƒƒãƒˆãƒ•ã‚©ãƒ¼ãƒ é–“ã§å¤šå²ã«ã‚ãŸã£ã¦ã„ã¾ã™ã€‚
+OpenBSD ’¤Ï’¤Û’¤È’¤ó’¤É’¤Î’¥×’¥é’¥Ã’¥È’¥Õ’¥©’¡¼’¥à’¤Ç’¥·’¥ê’¥¢’¥ë’¥³’¥ó’¥½’¡¼’¥ë’¤ò’¥µ’¥Ý’¡¼’¥È’¤·’¤Æ’¤¤’¤Þ’¤¹’¤¬’¡¢’¾Ü’ºÙ’¤Ï
+’¥×’¥é’¥Ã’¥È’¥Õ’¥©’¡¼’¥à’´Ö’¤Ç’Â¿’´ô’¤Ë’¤ï’¤¿’¤Ã’¤Æ’¤¤’¤Þ’¤¹’¡£
 
 <p>
-ã‚·ãƒªã‚¢ãƒ«ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹ã¯äº›æœ«ãªä»•äº‹ã§ã¯ãªã„ã“ã¨ã«æ³¨æ„ã—ã¦ãã ã•ã„ -- ã—ã°ã—ã°
-ç‹¬ç‰¹ã®ã‚±ãƒ¼ãƒ–ãƒ«ãŒå¿…è¦ã«ãªã‚Šã€ãã—ã¦ãƒãƒ¼ãƒˆã¯ãƒžã‚·ãƒ³é–“ã§æ¨™æº–åŒ–ã•ã‚Œã¦ã„ã¾ã›ã‚“ã—ã€
-ã„ãã¤ã‹ã®ã‚±ãƒ¼ã‚¹ã§ã¯ä¸€ã¤ã®ãƒžã‚·ãƒ³æƒ…ã§ã‚‚å®‰å®šã—ã¦ã„ã¾ã›ã‚“ã€‚ã“ã“ã§ã¯ã‚ãªãŸã¯
-ã‚ãªãŸã®ã‚³ãƒ³ãƒ”ãƒ¥ãƒ¼ã‚¿ã¨ãƒ‡ãƒã‚¤ã‚¹ã‚’ã‚·ãƒªã‚¢ãƒ«ã‚¿ãƒ¼ãƒŸãƒŠãƒ«ã¨ã—ã¦å‹•ãã‚ˆã†ã«æ­£ã—ãã‚±ãƒ¼ãƒ–ãƒ«ã‚’
-é¸æŠžã™ã‚‹æ–¹æ³•ã‚’çŸ¥ã£ã¦ã„ã‚‹ã‚‚ã®ã¨ä»®å®šã—ã¾ã™ã€‚ã‚·ãƒªã‚¢ãƒ«
-ã‚¤ãƒ³ã‚¿ãƒ¼ãƒ•ã‚§ãƒ¼ã‚¹ã®å®Œå…¨ãªãƒãƒ¥ãƒ¼ãƒˆãƒªã‚¢ãƒ«ã¯ã“ã®ç« ã®ç¯„å›²ã‚’è¶Šãˆã¦ã„ã¾ã™ã€ã—ã‹ã—ãªãŒã‚‰ä¸€ã¤ã®
-ãƒ’ãƒ³ãƒˆï¼šç¹‹ã„ã ã‹ã‚‰ã¨ã„ã£ã¦ãã‚ŒãŒå‹•ãã¨ã¯é™ã‚‰ãªã„ã§ã™ã€‚
+’¥·’¥ê’¥¢’¥ë’¥¤’¥ó’¥¿’¡¼’¥Õ’¥§’¡¼’¥¹’¤Ï’º³’Ëö’¤Ê’»Å’»ö’¤Ç’¤Ï’¤Ê’¤¤’¤³’¤È’¤Ë’Ãí’°Õ’¤·’¤Æ’¤¯’¤À’¤µ’¤¤ -- ’¤·’¤Ð’¤·’¤Ð
+’ÆÈ’ÆÃ’¤Î’¥±’¡¼’¥Ö’¥ë’¤¬’É¬’Í×’¤Ë’¤Ê’¤ê’¡¢’¤½’¤·’¤Æ’¥Ý’¡¼’¥È’¤Ï’¥Þ’¥·’¥ó’´Ö’¤Ç’É¸’½à’²½’¤µ’¤ì’¤Æ’¤¤’¤Þ’¤»’¤ó’¤·’¡¢
+’¤¤’¤¯’¤Ä’¤«’¤Î’¥±’¡¼’¥¹’¤Ç’¤Ï’°ì’¤Ä’¤Î’¥Þ’¥·’¥ó’¾ð’¤Ç’¤â’°Â’Äê’¤·’¤Æ’¤¤’¤Þ’¤»’¤ó’¡£’¤³’¤³’¤Ç’¤Ï’¤¢’¤Ê’¤¿’¤Ï
+’¤¢’¤Ê’¤¿’¤Î’¥³’¥ó’¥Ô’¥å’¡¼’¥¿’¤È’¥Ç’¥Ð’¥¤’¥¹’¤ò’¥·’¥ê’¥¢’¥ë’¥¿’¡¼’¥ß’¥Ê’¥ë’¤È’¤·’¤Æ’Æ°’¤¯’¤è’¤¦’¤Ë’Àµ’¤·’¤¯’¥±’¡¼’¥Ö’¥ë’¤ò
+’Áª’Âò’¤¹’¤ë’Êý’Ë¡’¤ò’ÃÎ’¤Ã’¤Æ’¤¤’¤ë’¤â’¤Î’¤È’²¾’Äê’¤·’¤Þ’¤¹’¡£’¥·’¥ê’¥¢’¥ë
+’¥¤’¥ó’¥¿’¡¼’¥Õ’¥§’¡¼’¥¹’¤Î’´°’Á´’¤Ê’¥Á’¥å’¡¼’¥È’¥ê’¥¢’¥ë’¤Ï’¤³’¤Î’¾Ï’¤Î’ÈÏ’°Ï’¤ò’±Û’¤¨’¤Æ’¤¤’¤Þ’¤¹’¡¢’¤·’¤«’¤·’¤Ê’¤¬’¤é’°ì’¤Ä’¤Î
+’¥Ò’¥ó’¥È’¡§’·Ò’¤¤’¤À’¤«’¤é’¤È’¤¤’¤Ã’¤Æ’¤½’¤ì’¤¬’Æ°’¤¯’¤È’¤Ï’¸Â’¤é’¤Ê’¤¤’¤Ç’¤¹’¡£
 
 <a name="SerContty"></a>
-<h3><i>/etc/ttys</i> ã®å¤‰æ›´</h3>
-OpenBSD ã§å®Ÿç”¨çš„ãªã‚·ãƒªã‚¢ãƒ«ã‚³ãƒ³ã‚½ãƒ¼ãƒ«ã‚’ä½¿ãˆã‚‹ã‚ˆã†ã«ã™ã‚‹ã«ã¯
-äºŒã¤ã®ãƒ‘ãƒ¼ãƒˆãŒã‚ã‚Šã¾ã™ã€‚ç¬¬ä¸€ã«ã€ OpenBSD ã¯ã‚·ãƒªã‚¢ãƒ«ãƒãƒ¼ãƒˆã‚’
-ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹è¡¨ç¤ºã¨ã‚·ãƒ³ã‚°ãƒ«ãƒ¦ãƒ¼ã‚¶ãƒ¼ãƒ¢ãƒ¼ãƒ‰ã®ãŸã‚ã®ã‚³ãƒ³ã‚½ãƒ¼ãƒ«ã¨ã—ã¦ä½¿ç”¨ã—ã¾ã™ã€‚ã“ã®ãƒ‘ãƒ¼ãƒˆã¯
-å¤§å¤‰ã«ãƒ—ãƒ©ãƒƒãƒˆãƒ•ã‚©ãƒ¼ãƒ ä¾å­˜ã§ã™ã€‚ç¬¬äºŒã«ã€ã‚·ãƒªã‚¢ãƒ«ãƒãƒ¼ãƒˆã‚’æœ‰åŠ¹ã«ã—ã¦
-å¯¾è©±çš„ã‚¿ãƒ¼ãƒŸãƒŠãƒ«ã¨ã—ã¦ä½¿ç”¨å‡ºæ¥ã‚‹ã‚ˆã†ã«ã—ã¾ã™ã€ã“ã‚Œã§ãƒžãƒ«ãƒãƒ¦ãƒ¼ã‚¶ãƒ¼ã§å‹•ã„ã¦ã„ã‚‹ã¨ãã«ãƒ­ã‚°ã‚¤ãƒ³å‡ºæ¥ã‚‹ã‚ˆã†ã«ãªã‚Šã¾ã™ã€‚
-ã“ã®ãƒ‘ãƒ¼ãƒˆã¯ãƒ—ãƒ©ãƒƒãƒˆãƒ•ã‚©ãƒ¼ãƒ é–“ã§ç›¸å½“ã«ä¼¼ã¦ã„ã¾ã™ã€è©³ç´°ã¯ã“ã“ã«ã‚ã‚Šã¾ã™ã€‚
+<h3><i>/etc/ttys</i> ’¤Î’ÊÑ’¹¹</h3>
+There are two parts to getting a functional serial console on an OpenBSD
+system.  First, you must have OpenBSD use your serial port as a
+console for status and single user mode.  This part is very platform
+dependent.  Second, you must enable the serial port to be used as an
+interactive terminal, so a user can log into it when running multi-user.
+This part is fairly similar between platforms, and is detailed here.
 
 <p>
 Terminal sessions are controlled by the 
