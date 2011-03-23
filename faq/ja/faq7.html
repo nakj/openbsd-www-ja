@@ -291,25 +291,25 @@ OpenBSD で実用的なシリアルコンソールを使えるようにするに
 このパートはプラットフォーム間で相当に似ています、詳細はここにあります。
 
 <p>
-Terminal sessions are controlled by the 
+ターミナルセッションは
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ttys&amp;sektion=5"><i>/etc/ttys</i></a>
-file.  Before OpenBSD will give you a "<tt>login:</tt>" prompt at a
-device, it has to be enabled in <i>/etc/ttys</i>, after all, there are
-other uses for a serial port other than for a terminal.  In platforms
-which typically have an attached keyboard and screen as a console, the
-serial terminal is typically disabled by default. We'll use the i386
-platform as an example.  In this case, you must edit the line that
-reads:
+ファイルで制御されます。OpenBSDは "<tt>login:</tt>" プロンプトを
+デバイスに表示する前に、 <i>/etc/ttys</i>で有効化され、結局のところ、
+他の用途よりはターミナルとしてシリアルポートが使われます。
+一般的にコンソールとして使用できるキーボードとスクリーンが接続されているプラットフォームでは
+シリアルターミナルはデフォルト無効になっています。ここでは i386 
+プラットフォームを例として使用します。この例では、以下の行を編集する
+必要があります。
 
 <pre>
      tty00   "/usr/libexec/getty std.9600"   unknown off
 </pre>
-to read something like:
+以下のように編集します。
 <pre>
      tty00   "/usr/libexec/getty std.9600"   vt220   on secure
 </pre>
 
-Here, <tt>tty00</tt> is the serial port we are using as a console.
+この、 <tt>tty00</tt> がコンソールとして使うシリアルポートになります。
 <tt>vt220</tt> is the 
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=termcap&amp;sektion=5">termcap(5)</a>
 entry that matches YOUR terminal (other likely options might include
