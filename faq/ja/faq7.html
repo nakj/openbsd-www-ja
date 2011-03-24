@@ -310,57 +310,55 @@ OpenBSD で実用的なシリアルコンソールを使えるようにするに
 </pre>
 
 この、 <tt>tty00</tt> がコンソールとして使うシリアルポートになります。
-<tt>vt220</tt> is the 
+<tt>vt220</tt> は、あなたのターミナルにマッチする
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=termcap&amp;sektion=5">termcap(5)</a>
-entry that matches YOUR terminal (other likely options might include
-<tt>vt100</tt>, <tt>xterm</tt>, etc.).
-The "<tt>on</tt>" activates the 
+エントリーです（他のありそうなオプションは、vt100、xterm、その他でしょう）。
+「<tt>on</tt>」はシリアルポートに
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=getty&amp;sektion=8"><i>getty</i></a>
-for that serial port so that a "<tt>login:</tt>" prompt will be
-presented, the "<tt>secure</tt>" permits a root (uid 0) login at this
-console (which may or may not be what you desire), and the
-"<tt>9600</tt>" is the terminal baud rate.
-Resist the urge to crank the baud rate up to the maximum your hardware
-can support, as you are more likely to create problems than benefit.
-Most systems have a "default" speed (supported by default by the boot
-ROM and/or the boot loader, often 9600), use this unless you have real
-reason to use something different.
+を起動し、それで「<tt>login:</tt>」プロンプトが表示されるように
+なります。「<tt>secure</tt>」は root (uid 0)ログインをこの
+コンソールで許可します(あなたが希望するかしないかにしろ)。そして
+「<tt>9600</tt> はシリアルのボーレートです。
+ハードウェアのサポートしている限界までボーレートを上げたいという欲求に抵抗してください、
+それは利益よりも問題を生み出すことに近いです。
+ほとんどのシステムでは「デフォルト」のスピードになっています(デフォルトで
+起動ロムと、あるいはブートローダがサポートしているのはほとんどは9600です)、あなたが
+違うスピードを使うための本当の理由がない限りはこれを使用してください。
 
 <p>
-Note that you can use a
-serial console for install without doing this step, as the system is
-running in single user mode, and not using <i>getty</i> for login.
+インストール時に
+この手順なしにシリアルコンソールを使える、システムは
+シングルユーザーモードで動作していて、ログインのためにgetty を用いていないことに注意してください。
 
 <p>
-On some platforms and some configurations, you must bring the system up
-in single user mode to make this change if a serial console is all you
-have available.
+いくつかのプラットフォームといくつかの構成では、シリアルコンソールがあなたの利用できる
+全てであるならば、この変更を行うためにシングルユーザーモードで
+システムを起動しなければいけません。
 
-<h3>amd64 and i386</h3>
-To direct the boot process to use the serial port as a console, 
-create or edit your 
+<h3>amd64 と i386</h3>
+直接に起動プロセスでシリアルポートをコンソールとして使用したいのであれば、
+あなたの
 <i><a href="http://www.openbsd.org/cgi-bin/man.cgi?query=boot.conf&amp;sektion=8&amp;arch=i386">/etc/boot.conf</a></i>
-file to include the line:
+ファイルに以下の行が含まれるように作成するか編集し
 <pre>
      set tty com0
 </pre>
 
-to use the first serial port as your console.  The
-default baud rate is 9600bps, this can be changed with a
-<i>/etc/boot.conf</i> line using the stty option.  This file is put on
-your boot drive, which could also be your install floppy, or the command
-can be entered at the <tt>boot></tt> prompt from the
+最初のシリアルポートをコンソールとして使えるようにします。
+デフォルトのボーレートは9600です。これは
+<i>/etc/boot.conf</i> の行にstty オプションを用いて変更することが出来ます。このファイルは
+起動ドライブに置かれます。これはインストールフロッピーか、
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=boot&amp;sektion=8&amp;arch=i386">OpenBSD
-second-stage boot loader</a> for a one-time (or first time) serial
-console usage.
+ セカンドステージブートローダ</a> が表示する<tt>boot></tt> プロンプトで入力可能なドライブで
+一度だけ(あるいは最初に)シリアルポートの使用のために＊＊＊＊＊。<!--FIXME -->
 
 
 <p>
-<h4>amd64 and i386 notes:</h4>
+<h4>amd64 と i386 の注釈:</h4>
 <ul>
-<li>OpenBSD numbers the serial ports starting at <i>tty00</i>,
-DOS/Windows labels them starting at <i>COM1</i>.  So, keep in mind
-<i>tty02</i> is <i>COM3</i>, not <i>COM2</i>.
+<li>OpenBSD はシリアルポートを <i>tty00</i> から数えます。
+DOS/Windows のラベルは <i>COM1</i> から始まります。ですので
+<i>tty02</i> は <i>COM3</i>で、 <i>COM2</i>ではない事を忘れないでください。
 
 <li>Some systems may be able to operate without a video card in the
 machine, but certainly not all -- many systems consider this an error
