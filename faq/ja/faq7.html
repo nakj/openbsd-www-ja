@@ -362,32 +362,32 @@ console usage.
 DOS/Windows のラベルは <i>COM1</i> から始まります。ですので
 <i>tty02</i> は <i>COM3</i>で、 <i>COM2</i>ではない事を忘れないでください。
 
-<li>Some systems may be able to operate without a video card in the
-machine, but certainly not all -- many systems consider this an error
-condition.  Some machines will even refuse to work easily without a
-keyboard attached.
+<li>いくつかのシステムではマシンにビデオカードがなくても動作するかも
+しれません。しかし全てがそうではありません -- 多くのシステムではこれはエラー
+状態だと考えます。いくつかのシステムではキーボードが接続されていないと
+簡単に動くことさえ拒否します。
 
-<li>Some systems are capable of redirecting all BIOS keyboard and screen
-activity to a serial port through a configuration option, so the machine
-can be completely maintained through the serial port.
-Your results may vary -- when using this feature, some BIOSs may prevent
-the bootloader from seeing the serial port, and thus, the kernel will
-not be told to use it.
-Some BIOSs have an option to "Continue Console Redirection after POST"
-(Power On Self Test), this should be set to "OFF", so the boot loader
-and the kernel can handle their own console.
-Unfortunately, this feature is not universal.
+<li>いくつかのシステムでは構成オプションで全てのBIOSキーボードとスクリーンを
+シリアルポートにリダイレクトすることができ、これでマシンの
+メンテナンスを完全にシリアルポート経由で行うことが出来ます。
+この結果は多岐にわたるでしょう -- この機能を用いるとき、いくつかのBIOSは
+ブートローダーがシリアルポートを見る事を拒否するでしょう。それ故にカーネルは
+それを使えなくなります。
+いくつかの BIOS には「コンソールリダイレクトをPOST
+(起動と自己診断)後も続ける」オプションがあります、これは 「OFF」に設定するべきです、これでブートローダ
+とカーネルはコンソールを操作できるようになります。
+残念ながら、この機能は普遍的ではありません。
 
-<li>PC compatible computers are not designed to be run from a serial
-console, unlike some other platforms.  Even those systems that support a
-serial console usually have it as a BIOS configuration option -- and
-should the configuration information get corrupted, you will find the
-system looking for a standard monitor and keyboard again.  You generally
-must have some way to get a monitor and keyboard to your amd64 and i386 
-systems in an emergency.
+<li>PC互換のコンピュータは他のプラットフォームと違ってシリアルコンソールから
+動かすようにはデザインされていません。シリアルコンソールをサポートするそれらのシステムでさえ
+通常は BIOS 構成オプションとして提供しています -- そして
+構成情報が間違っていた場合は、再び
+標準的なキーボードとモニターを探してくる羽目になるでしょう。あなたは、通常
+緊急時にはあなたの amd64 と i386 システムのためにモニターとキーボードを入手する
+いくつかの方法を保持しておくべきです。
 
-<li>You will need to edit <i>/etc/ttys</i> as 
-<a href="#SerContty">above</a>.
+<li>あなたは <i>/etc/ttys</i> を
+<a href="#SerContty">上記</a>のように編集する必要があります。
 
 </ul>
 
