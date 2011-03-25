@@ -344,13 +344,15 @@ OpenBSD で実用的なシリアルコンソールを使えるようにするに
      set tty com0
 </pre>
 
-最初のシリアルポートをコンソールとして使えるようにします。
-デフォルトのボーレートは9600です。これは
-<i>/etc/boot.conf</i> の行にstty オプションを用いて変更することが出来ます。このファイルは
-起動ドライブに置かれます。これはインストールフロッピーか、
-<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=boot&amp;sektion=8&amp;arch=i386">OpenBSD
- セカンドステージブートローダ</a> が表示する<tt>boot></tt> プロンプトで入力可能なドライブで
-一度だけ(あるいは最初に)シリアルポートの使用のために＊＊＊＊＊。<!--FIXME -->
+to use the first serial port as your console.  The
+default baud rate is 9600bps, this can be changed with a
+<i>/etc/boot.conf</i> line using the stty option.  This file is put on
+your boot drive, which could also be your install floppy, or the command
+can be entered at the <tt>boot></tt> prompt from the
+ <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=boot&amp;sektion=8&amp;arch=i386">OpenBSD
+second-stage boot loader</a> for a one-time (or first time) serial
+console usage.
+
 
 
 <p>
