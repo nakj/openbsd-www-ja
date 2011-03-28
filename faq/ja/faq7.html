@@ -405,25 +405,25 @@ DOS/Windows のラベルは <i>COM1</i> から始まります。ですので
 <li>他のいくつかのプラットフォームと違い、シリアルコンソールを使用するために
 <i>/etc/ttys</i> を編集する必要はありません。
 
-<li>The SPARC/UltraSPARC systems interpret a BREAK signal on the console
-port to be the same as a STOP-A command, and kicks the system back to
-the Forth prompt, stopping any application and operating system at that
-point.  This is handy when desired, but unfortunately, some serial
-terminals at power-down and some RS-232 switching devices send something
-the computer interprets as a break signal, halting the machine.  Test
-before you go into production.
+<li>SPARC/UltraSPARC システムはコンソールポートからの BREAK 信号を
+STOP-A コマンドと同じに解釈して、システムを
+強制的にプロンプトに戻します、アプリケーションとオペレーティングシステムはこの
+時点で停止します。これは必要に応じて便利ですが、残念なことに、いくつかのシリアル
+ターミナルではパワーダウンしますし、いくつかの RS-232 切り替え機はたまに
+コンピュータに break シグナルと解釈される信号を送り、マシンを停止させてしまいます。
+商用システムに入る前にテストしてください。
 
-<li>If you have a keyboard and monitor attached, you can still force 
-the serial console to be used instead by using the following commands 
-at the <tt>ok</tt> prompt:
+<li>もしキーボードとモニターが接続されていれば、
+現在使われているものの代わりにシリアルコンソールを使うように
+<tt>ok</tt>プロンプトで以下のコマンドを用いることで強制できます：
  <pre>
      ok <b>setenv input-device ttya</b>
      ok <b>setenv output-device ttya</b>
      ok <b>reset</b>
  </pre>
-If the keyboard and monitor (ttyC0) are active in <i>/etc/ttys</i>
-(<a href="#SerContty">above</a>), you can use the keyboard and monitor
-in X.
+もしキーボードとモニタ(ttyC0) が<i>/etc/ttys</i>でアクティブであれば
+(<a href="#SerContty">上記</a>)、キーボードとモニタを
+X上で使うことが出来ます。
 </ul>
 
 <h3>MacPPC</h3>
