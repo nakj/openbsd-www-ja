@@ -354,7 +354,6 @@ second-stage boot loader</a> for a one-time (or first time) serial
 console usage.
 
 
-
 <p>
 <h4>amd64 と i386 の注釈:</h4>
 <ul>
@@ -427,23 +426,23 @@ X上で使うことが出来ます。
 </ul>
 
 <h3>MacPPC</h3>
-The MacPPC machines are configured for a serial console through
-OpenFirmware.  Use the commands:
+MacPPC マシンは OpenFirmware 経由でシリアルコンソールが設定
+されており、以下のコマンドを使います：
  <pre>
      ok <b>setenv output-device scca</b>
      ok <b>setenv input-device scca</b>
      ok <b>reset-all</b>
  </pre>
-Set your serial console to 57600bps, 8N1.
+シリアルコンソールの設定を 57600bps, 8N1 に設定してください。
 
-<h4>MacPPC notes</h4>
+<h4>MacPPC の注釈</h4>
 <ul>
-<li>Unfortunately, serial console is not directly possible on most
-MacPPCs.  While most of these machines do have serial hardware, it isn't
-accessible outside the machine.  Fortunately, a few companies offer
-add-on devices for several Macintosh models which will make this port
-available for use as a serial console (or other uses).  Use your
-favorite search engine and look for "Macintosh internal serial port".
+<li>不幸なことに、シリアルコンソールはほとんどの MacPPC で直接有効には
+なっていません。ほとんどのマシンはシリアルハードウェアを持っていますが、それは
+マシンの外側からアクセス可能ではありません。有難いことに、2,3の会社が
+このポートをシリアルコンソールとして(あるいは他の用途として) 利用できるアドオンデバイスを
+いくつかのマッキントッシュモデルに対して提供しています。あなたの
+お好きなサーチエンジンを使って 「Macintosh internal serial port」を探してください。
 
 <li>You will have to change <tt>tty00</tt> in <i>/etc/ttys</i> to
 <tt>on</tt> and set the speed to 57600 instead of the default of 9600 as
@@ -472,43 +471,43 @@ until the OpenBSD boot process has started.
 indicated <a href="#SerContty">above</a>.  </ul>
 
 <a name="Blanker"></a>
-<h2>7.7 - How do I blank my console? (wscons)</h2>
-If you wish to blank your console after a period of inactivity without
-using X, you can alter the following
+<h2>7.7 - コンソールを暗転させるにはどうしたらいいのでしょうか？(wscons)</h2>
+もし X を使わずに一定の非活動期間の後にコンソールを暗転させたい
+のであれば、以下の
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=wscons&amp;sektion=4">wscons(4)</a>
-variables:
+値を変更してください。
 
 <ul>
-<li><b><tt>display.vblank</tt></b> set to <tt>on</tt> will disable the
-vertical sync pulse, which will cause many monitors to go into an
-"energy saver" mode.  This will require more time to bring the screen
-back on, but will reduce energy consumption and heat production of newer
-monitors.  When set to <tt>off</tt>, the display will blank, but the
-monitor will still be receiving the normal horizontal and vertical sync
-pulses, so the unblanking will be almost instant.
+<li><b><tt>dislay.vblank</tt></b> を <tt>on</tt> に設定し
+垂直同期信号を無効にします、これは多くのモニターを
+「energy saver」モードにします。これはスクリーンを再開させるために多くの時間を必要と
+しますが、より新しいモニターの消費電力と熱発生量を
+減らします。<tt>off</tt> が設定されていれば、ディスプレイは暗転しますが、
+モニターはいまだに通常の水平と垂直同期
+信号を受信しているので、明るくなるのはほとんど一瞬でしょう。
 
-<li><b><tt>display.screen_off</tt></b> determines the blanking time in
-thousandths of a second, i.e., 60000 would set the timeout to one
-minute.
+<li><b><tt>display.screen_off</tt></b> は暗転する時間を
+1000分の1秒単位で決定します。つまり 60000 はタイムアウトを一
+分に設定します。
 
-<li><b><tt>display.kbdact</tt></b> determines if keyboard activity will
-restore the blanked screen.  Usually, this is desirable.
+<li><b><tt>display.kbdact</tt></b> は、キーボードの活動が
+消されたスクリーンを元に戻すかどうか決定します。通常、これは望ましいです。
 
-<li><b><tt>display.outact</tt></b> determines if screen output will
-restore the blanked screen.
+<li><b><tt>display.outact</tt></b> は、スクリーン出力が
+消されたスクリーンを元に戻すか決定します。
 </ul>
 
-You can set these variables at the command line using the 
-<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=wsconsctl&amp;sektion=8">wsconsctl(8)</a> 
-command:
+これらの変数は
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=wsconsctl&amp;sektion=8">wsconsctl(8)</a>
+コマンドを用いてコマンドラインから設定できます。
 <pre>
      # <b>wsconsctl display.screen_off=60000</b>
      display.screen_off -> 60000
 </pre>
 
-or set them permanently by editing 
+あるいは永続的に設定する場合は
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=wsconsctl.conf&amp;sektion=5"><i>/etc/wsconsctl.conf</i></a>
-so these changes take place at next boot:
+ファイルを編集します。この変更は次回の起動時に設定されます。
 
 <pre>
      display.vblank=on               # enable vertical sync blank
@@ -517,31 +516,31 @@ so these changes take place at next boot:
      display.outact=off              # Restore screen on display output
 </pre>
 
-The blanker is activated when either <tt>display.kbdact</tt> or
-<tt>display.outact</tt> is set to "<tt>on</tt>".  
+消す奴は <tt>display.kbdact</tt> か
+<tt>display.outact</tt> が 「<tt>on</tt>」に設定されたときに作動します。
 
 <a name="ALLCAPS"></a>
-<h2>7.8 - EVERYTHING I TYPE AT THE LOGIN PROMPT IS IN CAPS!</H2>
-This is a feature, not a bug, actually.
+<h2>7.8 - ログインプロンプトで入力する全てが CAPS になってしまいます！</h2>
+これは機能です、実際にはバグではありません。
 
 <p>
-Virtually all Unix commands and user names are entered using all
-lowercase.
-However, some very old terminals were only capable of uppercase
-characters, making them difficult, if not impossible, to use with Unix.
-As a workaround, if you entered your user name in all uppercase,
+事実上全ての Unix コマンドとユーザー名は全て
+小文字で入力されます。
+しかしながら、いくつかのとても古いターミナルは大文字のみしか表示する
+ことが出来ないので、 Unix でつかうには、不可能ではないものの、難しくしています。
+回避策として、ユーザー名をすべて大文字で入力したとしても、
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=getty&amp;sektion=8">getty(8)</a>
-would assume your terminal was "lowercase challenged", and simply
-interpret everything you type as lowercase, while echoing it as
-uppercase.
-If you have a mixed-case or uppercase password, this will make login
-impossible.
+が、ターミナルが「小文字を表示できない」と仮定し、表示が大文字でされていても、単に
+入力が小文字だと
+解釈します。
+もし大文字と小文字の混合か大文字のパスワードであれば、これではログインすることは
+不可能です。
 
 <p>
-Hitting CTRL-D at the login prompt will cause getty(8) to terminate, and
+ログインプロンプトで CTRL+Dを押下すると getty(8) が終了し、
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=init&amp;sektion=8">init(8)</a>
-will relaunch a new one, which will accept uppercase and lowercase
-properly.
+が新しい正確に大文字と小文字を受け取ることができるgetty を
+再起動します。
 
 
 <a name="tmux"></a>
