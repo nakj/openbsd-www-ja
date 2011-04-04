@@ -527,15 +527,15 @@ CD から <i>/usr/src</i> にソースツリーを展開するには (CDは
     # <b>cd /usr; tar xzf /mnt/ports.tar.gz</b>
 </pre>
 
-The source files available for download from the FTP servers are separated into two
-files to minimize the download time for those wishing to work
-with only one part of the tree.  The two files are <tt>sys.tar.gz</tt>,
-which contains the files used to create the kernel, and <tt>src.tar.gz</tt>
-which contains all the other "userland" utilities except the ports tree
-and the X11 sources.
-In general, however, you will usually want both of them installed.
-Assuming the downloaded files, <tt>src.tar.gz</tt> and
-<tt>sys.tar.gz</tt>, are in <tt>/usr</tt>:
+FTPサーバからダウンロードできるソースファイルは、
+ツリーのひとつの部分だけで働きたい人がダウンロード時間を最小にするために、
+二つに分けられています。その二つのファイルは 
+カーネルを作るために必要なファイルが含まれた<tt>sys.tar.gz</tt>と
+ports ツリーと X11 のソースを除いたその他の「ユーザーランド」が含まれた<tt>src.tar.gz</tt>
+です。
+一般には、しかしながら、あなたは通常は双方ともインストールすることを望むでしょう。
+ダウンロードされたファイル、 <tt>src.tar.gz</tt> と
+<tt>sys.tar.gz</tt>は <tt>/usr</tt> に置かれたと仮定します。
   
 <pre>
     # <b>cd /usr/src</b>
@@ -547,40 +547,40 @@ Assuming the downloaded files, <tt>src.tar.gz</tt> and
 </pre>
 
 <p>
-Not all people will wish to unpack all the file sets, but as the system
-must be kept in sync, you will generally need to set up all parts of the tree.
+全ての人々がすべてのファイルセットを取り出したいというわけではありませんが、システムが
+同期を保たなくてはいけないので、あなたは通常はツリーの全ての部分を準備する必要があります。
 
 
 <a name="CVSTips"></a>
 <h4>一般的な CVS の秘訣</h4>
 
-As indicated earlier, some options are mandatory to get a valid
-<tt>src</tt> tree in OpenBSD.
-The "<tt>-P</tt>" option above is one of those: It "prunes" (removes)
-directories that are empty.
-Over the years, directories have been created and deleted in the OpenBSD
-source tree, and sometimes the names of old directories are currently
-used as file names.
-Without the "<tt>-P</tt>" option, your newly checked-out tree WILL NOT
-successfully compile.
+先に示したように、OpenBSDで有効な<tt>src</tt>ツリーを得る為には
+いくつかのオプションは必須です。
+上にある「<tt>-P</tt>」オプションはそのうちのひとつです。これは
+空のディレクトリを切り取り(削除)します。
+長年にわたって、ディレクトリはOpenBSDソースツリーの中で作成され、削除されて
+きました。時には、古いディレクトリ名は今では
+ファイル名に使われています。
+「<tt>-P</tt>」オプションがない場合、新しくチェックアウトしたツリーは
+コンパイルに成功*しないでしょう*。
 
 <p>
-Much the same with the <tt>-d</tt> option on the 'update' command -- it
-creates new directories that may have been added to the tree since your
-initial checkout.
-To get a successful update, you must use the <tt>-Pd</tt> options.
+『update』コマンドにおける <tt>-d</tt>オプションも同様です -- これは
+あなたが最初にチェックアウトした時点以降に新しく追加されたディレクトリを
+作成します。
+アップデートを成功させるためには、あなたは <tt>-Pd</tt>オプションを使わなければいけません。
 
 <p>
-Experienced CVS users may wonder why the CVSROOT was specified and 
-used in this example, as cvs(1) will record the CVS server's location in 
-the checked out tree.
-This is correct, however there are enough times where one may need to 
-override the default anoncvs server, many people recommend <i>always</i>
-specifying the repository explicitly.
-It is also worth noting that while the CVSROOT environment variable can
-be used directly by cvs(1), it is used only if nothing else overrides
-it (i.e., cvs(1) would have an error without it), whereas specifying it
-in the cvs(1) command line overrides all other values.
+経験のある CVS ユーザーはなぜ CVSROOT が指定されて
+このサンプルで使われているのか、cvs(1) はCVS サーバの場所を
+チェックアウトしたツリー内に記録しているのにと疑問に思うでしょう。
+これは正しいですが、人がデフォルトの anoncvs サーバを上書きする必要に
+迫られるには十分な時間がありますので、多くの人々は <i>常に</i>
+明確にリポジトリを指定することを推奨します。
+CVSROOT 環境変数が直接 cvs(1) によって使われることが出来る間、他の何も
+それ(すなわち、cvs(1) はそれなしではエラーになります) を上書きできない
+場合にだけ、使われる点に注意する価値があります。ところが、cvs(1)コマンドラインで
+それを指定することは他のすべての値を上書きします。
 
 <p>
 It is often useful to use a <tt>.cvsrc</tt> in your home directory to 
