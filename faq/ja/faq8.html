@@ -18,16 +18,16 @@
 </a>
 <p>
 <font color= "#0000e0">
-<a href= "index.html">[FAQ Index]</a>
-<a href= "faq7.html">[To Section 7 - Keyboard and Display controls]</a>
-<a href= "faq9.html">[To Section 9 - Migrating to OpenBSD]</a>
+<a href= "index.html">[FAQ の目次]</a>
+<a href= "faq7.html">[7 章 - キーボードとディスプレイ制御]</a>
+<a href= "faq9.html">[9 章 - OpenBSDへの移行]</a>
 </font>
 
-<h1><font color="#e00000">8 - General Questions</font></h1>
+<h1><font color="#e00000">8 - 一般的な質問</font></h1>
 <hr>
 
 <p>
-<h3>Table of Contents</h3>
+<h3>目次</h3>
 <ul>
 <li><a href= "#LostPW"      >8.1 - I forgot my root password, what 
   do I do now?</a>
@@ -69,20 +69,20 @@
 
 <p>
 <a name= "LostPW"></a>
-<h2>8.1 - I forgot my root password, what do I do now?</h2>
+<h2>8.1 - root パスワードを忘れてしまいました。どうしたらいいでしょうか？</h2>
 
-The basic process to regain root is to boot into single user mode, mount
-the relevant partitions (<tt>/</tt> and <tt>/usr</tt>), run
+root を奪還する基本的な方法はシングルユーザーモードで起動し、
+関連したパーティション(<tt>/</tt>と<tt>/usr</tt>)をマウントし、root パスワードを変更するために
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=passwd&amp;sektion=1">passwd(1)</a>
-to change the root password.
-You can then boot and login normally.
+を実行します。
+それで普通に起動してログインすることができます。
 
 <p>
-The detailed process:
+詳細な手順：
 <ul>
-<li><b>Boot into single user mode.</b>
-This part of the process varies from <a href="../plat.html">platform</a>
-to platform.
+<li><b>シングルユーザーモードで起動</b>
+手順のこの部分は <a href="../../plat.html">プラットフォーム</a> 毎に
+異なります。
 For amd64 and i386 platforms, the <a href="faq14.html#Boot386">second
 stage boot loader</a>,
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=boot&amp;sektion=8&amp;arch=i386">boot(8)</a>,
