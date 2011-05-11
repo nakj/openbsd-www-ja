@@ -63,32 +63,28 @@
 <h2>10.1 - Why does it say that I'm in the wrong group when I try to su root?</h2>
 
 <p>
-Existing users must be added to the <kbd>&quot;wheel&quot;</kbd> group
-by hand.
-This is done for security reasons, and you should be cautious with whom
-you give access to. On OpenBSD, users who are in the <kbd>wheel</kbd>
-group are allowed to use the
+On OpenBSD, users who are in the <kbd>wheel</kbd>
+group are allowed to use
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=su&amp;sektion=1">su(1)</a>
-userland program to become root. Users who are not in
-<kbd>&quot;wheel&quot;</kbd> cannot use su(1).
-Here is an example of a <kbd>/etc/group</kbd> entry to place the user
-<b>ericj</b> into the <kbd>&quot;wheel&quot;</kbd> group.
+to become root.
+Otherwise, the user will receive an error.
 
 <p>
-If you are adding a new user with
+If you are creating new users with
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=adduser&amp;sektion=8">adduser(8)</a>,
-you can put them in the wheel group by answering wheel at "<tt>Invite
-<i>user</i> into other groups:</tt>". This will add them to /etc/group,
-which will look something like this:
+you can add them to the <kbd>wheel</kbd> group by answering "wheel" at the
+"<tt>Invite <i>user</i> into other groups:</tt>" prompt.
+Existing users must be added to the <kbd>wheel</kbd> group by hand.
+Here is an example of a <kbd>/etc/group</kbd> entry which has had the user
+<b>ericj</b> added to the <kbd>wheel</kbd> group:
 
 <blockquote><pre>
 wheel:*:0:root,ericj
 </pre></blockquote>
 
 <p>
-If you are looking for a way to allow users limited access to superuser
-privileges without putting them in the <kbd>&quot;wheel&quot;</kbd>
-group, use
+If you want to give access to superuser
+privileges without adding users to the <kbd>wheel</kbd> group, use
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=sudo&amp;sektion=8">sudo(8)</a>.
 
 <p>
@@ -122,7 +118,7 @@ may be faster for this operation.  The format looks very similar:
 <h2>10.3 - How do I start daemons with the system? (Overview of
 rc(8))</h2>
 
-OpenBSD uses an
+OpenBSD itself uses an
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=rc&amp;sektion=8">rc(8)</a>
 style startup. This uses a few key files for startup.
 
@@ -171,7 +167,9 @@ After the kernel is booted, <i>/etc/rc</i> is started:
   </ul>
   <li>Starts system daemons
   <li>Performs various other checks (quotas, savecore, etc)
-  <li>Local daemons are run, via <i>/etc/rc.local</i>
+  <li>Runs <i>/etc/rc.firsttime</i>
+  <li>Runs <i>/etc/rc.local</i>
+  <li>Processes the scripts in <i>/etc/rc.d</i>
 </ul>
 
 <h3>Starting Daemons and Services that come with OpenBSD</h3>
@@ -203,12 +201,12 @@ Read the relevant manual page to see how you can have that daemon or
 service start up in any way you like.
 
 <p>
-We strongly suggest you never touch <i>/etc/rc.conf</i> itself.
-Instead, create the file <i>/etc/rc.conf.local</i>, copy just the lines
+We strongly suggest you do not alter <i>/etc/rc.conf</i> itself.
+Instead, create or edit the file <i>/etc/rc.conf.local</i>, copy just the lines
 you need to change from <i>/etc/rc.conf</i> and adjust them as you like.
 This makes future upgrades easier -- all the changes are in the one
-file.
-In fact, the standard <a href="upgrade48.html">upgrade process</a>
+file that isn't touched during upgrade.
+In fact, the standard <a href="upgrade49.html">upgrade process</a>
 assumes you have not modified <i>/etc/rc.conf</i>, and will overwrite it
 with the new version.
 
@@ -233,10 +231,10 @@ you may need to add other parameters for other reasons.
 
 <p>
 For other daemons which you might install on the system via packages or
-other ways, you should use the <i>/etc/rc.local</i> file.
+other ways, you could use the <i>/etc/rc.local</i> file.
 For example, I've installed a daemon which lies at
-/usr/local/sbin/daemonx. I want it to start at boot time. I would put
-an entry into <i>/etc/rc.local</i> like this:
+/usr/local/sbin/daemonx. I want it to start at boot time.
+I could put an entry into <i>/etc/rc.local</i> like this:
 
 <blockquote><pre>
 if [ -x /usr/local/sbin/daemonx ]; then
@@ -256,6 +254,24 @@ this:
 <blockquote><pre>
 Starting local daemons: daemonx.
 </pre></blockquote>
+
+<h3>The <i>/etc/rc.d/</i> directory</h3>
+Starting with OpenBSD 4.9, you have another option for
+<a href="faq15.html#Packages">packages</a>.
+Most packages will now install a startup script in
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=rc.d&amp;sektion=8"
+><i>/etc/rc.d</i></a> to handle their startup and shutdown.
+This is used ONLY for add-on applications, the base system does not
+use any scripts in this directory.
+
+<p>
+Note that rather than having each script in rc.d managing the entire
+startup, shutdown, reload, restart, and check operations, 
+most rc.d scripts can be reduced to specifying a very few variables,
+and invoking the 
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=rc.subr&amp;sektion=8">rc.subr</a>
+script, which manages most of the standard way of doing these tasks.
+
 
 <h3>rc.shutdown</h3>
 
@@ -369,6 +385,7 @@ mail:*:6:
 <p>
 would be sufficient.
 
+<p>
 <a name="SendmailDNS"></a>
 <h2>10.6 - Why does Sendmail ignore the <tt>/etc/hosts</tt> file?</h2>
 
@@ -546,21 +563,19 @@ member of the group <b>guest</b>, and given the shell <i>/bin/ksh</i>.
 Use option ``-silent'' if you don't want to see all warnings and questions.
 
 Reading /etc/shells
-Reading /etc/login.conf
 Check /etc/master.passwd
 Check /etc/group
 
 Ok, let's go.
-Don't worry about mistakes. I will give you the chance later to correct any input.
+Don't worry about mistakes. There will be a chance later to correct any input.
 Enter username []: <b>testuser</b>
 Enter full name []: <b>Test FAQ User</b>
-Enter shell csh ksh nologin sh [sh]: <b>ksh</b>
+Enter shell csh ksh nologin sh [ksh]: <b>ksh</b>
 Uid [1002]: <b><i>Enter</i></b>
 Login group testuser [testuser]: <b>guest</b>
 Login group is ``guest''. Invite testuser into other groups: guest no 
 [no]: <b>no</b>
-Login class auth-defaults auth-ftp-defaults daemon default staff 
-[default]: <b><i>Enter</i></b>
+Login class authpf daemon default staff [default]: <b><i>Enter</i></b>
 Enter password []: <b><i>Type password, then Enter</i></b>
 Enter password again []: <b><i>Type password, then Enter</i></b>
 
@@ -632,19 +647,20 @@ The full set of tools is:
 <h4>Actually adding users</h4>
 
 <p>
-Being that user(8) is not interactive, the easiest way to add users
-efficiently is to use the adduser(8) command. The actual command
-<i>/usr/sbin/user</i> is just a frontend to the rest of the
-<i>/usr/sbin/user*</i> commands. Therefore, the following commands can
-be added by using <b>user add</b> or <b>useradd</b>, its your choice as
-to what you want, and doesn't change the use of the commands at all.
+The command <i>/usr/sbin/user</i> is just a frontend to the rest of the
+<i>/usr/sbin/user*</i> commands.
+Therefore, the following commands can be added by using <b>user add</b>
+or <b>useradd</b>,
+which form you chose doesn't change the results at all.
+Remember, since user(8) is not interactive, the easiest way to add users
+is with adduser(8).
 
 <p>
-In this example, we are adding the same user with the same
-specifications as the user that was added <a href="#adduser">above</a>.
-useradd(8) is much easier to use if you know the default setting before
-adding a user. These settings are located in <i>/etc/usermgmt.conf</i>
-and can be viewed by doing so:
+useradd(8) is less daunting to use if you know the default settings
+beforehand.
+These settings are located in
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=usermgmt.conf&amp;sektion=5">usermgmt.conf(5)</a>
+and can be viewed by doing:
 
 <blockquote><pre>
 $ <b>user add -D</b>
@@ -658,16 +674,17 @@ range           1000..60000
 </pre></blockquote>
 
 <p>
-The above settings are what will be set unless you specify different
-with command line options. For example, in our case, we want the user to
-go to the group <b>guest</b>, not <b>users</b>.
+These defaults will be used unless you specify alternatives
+with the command line options. For example, we want the user to
+be added to the group <b>guest</b>, not <b>users</b>.
 One more little hurdle with adding users, is that passwords must be
-specified on the command line. This is, the encrypted passwords, so you
-must first use the
+specified on the command line.
+Importantly, the passwords must be encrypted, so you need to use the
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=encrypt&amp;sektion=1">encrypt(1)</a>
-utility to create the password. For example: OpenBSD's passwords by
-default use the Blowfish algorithm for 6 rounds.
-Here is an example line to create an encrypted password to specify to
+utility.
+For example: OpenBSD's passwords by default use the Blowfish
+algorithm for 6 rounds.
+Here is an example to create an encrypted password to give to
 useradd(8).
 
 <blockquote><pre>
@@ -677,7 +694,9 @@ $2a$06$YOdOZM3.4m6MObBXjeZtBOWArqC2.uRJZXUkOghbieIvSWXVJRzlq
 </pre></blockquote>
 
 <p>
-Now that we have our encrypted password, we are ready to add the user.
+Now that we have an encrypted password, we are ready to add the user.
+We will add the same user with the same specifications as the user
+we added <a href="#adduser">above</a>, via adduser(8).
 
 <blockquote><pre>
 # <b>user add -p '$2a$06$YOdOZM3.4m6MObBXjeZtBOWArqC2.uRJZXUkOghbieIvSWXVJRzlq' -u 1002 \
@@ -927,21 +946,19 @@ After this, you are ready to add the <i>ftp</i> user:
 Use option ``-silent'' if you don't want to see all warnings and questions.
 
 Reading /etc/shells
-Reading /etc/login.conf
 Check /etc/master.passwd
 Check /etc/group
 
 Ok, let's go.
-Don't worry about mistakes. I will give you the chance later to correct any input.
+Don't worry about mistakes. There will be a chance later to correct any input.
 Enter username []: <b>ftp</b>
 Enter full name []: <b>anonymous ftp</b>
-Enter shell csh false ksh nologin sh tcsh zsh [sh]: <b>false</b>
+Enter shell csh false ksh nologin sh [ksh]: <b>false</b>
 Uid [1002]: <b><i>Enter</i></b>
 Login group ftp [ftp]: <b><i>Enter</i></b>
 Login group is ``ftp''. Invite ftp into other groups: guest no 
 [no]: <b>no</b>
-Login class auth-defaults auth-ftp-defaults daemon default staff 
-[default]: <b><i>Enter</i></b>
+Login class authpf daemon default staff [default]: <b><i>Enter</i></b>
 Enter password []: <b><i>Enter</i></b>
 Set the password so that user cannot logon? (y/n) [n]: <b>y</b>
 
@@ -1059,6 +1076,16 @@ ftpd_flags="-DllUSA"           # for non-inetd use: ftpd_flags="-D"
 This of course only works if you have ftpd taken out of 
 <i>/etc/inetd.conf</i> and made inetd re-read its configuration file.
 
+<p>
+It is not necessary to give additional startup options to ftpd to
+allow anonymous connections.
+The preceeding steps of creating the 'ftp' user and configuring the
+relevant directories with the correct permissions are enough.
+However, to stop anonymous connections it isn't necessary to undo
+everything.
+Just restart ftpd with the <b>-n</b> option included.
+Anonymous connections are then disabled.
+
 <h3>Other relevant files</h3>
 
 <ul>
@@ -1110,7 +1137,7 @@ Even with OpenBSD, bugs happen.
 Some bugs may lead to reliability issues (i.e., something may cause
 the system to stop functioning as desired). Other bugs may lead to security
 vulnerabilities (which may allow others to "use" your computer in unintended
-ways).
+and unauthorized ways).
 When a critical bug is found, the fix will be committed to
 the <i>-current</i> source tree, and patches will be released for the
 <a href="faq5.html#Flavors">supported releases</a> of OpenBSD.
@@ -1120,8 +1147,9 @@ all <a href="../plat.html">platforms</a>, and errata that impact only
 one or more, but not all, platforms.
 
 <p>
-Note, however, that patches aren't made for new additions to OpenBSD,
-and are only done for important reliability fixes or security problems
+Note, however, that patches aren't released for new features or
+additional hardware support for OpenBSD,
+and are only published for important reliability fixes or security problems
 that should be addressed right away on impacted systems (which is often
 NOT all systems, depending on their purpose).
 
@@ -1288,7 +1316,7 @@ that a later patch is dependent upon an earlier one.
 Be aware of this if you elect to "pick and choose" which patches you
 apply, and if in doubt, apply them all, in order.
 
-
+<p>
 <a name="httpdchroot"></a>
 <h2>10.16 - Tell me about this chroot(2) Apache?</h2>
 
@@ -1567,6 +1595,7 @@ should.
 This could end up making your system LESS secure than a more
 maintainable system with the chroot feature deactivated.
 
+<p>
 <a name="rootshell"></a>
 <h2>10.17 - Can I change the root shell?</h2>
 It is sometimes said that one should never change the root shell, though
@@ -1592,7 +1621,7 @@ and
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=ksh&amp;sektion=1">ksh</a>)
 are all statically linked, and thus usable in single user mode.
 
-
+<p>
 <a name="ksh"></a>
 <h2>10.18 - What else can I do with <i>ksh</i>?</h2>
 In OpenBSD, 
@@ -1718,6 +1747,7 @@ files among a group of machines using tools like
 >scp(1)</a> or <tt>rsync</tt> (available from ports) constitutes an easy
 and robust alternative to a full-blown directory service.
 
+<p>
 <a name="YP_secure"></a> 
 <h3>10.19.2 - YP security considerations</h3>
 
@@ -1742,6 +1772,7 @@ might be an option, or you might consider combining YP with
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=kerberos&amp;sektion=8"
 >kerberos(8)</a> authentication.
 
+<p>
 <a name="YP_server"></a> 
 <h3>10.19.3 - Setting up a YP server</h3>
 
@@ -2079,6 +2110,6 @@ lookup file yp bind
 <a href= "index.html"><img height= "24" width= "24" src= "../images/back.gif" border= "0" alt="[back]"></a>
 <a href="mailto:www@openbsd.org">www@openbsd.org</a>
 <br>
-<small>$OpenBSD: faq10.html,v 1.152 2010/11/21 15:52:43 nick Exp $</small>
+<small>$OpenBSD: faq10.html,v 1.160 2011/05/10 02:38:27 lum Exp $</small>
 </body>
 </html>

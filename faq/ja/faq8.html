@@ -83,12 +83,12 @@ root を奪還する基本的な方法はシングルユーザーモードで起
 <li><b>シングルユーザーモードで起動</b>
 手順のこの部分は <a href="../../plat.html">プラットフォーム</a> 毎に
 異なります。
-For amd64 and i386 platforms, the <a href="faq14.html#Boot386">second
-stage boot loader</a>,
-<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=boot&amp;sektion=8&amp;arch=i386">boot(8)</a>,
-pauses for a few seconds to give you a chance to provide parameters to
-the kernel.
-This prompt looks like this:
+amd64 と i386 プラットフォームでは<a href="faq14.html#Boot386">セカンド
+ブートローダ</a>の、
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=boot&amp;sektion=8&amp;arch=i386">boot(8)</a>が
+数秒間停止して、カーネルにパラメータを設定する機会を提供
+します。
+このプロンプトは以下のようなものです。
 
 <blockquote><pre>
 probing: pc0 com0 com1 apm mem[636k 190M a20=on]
@@ -97,27 +97,27 @@ disk: fd0 hd0+
 boot>
 </pre></blockquote>
 
-At this point, enter "<tt>boot -s</tt>" to bring the system up in single
-user mode:
+この時点で、「<tt>boot -s</tt>」と入力することでシステムをシングル
+ユーザーモードで起こします。
 
 <blockquote><pre>
 boot> <b>boot -s</b>
 </pre></blockquote>
 
-Most other platforms send parameters to the kernel via the boot ROM.
+多くのほかのプラットフォームではカーネルにパラメータをブートROM経由で送ります。
 
 <p>
-Of course the problem before this will probably be getting the system to
-shut down.
-Most likely, this will involve hitting the reset button or the power
-button.
-While hardly desirable, there usually isn't any alternative.
-Don't worry too much, OpenBSD's file system is very robust.
+もちろんこの問題の前におそらくシステムを
+シャットダウンしているでしょう。
+十中八九、それはリセットボタンか電源ボタンを押すことを
+意味しています。
+大変望ましくないのに、他に選択肢はありません。
+心配しすぎないでください。OpenBSD のファイルシステムはとても堅牢です。
 
-<li><b>Mount the partitions.</b>
-Both "/" and <tt>/usr</tt> will need to be mounted read-write.
-Assuming they are on separate partitions (as they should be), the 
-following will work:
+<li><b>パーティションをマウントする</b>
+「/」と<tt>/usr</tt>の両方は、読み書き可能でマウントする必要があります。
+これらがパーティション分けされていると仮定して(as they should be)、
+以下のようにします。
 
 <blockquote><pre>
 # <b>fsck -p / &amp;&amp; mount -uw /</b>
