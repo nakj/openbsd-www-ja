@@ -8,7 +8,7 @@ q<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <meta name="description"   content="the OpenBSD FAQ page">
 <meta name="keywords"      content="openbsd,faq">
 <meta name="distribution"  content="global">
-<meta name="copyright"     content="This document copyright 1998-2010 by OpenBSD.">
+<meta name="copyright"     content="This document copyright 1998-2011 by OpenBSD.">
 </head>
 
 <body bgcolor="#ffffff" text="#000000">
@@ -184,8 +184,7 @@ web ページへのリンクを含む、参加の意思確認のためのいく�
 <h2>2.3 - Manual Pages</h2>
 
 <p>
-OpenBSD は特定のアプリケーションに関する長い文書の他、さまざまな文書を
-マニュアルページという形で提供しています。
+OpenBSD はさまざまな文書をマニュアルページという形で提供しています。
 マニュアルページが最新のものに維持され、間違いがないことを確実にするために、
 考え得るだけの努力が行われています。
 すべての場合において、マニュアルページは OpenBSD についての
@@ -193,7 +192,7 @@ OpenBSD は特定のアプリケーションに関する長い文書の他、さ
 
 <p>
 <!-- XXXrelease -->
-マニュアルページや他の文書を読むには、<tt>man48.tgz</tt> と <tt>misc48.tgz</tt>
+マニュアルページを読むには、<tt>man49.tgz</tt> 
 の<a href="faq4.html#FilesNeeded">配布セット</a>を
 インストールしていなければなりませんのでご注意ください。
 
@@ -293,7 +292,7 @@ OpenBSD は特定のアプリケーションに関する長い文書の他、さ
 
 <p>
 <!-- XXXrelease -->
-<tt>man48.tgz </tt>のファイル一式をインストールしていない場合でも、
+<tt>man49.tgz </tt>のファイル一式をインストールしていない場合でも、
 <a href="http://www.openbsd.org/cgi-bin/man.cgi">http://www.openbsd.org/cgi-bin/man.cgi</a>
 を使用して、web 上ですべての OpenBSD
 のマニュアルページを読むことができます。
@@ -337,51 +336,6 @@ crontab (5) - tables for driving cron
 </blockquote>
 
 <p>
-<!-- XXXrelease -->
-UNIX マニュアルページの他に、(<tt>misc48.tgz</tt> に含まれる)
-組版可能な文書群があります。それらは <tt>/usr/share/doc</tt>
-ディレクトリに置かれており、
-それぞれのサブディレクトリで
-"make" を実行することで組版することが可能です。
-<tt>psd</tt> サブディレクトリは Programmer's Supplementary Documents,
-<tt>smm</tt> サブディレクトリは System Manager's Manual,
-<tt>usd</tt> サブディレクトリは UNIX User's Supplementary Documents です。
-この 3 つのサブディレクトリで "<tt>make</tt>" を実行するか、
-あるいはそのディレクトリの下にあるセクションをひとつ選んで `make'
-を実行することができます。
-
-<p>
-サブディレクトリには、空のものもあります。
-文書は標準で、印刷に適した PostScript 形式に組版されます。
-この PostScript 形式は非常に大きなもの -- 250-300% のサイズ -- になります。
-PostScript プリンタや PostScript ディスプレイが使用できない環境にいる場合は、
-端末のディスプレイで表示できる形式に組版することも可能です。
-各文書サブディレクトリには
-<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=make&amp;sektion=1">make(1)</a>
-で生成する事のできる
-テキスト形式のコピー(`paper.txt'と呼ばれています) を生成するターゲットがあります。
-たとえば、次のような感じです。
-
-<blockquote>
-<pre>
-# <strong>cd /usr/share/doc/usd/06.bc</strong>
-# <strong>make paper.txt</strong>
-# <strong>more paper.txt</strong>
-</pre>
-</blockquote>
-
-<p>
-これらのディレクトリで文書を生成するにはスーパーユーザー権限が必要になることに注意してください。
-<strong>make clean</strong> で以前に生成した全ての文書を
-削除することができます。/usr/share/doc 以下のドキュメントに関する詳細は、
- /usr/share/doc/README にあります。
-
-<p>
-通常、これらの組版可能な文書よりも UNIX マニュアルページの方が新しく、
-信頼できるものになっています。一方で組版可能な文書は、マニュアルページよりも
-複雑な応用例について解説してあることがあります。
-
-<p>
 ほとんどの場合、マニュアルページを印刷すると便利でしょう。
 マニュアルページの印刷手順を以下に説明します。
 
@@ -396,7 +350,7 @@ PostScript プリンタや PostScript ディスプレイが使用できない環
 
 <blockquote>
 <pre>
-# <b>nroff -Tascii -mandoc &lt;file&gt; | more</b>
+# <b>mandoc &lt;file&gt; | more</b>
 </pre>
 </blockquote>
 
@@ -425,12 +379,12 @@ Note that <tt>&lt;ファイル名&gt;</tt> の部分には、マニュアルペ�
 、gv (GhostView) のようなプログラムで印刷やディスプレイ上での表示を行うことが可
 能です。GhostView は<a href="faq15.html">packages コレクション</a>にあります。
 OpenBSD システムのマニュアルページの PostScript 版を作成するには、次のような 
-<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=nroff&amp;sektion=1">nroff(1)</a> 
+<a href="http://www.openbsd.org/cgi-bin/man.cgi?query=mandoc&amp;sektion=1">mandoc(1)</a>
 コマンドオプションを使用してください。
 
 <blockquote>
 <pre>
-# <b>nroff -Tps -mandoc &lt;file&gt; &gt; outfile.ps</b>
+# <b>mandoc -Tps &lt;file&gt; &gt; outfile.ps</b>
 </pre>
 </blockquote>
 
@@ -518,10 +472,8 @@ xtermとxmanのマニュアルページに詳細があります。
 
 <p>
 自分の作ったアプリケーション向けのマニュアルページを書きたいとお望みなら、
- <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=mdoc.samples&amp;sektion=7">mdoc.samples(7)</a> 
-にチュートリアルがあります。
 <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=mdoc&amp;sektion=7">mdoc(7)</a> 
-に便利なリファレンスガイドもあります。
+に便利なリファレンスガイドがあります。
 
 <p>
 <a name="Bugs"></a>
@@ -865,7 +817,7 @@ ddb&gt;プロンプトの trace 出力と関連するobjdumpのセクション�
 <br>
 <small>
 <!--
-Originally [OpenBSD: faq2.html,v 1.108 ]<br>
+Originally [OpenBSD: faq2.html,v 1.110 ]<br>
 $Translation$ <br>
 -->
 $OpenBSD$

@@ -97,16 +97,16 @@ OpenBSD には3つの "フレーバー"があります。
 
 <blockquote>
 <pre>
-       ,------o-----------o----X                    4.5 Stable
+       ,------o-----------o----X                    4.6 Stable
        |      .           .
-       |      .    ,------o---------o----X          4.6 Stable
+       |      .    ,------o---------o----X          4.7 Stable
        |      .    |      .         .
-       |      .    |      .    ,----o----------o--&gt; 4.7 Stable
+       |      .    |      .    ,----o----------o--&gt; 4.8 Stable
        |      .    |      .    |    .          .
-       |      .    |      .    |    .    ,-----o--&gt; 4.8 Stable
+       |      .    |      .    |    .    ,-----o--&gt; 4.9 Stable
        |      .    |      .    |    .    |     .
        |      .    |      .    |    .    |     .
- --&gt;4.5Rel-----&gt;4.6Rel-----&gt;4.7Rel-----&gt;4.8Rel----&gt; Current 
+ --&gt;4.6Rel-----&gt;4.7Rel-----&gt;4.8Rel-----&gt;4.9Rel----&gt; Current 
 
           Time ---&gt;
 </pre>
@@ -131,15 +131,15 @@ OpenBSD には3つの "フレーバー"があります。
 "<i>patch branch</i>" として知られているからです。
 上のイラストでは、垂直の点線がバグ
 フィックスが<i>-stable</i>ブランチに盛り込まれたことを示しています。そして
-上の例では、<i>4.5-stable</i> ブランチが<i>4.7-release</i>とともに終わりを迎えた
-こと、そして <i>4.6-stable</i>ブランチは<i>4.8-release</i>とともに終わりをむかえた
+上の例では、<i>4.6-stable</i> ブランチが<i>4.8-release</i>とともに終わりを迎えた
+こと、そして <i>4.7-stable</i>ブランチは<i>4.9-release</i>とともに終わりをむかえた
 ことに気付くでしょう -- 古いリリースは、通常
 ２つ
 前のリリースまでサポートされます。古いバージョンをサポートする事は資源と時間を使います、
 古いリリースのサポートを継続して提供してもよいでしょうけれども、我々は
 新しい機能に焦点を当てたいのです。<i>-stable</i> ブランチは、とても簡単に
 同じバージョンの<i>-release</i>ブランチから構築することができるようにデザインされています
-(たとえば、<i>4.8-release</i>から<i>4.8-stable</i>へ移行するなどです)。
+(たとえば、<i>4.9-release</i>から<i>4.9-stable</i>へ移行するなどです)。
 
 <p>
 <i>-stable</i>ブランチは<i>-release</i>と
@@ -153,7 +153,7 @@ OpenBSD には3つの "フレーバー"があります。
 
 <p>
 "<i>-stable</i>" という名前が指し示すものは <i>-current</i> が信頼性のないもの
-あるいは、これがより堅牢な製品であることを意味するものでは
+あるいは、堅牢でない製品であることを意味するものでは
 ありません。
 <i>-current</i>のAPI(プログラムがどうやってOSと対話するか ) や機能
 は変更され進化しているのにたいして、
@@ -227,11 +227,11 @@ OpenBSD 公式リリースの間、<i>スナップショット</i> が作られ
 <p>
 <b>Upgrading</b> は新機能を含む OpenBSD の新しいバージョンを
 インストールするプロセスになります。
-たとえば、v4.7 から v4.8 にしたり、 6月12日版の
+たとえば、v4.8 から v4.9 にしたり、 6月12日版の
 スナップショットを 6月20日版にすることです。
 アップグレードするときには、例によって
 <a href="../current.html">Following -current</a> あるいは
-<a href="../upgrade48.html">Upgrade guide</a> (リリースが変わったとき)
+<a href="../upgrade49.html">Upgrade guide</a> (リリースが変わったとき)
 の両方をアップグレードされたバージョンの OpenBSD に必要な変更の参考にするでしょう。
 
 <br>
@@ -243,7 +243,7 @@ OpenBSD 公式リリースの間、<i>スナップショット</i> が作られ
 the <a href="../../stable.html">stable process</a>にならうことで完了します。
 システムを "update" するときは、<i>-release</i>から
 同じリリースバージョンの<i>-stable</i> (あるいはパッチ適用済み<i>-release</i>)にします。
-たとえば、4.8-release を 4.8-stable にするようにです。
+たとえば、4.9-release を 4.9-stable にするようにです。
 You may then later update it to a newer <i>-stable</i> of the same
 release version.
 それで、 同じリリースバージョンのより新しい <i>-stable</i> 
@@ -252,9 +252,9 @@ release version.
 ファイルやその他のシステム設定には変更を加える必要はありません。
 
 <p>
-それで、CDからシステムをインストールした(たとえば、 4.6-release) としたら、
-4.6-stable にアップデートするのは少しの時間ですみます。 それから CD で 4.7-release に
-アップグレードし、そして 4.8-releaseに再びアップグレードするのは少しの時間で
+それで、CDからシステムをインストールした(たとえば、 4.7-release) としたら、
+4.7-stable にアップデートするのは少しの時間ですみます。 それから CD で 4.8-release に
+アップグレードし、そして 4.9-releaseに再びアップグレードするのは少しの時間で
 済みます。
 
 <h3>同期を維持しましょう</h3>
@@ -276,8 +276,8 @@ OpenBSDが、カーネルと一束のユーティリティとしてではなく�
 プロセスがサポートしているのは <b>一方向のみです： 以前のバージョンからそれ以降に</b>
 and from <i>-stable</i> to <i>-current</i>.  You can not run
 そして <i> -stable</i> から <i>-current</i> に。あなたは
-<i>4.8-current</i> （あるいはスナップショット）を動かせず、とても危険なことに
-気づいて、<i>4.8-stable</i> に戻ろうとしても。 あなたの場合あなたの
+<i>4.9-current</i> （あるいはスナップショット）を動かせず、とても危険なことに
+気づいて、<i>4.9-stable</i> に戻ろうとしても。 あなたの場合あなたの
 選ぶどんな方法よりも、最初からシステムを再読み込みする方が
 いいでしょう。決してOpenBSD 開発チームの援助を
 期待しないでください。
@@ -390,7 +390,7 @@ OpenBSDチームは <i>-current</i>のコードに基づいた新しいスナッ
 <p>
 バイナリのインストールには
 インストールメディアの "Upgrade" オプションを使うことがお勧めです。
-それが不可能であれば、<a href="../upgrade48.html">ここ</a>で説明されている
+それが不可能であれば、<a href="../upgrade49.html">ここ</a>で説明されている
 バイナリを解凍することもできます。
 それとは関係なく、ユーザーの作成や必要な <tt>/etc</tt>ディレクトリの変更を含む
 全体のアップグレードプロセスを実行する必要があります。
@@ -467,20 +467,20 @@ OpenBSD のソースは
 <pre>
     # <b>cd /usr</b>
     # <b>export CVSROOT=anoncvs@anoncvs.example.org:/cvs</b>
-    # <b>cvs -d$CVSROOT checkout -rOPENBSD_4_8 -P src</b>
+    # <b>cvs -d$CVSROOT checkout -rOPENBSD_4_9 -P src</b>
 </pre>
 
 これは、「パッチブランチ」や 「<a href="../../stable.html">-stable</a>」の名で知られている
-OPENBSD_4_8 ブランチのソースファイルを取ってきます。
+OPENBSD_4_9 ブランチのソースファイルを取ってきます。
 コードをアップデートするには同様に：
 <pre>
     # <b>cd /usr/src</b>
     # <b>export CVSROOT=anoncvs@anoncvs.example.org:/cvs</b>
-    # <b>cvs -d$CVSROOT up -rOPENBSD_4_8 -Pd</b>
+    # <b>cvs -d$CVSROOT up -rOPENBSD_4_9 -Pd</b>
 </pre>
 
 実際には、 CVS はファイルシステムにチェックアウトしたファイルへ「タグ」を貼るのに
-十分すばらしいので、コマンドラインの「 <tt>-rOPENBSD_4_8</tt> 」 部分を覚えて
+十分すばらしいので、コマンドラインの「 <tt>-rOPENBSD_4_9</tt> 」 部分を覚えて
 おく必要はありません。明確に消すか、
 「 <tt>-A</tt> 」オプションをつけて「 <tt>update</tt> 」を実行し新しいタグをセットするまで
 覚えています。
@@ -498,7 +498,7 @@ OpenBSDの全ての部分は同期させる必要がありますので、あな�
 <pre>
     # <b>export CVSROOT=anoncvs@anoncvs.example.org:/cvs</b>
     # <b>cd /usr</b>
-    # <b>cvs -d$CVSROOT checkout -rOPENBSD_4_8 -P src ports xenocara</b>
+    # <b>cvs -d$CVSROOT checkout -rOPENBSD_4_9 -P src ports xenocara</b>
 </pre>
 
 しかしながら、アップデートはディレクトリ毎に行われます。
@@ -735,7 +735,7 @@ on your system.
 <li><b>If building <i>-current</i>:</b> Update <tt>/dev</tt> and
 <tt>/etc</tt>, with the changes listed in
 <a href="current.html">current.html</a>.
-If following -stable after a proper <a href="upgrade48.html">upgrade
+If following -stable after a proper <a href="upgrade49.html">upgrade
 process</a> or a install of the <a href="#BldBinary">proper starting
 binary</a>, this step is not needed or desired.
 
@@ -848,7 +848,7 @@ release.
 
 Once you have the complete release made, you can use those files for
 a standard <a href="faq4.html">install</a> or
-<a href="upgrade48.html">upgrade</a> on another machine, or if updating
+<a href="upgrade49.html">upgrade</a> on another machine, or if updating
 a machine to a new <i>-stable</i>, simply
 <a href="faq4.html#AddFileSet">unpack</a> the tar files in the root
 directory of the target machine.
@@ -1531,17 +1531,17 @@ recently, do a:
 <!-- XXXversion -->
 <p>To see all the changes in <tt>/etc</tt> between arbitrary versions of
 OpenBSD, you can use <a href="../anoncvs.html">CVS</a>.
-For example, to see the changes between 4.7 and 4.8 do a:
+For example, to see the changes between 4.8 and 4.9 do a:
 
 <pre>
     # cd /usr/src/etc
-    # cvs diff -u -rOPENBSD_4_7 -rOPENBSD_4_8
+    # cvs diff -u -rOPENBSD_4_8 -rOPENBSD_4_9
 </pre>
 
-To see the changes between 4.8 and <i>-current</i> ("HEAD"), use:
+To see the changes between 4.9 and <i>-current</i> ("HEAD"), use:
 <pre>
     # cd /usr/src/etc
-    # cvs diff -u -rOPENBSD_4_8 -rHEAD
+    # cvs diff -u -rOPENBSD_4_9 -rHEAD
 </pre>
 
 The 
@@ -1579,7 +1579,7 @@ Typical <tt>/etc</tt> changes to watch out for between releases include:
 
 <!-- XXXversion -->
 These changes are summarized in
-<a href="upgrade48.html">upgrade48.html</a> (for going to 4.8-release)
+<a href="upgrade49.html">upgrade49.html</a> (for going to 4.9-release)
 or <a href="current.html">current.html</a> (for going
 to <i>-current</i>).
 
@@ -1642,7 +1642,7 @@ booting.
 <br>
 <small>
 <!--
-Originally [OpenBSD: faq5.html,v 1.182 ]
+Originally [OpenBSD: faq5.html,v 1.185 ]
 <br>
 $Translation$
 <br>
