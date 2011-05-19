@@ -377,8 +377,8 @@ OpenBSD では、chroot による運用や他のセキュリティ関連の問�
 
 <ul>
 
-<li><b>NTFS (read only)</b><br>
-is now enabled on GENERIC i386 and amd64 kernels
+<li><b>NTFS (読み込みのみ)</b><br>
+は i386 と amd64 の GENERICカーネルで有効になりました。
 
 <li><b>Wireless improvements</b><br>
 WPA keys can now be specified using the simpler hostname.if format of:
@@ -386,12 +386,11 @@ WPA keys can now be specified using the simpler hostname.if format of:
 nwid myssid wpakey wpapassword
 </pre></blockquote>
 
-<li><b>New <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=rc.d&amp;sektion=8">rc.d(8)</a>
-mechanism</b><br>
-can be used for starting, stopping and reconfiguring
-<a href="faq15.html">package</a> daemons, which can be used instead of
-or in addition to modifications to <tt>/etc/rc.local</tt>.
-
+<li><b>新しい <a href="http://www.openbsd.org/cgi-bin/man.cgi?query=rc.d&amp;sektion=8">rc.d(8)</a>
+機構</b><br>
+が、従来の<tt>/etc/rc.local</tt>の編集に代わり、あるいは加えて
+<a href="faq15.html">package</a> デーモンの起動、停止そして再設定のために
+使われます、。
 
 </ul>
 
